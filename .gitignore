@@ -1,0 +1,9 @@
+.vsconfig
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp.csproj
+Library/
+Logs/
+Packages/
+ProjectSettings/
+UserSettings/
+player2-gamejam-_3.sln
