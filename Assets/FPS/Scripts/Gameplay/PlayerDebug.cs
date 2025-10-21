@@ -67,23 +67,50 @@ namespace Unity.FPS.Gameplay
             if (!Application.isPlaying || !ShowDebugInfo) return;
             if (m_PlayerController == null) return;
 
-            // Draw debug label above player
-            Vector3 labelPosition = transform.position + transform.up * LabelHeight;
+            // Get detailed velocity breakdown
+            Vector3 velocity = m_PlayerController.CharacterVelocity;
+            PlayerCharacterController controller = m_PlayerController;
 
-            string debugText = $"Grounded: {m_PlayerController.IsGrounded}\n";
-            debugText += $"Velocity: {m_PlayerController.CharacterVelocity.magnitude:F1} m/s\n";
-            debugText += $"Crouching: {m_PlayerController.IsCrouching}";
+            // Calculate velocity components relative to gravity
+            Vector3 gravityDir = Vector3.zero;
+            Vector3 upDir = Vector3.zero;
+            float verticalVel = 0f;
+            float horizontalVel = 0f;
 
-            Handles.Label(labelPosition, debugText, new GUIStyle()
+            if (controller.Asteroid != null)
             {
-                fontSize = 12,
-                normal = new GUIStyleState()
-                {
-                    textColor = m_PlayerController.IsGrounded ? Color.green : Color.yellow
-                },
-                alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold
-            });
+                gravityDir = (controller.Asteroid.transform.position - transform.position).normalized;
+                upDir = -gravityDir;
+                verticalVel = Vector3.Dot(velocity, upDir);
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, upDir);
+                horizontalVel = horizontalVelocity.magnitude;
+            }
+
+            // Draw debug info in top-left corner
+            Handles.BeginGUI();
+
+            string debugText = "=== MOVEMENT ===\n";
+            debugText += $"Grounded: {m_PlayerController.IsGrounded}\n";
+            debugText += $"Crouching: {m_PlayerController.IsCrouching}\n";
+            debugText += $"HasJumped: {m_PlayerController.HasJumpedThisFrame}\n";
+            debugText += "\n=== VELOCITY ===\n";
+            debugText += $"Total: {velocity.magnitude:F2} m/s\n";
+            debugText += $"Horizontal: {horizontalVel:F2} m/s\n";
+            debugText += $"Vertical: {verticalVel:F2} m/s\n";
+            debugText += $"X: {velocity.x:F2} Y: {velocity.y:F2} Z: {velocity.z:F2}";
+
+            GUIStyle labelStyle = new GUIStyle(GUI.skin.box)
+            {
+                fontSize = 11,
+                fontStyle = FontStyle.Bold,
+                alignment = TextAnchor.UpperLeft,
+                normal = { textColor = m_PlayerController.IsGrounded ? Color.green : Color.yellow },
+                padding = new RectOffset(10, 10, 10, 10)
+            };
+
+            GUI.Box(new Rect(10, 80, 250, 200), debugText, labelStyle);
+
+            Handles.EndGUI();
 
             // Draw ground normal arrow when grounded
             if (ShowGroundNormal && m_PlayerController.IsGrounded)
@@ -97,19 +124,29 @@ namespace Unity.FPS.Gameplay
             }
 
             // Draw gravity direction arrow
-            if (ShowGravityDirection)
+            if (ShowGravityDirection && controller != null && controller.Asteroid != null)
             {
-                PlayerCharacterController controller = GetComponent<PlayerCharacterController>();
-                if (controller != null && controller.Asteroid != null)
-                {
-                    Vector3 gravityDir = (controller.Asteroid.transform.position - transform.position).normalized;
-                    Gizmos.color = Color.red;
-                    Vector3 start = transform.position;
-                    Vector3 end = start + gravityDir * 1.5f;
-                    Gizmos.DrawLine(start, end);
-                    // Draw arrow head
-                    DrawArrowHead(end, gravityDir, Color.red, 0.3f);
-                }
+                Gizmos.color = Color.red;
+                Vector3 start = transform.position;
+                Vector3 end = start + gravityDir * 1.5f;
+                Gizmos.DrawLine(start, end);
+                // Draw arrow head
+                DrawArrowHead(end, gravityDir, Color.red, 0.3f);
+            }
+
+            // Draw velocity vector
+            Vector3 velocityVec = m_PlayerController.CharacterVelocity;
+            if (velocityVec.magnitude > 0.1f)
+            {
+                Gizmos.color = Color.cyan;
+                Vector3 start = transform.position + transform.up * 0.5f;
+                Vector3 end = start + velocityVec.normalized * Mathf.Min(velocityVec.magnitude * 0.1f, 3f);
+                Gizmos.DrawLine(start, end);
+                DrawArrowHead(end, velocityVec.normalized, Color.cyan, 0.2f);
+
+                // Draw velocity magnitude as a sphere
+                Gizmos.color = new Color(0, 1, 1, 0.3f);
+                Gizmos.DrawSphere(end, 0.1f);
             }
         }
 
