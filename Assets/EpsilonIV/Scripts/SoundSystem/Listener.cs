@@ -16,15 +16,28 @@ public class Listener : MonoBehaviour
     /// </summary>
     public void CheckSound(float loudness, Vector3 sourcePos, float quality)
     {
+        // --- Runtime label (TMP) ---
+        var label = GetComponent<ListenerDebugLabel>();
+        if (label) label.ShowChecking(loudness, quality);
+
+        // --- Scene view label (Editor-only) ---
+        #if UNITY_EDITOR
+        var giz = GetComponent<ListenerDebugGizmo>();
+        if (giz)
+        {
+            giz.lastCheckTime = Time.time;
+            giz.lastLoudness = loudness;
+            giz.lastQuality  = quality;
+        }
+        #endif
+
+        // Threshold logic, events, etc…
         if (loudness >= hearingThreshold)
         {
-            // Default reaction hook; implement gameplay in the UnityEvent or by subclassing.
             onHeard?.Invoke(loudness, sourcePos, quality);
-            // Example (optional): turn to face sound
-            // var dir = (sourcePos - transform.position).normalized;
-            // if (dir.sqrMagnitude > 0.0001f) transform.forward = Vector3.Lerp(transform.forward, dir, 0.5f);
         }
     }
+
 
     // Optional: expose a way to adjust threshold at runtime.
     public void SetHearingThreshold(float value) => hearingThreshold = Mathf.Clamp01(value);
