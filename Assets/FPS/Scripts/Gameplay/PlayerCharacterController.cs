@@ -10,9 +10,6 @@ namespace Unity.FPS.Gameplay
         [Header("References")] [Tooltip("Reference to the main camera used for the player")]
         public Camera PlayerCamera;
 
-        [Tooltip("Reference to the asteroid GameObject for radial gravity")]
-        public GameObject Asteroid;
-
         [Tooltip("Audio source for footsteps, jump, etc...")]
         public AudioSource AudioSource;
 
@@ -132,7 +129,6 @@ namespace Unity.FPS.Gameplay
         float m_CameraVerticalAngle = 0f;
         float m_FootstepDistanceCounter;
         float m_TargetCharacterHeight;
-        Vector3 m_OrientationUpWhileAirborne;
 
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
@@ -217,27 +213,6 @@ namespace Unity.FPS.Gameplay
 
             UpdateCharacterHeight(false);
 
-            // Align player to asteroid surface
-            if (Asteroid != null)
-            {
-                Vector3 targetUp;
-                if (IsGrounded)
-                {
-                    // When grounded, align to the surface normal
-                    targetUp = m_GroundNormal;
-                    // Store current up direction for use when airborne
-                    m_OrientationUpWhileAirborne = transform.up;
-                }
-                else
-                {
-                    // When airborne, maintain the orientation from when we left the ground
-                    targetUp = m_OrientationUpWhileAirborne;
-                }
-
-                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, targetUp) * transform.rotation;
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-            }
-
             HandleCharacterMovement();
         }
 
@@ -259,14 +234,14 @@ namespace Unity.FPS.Gameplay
 
             // reset values before the ground check
             IsGrounded = false;
-            m_GroundNormal = GetUpDirection();
+            m_GroundNormal = Vector3.up;
 
             // only try to detect ground if it's been a short amount of time since last jump; otherwise we may snap to the ground instantly after we try jumping
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
                 // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
                 if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
-                    m_Controller.radius, GetGravityDirection(), out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
+                    m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))
                 {
                     // storing the upward direction for the surface found
@@ -282,7 +257,7 @@ namespace Unity.FPS.Gameplay
                         // handle snapping to the ground
                         if (hit.distance > m_Controller.skinWidth)
                         {
-                            m_Controller.Move(GetGravityDirection() * hit.distance);
+                            m_Controller.Move(Vector3.down * hit.distance);
                         }
                     }
                 }
@@ -346,11 +321,10 @@ namespace Unity.FPS.Gameplay
                         if (SetCrouchingState(false, false))
                         {
                             // start by canceling out the vertical component of our velocity
-                            Vector3 upDirection = GetUpDirection();
-                            CharacterVelocity = Vector3.ProjectOnPlane(CharacterVelocity, upDirection);
+                            CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
 
                             // then, add the jumpSpeed value upwards
-                            CharacterVelocity += upDirection * JumpForce;
+                            CharacterVelocity += Vector3.up * JumpForce;
 
                             // play sound
                             AudioSource.PlayOneShot(JumpSfx);
@@ -361,7 +335,7 @@ namespace Unity.FPS.Gameplay
 
                             // Force grounding to false
                             IsGrounded = false;
-                            m_GroundNormal = upDirection;
+                            m_GroundNormal = Vector3.up;
                         }
                     }
 
@@ -384,14 +358,13 @@ namespace Unity.FPS.Gameplay
                     CharacterVelocity += worldspaceMoveInput * AccelerationSpeedInAir * Time.deltaTime;
 
                     // limit air speed to a maximum, but only horizontally
-                    Vector3 upDirection = GetUpDirection();
-                    float verticalVelocity = Vector3.Dot(CharacterVelocity, upDirection);
-                    Vector3 horizontalVelocity = Vector3.ProjectOnPlane(CharacterVelocity, upDirection);
+                    float verticalVelocity = CharacterVelocity.y;
+                    Vector3 horizontalVelocity = Vector3.ProjectOnPlane(CharacterVelocity, Vector3.up);
                     horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, MaxSpeedInAir * speedModifier);
-                    CharacterVelocity = horizontalVelocity + (upDirection * verticalVelocity);
+                    CharacterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
 
                     // apply the gravity to the velocity
-                    CharacterVelocity += GetGravityDirection() * GravityDownForce * Time.deltaTime;
+                    CharacterVelocity += Vector3.down * GravityDownForce * Time.deltaTime;
                 }
             }
 
@@ -499,21 +472,6 @@ namespace Unity.FPS.Gameplay
 
             IsCrouching = crouched;
             return true;
-        }
-
-        // Gets the direction from player to asteroid center (gravity direction)
-        Vector3 GetGravityDirection()
-        {
-            if (Asteroid == null)
-                return Vector3.down; // Fallback to normal gravity
-
-            return (Asteroid.transform.position - transform.position).normalized;
-        }
-
-        // Gets the "up" direction (away from asteroid center)
-        Vector3 GetUpDirection()
-        {
-            return -GetGravityDirection();
         }
     }
 }

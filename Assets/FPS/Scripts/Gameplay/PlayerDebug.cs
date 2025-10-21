@@ -69,22 +69,13 @@ namespace Unity.FPS.Gameplay
 
             // Get detailed velocity breakdown
             Vector3 velocity = m_PlayerController.CharacterVelocity;
-            PlayerCharacterController controller = m_PlayerController;
 
-            // Calculate velocity components relative to gravity
-            Vector3 gravityDir = Vector3.zero;
-            Vector3 upDir = Vector3.zero;
-            float verticalVel = 0f;
-            float horizontalVel = 0f;
-
-            if (controller.Asteroid != null)
-            {
-                gravityDir = (controller.Asteroid.transform.position - transform.position).normalized;
-                upDir = -gravityDir;
-                verticalVel = Vector3.Dot(velocity, upDir);
-                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(velocity, upDir);
-                horizontalVel = horizontalVelocity.magnitude;
-            }
+            // Calculate velocity components (standard gravity)
+            Vector3 gravityDir = Vector3.down;
+            Vector3 upDir = Vector3.up;
+            float verticalVel = velocity.y;
+            Vector3 horizontalVelocity = new Vector3(velocity.x, 0f, velocity.z);
+            float horizontalVel = horizontalVelocity.magnitude;
 
             // Draw debug info in top-left corner
             Handles.BeginGUI();
@@ -124,7 +115,7 @@ namespace Unity.FPS.Gameplay
             }
 
             // Draw gravity direction arrow
-            if (ShowGravityDirection && controller != null && controller.Asteroid != null)
+            if (ShowGravityDirection)
             {
                 Gizmos.color = Color.red;
                 Vector3 start = transform.position;
