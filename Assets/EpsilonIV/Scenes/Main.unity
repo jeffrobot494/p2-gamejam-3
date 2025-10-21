@@ -119,6 +119,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &70205437
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.19046
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99065256
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13640964
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -15.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750859214229872840, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7792778196241560761, guid: beef6953f3be1cd43b51a4b30bda2ca2,
+        type: 3}
+      propertyPath: m_Name
+      value: Corridor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beef6953f3be1cd43b51a4b30bda2ca2, type: 3}
 --- !u!1 &74010198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7253983127304857660, guid: 761cdc9e4e883334cbdcea062d0befa7,
@@ -351,6 +419,16 @@ PrefabInstance:
       propertyPath: Asteroid
       value: 
       objectReference: {fileID: 1667958339}
+    - target: {fileID: 814417836257332542, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: JumpForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 814417836257332542, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: GravityDownForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2286125971047457827, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_ClearFlags
@@ -603,3 +681,4 @@ SceneRoots:
   - {fileID: 300365223}
   - {fileID: 1192968722}
   - {fileID: 1620657364}
+  - {fileID: 70205437}
