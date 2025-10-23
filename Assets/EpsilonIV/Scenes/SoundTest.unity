@@ -385,8 +385,8 @@ MonoBehaviour:
   quality: 0
   wallMask:
     serializedVersion: 2
-    m_Bits: 0
-  wallPenalty: 0.8
+    m_Bits: 8
+  wallPenalty: 0.5
   drawDebug: 1
   scrollNotchToLoudness: 0.05
   popupOnEmit: 1
@@ -8687,6 +8687,7 @@ GameObject:
   - component: {fileID: 1030777839}
   - component: {fileID: 1030777838}
   - component: {fileID: 1030777843}
+  - component: {fileID: 1030777844}
   m_Layer: 0
   m_Name: Listener (1)
   m_TagString: Untagged
@@ -8706,7 +8707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f8809bc9b46804b8b9a03f8485b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Listener
-  hearingThreshold: 0.679
+  hearingThreshold: 0.208
   onHeard:
     m_PersistentCalls:
       m_Calls: []
@@ -8820,6 +8821,21 @@ MonoBehaviour:
   lastLoudness: 0
   lastQuality: 0
   enableSceneLabel: 1
+--- !u!114 &1030777844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030777837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c408f0e1a8f15a24184647c18cd4f90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ListenerDebugFlash
+  checkedColor: {r: 0, g: 0, b: 0.5, a: 1}
+  heardColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flashDuration: 0.2
 --- !u!4 &1276543516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3266055805896289692, guid: cc404ea150b36e84b8072fd3feb32eda,
@@ -8840,6 +8856,7 @@ GameObject:
   - component: {fileID: 1629865754}
   - component: {fileID: 1629865758}
   - component: {fileID: 1629865759}
+  - component: {fileID: 1629865760}
   m_Layer: 0
   m_Name: Listener
   m_TagString: Untagged
@@ -8951,7 +8968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f8809bc9b46804b8b9a03f8485b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Listener
-  hearingThreshold: 0.679
+  hearingThreshold: 0.208
   onHeard:
     m_PersistentCalls:
       m_Calls: []
@@ -8973,6 +8990,21 @@ MonoBehaviour:
   lastLoudness: 0
   lastQuality: 0
   enableSceneLabel: 1
+--- !u!114 &1629865760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629865753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c408f0e1a8f15a24184647c18cd4f90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ListenerDebugFlash
+  checkedColor: {r: 0, g: 0, b: 0.5, a: 1}
+  heardColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flashDuration: 0.2
 --- !u!1001 &1954079890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9071,6 +9103,7 @@ GameObject:
   - component: {fileID: 2013113210}
   - component: {fileID: 2013113209}
   - component: {fileID: 2013113214}
+  - component: {fileID: 2013113215}
   m_Layer: 0
   m_Name: Listener (2)
   m_TagString: Untagged
@@ -9090,7 +9123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f8809bc9b46804b8b9a03f8485b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Listener
-  hearingThreshold: 0.679
+  hearingThreshold: 0.208
   onHeard:
     m_PersistentCalls:
       m_Calls: []
@@ -9204,6 +9237,21 @@ MonoBehaviour:
   lastLoudness: 0
   lastQuality: 0
   enableSceneLabel: 1
+--- !u!114 &2013113215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013113208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c408f0e1a8f15a24184647c18cd4f90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ListenerDebugFlash
+  checkedColor: {r: 0, g: 0, b: 0.5, a: 1}
+  heardColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flashDuration: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
