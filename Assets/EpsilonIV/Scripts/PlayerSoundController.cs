@@ -38,15 +38,15 @@ public class PlayerSoundController : MonoBehaviour
         [Range(0f, 1f)]
         [SerializeField] private float crouchWalkingLoudness = 0.15f;
 
-        [Header("Emission Intervals")]
-        [Tooltip("Time between footstep sounds when walking")]
-        [SerializeField] private float walkingInterval = 1f;
+        [Header("Emission Frequencies")]
+        [Tooltip("Footstep sounds played per meter when walking")]
+        [SerializeField] private float walkingFrequency = 1f;
 
-        [Tooltip("Time between footstep sounds when running")]
-        [SerializeField] private float runningInterval = 0.5f;
+        [Tooltip("Footstep sounds played per meter when running")]
+        [SerializeField] private float runningFrequency = 2f;
 
-        [Tooltip("Time between footstep sounds when crouch walking")]
-        [SerializeField] private float crouchWalkingInterval = 2f;
+        [Tooltip("Footstep sounds played per meter when crouch walking")]
+        [SerializeField] private float crouchWalkingFrequency = 0.5f;
 
         [Header("Sound Quality")]
         [Tooltip("Quality parameter passed to Sound system")]
@@ -67,8 +67,8 @@ public class PlayerSoundController : MonoBehaviour
 
         private PlayerCharacterController m_PlayerController;
         private SoundEmitter m_SoundEmitter;
-        private Coroutine m_EmissionCoroutine;
         private MovementState m_CurrentState = MovementState.Idle;
+        private float m_FootstepDistanceCounter;
 
         private void Awake()
         {
@@ -99,53 +99,86 @@ public class PlayerSoundController : MonoBehaviour
             }
         }
 
+        private void Update()
+        {
+            // Only track footsteps when in a moving state
+            if (m_CurrentState == MovementState.Walking ||
+                m_CurrentState == MovementState.Running ||
+                m_CurrentState == MovementState.CrouchWalking)
+            {
+                // Get the appropriate frequency and loudness for current state
+                float frequency = GetFrequencyForState(m_CurrentState);
+                float loudness = GetLoudnessForState(m_CurrentState);
+
+                // Calculate distance traveled this frame
+                float distanceTraveled = m_PlayerController.CharacterVelocity.magnitude * Time.deltaTime;
+                m_FootstepDistanceCounter += distanceTraveled;
+
+                // Check if we've traveled far enough to emit a footstep
+                if (frequency > 0f && m_FootstepDistanceCounter >= 1f / frequency)
+                {
+                    m_FootstepDistanceCounter = 0f;
+                    EmitFootstepSound(loudness);
+                }
+            }
+            else
+            {
+                // Reset counter when not moving
+                m_FootstepDistanceCounter = 0f;
+            }
+        }
+
         private void OnMovementStateChanged(MovementState newState)
         {
+            MovementState previousState = m_CurrentState;
             m_CurrentState = newState;
 
-            // Stop any existing emission coroutine
-            if (m_EmissionCoroutine != null)
+            // Check if transitioning from non-moving to moving state
+            bool wasNotMoving = previousState == MovementState.Idle || previousState == MovementState.InAir;
+            bool isNowMoving = newState == MovementState.Walking || newState == MovementState.Running || newState == MovementState.CrouchWalking;
+
+            if (wasNotMoving && isNowMoving)
             {
-                StopCoroutine(m_EmissionCoroutine);
-                m_EmissionCoroutine = null;
+                // Emit initial footstep immediately when starting to move
+                float loudness = GetLoudnessForState(newState);
+                EmitFootstepSound(loudness);
             }
 
-            // Start appropriate emission pattern based on state
-            switch (newState)
+            // Reset distance counter on state change
+            m_FootstepDistanceCounter = 0f;
+        }
+
+        private float GetFrequencyForState(MovementState state)
+        {
+            switch (state)
             {
                 case MovementState.Walking:
-                    m_EmissionCoroutine = StartCoroutine(EmitSoundLoop(walkingLoudness, walkingInterval));
-                    break;
-
+                    return walkingFrequency;
                 case MovementState.Running:
-                    m_EmissionCoroutine = StartCoroutine(EmitSoundLoop(runningLoudness, runningInterval));
-                    break;
-
+                    return runningFrequency;
                 case MovementState.CrouchWalking:
-                    m_EmissionCoroutine = StartCoroutine(EmitSoundLoop(crouchWalkingLoudness, crouchWalkingInterval));
-                    break;
-
-                case MovementState.Idle:
-                case MovementState.InAir:
-                    // No sound emission for these states
-                    break;
+                    return crouchWalkingFrequency;
+                default:
+                    return 0f;
             }
         }
 
-        private IEnumerator EmitSoundLoop(float loudness, float interval)
+        private float GetLoudnessForState(MovementState state)
         {
-            // Emit initial sound immediately
-            EmitSound(loudness);
-
-            // Then emit at regular intervals
-            while (true)
+            switch (state)
             {
-                yield return new WaitForSeconds(interval);
-                EmitSound(loudness);
+                case MovementState.Walking:
+                    return walkingLoudness;
+                case MovementState.Running:
+                    return runningLoudness;
+                case MovementState.CrouchWalking:
+                    return crouchWalkingLoudness;
+                default:
+                    return 0f;
             }
         }
 
-        private void EmitSound(float loudness)
+        private void EmitFootstepSound(float loudness)
         {
             // Play the footstep SFX
             if (audioSource != null && footstepSfx != null)
