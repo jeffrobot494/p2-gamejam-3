@@ -30,11 +30,23 @@ public class Listener : MonoBehaviour
             giz.lastQuality  = quality;
         }
         #endif
-
+        Debug.Log("CheckSound: " + loudness + " " + sourcePos + " " + quality);
         // Threshold logic, events, etc…
         if (loudness >= hearingThreshold)
         {
+            // --- Debug flash (heard) ---
+            Debug.Log("Heard");
+            var flash = GetComponent<ListenerDebugFlash>();
+            if (flash) flash.FlashHeard();
+
             onHeard?.Invoke(loudness, sourcePos, quality);
+        }
+        else
+        {
+            Debug.Log("Not Heard");
+            // --- Debug flash (checked but not heard) ---
+            var flash = GetComponent<ListenerDebugFlash>();
+            if (flash) flash.FlashChecked();
         }
     }
 
