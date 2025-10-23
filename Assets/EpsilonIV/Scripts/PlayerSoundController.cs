@@ -11,6 +11,13 @@ using Unity.FPS.Gameplay;
 [RequireComponent(typeof(SoundEmitter))]
 public class PlayerSoundController : MonoBehaviour
     {
+        [Header("Audio")]
+        [Tooltip("Audio source for playing footstep SFX")]
+        [SerializeField] private AudioSource audioSource;
+
+        [Tooltip("Sound played for footsteps")]
+        [SerializeField] private AudioClip footstepSfx;
+
         [Header("Sound Settings")]
         [Tooltip("Loudness of footstep sounds [0-1]")]
         [Range(0f, 1f)]
@@ -110,6 +117,13 @@ public class PlayerSoundController : MonoBehaviour
 
         private void EmitSound(float loudness)
         {
+            // Play the footstep SFX
+            if (audioSource != null && footstepSfx != null)
+            {
+                audioSource.PlayOneShot(footstepSfx);
+            }
+
+            // Broadcast sound to hearing system
             if (m_SoundEmitter != null)
             {
                 m_SoundEmitter.EmitSound(loudness, soundQuality);

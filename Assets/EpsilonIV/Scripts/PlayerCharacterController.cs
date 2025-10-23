@@ -74,16 +74,7 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Speed of crouching transitions")]
         public float CrouchingSharpness = 10f;
 
-        [Header("Audio")] [Tooltip("Amount of footstep sounds played when moving one meter")]
-        public float FootstepSfxFrequency = 1f;
-
-        [Tooltip("Amount of footstep sounds played when moving one meter while sprinting")]
-        public float FootstepSfxFrequencyWhileSprinting = 1f;
-
-        [Tooltip("Sound played for footsteps")]
-        public AudioClip FootstepSfx;
-
-        [Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
+        [Header("Audio")] [Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
         [Tooltip("Sound played when landing")] public AudioClip LandSfx;
 
         [Tooltip("Sound played when taking damage from a fall")]
@@ -137,7 +128,6 @@ namespace Unity.FPS.Gameplay
         Vector3 m_LatestImpactSpeed;
         float m_LastTimeJumped = 0f;
         float m_CameraVerticalAngle = 0f;
-        float m_FootstepDistanceCounter;
         float m_TargetCharacterHeight;
 
         private MovementState m_CurrentMovementState = MovementState.Idle;
@@ -355,18 +345,6 @@ namespace Unity.FPS.Gameplay
                             m_GroundNormal = Vector3.up;
                         }
                     }
-
-                    // footsteps sound
-                    float chosenFootstepSfxFrequency =
-                        (isSprinting ? FootstepSfxFrequencyWhileSprinting : FootstepSfxFrequency);
-                    if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
-                    {
-                        m_FootstepDistanceCounter = 0f;
-                        AudioSource.PlayOneShot(FootstepSfx);
-                    }
-
-                    // keep track of distance traveled for footsteps sound
-                    m_FootstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
                 }
                 // handle air movement
                 else
