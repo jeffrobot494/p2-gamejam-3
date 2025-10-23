@@ -18,6 +18,15 @@ public class PlayerSoundController : MonoBehaviour
         [Tooltip("Sound played for footsteps")]
         [SerializeField] private AudioClip footstepSfx;
 
+        [Tooltip("Sound played when jumping")]
+        [SerializeField] private AudioClip jumpSfx;
+
+        [Tooltip("Sound played when landing")]
+        [SerializeField] private AudioClip landSfx;
+
+        [Tooltip("Sound played when taking damage from a fall")]
+        [SerializeField] private AudioClip fallDamageSfx;
+
         [Header("Sound Settings")]
         [Tooltip("Loudness of footstep sounds [0-1]")]
         [Range(0f, 1f)]
@@ -43,6 +52,19 @@ public class PlayerSoundController : MonoBehaviour
         [Tooltip("Quality parameter passed to Sound system")]
         [SerializeField] private float soundQuality = 1f;
 
+        [Header("Jump/Land Sound Settings")]
+        [Tooltip("Loudness of jump sound [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float jumpLoudness = 0.4f;
+
+        [Tooltip("Loudness of landing sound [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float landLoudness = 0.5f;
+
+        [Tooltip("Loudness of fall damage sound [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float fallDamageLoudness = 0.7f;
+
         private PlayerCharacterController m_PlayerController;
         private SoundEmitter m_SoundEmitter;
         private Coroutine m_EmissionCoroutine;
@@ -58,6 +80,11 @@ public class PlayerSoundController : MonoBehaviour
         {
             // Subscribe to movement state changes
             m_PlayerController.OnMovementStateChanged += OnMovementStateChanged;
+
+            // Subscribe to jump/land/fall events
+            m_PlayerController.OnJumped += OnJumped;
+            m_PlayerController.OnLanded += OnLanded;
+            m_PlayerController.OnFallDamage += OnFallDamage;
         }
 
         private void OnDestroy()
@@ -66,6 +93,9 @@ public class PlayerSoundController : MonoBehaviour
             if (m_PlayerController != null)
             {
                 m_PlayerController.OnMovementStateChanged -= OnMovementStateChanged;
+                m_PlayerController.OnJumped -= OnJumped;
+                m_PlayerController.OnLanded -= OnLanded;
+                m_PlayerController.OnFallDamage -= OnFallDamage;
             }
         }
 
@@ -127,6 +157,51 @@ public class PlayerSoundController : MonoBehaviour
             if (m_SoundEmitter != null)
             {
                 m_SoundEmitter.EmitSound(loudness, soundQuality);
+            }
+        }
+
+        private void OnJumped()
+        {
+            // Play jump SFX
+            if (audioSource != null && jumpSfx != null)
+            {
+                audioSource.PlayOneShot(jumpSfx);
+            }
+
+            // Broadcast jump sound to hearing system
+            if (m_SoundEmitter != null)
+            {
+                m_SoundEmitter.EmitSound(jumpLoudness, soundQuality);
+            }
+        }
+
+        private void OnLanded()
+        {
+            // Play land SFX
+            if (audioSource != null && landSfx != null)
+            {
+                audioSource.PlayOneShot(landSfx);
+            }
+
+            // Broadcast land sound to hearing system
+            if (m_SoundEmitter != null)
+            {
+                m_SoundEmitter.EmitSound(landLoudness, soundQuality);
+            }
+        }
+
+        private void OnFallDamage()
+        {
+            // Play fall damage SFX
+            if (audioSource != null && fallDamageSfx != null)
+            {
+                audioSource.PlayOneShot(fallDamageSfx);
+            }
+
+            // Broadcast fall damage sound to hearing system
+            if (m_SoundEmitter != null)
+            {
+                m_SoundEmitter.EmitSound(fallDamageLoudness, soundQuality);
             }
         }
     }
