@@ -45,7 +45,9 @@ public class Sound : MonoBehaviour
     {
         if (originalLoudness <= 0f) return;
 
-        float radius = Mathf.Lerp(MinRadius, MaxRadius, originalLoudness);
+        // Quadratic scaling: quiet sounds have small radii, loud sounds reach max radius faster
+        float radiusScale = originalLoudness * originalLoudness;
+        float radius = Mathf.Lerp(MinRadius, MaxRadius, radiusScale);
 
         int count = Physics.OverlapSphereNonAlloc(sourcePos, radius, overlapBuffer, ~0, QueryTriggerInteraction.Ignore);
 
@@ -66,8 +68,11 @@ public class Sound : MonoBehaviour
             float distance = Vector3.Distance(sourcePos, listenerPos);
             if (distance > radius) continue; // out of range
 
-            // Distance falloff (linear)
-            float heardLoudness = originalLoudness * (1f - (distance / radius));
+            // Distance falloff (inverse square)
+            // Normalize distance to [0..1], then apply inverse square formula
+            float normalizedDistance = distance / radius;
+            float falloff = 1f - (normalizedDistance * normalizedDistance);
+            float heardLoudness = originalLoudness * falloff;
             if (heardLoudness <= 0f) continue;
 
             // Obstruction via RaycastAll against wallMask only
