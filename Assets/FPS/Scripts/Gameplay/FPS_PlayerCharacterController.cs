@@ -4,15 +4,6 @@ using UnityEngine.Events;
 
 namespace Unity.FPS.Gameplay
 {
-    public enum MovementState
-    {
-        Idle,
-        Walking,
-        Running,
-        CrouchWalking,
-        InAir
-    }
-
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
     public class PlayerCharacterController : MonoBehaviour
     {
@@ -139,9 +130,6 @@ namespace Unity.FPS.Gameplay
         float m_FootstepDistanceCounter;
         float m_TargetCharacterHeight;
 
-        private MovementState m_CurrentMovementState = MovementState.Idle;
-        private bool m_IsSprinting = false;
-
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
 
@@ -226,8 +214,6 @@ namespace Unity.FPS.Gameplay
             UpdateCharacterHeight(false);
 
             HandleCharacterMovement();
-
-            UpdateMovementState();
         }
 
         void OnDie()
@@ -307,8 +293,6 @@ namespace Unity.FPS.Gameplay
                 {
                     isSprinting = SetCrouchingState(false, false);
                 }
-
-                m_IsSprinting = isSprinting;
 
                 float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
 
@@ -447,30 +431,6 @@ namespace Unity.FPS.Gameplay
                 PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.localPosition,
                     Vector3.up * m_TargetCharacterHeight * CameraHeightRatio, CrouchingSharpness * Time.deltaTime);
                 m_Actor.AimPoint.transform.localPosition = m_Controller.center;
-            }
-        }
-
-        void UpdateMovementState()
-        {
-            // Determine new state based on current conditions
-            MovementState newState;
-
-            if (!IsGrounded)
-                newState = MovementState.InAir;
-            else if (CharacterVelocity.magnitude < 0.1f) // threshold for "standing still"
-                newState = MovementState.Idle;
-            else if (IsCrouching)
-                newState = MovementState.CrouchWalking;
-            else if (m_IsSprinting)
-                newState = MovementState.Running;
-            else
-                newState = MovementState.Walking;
-
-            // Only fire event if state actually changed
-            if (newState != m_CurrentMovementState)
-            {
-                Debug.Log($"Movement state changed: {m_CurrentMovementState} -> {newState}");
-                m_CurrentMovementState = newState;
             }
         }
 
