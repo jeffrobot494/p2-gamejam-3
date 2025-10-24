@@ -8,8 +8,10 @@ public class Listener : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float hearingThreshold = 0.2f;
 
-    [Tooltip("Invoked when a sound at or above threshold is heard. Args: loudness [0-1], source position, quality")]
-    [SerializeField] private UnityEvent<float, Vector3, float> onHeard;
+    /// <summary>
+    /// C# event for code-based subscriptions. Args: loudness, source position, quality
+    /// </summary>
+    public UnityAction<float, Vector3, float> OnSoundHeard;
 
     /// <summary>
     /// Called by the Sound system. Decides whether to react based on hearingThreshold.
@@ -39,7 +41,7 @@ public class Listener : MonoBehaviour
             var flash = GetComponent<ListenerDebugFlash>();
             if (flash) flash.FlashHeard();
 
-            onHeard?.Invoke(loudness, sourcePos, quality);
+            OnSoundHeard?.Invoke(loudness, sourcePos, quality);
         }
         else
         {
