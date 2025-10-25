@@ -30,6 +30,9 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Radius of patrol area")]
     [SerializeField] private float patrolRadius = 10f;
 
+    [Tooltip("Movement speed while patrolling")]
+    [SerializeField] private float patrolSpeed = 2f;
+
     [Header("Idle Settings")]
     [Tooltip("How long to idle before resuming patrol")]
     [SerializeField] private float idleDuration = 2f;
@@ -38,15 +41,19 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("How close to get to the heard sound location")]
     [SerializeField] private float huntingStoppingDistance = 1f;
 
-    [Header("Attacking Settings")]
-    [Tooltip("How far player can be before enemy stops attacking")]
-    [SerializeField] private float attackRange = 3f;
+    [Tooltip("Movement speed while hunting sounds")]
+    [SerializeField] private float huntingSpeed = 5f;
+
 
     [Header("State Colors")]
     [SerializeField] private Color idleColor = Color.gray;
     [SerializeField] private Color patrolColor = Color.black;
     [SerializeField] private Color huntingColor = Color.yellow;
     [SerializeField] private Color attackingColor = Color.red;
+
+    [Header("Debug")]
+    [Tooltip("Show debug visualization of target position in Game view")]
+    [SerializeField] private bool showDebugVisualization = true;
 
     private NavMeshAgent agent;
     private Listener listener;
@@ -59,7 +66,6 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lastHeardSoundPosition;
     private float lastHeardSoundLoudness;
     private float lastHeardSoundQuality;
-    private GameObject playerTarget;
 
     private void Awake()
     {
@@ -129,6 +135,35 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        // Debug visualization
+        if (showDebugVisualization)
+        {
+            // Draw line to current target sound position
+            if (currentState == EnemyState.Hunting || currentState == EnemyState.Attacking)
+            {
+                Debug.DrawLine(transform.position, lastHeardSoundPosition, Color.yellow);
+                Debug.DrawRay(lastHeardSoundPosition, Vector3.up * 2f, Color.yellow); // Marker at target
+            }
+
+            // Draw attack range indicator when hunting
+            if (currentState == EnemyState.Hunting && leapAttack != null)
+            {
+                float attackRange = leapAttack.GetAttackRange();
+                // Draw rays in a circle to show attack range
+                int segments = 16;
+                for (int i = 0; i < segments; i++)
+                {
+                    float angle1 = (i / (float)segments) * Mathf.PI * 2f;
+                    float angle2 = ((i + 1) / (float)segments) * Mathf.PI * 2f;
+
+                    Vector3 point1 = transform.position + new Vector3(Mathf.Cos(angle1), 0, Mathf.Sin(angle1)) * attackRange;
+                    Vector3 point2 = transform.position + new Vector3(Mathf.Cos(angle2), 0, Mathf.Sin(angle2)) * attackRange;
+
+                    Debug.DrawLine(point1, point2, Color.red);
+                }
+            }
+        }
+
         // Execute behavior for current state
         switch (currentState)
         {
@@ -170,6 +205,19 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdateHunting()
     {
+        // Check if within attack range and can attack
+        if (leapAttack != null)
+        {
+            float distanceToSound = Vector3.Distance(transform.position, lastHeardSoundPosition);
+
+            if (distanceToSound <= leapAttack.GetAttackRange() && leapAttack.CanAttack(lastHeardSoundPosition))
+            {
+                // Within attack range and ready - leap!
+                TransitionToState(EnemyState.Attacking);
+                return;
+            }
+        }
+
         // If reached the sound location
         if (!agent.pathPending && agent.remainingDistance <= huntingStoppingDistance)
         {
@@ -180,34 +228,43 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdateAttacking()
     {
-        // If player escapes or dies
-        if (playerTarget == null || Vector3.Distance(transform.position, playerTarget.transform.position) > attackRange)
+        // Wait for leap attack to complete
+        if (leapAttack != null && !leapAttack.IsAttackComplete())
         {
-            playerTarget = null;
-            TransitionToState(EnemyState.Patrol);
+            // Still leaping, wait...
+            return;
         }
-        else
-        {
-            // Keep moving towards player
-            agent.SetDestination(playerTarget.transform.position);
-        }
+
+        // Leap complete, transition back to hunting at landing position
+        TransitionToState(EnemyState.Hunting);
     }
 
     private void TransitionToState(EnemyState newState)
     {
-        if (currentState == newState) return;
+        // Allow re-entering Hunting state (to update destination when new sound heard)
+        // For other states, ignore if already in that state
+        if (currentState == newState && newState != EnemyState.Hunting)
+            return;
 
-        // Exit current state
-        ExitState(currentState);
+        bool isActualStateChange = (currentState != newState);
+
+        // Exit current state (only if actually changing states)
+        if (isActualStateChange)
+        {
+            ExitState(currentState);
+        }
 
         // Update state
         currentState = newState;
 
-        // Enter new state
+        // Enter new state (or re-enter if Hunting)
         EnterState(newState);
 
-        // Update visual
-        UpdateStateColor();
+        // Update visual (only if actually changing states)
+        if (isActualStateChange)
+        {
+            UpdateStateColor();
+        }
     }
 
     private void EnterState(EnemyState state)
@@ -221,19 +278,21 @@ public class EnemyAI : MonoBehaviour
 
             case EnemyState.Patrol:
                 agent.isStopped = false;
+                agent.speed = patrolSpeed;
                 SetRandomPatrolDestination();
                 break;
 
             case EnemyState.Hunting:
                 agent.isStopped = false;
+                agent.speed = huntingSpeed;
                 agent.SetDestination(lastHeardSoundPosition);
                 break;
 
             case EnemyState.Attacking:
-                agent.isStopped = false;
-                if (playerTarget != null)
+                agent.isStopped = true; // Stop NavMesh movement during leap
+                if (leapAttack != null)
                 {
-                    agent.SetDestination(playerTarget.transform.position);
+                    leapAttack.ExecuteAttack(lastHeardSoundPosition);
                 }
                 break;
         }
@@ -288,14 +347,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerTarget = collision.gameObject;
-            TransitionToState(EnemyState.Attacking);
-        }
-    }
 
     private void OnDie()
     {
@@ -328,10 +379,10 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(center, patrolRadius);
 
         // Visualize attack range when attacking
-        if (Application.isPlaying && currentState == EnemyState.Attacking)
+        if (Application.isPlaying && currentState == EnemyState.Attacking && leapAttack != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            Gizmos.DrawWireSphere(transform.position, leapAttack.GetAttackRange());
         }
     }
 }
