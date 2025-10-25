@@ -26,6 +26,10 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
     [Tooltip("Cooldown between attacks in seconds")]
     [SerializeField] private float attackCooldown = 3f;
 
+    [Header("Damage")]
+    [Tooltip("Child GameObject with trigger collider and DamageOnTouch (will be activated during leap)")]
+    [SerializeField] private GameObject attackZone;
+
     [Header("Debug")]
     [Tooltip("Show debug logs for attack behavior")]
     [SerializeField] private bool debugMode = true;
@@ -41,6 +45,12 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
     {
         // Initialize with random attack range
         RandomizeAttackRange();
+
+        // Ensure attack zone starts disabled
+        if (attackZone != null)
+        {
+            attackZone.SetActive(false);
+        }
     }
 
     public float GetAttackRange()
@@ -96,6 +106,12 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
             Debug.Log($"[LeapAttack] Starting leap from {leapStartPosition} to {leapTargetPosition} (Distance: {distance:F2}, Duration: {leapDuration:F2}s)");
         }
 
+        // Activate attack zone during leap
+        if (attackZone != null)
+        {
+            attackZone.SetActive(true);
+        }
+
         float elapsedTime = 0f;
 
         while (elapsedTime < leapDuration)
@@ -134,6 +150,12 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
         if (debugMode)
         {
             Debug.Log($"[LeapAttack] Leap complete! Landed at {transform.position}");
+        }
+
+        // Deactivate attack zone
+        if (attackZone != null)
+        {
+            attackZone.SetActive(false);
         }
 
         // Attack complete
