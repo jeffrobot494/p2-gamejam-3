@@ -7,11 +7,12 @@ public enum EnemyState
     Idle,
     Patrol,
     Hunting,
-    Attacking
+    Attacking,
+    Investigating
 }
 
 /// <summary>
-/// Enemy AI with state machine for Idle, Patrol, Hunting, and Attacking behaviors.
+/// Enemy AI with state machine for Idle, Patrol, Hunting, Attacking, and Investigating behaviors.
 /// Uses NavMesh for navigation and Listener component for hearing sounds.
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
@@ -23,15 +24,25 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
 
     [Header("Patrol Settings")]
-    [Tooltip("Center point of patrol area")]
+    [Tooltip("Center point of default patrol area")]
     [SerializeField] private GameObject patrolCenterObject;
-    private Vector3 patrolCenter;
+    private Vector3 defaultPatrolCenter;
+    private Vector3 currentPatrolCenter;
 
-    [Tooltip("Radius of patrol area")]
-    [SerializeField] private float patrolRadius = 10f;
+    [Tooltip("Radius of default patrol area")]
+    [SerializeField] private float defaultPatrolRadius = 10f;
 
     [Tooltip("Movement speed while patrolling")]
     [SerializeField] private float patrolSpeed = 2f;
+
+    [Header("Investigating Settings")]
+    [Tooltip("Radius of patrol area when investigating a sound")]
+    [SerializeField] private float investigativePatrolRadius = 5f;
+
+    [Tooltip("How long to investigate around last heard sound before returning to default patrol (in seconds)")]
+    [SerializeField] private float investigateDuration = 30f;
+
+    private float investigateTimer = 0f;
 
     [Header("Idle Settings")]
     [Tooltip("How long to idle before resuming patrol")]
@@ -50,6 +61,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Color patrolColor = Color.black;
     [SerializeField] private Color huntingColor = Color.yellow;
     [SerializeField] private Color attackingColor = Color.red;
+    [SerializeField] private Color investigatingColor = Color.cyan;
 
     [Header("Debug")]
     [Tooltip("Show debug visualization of target position in Game view")]
@@ -62,6 +74,7 @@ public class EnemyAI : MonoBehaviour
     private IAlienAttack leapAttack;
 
     private EnemyState currentState = EnemyState.Patrol;
+    private EnemyState stateBeforeIdle = EnemyState.Patrol; // Track what state we came from
     private float idleTimer = 0f;
     private Vector3 lastHeardSoundPosition;
     private float lastHeardSoundLoudness;
@@ -81,8 +94,10 @@ public class EnemyAI : MonoBehaviour
 
         if (patrolCenterObject != null)
         {
-            patrolCenter = patrolCenterObject.transform.position;
+            defaultPatrolCenter = patrolCenterObject.transform.position;
         }
+
+        currentPatrolCenter = defaultPatrolCenter;
     }
 
     private void Start()
@@ -109,9 +124,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Set patrol center to current position if not set
-        if (patrolCenter == Vector3.zero)
+        if (defaultPatrolCenter == Vector3.zero)
         {
-            patrolCenter = transform.position;
+            defaultPatrolCenter = transform.position;
+            currentPatrolCenter = defaultPatrolCenter;
         }
 
         // Initialize state
@@ -182,6 +198,10 @@ public class EnemyAI : MonoBehaviour
             case EnemyState.Attacking:
                 UpdateAttacking();
                 break;
+
+            case EnemyState.Investigating:
+                UpdateInvestigating();
+                break;
         }
     }
 
@@ -190,7 +210,9 @@ public class EnemyAI : MonoBehaviour
         idleTimer += Time.deltaTime;
         if (idleTimer >= idleDuration)
         {
-            TransitionToState(EnemyState.Patrol);
+            Debug.Log($"[EnemyAI] Idle complete, returning to: {stateBeforeIdle}");
+            // Return to the state we were in before idling
+            TransitionToState(stateBeforeIdle);
         }
     }
 
@@ -235,8 +257,32 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        // Leap complete, transition back to hunting at landing position
-        TransitionToState(EnemyState.Hunting);
+        // Leap complete, transition to investigating
+        TransitionToState(EnemyState.Investigating);
+    }
+
+    private void UpdateInvestigating()
+    {
+        // Update timer
+        investigateTimer += Time.deltaTime;
+
+        Debug.Log($"[EnemyAI] Investigating - Timer: {investigateTimer:F2}/{investigateDuration:F2}");
+
+        // Time to return to default patrol?
+        if (investigateTimer >= investigateDuration)
+        {
+            Debug.Log($"[EnemyAI] Investigation complete! Returning to Patrol");
+            // Investigation over, return to default patrol
+            TransitionToState(EnemyState.Patrol);
+            return;
+        }
+
+        // If reached investigation destination, idle then pick new spot
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            Debug.Log($"[EnemyAI] Reached investigation destination, going to Idle");
+            TransitionToState(EnemyState.Idle);
+        }
     }
 
     private void TransitionToState(EnemyState newState)
@@ -248,10 +294,16 @@ public class EnemyAI : MonoBehaviour
 
         bool isActualStateChange = (currentState != newState);
 
+        // Track state before going to Idle (so we can return to it)
+        if (isActualStateChange && newState == EnemyState.Idle)
+        {
+            stateBeforeIdle = currentState;
+        }
+
         // Exit current state (only if actually changing states)
         if (isActualStateChange)
         {
-            ExitState(currentState);
+            ExitState(currentState, newState);
         }
 
         // Update state
@@ -295,27 +347,62 @@ public class EnemyAI : MonoBehaviour
                     leapAttack.ExecuteAttack(lastHeardSoundPosition);
                 }
                 break;
+
+            case EnemyState.Investigating:
+                // Only reset timer when first entering from Attacking, not when returning from Idle
+                if (stateBeforeIdle != EnemyState.Investigating)
+                {
+                    investigateTimer = 0f; // Reset timer
+                    currentPatrolCenter = lastHeardSoundPosition; // Set patrol center to last heard sound
+                }
+                agent.isStopped = false;
+                agent.speed = patrolSpeed; // Use patrol speed
+                SetRandomPatrolDestination(); // Start patrolling around the sound location
+                break;
         }
     }
 
-    private void ExitState(EnemyState state)
+    private void ExitState(EnemyState state, EnemyState nextState)
     {
         // Clean up state-specific data if needed
+        if (state == EnemyState.Investigating)
+        {
+            Debug.Log($"[EnemyAI] Exiting Investigating state, going to: {nextState}. stateBeforeIdle was: {stateBeforeIdle}");
+
+            // Only clear patrol center and stateBeforeIdle when investigation is COMPLETE (going to Patrol)
+            // Don't clear when temporarily going to Idle during investigation
+            if (nextState == EnemyState.Patrol)
+            {
+                Debug.Log($"[EnemyAI] Investigation complete, resetting to default patrol");
+                // Reset to default patrol center
+                currentPatrolCenter = defaultPatrolCenter;
+
+                // Clear stateBeforeIdle so next investigation starts fresh
+                if (stateBeforeIdle == EnemyState.Investigating)
+                {
+                    Debug.Log($"[EnemyAI] Clearing stateBeforeIdle to Patrol");
+                    stateBeforeIdle = EnemyState.Patrol;
+                }
+            }
+        }
     }
 
     private void SetRandomPatrolDestination()
     {
-        Vector3 randomPoint = patrolCenter + Random.insideUnitSphere * patrolRadius;
-        randomPoint.y = patrolCenter.y; // Keep on same Y level
+        // Use investigative radius when investigating, otherwise use default
+        float radius = (currentState == EnemyState.Investigating) ? investigativePatrolRadius : defaultPatrolRadius;
 
-        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
+        Vector3 randomPoint = currentPatrolCenter + Random.insideUnitSphere * radius;
+        randomPoint.y = currentPatrolCenter.y; // Keep on same Y level
+
+        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
         }
         else
         {
             // If no valid position found, just go to patrol center
-            agent.SetDestination(patrolCenter);
+            agent.SetDestination(currentPatrolCenter);
         }
     }
 
@@ -329,6 +416,7 @@ public class EnemyAI : MonoBehaviour
             EnemyState.Patrol => patrolColor,
             EnemyState.Hunting => huntingColor,
             EnemyState.Attacking => attackingColor,
+            EnemyState.Investigating => investigatingColor,
             _ => Color.white
         };
 
@@ -373,10 +461,17 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Visualize patrol area
+        // Visualize default patrol area
         Gizmos.color = Color.blue;
-        Vector3 center = patrolCenter == Vector3.zero ? transform.position : patrolCenter;
-        Gizmos.DrawWireSphere(center, patrolRadius);
+        Vector3 center = defaultPatrolCenter == Vector3.zero ? transform.position : defaultPatrolCenter;
+        Gizmos.DrawWireSphere(center, defaultPatrolRadius);
+
+        // Visualize investigative patrol area when investigating
+        if (Application.isPlaying && currentState == EnemyState.Investigating)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(currentPatrolCenter, investigativePatrolRadius);
+        }
 
         // Visualize attack range when attacking
         if (Application.isPlaying && currentState == EnemyState.Attacking && leapAttack != null)
