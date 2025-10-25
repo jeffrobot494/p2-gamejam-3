@@ -210,7 +210,6 @@ public class EnemyAI : MonoBehaviour
         idleTimer += Time.deltaTime;
         if (idleTimer >= idleDuration)
         {
-            Debug.Log($"[EnemyAI] Idle complete, returning to: {stateBeforeIdle}");
             // Return to the state we were in before idling
             TransitionToState(stateBeforeIdle);
         }
@@ -243,8 +242,8 @@ public class EnemyAI : MonoBehaviour
         // If reached the sound location
         if (!agent.pathPending && agent.remainingDistance <= huntingStoppingDistance)
         {
-            // Didn't find anything, go back to patrol
-            TransitionToState(EnemyState.Patrol);
+            // Reached sound location - investigate the area
+            TransitionToState(EnemyState.Investigating);
         }
     }
 
@@ -257,6 +256,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[EnemyAI] Attack complete, transitioning to Investigating");
         // Leap complete, transition to investigating
         TransitionToState(EnemyState.Investigating);
     }
@@ -266,12 +266,10 @@ public class EnemyAI : MonoBehaviour
         // Update timer
         investigateTimer += Time.deltaTime;
 
-        Debug.Log($"[EnemyAI] Investigating - Timer: {investigateTimer:F2}/{investigateDuration:F2}");
-
         // Time to return to default patrol?
         if (investigateTimer >= investigateDuration)
         {
-            Debug.Log($"[EnemyAI] Investigation complete! Returning to Patrol");
+            Debug.Log($"[EnemyAI] Investigation duration elapsed ({investigateTimer:F2}/{investigateDuration:F2}), returning to Patrol");
             // Investigation over, return to default patrol
             TransitionToState(EnemyState.Patrol);
             return;
@@ -280,7 +278,6 @@ public class EnemyAI : MonoBehaviour
         // If reached investigation destination, idle then pick new spot
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            Debug.Log($"[EnemyAI] Reached investigation destination, going to Idle");
             TransitionToState(EnemyState.Idle);
         }
     }
@@ -349,11 +346,13 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Investigating:
+                Debug.Log($"[EnemyAI] Entering Investigating state. stateBeforeIdle: {stateBeforeIdle}, investigateTimer: {investigateTimer}");
                 // Only reset timer when first entering from Attacking, not when returning from Idle
                 if (stateBeforeIdle != EnemyState.Investigating)
                 {
                     investigateTimer = 0f; // Reset timer
                     currentPatrolCenter = lastHeardSoundPosition; // Set patrol center to last heard sound
+                    Debug.Log($"[EnemyAI] Reset timer and patrol center to: {currentPatrolCenter}");
                 }
                 agent.isStopped = false;
                 agent.speed = patrolSpeed; // Use patrol speed
@@ -367,20 +366,16 @@ public class EnemyAI : MonoBehaviour
         // Clean up state-specific data if needed
         if (state == EnemyState.Investigating)
         {
-            Debug.Log($"[EnemyAI] Exiting Investigating state, going to: {nextState}. stateBeforeIdle was: {stateBeforeIdle}");
-
             // Only clear patrol center and stateBeforeIdle when investigation is COMPLETE (going to Patrol)
             // Don't clear when temporarily going to Idle during investigation
             if (nextState == EnemyState.Patrol)
             {
-                Debug.Log($"[EnemyAI] Investigation complete, resetting to default patrol");
                 // Reset to default patrol center
                 currentPatrolCenter = defaultPatrolCenter;
 
                 // Clear stateBeforeIdle so next investigation starts fresh
                 if (stateBeforeIdle == EnemyState.Investigating)
                 {
-                    Debug.Log($"[EnemyAI] Clearing stateBeforeIdle to Patrol");
                     stateBeforeIdle = EnemyState.Patrol;
                 }
             }

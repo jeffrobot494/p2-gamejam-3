@@ -51,19 +51,15 @@ public class DamageOnTouch : MonoBehaviour
 
     private void TryDealDamage(GameObject target)
     {
-        Debug.Log($"[DamageOnTouch] TryDealDamage called for: {target.name}");
-
         // Check cooldown
         if (Time.time < lastDamageTime + damageCooldown)
         {
-            Debug.Log($"[DamageOnTouch] On cooldown. Last damage: {lastDamageTime}, Current: {Time.time}");
             return;
         }
 
         // Check tag filter if specified
         if (!string.IsNullOrEmpty(targetTag) && !target.CompareTag(targetTag))
         {
-            Debug.Log($"[DamageOnTouch] Target tag '{target.tag}' doesn't match required tag '{targetTag}'");
             return;
         }
 
@@ -71,7 +67,6 @@ public class DamageOnTouch : MonoBehaviour
         Damageable damageable = target.GetComponent<Damageable>();
         if (damageable == null)
         {
-            Debug.Log($"[DamageOnTouch] No Damageable on {target.name}, checking parent...");
             // Try to find it in parent (in case we hit a child collider)
             damageable = target.GetComponentInParent<Damageable>();
         }
@@ -79,13 +74,8 @@ public class DamageOnTouch : MonoBehaviour
         // Deal damage if we found a Damageable
         if (damageable != null)
         {
-            Debug.Log($"[DamageOnTouch] Found Damageable! Dealing {damageAmount} damage to {target.name}");
             damageable.InflictDamage(damageAmount, false, gameObject);
             lastDamageTime = Time.time;
-        }
-        else
-        {
-            Debug.LogWarning($"[DamageOnTouch] No Damageable component found on {target.name} or its parents!");
         }
     }
 }

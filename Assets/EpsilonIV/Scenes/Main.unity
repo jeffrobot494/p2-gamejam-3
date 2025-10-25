@@ -532,12 +532,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   GroundCheckDistance: 0.05
-  MaxSpeedOnGround: 10
+  MaxSpeedOnGround: 5
   MovementSharpnessOnGround: 15
   MaxSpeedCrouchedRatio: 0.5
   MaxSpeedInAir: 10
   AccelerationSpeedInAir: 25
-  SprintSpeedModifier: 2
+  SprintSpeedModifier: 1.5
   KillHeight: -50
   RotationSpeed: 200
   AimingRotationMultiplier: 0.4
@@ -13683,8 +13683,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   meshRenderer: {fileID: 1674328881}
   patrolCenterObject: {fileID: 1879498978}
-  patrolRadius: 40
+  defaultPatrolRadius: 17.56
   patrolSpeed: 1
+  investigativePatrolRadius: 4
+  investigateDuration: 20
   idleDuration: 2
   huntingStoppingDistance: 1
   huntingSpeed: 6
@@ -13692,6 +13694,7 @@ MonoBehaviour:
   patrolColor: {r: 0, g: 0, b: 0, a: 1}
   huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   attackingColor: {r: 1, g: 0, b: 0, a: 1}
+  investigatingColor: {r: 0, g: 1, b: 1, a: 1}
   showDebugVisualization: 1
 --- !u!114 &1674328876
 MonoBehaviour:

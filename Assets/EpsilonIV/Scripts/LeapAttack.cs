@@ -32,7 +32,7 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
 
     [Header("Debug")]
     [Tooltip("Show debug logs for attack behavior")]
-    [SerializeField] private bool debugMode = true;
+    [SerializeField] private bool debugMode = false;
 
     // State tracking
     private float currentAttackRange;

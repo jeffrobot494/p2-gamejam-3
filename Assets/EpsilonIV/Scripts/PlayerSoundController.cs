@@ -38,15 +38,25 @@ public class PlayerSoundController : MonoBehaviour
         [Range(0f, 1f)]
         [SerializeField] private float crouchWalkingLoudness = 0.15f;
 
-        [Header("Emission Frequencies")]
-        [Tooltip("Footstep sounds played per meter when walking")]
-        [SerializeField] private float walkingFrequency = 1f;
+        [Header("Audio SFX Frequencies")]
+        [Tooltip("Footstep SFX played per meter when walking")]
+        [SerializeField] private float walkingSfxFrequency = 1f;
 
-        [Tooltip("Footstep sounds played per meter when running")]
-        [SerializeField] private float runningFrequency = 2f;
+        [Tooltip("Footstep SFX played per meter when running")]
+        [SerializeField] private float runningSfxFrequency = 2f;
 
-        [Tooltip("Footstep sounds played per meter when crouch walking")]
-        [SerializeField] private float crouchWalkingFrequency = 0.5f;
+        [Tooltip("Footstep SFX played per meter when crouch walking")]
+        [SerializeField] private float crouchWalkingSfxFrequency = 0.5f;
+
+        [Header("Sound Broadcast Frequencies")]
+        [Tooltip("Sound broadcasts per meter when walking (can be higher than SFX for better AI tracking)")]
+        [SerializeField] private float walkingBroadcastFrequency = 3f;
+
+        [Tooltip("Sound broadcasts per meter when running")]
+        [SerializeField] private float runningBroadcastFrequency = 5f;
+
+        [Tooltip("Sound broadcasts per meter when crouch walking")]
+        [SerializeField] private float crouchWalkingBroadcastFrequency = 2f;
 
         [Header("Sound Quality")]
         [Tooltip("Quality parameter passed to Sound system")]
@@ -68,7 +78,8 @@ public class PlayerSoundController : MonoBehaviour
         private PlayerCharacterController m_PlayerController;
         private SoundEmitter m_SoundEmitter;
         private MovementState m_CurrentState = MovementState.Idle;
-        private float m_FootstepDistanceCounter;
+        private float m_FootstepSfxDistanceCounter;
+        private float m_SoundBroadcastDistanceCounter;
 
         private void Awake()
         {
@@ -106,25 +117,35 @@ public class PlayerSoundController : MonoBehaviour
                 m_CurrentState == MovementState.Running ||
                 m_CurrentState == MovementState.CrouchWalking)
             {
-                // Get the appropriate frequency and loudness for current state
-                float frequency = GetFrequencyForState(m_CurrentState);
+                // Get the appropriate frequencies and loudness for current state
+                float sfxFrequency = GetSfxFrequencyForState(m_CurrentState);
+                float broadcastFrequency = GetBroadcastFrequencyForState(m_CurrentState);
                 float loudness = GetLoudnessForState(m_CurrentState);
 
                 // Calculate distance traveled this frame
                 float distanceTraveled = m_PlayerController.CharacterVelocity.magnitude * Time.deltaTime;
-                m_FootstepDistanceCounter += distanceTraveled;
+                m_FootstepSfxDistanceCounter += distanceTraveled;
+                m_SoundBroadcastDistanceCounter += distanceTraveled;
 
-                // Check if we've traveled far enough to emit a footstep
-                if (frequency > 0f && m_FootstepDistanceCounter >= 1f / frequency)
+                // Check if we've traveled far enough to play footstep SFX
+                if (sfxFrequency > 0f && m_FootstepSfxDistanceCounter >= 1f / sfxFrequency)
                 {
-                    m_FootstepDistanceCounter = 0f;
-                    EmitFootstepSound(loudness);
+                    m_FootstepSfxDistanceCounter = 0f;
+                    PlayFootstepSfx();
+                }
+
+                // Check if we've traveled far enough to broadcast sound (independent of SFX)
+                if (broadcastFrequency > 0f && m_SoundBroadcastDistanceCounter >= 1f / broadcastFrequency)
+                {
+                    m_SoundBroadcastDistanceCounter = 0f;
+                    BroadcastSound(loudness);
                 }
             }
             else
             {
-                // Reset counter when not moving
-                m_FootstepDistanceCounter = 0f;
+                // Reset counters when not moving
+                m_FootstepSfxDistanceCounter = 0f;
+                m_SoundBroadcastDistanceCounter = 0f;
             }
         }
 
@@ -139,25 +160,42 @@ public class PlayerSoundController : MonoBehaviour
 
             if (wasNotMoving && isNowMoving)
             {
-                // Emit initial footstep immediately when starting to move
+                // Emit initial footstep SFX and broadcast immediately when starting to move
                 float loudness = GetLoudnessForState(newState);
-                EmitFootstepSound(loudness);
+                PlayFootstepSfx();
+                BroadcastSound(loudness);
             }
 
-            // Reset distance counter on state change
-            m_FootstepDistanceCounter = 0f;
+            // Reset distance counters on state change
+            m_FootstepSfxDistanceCounter = 0f;
+            m_SoundBroadcastDistanceCounter = 0f;
         }
 
-        private float GetFrequencyForState(MovementState state)
+        private float GetSfxFrequencyForState(MovementState state)
         {
             switch (state)
             {
                 case MovementState.Walking:
-                    return walkingFrequency;
+                    return walkingSfxFrequency;
                 case MovementState.Running:
-                    return runningFrequency;
+                    return runningSfxFrequency;
                 case MovementState.CrouchWalking:
-                    return crouchWalkingFrequency;
+                    return crouchWalkingSfxFrequency;
+                default:
+                    return 0f;
+            }
+        }
+
+        private float GetBroadcastFrequencyForState(MovementState state)
+        {
+            switch (state)
+            {
+                case MovementState.Walking:
+                    return walkingBroadcastFrequency;
+                case MovementState.Running:
+                    return runningBroadcastFrequency;
+                case MovementState.CrouchWalking:
+                    return crouchWalkingBroadcastFrequency;
                 default:
                     return 0f;
             }
@@ -178,14 +216,17 @@ public class PlayerSoundController : MonoBehaviour
             }
         }
 
-        private void EmitFootstepSound(float loudness)
+        private void PlayFootstepSfx()
         {
             // Play the footstep SFX
             if (audioSource != null && footstepSfx != null)
             {
                 audioSource.PlayOneShot(footstepSfx);
             }
+        }
 
+        private void BroadcastSound(float loudness)
+        {
             // Broadcast sound to hearing system
             if (m_SoundEmitter != null)
             {
