@@ -24,8 +24,8 @@ namespace Unity.FPS.UI
 
         void Awake()
         {
-            PlayerCharacterController playerCharacterController = FindFirstObjectByType<PlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, Compass>(playerCharacterController,
+            FPSPlayerCharacterController playerCharacterController = FindFirstObjectByType<FPSPlayerCharacterController>();
+            DebugUtility.HandleErrorIfNullFindObject<FPSPlayerCharacterController, Compass>(playerCharacterController,
                 this);
             m_PlayerTransform = playerCharacterController.transform;
 

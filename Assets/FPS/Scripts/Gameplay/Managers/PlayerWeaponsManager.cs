@@ -82,7 +82,7 @@ namespace Unity.FPS.Gameplay
 
         WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
         PlayerInputHandler m_InputHandler;
-        PlayerCharacterController m_PlayerCharacterController;
+        FPSPlayerCharacterController m_PlayerCharacterController;
         float m_WeaponBobFactor;
         Vector3 m_LastCharacterPosition;
         Vector3 m_WeaponMainLocalPosition;
@@ -102,8 +102,8 @@ namespace Unity.FPS.Gameplay
             DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, PlayerWeaponsManager>(m_InputHandler, this,
                 gameObject);
 
-            m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, PlayerWeaponsManager>(
+            m_PlayerCharacterController = GetComponent<FPSPlayerCharacterController>();
+            DebugUtility.HandleErrorIfNullGetComponent<FPSPlayerCharacterController, PlayerWeaponsManager>(
                 m_PlayerCharacterController, this, gameObject);
 
             SetFov(DefaultFov);

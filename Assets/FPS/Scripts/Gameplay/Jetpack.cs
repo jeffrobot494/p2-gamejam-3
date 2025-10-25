@@ -39,7 +39,7 @@ namespace Unity.FPS.Gameplay
         public AudioClip JetpackSfx;
 
         bool m_CanUseJetpack;
-        PlayerCharacterController m_PlayerCharacterController;
+        FPSPlayerCharacterController m_PlayerCharacterController;
         PlayerInputHandler m_InputHandler;
         float m_LastTimeOfUse;
 
@@ -55,8 +55,8 @@ namespace Unity.FPS.Gameplay
         {
             IsJetpackUnlocked = IsJetpackUnlockedAtStart;
 
-            m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, Jetpack>(m_PlayerCharacterController,
+            m_PlayerCharacterController = GetComponent<FPSPlayerCharacterController>();
+            DebugUtility.HandleErrorIfNullGetComponent<FPSPlayerCharacterController, Jetpack>(m_PlayerCharacterController,
                 this, gameObject);
 
             m_InputHandler = GetComponent<PlayerInputHandler>();

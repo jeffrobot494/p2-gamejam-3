@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Unity.FPS.Gameplay
 {
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
-    public class PlayerCharacterController : MonoBehaviour
+    public class FPSPlayerCharacterController : MonoBehaviour
     {
         [Header("References")] [Tooltip("Reference to the main camera used for the player")]
         public Camera PlayerCamera;
@@ -144,22 +144,22 @@ namespace Unity.FPS.Gameplay
         {
             // fetch components on the same gameObject
             m_Controller = GetComponent<CharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, PlayerCharacterController>(m_Controller,
+            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, FPSPlayerCharacterController>(m_Controller,
                 this, gameObject);
 
             m_InputHandler = GetComponent<PlayerInputHandler>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, PlayerCharacterController>(m_InputHandler,
+            DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, FPSPlayerCharacterController>(m_InputHandler,
                 this, gameObject);
 
             m_WeaponsManager = GetComponent<PlayerWeaponsManager>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerWeaponsManager, PlayerCharacterController>(
+            DebugUtility.HandleErrorIfNullGetComponent<PlayerWeaponsManager, FPSPlayerCharacterController>(
                 m_WeaponsManager, this, gameObject);
 
             m_Health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerCharacterController>(m_Health, this, gameObject);
+            DebugUtility.HandleErrorIfNullGetComponent<Health, FPSPlayerCharacterController>(m_Health, this, gameObject);
 
             m_Actor = GetComponent<Actor>();
-            DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
+            DebugUtility.HandleErrorIfNullGetComponent<Actor, FPSPlayerCharacterController>(m_Actor, this, gameObject);
 
             m_Controller.enableOverlapRecovery = true;
 

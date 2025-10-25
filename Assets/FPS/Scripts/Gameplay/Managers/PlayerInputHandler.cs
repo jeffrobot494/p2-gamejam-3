@@ -22,7 +22,7 @@ namespace Unity.FPS.Gameplay
         public bool InvertXAxis = false;
 
         GameFlowManager m_GameFlowManager;
-        PlayerCharacterController m_PlayerCharacterController;
+        FPSPlayerCharacterController m_PlayerCharacterController;
         bool m_FireInputWasHeld;
 
         private InputAction m_MoveAction;
@@ -37,8 +37,8 @@ namespace Unity.FPS.Gameplay
 
         void Start()
         {
-            m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, PlayerInputHandler>(
+            m_PlayerCharacterController = GetComponent<FPSPlayerCharacterController>();
+            DebugUtility.HandleErrorIfNullGetComponent<FPSPlayerCharacterController, PlayerInputHandler>(
                 m_PlayerCharacterController, this, gameObject);
             m_GameFlowManager = FindFirstObjectByType<GameFlowManager>();
             DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);

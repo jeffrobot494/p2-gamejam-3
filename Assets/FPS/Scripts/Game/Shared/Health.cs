@@ -44,12 +44,19 @@ namespace Unity.FPS.Game
 
         public void TakeDamage(float damage, GameObject damageSource)
         {
+            Debug.Log($"[Health] TakeDamage called on {gameObject.name}. Damage: {damage}, CurrentHealth before: {CurrentHealth}");
+
             if (Invincible)
+            {
+                Debug.Log($"[Health] {gameObject.name} is invincible, ignoring damage");
                 return;
+            }
 
             float healthBefore = CurrentHealth;
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
+
+            Debug.Log($"[Health] {gameObject.name} health after damage: {CurrentHealth}/{MaxHealth}");
 
             // call OnDamage action
             float trueDamageAmount = healthBefore - CurrentHealth;

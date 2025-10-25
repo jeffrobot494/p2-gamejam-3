@@ -442,7 +442,6 @@ namespace Unity.FPS.Gameplay
             // Only fire event if state actually changed
             if (newState != m_CurrentMovementState)
             {
-                Debug.Log($"Movement state changed: {m_CurrentMovementState} -> {newState}");
                 m_CurrentMovementState = newState;
                 OnMovementStateChanged?.Invoke(newState);
             }
