@@ -52,6 +52,7 @@ public class EnemyAI : MonoBehaviour
     private Listener listener;
     private Health health;
     private Material material;
+    private IAlienAttack leapAttack;
 
     private EnemyState currentState = EnemyState.Patrol;
     private float idleTimer = 0f;
@@ -65,6 +66,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         listener = GetComponent<Listener>();
         health = GetComponent<Health>();
+        leapAttack = GetComponent<IAlienAttack>();
 
         if (meshRenderer != null)
         {
