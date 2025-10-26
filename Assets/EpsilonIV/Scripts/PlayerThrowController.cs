@@ -111,7 +111,7 @@ public class PlayerThrowController : MonoBehaviour
                 break;
         }
 
-        // Update held object position
+        // Update held object position (using local position since it's parented)
         if (heldObject != null && currentState != ThrowState.Throwing)
         {
             UpdateObjectPosition();
@@ -136,15 +136,11 @@ public class PlayerThrowController : MonoBehaviour
 
     private void UpdateObjectPosition()
     {
-        if (heldObject == null || playerCamera == null)
+        if (heldObject == null)
             return;
 
-        // Position object relative to camera
-        Vector3 worldPosition = playerCamera.TransformPoint(targetPosition);
-        heldObject.transform.position = worldPosition;
-
-        // Make object face same direction as camera (optional)
-        heldObject.transform.rotation = playerCamera.rotation;
+        // Update local position (object is parented to camera)
+        heldObject.transform.localPosition = targetPosition;
     }
 
     private void TryPickup()
@@ -173,9 +169,13 @@ public class PlayerThrowController : MonoBehaviour
         heldObject = throwable;
         heldObject.OnPickup();
 
+        // Parent to camera
+        heldObject.transform.SetParent(playerCamera);
+
         // Set initial position to hold position
         targetPosition = holdPosition;
-        UpdateObjectPosition();
+        heldObject.transform.localPosition = targetPosition;
+        heldObject.transform.localRotation = Quaternion.identity;
 
         currentState = ThrowState.Holding;
     }
@@ -209,6 +209,9 @@ public class PlayerThrowController : MonoBehaviour
         Vector3 throwDirection = playerCamera.forward;
         Vector3 forceVector = throwDirection * throwForce;
 
+        // Unparent before throwing
+        heldObject.transform.SetParent(null);
+
         // Throw the object
         heldObject.OnThrow(forceVector);
         heldObject = null;
@@ -226,6 +229,8 @@ public class PlayerThrowController : MonoBehaviour
     {
         if (heldObject != null)
         {
+            // Unparent before dropping
+            heldObject.transform.SetParent(null);
             heldObject.OnThrow(Vector3.zero);
             heldObject = null;
         }
