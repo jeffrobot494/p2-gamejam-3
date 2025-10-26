@@ -9,6 +9,10 @@ public class SoundEmitter : MonoBehaviour
     [Range(0f, 1f)] public float defaultLoudness = 1f;
     public float defaultQuality = 0f;
 
+    [Header("Emit Position")]
+    [Tooltip("Optional: GameObject to use as emit position (e.g., player's center mass). If null, uses this transform.")]
+    public Transform emitPosition;
+
     [Header("Obstruction")]
     public LayerMask wallMask;
     [Range(0.1f, 1f)] public float wallPenalty = 0.8f;
@@ -39,8 +43,11 @@ public class SoundEmitter : MonoBehaviour
             velocity = playerController.CharacterVelocity;
         }
 
+        // Use emitPosition if set, otherwise use this transform
+        Vector3 soundPosition = emitPosition != null ? emitPosition.position : transform.position;
+
         // Spawn the actual sound with velocity
-        Sound.Spawn(transform.position, loudness, quality, wallMask, wallPenalty, drawDebug, velocity);
+        Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity);
 
         // Record debug state for Scene labels
         lastEmitLoudness = loudness;
@@ -50,7 +57,7 @@ public class SoundEmitter : MonoBehaviour
         // Optional runtime popup
         if (debugRuntimePopups)
         {
-            DebugPopupText.Spawn(transform.position, $"Emit L:{loudness:0.00} Q:{quality:0.00}", Color.cyan);
+            DebugPopupText.Spawn(soundPosition, $"Emit L:{loudness:0.00} Q:{quality:0.00}", Color.cyan);
         }
     }
 

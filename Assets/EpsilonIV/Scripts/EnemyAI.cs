@@ -495,12 +495,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 predictedOffset = lastHeardSoundVelocity * prepareAttackDuration;
         Vector3 predictedPosition = lastHeardSoundPosition + predictedOffset;
 
-        // Try to keep prediction on NavMesh
-        if (NavMesh.SamplePosition(predictedPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-        {
-            predictedPosition = hit.position;
-        }
-
+        // Don't snap to NavMesh - allow full 3D targeting
         return predictedPosition;
     }
 

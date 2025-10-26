@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Leap attack behavior for aliens.
@@ -106,6 +107,13 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
             Debug.Log($"[LeapAttack] Starting leap from {leapStartPosition} to {leapTargetPosition} (Distance: {distance:F2}, Duration: {leapDuration:F2}s)");
         }
 
+        // Disable NavMeshAgent during leap to prevent it from interfering
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
+
         // Activate attack zone during leap
         if (attackZone != null)
         {
@@ -142,10 +150,24 @@ public class LeapAttack : MonoBehaviour, IAlienAttack
             yield return null;
         }
 
-        // Ensure we end exactly at target
-        Vector3 finalPosition = leapTargetPosition;
-        finalPosition.y = leapStartPosition.y; // Keep on same Y level
-        transform.position = finalPosition;
+        // Ensure we end exactly at target (full 3D position)
+        transform.position = leapTargetPosition;
+
+        // Snap to NavMesh at landed position
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit navHit, 5f, NavMesh.AllAreas))
+        {
+            transform.position = navHit.position;
+        }
+        else
+        {
+            Debug.LogWarning($"[LeapAttack] Landed off NavMesh at {transform.position}");
+        }
+
+        // Re-enable NavMeshAgent now that we're at the landing position
+        if (agent != null)
+        {
+            agent.enabled = true;
+        }
 
         if (debugMode)
         {
