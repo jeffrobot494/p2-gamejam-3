@@ -10,6 +10,7 @@ public class Sound : MonoBehaviour
 
     // Assigned at spawn
     private Vector3 sourcePos;
+    private Vector3 sourceVelocity;
     private float originalLoudness; // [0..1]
     private float quality;
     private LayerMask wallMask;
@@ -22,11 +23,12 @@ public class Sound : MonoBehaviour
     /// <summary>
     /// Factory to spawn a transient Sound processor.
     /// </summary>
-    public static void Spawn(Vector3 pos, float loudness, float quality, LayerMask wallMask, float wallPenalty = 0.8f, bool drawDebug = false)
+    public static void Spawn(Vector3 pos, float loudness, float quality, LayerMask wallMask, float wallPenalty = 0.8f, bool drawDebug = false, Vector3 velocity = default)
     {
         var go = new GameObject("Sound");
         var s = go.AddComponent<Sound>();
         s.sourcePos = pos;
+        s.sourceVelocity = velocity;
         s.originalLoudness = Mathf.Clamp01(loudness);
         s.quality = quality;
         s.wallMask = wallMask;
@@ -101,7 +103,7 @@ public class Sound : MonoBehaviour
             }
 
             // Notify the listener (they decide based on their threshold)
-            listener.CheckSound(heardLoudness, sourcePos, quality);
+            listener.CheckSound(heardLoudness, sourcePos, quality, sourceVelocity);
         }
     }
 

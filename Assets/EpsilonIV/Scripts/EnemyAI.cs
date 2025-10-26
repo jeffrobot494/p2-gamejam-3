@@ -85,6 +85,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyState stateBeforeIdle = EnemyState.Patrol; // Track what state we came from
     private float idleTimer = 0f;
     private Vector3 lastHeardSoundPosition;
+    private Vector3 lastHeardSoundVelocity;
     private float lastHeardSoundLoudness;
     private float lastHeardSoundQuality;
 
@@ -456,14 +457,19 @@ public class EnemyAI : MonoBehaviour
         material.color = targetColor;
     }
 
-    private void OnSoundHeard(float loudness, Vector3 soundPosition, float quality)
+    private void OnSoundHeard(float loudness, Vector3 soundPosition, float quality, Vector3 soundVelocity)
     {
         // Don't interrupt preparing to attack or attacking
         if (currentState != EnemyState.PrepareAttack && currentState != EnemyState.Attacking)
         {
             lastHeardSoundPosition = soundPosition;
+            lastHeardSoundVelocity = soundVelocity;
             lastHeardSoundLoudness = loudness;
             lastHeardSoundQuality = quality;
+
+            // Debug log to verify velocity is being captured
+            Debug.Log($"[EnemyAI] Sound heard at {soundPosition} with velocity {soundVelocity} (magnitude: {soundVelocity.magnitude:F2})");
+
             TransitionToState(EnemyState.Hunting);
         }
     }

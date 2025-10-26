@@ -1,6 +1,7 @@
 // SoundEmitter.cs (additions for debug toggles and last-emit tracking)
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.FPS.Gameplay;
 
 public class SoundEmitter : MonoBehaviour
 {
@@ -30,8 +31,16 @@ public class SoundEmitter : MonoBehaviour
 
     public void EmitSound(float loudness, float quality)
     {
-        // Spawn the actual sound
-        Sound.Spawn(transform.position, loudness, quality, wallMask, wallPenalty, drawDebug);
+        // Get velocity only if this is the player
+        Vector3 velocity = Vector3.zero;
+        var playerController = GetComponent<PlayerCharacterController>();
+        if (playerController != null)
+        {
+            velocity = playerController.CharacterVelocity;
+        }
+
+        // Spawn the actual sound with velocity
+        Sound.Spawn(transform.position, loudness, quality, wallMask, wallPenalty, drawDebug, velocity);
 
         // Record debug state for Scene labels
         lastEmitLoudness = loudness;

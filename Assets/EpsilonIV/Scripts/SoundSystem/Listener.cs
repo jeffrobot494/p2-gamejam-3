@@ -9,14 +9,14 @@ public class Listener : MonoBehaviour
     [SerializeField] private float hearingThreshold = 0.2f;
 
     /// <summary>
-    /// C# event for code-based subscriptions. Args: loudness, source position, quality
+    /// C# event for code-based subscriptions. Args: loudness, source position, quality, source velocity
     /// </summary>
-    public UnityAction<float, Vector3, float> OnSoundHeard;
+    public UnityAction<float, Vector3, float, Vector3> OnSoundHeard;
 
     /// <summary>
     /// Called by the Sound system. Decides whether to react based on hearingThreshold.
     /// </summary>
-    public void CheckSound(float loudness, Vector3 sourcePos, float quality)
+    public void CheckSound(float loudness, Vector3 sourcePos, float quality, Vector3 sourceVelocity)
     {
         // --- Runtime label (TMP) ---
         var label = GetComponent<ListenerDebugLabel>();
@@ -40,7 +40,7 @@ public class Listener : MonoBehaviour
             var flash = GetComponent<ListenerDebugFlash>();
             if (flash) flash.FlashHeard();
 
-            OnSoundHeard?.Invoke(loudness, sourcePos, quality);
+            OnSoundHeard?.Invoke(loudness, sourcePos, quality, sourceVelocity);
         }
         else
         {
