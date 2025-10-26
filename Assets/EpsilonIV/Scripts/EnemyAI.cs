@@ -169,6 +169,13 @@ public class EnemyAI : MonoBehaviour
                 Color lineColor = currentState == EnemyState.PrepareAttack ? Color.magenta : Color.yellow;
                 Debug.DrawLine(transform.position, lastHeardSoundPosition, lineColor);
                 Debug.DrawRay(lastHeardSoundPosition, Vector3.up * 2f, lineColor); // Marker at target
+
+                // Draw line to predicted position during PrepareAttack/Attacking
+                if (currentState == EnemyState.PrepareAttack || currentState == EnemyState.Attacking)
+                {
+                    Vector3 predictedPos = CalculatePredictedPosition();
+                    Debug.DrawLine(transform.position, predictedPos, Color.cyan);
+                }
             }
 
             // Draw attack range indicator when hunting or preparing
@@ -379,7 +386,8 @@ public class EnemyAI : MonoBehaviour
                 agent.isStopped = true; // Stop NavMesh movement during leap
                 if (leapAttack != null)
                 {
-                    leapAttack.ExecuteAttack(lastHeardSoundPosition);
+                    Vector3 predictedPosition = CalculatePredictedPosition();
+                    leapAttack.ExecuteAttack(predictedPosition);
                 }
                 break;
 
@@ -467,11 +475,33 @@ public class EnemyAI : MonoBehaviour
             lastHeardSoundLoudness = loudness;
             lastHeardSoundQuality = quality;
 
-            // Debug log to verify velocity is being captured
-            Debug.Log($"[EnemyAI] Sound heard at {soundPosition} with velocity {soundVelocity} (magnitude: {soundVelocity.magnitude:F2})");
-
             TransitionToState(EnemyState.Hunting);
         }
+    }
+
+    /// <summary>
+    /// Calculates predicted target position based on velocity and preparation time.
+    /// If target has low/zero velocity, returns original position (stationary target).
+    /// </summary>
+    private Vector3 CalculatePredictedPosition()
+    {
+        // If no significant velocity, target is stationary
+        if (lastHeardSoundVelocity.magnitude < 0.1f)
+        {
+            return lastHeardSoundPosition;
+        }
+
+        // Linear prediction: position + (velocity * time)
+        Vector3 predictedOffset = lastHeardSoundVelocity * prepareAttackDuration;
+        Vector3 predictedPosition = lastHeardSoundPosition + predictedOffset;
+
+        // Try to keep prediction on NavMesh
+        if (NavMesh.SamplePosition(predictedPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+        {
+            predictedPosition = hit.position;
+        }
+
+        return predictedPosition;
     }
 
 
