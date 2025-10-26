@@ -62,6 +62,16 @@ public class EnemyAI : MonoBehaviour
 
     private float prepareAttackTimer = 0f;
 
+    [Header("Leap Overshoot Settings")]
+    [Tooltip("How far past predicted target to aim when leaping")]
+    [SerializeField] private float overshootDistance = 3f;
+
+    [Tooltip("Layers considered as walls/obstacles for overshoot calculation")]
+    [SerializeField] private LayerMask overshootWallMask = -1;
+
+    [Tooltip("Layers considered as ground for overshoot calculation")]
+    [SerializeField] private LayerMask overshootGroundLayer = -1;
+
 
     [Header("State Colors")]
     [SerializeField] private Color idleColor = Color.gray;
@@ -170,11 +180,17 @@ public class EnemyAI : MonoBehaviour
                 Debug.DrawLine(transform.position, lastHeardSoundPosition, lineColor);
                 Debug.DrawRay(lastHeardSoundPosition, Vector3.up * 2f, lineColor); // Marker at target
 
-                // Draw line to predicted position during PrepareAttack/Attacking
+                // Draw line to predicted position and leap target during PrepareAttack/Attacking
                 if (currentState == EnemyState.PrepareAttack || currentState == EnemyState.Attacking)
                 {
                     Vector3 predictedPos = CalculatePredictedPosition();
-                    Debug.DrawLine(transform.position, predictedPos, Color.cyan);
+                    Vector3 leapTarget = CalculateLeapTarget(predictedPos);
+
+                    // Cyan line to final leap target
+                    Debug.DrawLine(transform.position, leapTarget, Color.cyan);
+
+                    // White line showing predicted vs leap target offset (overshoot)
+                    Debug.DrawLine(predictedPos, leapTarget, Color.white);
                 }
             }
 
@@ -387,7 +403,8 @@ public class EnemyAI : MonoBehaviour
                 if (leapAttack != null)
                 {
                     Vector3 predictedPosition = CalculatePredictedPosition();
-                    leapAttack.ExecuteAttack(predictedPosition);
+                    Vector3 leapTarget = CalculateLeapTarget(predictedPosition);
+                    leapAttack.ExecuteAttack(leapTarget);
                 }
                 break;
 
@@ -497,6 +514,64 @@ public class EnemyAI : MonoBehaviour
 
         // Don't snap to NavMesh - allow full 3D targeting
         return predictedPosition;
+    }
+
+    /// <summary>
+    /// Calculates the final leap target with smart overshoot.
+    /// Handles obstacles, terrain elevation, and pits/edges.
+    /// Falls back to predicted position if overshoot is unsafe.
+    /// </summary>
+    private Vector3 CalculateLeapTarget(Vector3 predictedPosition)
+    {
+        Vector3 startPos = transform.position;
+        Vector3 direction = (predictedPosition - startPos).normalized;
+
+        // Calculate ideal overshoot point beyond predicted position
+        Vector3 idealOvershoot = predictedPosition + (direction * overshootDistance);
+        Vector3 finalTarget = idealOvershoot;
+
+        // Check for obstacles/walls between predicted position and overshoot
+        RaycastHit obstacleHit;
+        if (Physics.Raycast(predictedPosition, direction, out obstacleHit, overshootDistance, overshootWallMask))
+        {
+            // Wall detected - aim just before it
+            idealOvershoot = obstacleHit.point - (direction * 0.5f);
+
+            if (showDebugVisualization)
+            {
+                Debug.Log($"[EnemyAI] Wall detected at overshoot, adjusting target");
+            }
+        }
+
+        // Find ground at overshoot point (handles elevation changes)
+        RaycastHit groundHit;
+        Vector3 rayStart = new Vector3(idealOvershoot.x, idealOvershoot.y + 10f, idealOvershoot.z);
+
+        if (Physics.Raycast(rayStart, Vector3.down, out groundHit, 50f, overshootGroundLayer))
+        {
+            // Ground found at overshoot point
+            finalTarget = groundHit.point;
+        }
+        else
+        {
+            // No ground found (pit/edge) - don't overshoot, use predicted position
+            Debug.LogWarning($"[EnemyAI] No ground at overshoot point, falling back to predicted position");
+            finalTarget = predictedPosition;
+        }
+
+        // Optional: Ensure target is on NavMesh (so alien can walk after landing)
+        if (NavMesh.SamplePosition(finalTarget, out NavMeshHit navHit, 5f, NavMesh.AllAreas))
+        {
+            finalTarget = navHit.position;
+        }
+        else
+        {
+            // Off NavMesh - use predicted position instead (safer)
+            Debug.LogWarning($"[EnemyAI] Overshoot point off NavMesh, using predicted position");
+            finalTarget = predictedPosition;
+        }
+
+        return finalTarget;
     }
 
 
