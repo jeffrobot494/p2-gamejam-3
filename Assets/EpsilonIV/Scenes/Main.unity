@@ -13935,10 +13935,12 @@ MonoBehaviour:
   investigateDuration: 20
   idleDuration: 2
   huntingStoppingDistance: 1
-  huntingSpeed: 6
+  huntingSpeed: 10
+  prepareAttackDuration: 0.5
   idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   patrolColor: {r: 0, g: 0, b: 0, a: 1}
   huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  prepareAttackColor: {r: 1, g: 0.5, b: 0, a: 1}
   attackingColor: {r: 1, g: 0, b: 0, a: 1}
   investigatingColor: {r: 0, g: 1, b: 1, a: 1}
   showDebugVisualization: 1

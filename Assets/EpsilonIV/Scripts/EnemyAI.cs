@@ -7,6 +7,7 @@ public enum EnemyState
     Idle,
     Patrol,
     Hunting,
+    PrepareAttack,
     Attacking,
     Investigating
 }
@@ -55,11 +56,18 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Movement speed while hunting sounds")]
     [SerializeField] private float huntingSpeed = 5f;
 
+    [Header("Prepare Attack Settings")]
+    [Tooltip("Time spent preparing/winding up before leap")]
+    [SerializeField] private float prepareAttackDuration = 0.5f;
+
+    private float prepareAttackTimer = 0f;
+
 
     [Header("State Colors")]
     [SerializeField] private Color idleColor = Color.gray;
     [SerializeField] private Color patrolColor = Color.black;
     [SerializeField] private Color huntingColor = Color.yellow;
+    [SerializeField] private Color prepareAttackColor = new Color(1f, 0.5f, 0f); // Orange
     [SerializeField] private Color attackingColor = Color.red;
     [SerializeField] private Color investigatingColor = Color.cyan;
 
@@ -155,14 +163,15 @@ public class EnemyAI : MonoBehaviour
         if (showDebugVisualization)
         {
             // Draw line to current target sound position
-            if (currentState == EnemyState.Hunting || currentState == EnemyState.Attacking)
+            if (currentState == EnemyState.Hunting || currentState == EnemyState.PrepareAttack || currentState == EnemyState.Attacking)
             {
-                Debug.DrawLine(transform.position, lastHeardSoundPosition, Color.yellow);
-                Debug.DrawRay(lastHeardSoundPosition, Vector3.up * 2f, Color.yellow); // Marker at target
+                Color lineColor = currentState == EnemyState.PrepareAttack ? Color.magenta : Color.yellow;
+                Debug.DrawLine(transform.position, lastHeardSoundPosition, lineColor);
+                Debug.DrawRay(lastHeardSoundPosition, Vector3.up * 2f, lineColor); // Marker at target
             }
 
-            // Draw attack range indicator when hunting
-            if (currentState == EnemyState.Hunting && leapAttack != null)
+            // Draw attack range indicator when hunting or preparing
+            if ((currentState == EnemyState.Hunting || currentState == EnemyState.PrepareAttack) && leapAttack != null)
             {
                 float attackRange = leapAttack.GetAttackRange();
                 // Draw rays in a circle to show attack range
@@ -193,6 +202,10 @@ public class EnemyAI : MonoBehaviour
 
             case EnemyState.Hunting:
                 UpdateHunting();
+                break;
+
+            case EnemyState.PrepareAttack:
+                UpdatePrepareAttack();
                 break;
 
             case EnemyState.Attacking:
@@ -233,8 +246,8 @@ public class EnemyAI : MonoBehaviour
 
             if (distanceToSound <= leapAttack.GetAttackRange() && leapAttack.CanAttack(lastHeardSoundPosition))
             {
-                // Within attack range and ready - leap!
-                TransitionToState(EnemyState.Attacking);
+                // Within attack range and ready - prepare to leap!
+                TransitionToState(EnemyState.PrepareAttack);
                 return;
             }
         }
@@ -244,6 +257,19 @@ public class EnemyAI : MonoBehaviour
         {
             // Reached sound location - investigate the area
             TransitionToState(EnemyState.Investigating);
+        }
+    }
+
+    private void UpdatePrepareAttack()
+    {
+        // Increment timer
+        prepareAttackTimer += Time.deltaTime;
+
+        // Check if windup complete
+        if (prepareAttackTimer >= prepareAttackDuration)
+        {
+            // Windup complete, execute attack
+            TransitionToState(EnemyState.Attacking);
         }
     }
 
@@ -337,6 +363,17 @@ public class EnemyAI : MonoBehaviour
                 agent.SetDestination(lastHeardSoundPosition);
                 break;
 
+            case EnemyState.PrepareAttack:
+                prepareAttackTimer = 0f;
+                agent.isStopped = true; // Stop moving during preparation
+                // Face toward target
+                Vector3 directionToTarget = (lastHeardSoundPosition - transform.position).normalized;
+                if (directionToTarget != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.LookRotation(directionToTarget);
+                }
+                break;
+
             case EnemyState.Attacking:
                 agent.isStopped = true; // Stop NavMesh movement during leap
                 if (leapAttack != null)
@@ -410,6 +447,7 @@ public class EnemyAI : MonoBehaviour
             EnemyState.Idle => idleColor,
             EnemyState.Patrol => patrolColor,
             EnemyState.Hunting => huntingColor,
+            EnemyState.PrepareAttack => prepareAttackColor,
             EnemyState.Attacking => attackingColor,
             EnemyState.Investigating => investigatingColor,
             _ => Color.white
@@ -420,8 +458,8 @@ public class EnemyAI : MonoBehaviour
 
     private void OnSoundHeard(float loudness, Vector3 soundPosition, float quality)
     {
-        // Don't interrupt attacking
-        if (currentState != EnemyState.Attacking)
+        // Don't interrupt preparing to attack or attacking
+        if (currentState != EnemyState.PrepareAttack && currentState != EnemyState.Attacking)
         {
             lastHeardSoundPosition = soundPosition;
             lastHeardSoundLoudness = loudness;
@@ -468,10 +506,10 @@ public class EnemyAI : MonoBehaviour
             Gizmos.DrawWireSphere(currentPatrolCenter, investigativePatrolRadius);
         }
 
-        // Visualize attack range when attacking
-        if (Application.isPlaying && currentState == EnemyState.Attacking && leapAttack != null)
+        // Visualize attack range when preparing or attacking
+        if (Application.isPlaying && (currentState == EnemyState.PrepareAttack || currentState == EnemyState.Attacking) && leapAttack != null)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = currentState == EnemyState.PrepareAttack ? Color.yellow : Color.red;
             Gizmos.DrawWireSphere(transform.position, leapAttack.GetAttackRange());
         }
     }

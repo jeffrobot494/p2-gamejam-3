@@ -290,7 +290,18 @@ namespace Unity.FPS.Gameplay
             {
                 if (isSprinting)
                 {
-                    isSprinting = SetCrouchingState(false, false);
+                    // Can only sprint when moving forward (or forward+strafe)
+                    Vector3 moveInput = m_InputHandler.GetMoveInput();
+                    bool isMovingForward = moveInput.z > 0f; // z is forward/backward axis
+
+                    if (!isMovingForward)
+                    {
+                        isSprinting = false;
+                    }
+                    else
+                    {
+                        isSprinting = SetCrouchingState(false, false);
+                    }
                 }
 
                 m_IsSprinting = isSprinting;
