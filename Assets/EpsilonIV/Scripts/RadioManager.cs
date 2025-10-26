@@ -26,23 +26,23 @@ public class RadioManager : MonoBehaviour
         // use shift+a for viewing the chat box or for viewing the next
         bool isADown = Input.GetKeyDown(KeyCode.A);
 
-        // Input check for advancing the sequence (Shift + A)
+        
         if (isShiftDown && isADown)
         {
             SwitchToNextNpc();
         }
 
-        // Input check for deactivating the current NPC (Shift + R)
+        // deactivating the current NPC (Shift + R)
         if (isShiftDown && Input.GetKeyDown(KeyCode.R))
         {
             DeactivateCurrentNpc();
         }
     }
 
-    // New function to deactivate the currently active NPC (Shift + R)
+    // 
     public void DeactivateCurrentNpc()
     {
-        // Check if an NPC is currently referenced (index is valid)
+        // if a, NPC index is valid
         if (currentIndex >= 0 && currentIndex < npc_array.Length)
         {
             if (npc_array[currentIndex] != null)
@@ -67,7 +67,7 @@ public class RadioManager : MonoBehaviour
             return;
         }
 
-        // switching to next and deactive the pre/curr one
+        // switching to next and deactive the pre/curr NPC one
         if (currentIndex >= 0 && currentIndex < npc_array.Length)
         {
             if (npc_array[currentIndex] != null)
