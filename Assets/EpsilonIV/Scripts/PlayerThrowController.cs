@@ -12,11 +12,8 @@ public class PlayerThrowController : MonoBehaviour
     [SerializeField] private Transform playerCamera;
 
     [Header("Pickup Settings")]
-    [Tooltip("Maximum distance to detect and pick up objects")]
-    [SerializeField] private float pickupRange = 3f;
-
-    [Tooltip("Layer mask for raycast detection of throwable objects")]
-    [SerializeField] private LayerMask pickupLayerMask = ~0;
+    [Tooltip("Note: Pickup is now handled by PlayerInteraction + IInteractable system")]
+    [SerializeField] private bool _pickupInfoOnly = false;
 
     [Header("Hold Position")]
     [Tooltip("Position of held object relative to camera (local space)")]
@@ -39,9 +36,6 @@ public class PlayerThrowController : MonoBehaviour
     [SerializeField] private float maxChargeTime = 2f;
 
     [Header("Input")]
-    [Tooltip("Input action for picking up objects")]
-    [SerializeField] private InputAction pickupAction;
-
     [Tooltip("Input action for throwing objects (hold to charge)")]
     [SerializeField] private InputAction throwAction;
 
@@ -60,13 +54,11 @@ public class PlayerThrowController : MonoBehaviour
 
     private void OnEnable()
     {
-        pickupAction?.Enable();
         throwAction?.Enable();
     }
 
     private void OnDisable()
     {
-        pickupAction?.Disable();
         throwAction?.Disable();
     }
 
@@ -83,11 +75,6 @@ public class PlayerThrowController : MonoBehaviour
         }
 
         // Setup input callbacks
-        if (pickupAction != null)
-        {
-            pickupAction.performed += _ => TryPickup();
-        }
-
         if (throwAction != null)
         {
             throwAction.started += _ => StartWindup();
@@ -143,29 +130,18 @@ public class PlayerThrowController : MonoBehaviour
         heldObject.transform.localPosition = targetPosition;
     }
 
-    private void TryPickup()
+    /// <summary>
+    /// Picks up the specified throwable object. Called by ThrowableObject when interacted with.
+    /// </summary>
+    public void PickupObject(ThrowableObject throwable)
     {
         // Can only pickup when not holding anything
         if (currentState != ThrowState.NoObject)
             return;
 
-        if (playerCamera == null)
+        if (throwable == null || throwable.IsHeld)
             return;
 
-        // Raycast from camera to find throwable object
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, pickupLayerMask))
-        {
-            ThrowableObject throwable = hit.collider.GetComponent<ThrowableObject>();
-            if (throwable != null && !throwable.IsHeld)
-            {
-                PickupObject(throwable);
-            }
-        }
-    }
-
-    private void PickupObject(ThrowableObject throwable)
-    {
         heldObject = throwable;
         heldObject.OnPickup();
 
@@ -248,26 +224,4 @@ public class PlayerThrowController : MonoBehaviour
     /// Returns the current charge percentage (0-1) when winding up.
     /// </summary>
     public float ChargePercent => currentState == ThrowState.WindingUp ? (chargeTime / maxChargeTime) : 0f;
-
-    private void OnDrawGizmos()
-    {
-        // Visualize pickup range
-        if (playerCamera != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(playerCamera.position, playerCamera.forward * pickupRange);
-        }
-
-        // Visualize hold position
-        if (playerCamera != null && heldObject != null)
-        {
-            Gizmos.color = Color.yellow;
-            Vector3 worldHoldPos = playerCamera.TransformPoint(holdPosition);
-            Gizmos.DrawWireSphere(worldHoldPos, 0.1f);
-
-            Gizmos.color = Color.red;
-            Vector3 worldWindupPos = playerCamera.TransformPoint(windupPosition);
-            Gizmos.DrawWireSphere(worldWindupPos, 0.1f);
-        }
-    }
 }
