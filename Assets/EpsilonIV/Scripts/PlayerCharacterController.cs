@@ -116,6 +116,7 @@ namespace Unity.FPS.Gameplay
         PlayerInputHandler m_InputHandler;
         CharacterController m_Controller;
         PlayerWeaponsManager m_WeaponsManager;
+        PlayerLadderController m_LadderController;
         Actor m_Actor;
         Vector3 m_GroundNormal;
         Vector3 m_CharacterVelocity;
@@ -158,6 +159,9 @@ namespace Unity.FPS.Gameplay
             m_Actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
 
+            m_LadderController = GetComponent<PlayerLadderController>();
+            // Ladder controller is optional, so no error check
+
             m_Controller.enableOverlapRecovery = true;
 
             m_Health.OnDie += OnDie;
@@ -177,8 +181,12 @@ namespace Unity.FPS.Gameplay
 
             HasJumpedThisFrame = false;
 
+            // Skip ground check if on ladder
             bool wasGrounded = IsGrounded;
-            GroundCheck();
+            if (m_LadderController == null || !m_LadderController.IsOnLadder)
+            {
+                GroundCheck();
+            }
 
             // landing
             if (IsGrounded && !wasGrounded)
@@ -273,6 +281,33 @@ namespace Unity.FPS.Gameplay
 
         void HandleCharacterMovement()
         {
+            // Skip normal movement if on ladder
+            if (m_LadderController != null && m_LadderController.IsOnLadder)
+            {
+                // Still allow camera rotation
+                // vertical camera rotation
+                {
+                    // add vertical inputs to the camera's vertical angle
+                    m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * RotationSpeed * RotationMultiplier;
+
+                    // limit the camera's vertical angle to min/max
+                    m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
+
+                    // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
+                    PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
+                }
+
+                // horizontal character rotation
+                {
+                    // rotate the transform with the input speed around its local Y axis
+                    transform.Rotate(
+                        new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier),
+                            0f), Space.Self);
+                }
+
+                return; // Skip the rest of normal movement
+            }
+
             // horizontal character rotation
             {
                 // rotate the transform with the input speed around its local Y axis
