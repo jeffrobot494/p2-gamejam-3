@@ -248,26 +248,4 @@ public class PlayerThrowController : MonoBehaviour
     /// Returns the current charge percentage (0-1) when winding up.
     /// </summary>
     public float ChargePercent => currentState == ThrowState.WindingUp ? (chargeTime / maxChargeTime) : 0f;
-
-    private void OnDrawGizmos()
-    {
-        // Visualize pickup range
-        if (playerCamera != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(playerCamera.position, playerCamera.forward * pickupRange);
-        }
-
-        // Visualize hold position
-        if (playerCamera != null && heldObject != null)
-        {
-            Gizmos.color = Color.yellow;
-            Vector3 worldHoldPos = playerCamera.TransformPoint(holdPosition);
-            Gizmos.DrawWireSphere(worldHoldPos, 0.1f);
-
-            Gizmos.color = Color.red;
-            Vector3 worldWindupPos = playerCamera.TransformPoint(windupPosition);
-            Gizmos.DrawWireSphere(worldWindupPos, 0.1f);
-        }
-    }
 }

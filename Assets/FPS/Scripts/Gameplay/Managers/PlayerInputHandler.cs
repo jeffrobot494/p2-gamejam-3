@@ -34,6 +34,7 @@ namespace Unity.FPS.Gameplay
         private InputAction m_CrouchAction;
         private InputAction m_ReloadAction;
         private InputAction m_NextWeaponAction;
+        private InputAction m_InteractAction;
 
         void Start()
         {
@@ -55,7 +56,8 @@ namespace Unity.FPS.Gameplay
             m_CrouchAction = InputSystem.actions.FindAction("Player/Crouch");
             m_ReloadAction = InputSystem.actions.FindAction("Player/Reload");
             m_NextWeaponAction = InputSystem.actions.FindAction("Player/NextWeapon");
-            
+            m_InteractAction = InputSystem.actions.FindAction("Player/Interact");
+
             m_MoveAction.Enable();
             m_LookAction.Enable();
             m_JumpAction.Enable();
@@ -65,6 +67,7 @@ namespace Unity.FPS.Gameplay
             m_CrouchAction.Enable();
             m_ReloadAction.Enable();
             m_NextWeaponAction.Enable();
+            m_InteractAction.Enable();
         }
 
         void LateUpdate()
@@ -264,6 +267,16 @@ namespace Unity.FPS.Gameplay
             }
 
             return 0;
+        }
+
+        public bool GetInteractInputDown()
+        {
+            if (CanProcessInput())
+            {
+                return m_InteractAction.WasPressedThisFrame();
+            }
+
+            return false;
         }
     }
 }
