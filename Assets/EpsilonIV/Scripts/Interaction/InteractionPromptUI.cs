@@ -55,6 +55,27 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Smoothing factor for bracket movement (0 = no smoothing, higher = smoother)")]
         public float PositionSmoothness = 15f;
 
+        [Header("Glitch Effects")]
+        [Tooltip("Enable glitch/jitter effects")]
+        public bool EnableGlitch = true;
+
+        [Tooltip("Maximum random offset for glitch effect (in pixels)")]
+        public float GlitchIntensity = 2f;
+
+        [Tooltip("How often glitch happens (lower = more frequent)")]
+        public float GlitchFrequency = 0.1f;
+
+        [Tooltip("Enable random flicker effect")]
+        public bool EnableFlicker = true;
+
+        [Tooltip("Chance of flicker per frame (0-1)")]
+        [Range(0f, 0.1f)]
+        public float FlickerChance = 0.02f;
+
+        [Tooltip("Minimum alpha during flicker")]
+        [Range(0.5f, 1f)]
+        public float FlickerMinAlpha = 0.7f;
+
         private CanvasGroup m_CanvasGroup;
         private float m_PulseTime = 0f;
         private Vector2 m_TargetTopLeft;
@@ -62,6 +83,9 @@ namespace Unity.FPS.Gameplay
         private Vector2 m_TargetBottomLeft;
         private Vector2 m_TargetBottomRight;
         private Vector2 m_TargetCenter;
+        private float m_NextGlitchTime = 0f;
+        private Vector2[] m_GlitchOffsets = new Vector2[4];
+        private float m_FlickerAlpha = 1f;
 
         void Start()
         {
@@ -110,6 +134,16 @@ namespace Unity.FPS.Gameplay
                 {
                     AnimatePulse();
                 }
+
+                if (EnableGlitch)
+                {
+                    ApplyGlitchEffect();
+                }
+
+                if (EnableFlicker)
+                {
+                    ApplyFlickerEffect();
+                }
             }
             else
             {
@@ -122,6 +156,7 @@ namespace Unity.FPS.Gameplay
             if (m_CanvasGroup.alpha < 1f)
             {
                 m_CanvasGroup.alpha = 1f;
+                m_FlickerAlpha = 1f;
             }
 
             // Update prompt text
@@ -210,25 +245,25 @@ namespace Unity.FPS.Gameplay
             if (BracketTopLeft != null)
             {
                 Vector2 current = BracketTopLeft.position;
-                BracketTopLeft.position = Vector2.Lerp(current, m_TargetTopLeft, smoothFactor);
+                BracketTopLeft.position = Vector2.Lerp(current, m_TargetTopLeft + m_GlitchOffsets[0], smoothFactor);
             }
 
             if (BracketTopRight != null)
             {
                 Vector2 current = BracketTopRight.position;
-                BracketTopRight.position = Vector2.Lerp(current, m_TargetTopRight, smoothFactor);
+                BracketTopRight.position = Vector2.Lerp(current, m_TargetTopRight + m_GlitchOffsets[1], smoothFactor);
             }
 
             if (BracketBottomLeft != null)
             {
                 Vector2 current = BracketBottomLeft.position;
-                BracketBottomLeft.position = Vector2.Lerp(current, m_TargetBottomLeft, smoothFactor);
+                BracketBottomLeft.position = Vector2.Lerp(current, m_TargetBottomLeft + m_GlitchOffsets[2], smoothFactor);
             }
 
             if (BracketBottomRight != null)
             {
                 Vector2 current = BracketBottomRight.position;
-                BracketBottomRight.position = Vector2.Lerp(current, m_TargetBottomRight, smoothFactor);
+                BracketBottomRight.position = Vector2.Lerp(current, m_TargetBottomRight + m_GlitchOffsets[3], smoothFactor);
             }
 
             // Center the prompt text
@@ -252,6 +287,41 @@ namespace Unity.FPS.Gameplay
                 BracketBottomLeft.localScale = Vector3.one * scale;
             if (BracketBottomRight != null)
                 BracketBottomRight.localScale = Vector3.one * scale;
+        }
+
+        void ApplyGlitchEffect()
+        {
+            // Apply random offset at intervals
+            if (Time.time >= m_NextGlitchTime)
+            {
+                m_NextGlitchTime = Time.time + GlitchFrequency;
+
+                // Generate random offsets for each bracket
+                for (int i = 0; i < 4; i++)
+                {
+                    m_GlitchOffsets[i] = new Vector2(
+                        Random.Range(-GlitchIntensity, GlitchIntensity),
+                        Random.Range(-GlitchIntensity, GlitchIntensity)
+                    );
+                }
+            }
+        }
+
+        void ApplyFlickerEffect()
+        {
+            // Random chance to flicker
+            if (Random.value < FlickerChance)
+            {
+                m_FlickerAlpha = Random.Range(FlickerMinAlpha, 1f);
+            }
+            else
+            {
+                // Smoothly return to full opacity
+                m_FlickerAlpha = Mathf.Lerp(m_FlickerAlpha, 1f, Time.deltaTime * 10f);
+            }
+
+            // Apply flicker to canvas group
+            m_CanvasGroup.alpha = m_FlickerAlpha;
         }
     }
 }

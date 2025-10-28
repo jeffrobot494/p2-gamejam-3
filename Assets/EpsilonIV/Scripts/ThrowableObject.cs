@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.FPS.Gameplay;
 
 /// <summary>
 /// Object that can be picked up and thrown by the player.
@@ -6,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public class ThrowableObject : MonoBehaviour
+public class ThrowableObject : MonoBehaviour, IInteractable
 {
     [Header("Pickup Settings")]
     [Tooltip("Tag used to identify this as a pickupable object")]
@@ -117,4 +118,29 @@ public class ThrowableObject : MonoBehaviour
     /// Returns the rigidbody component.
     /// </summary>
     public Rigidbody Rigidbody => rb;
+
+    // IInteractable implementation
+    public void Interact()
+    {
+        // Find the PlayerThrowController and tell it to pick up this object
+        PlayerThrowController throwController = FindFirstObjectByType<PlayerThrowController>();
+        if (throwController != null)
+        {
+            throwController.PickupObject(this);
+        }
+        else
+        {
+            Debug.LogWarning("[ThrowableObject] No PlayerThrowController found in scene!");
+        }
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public string GetInteractionPrompt()
+    {
+        return "[E] PICK UP";
+    }
 }
