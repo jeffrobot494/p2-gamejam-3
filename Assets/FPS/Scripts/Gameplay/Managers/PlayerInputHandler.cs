@@ -77,6 +77,12 @@ namespace Unity.FPS.Gameplay
 
         public bool CanProcessInput()
         {
+            // If GameFlowManager doesn't exist, only check cursor lock state
+            if (m_GameFlowManager == null)
+            {
+                return Cursor.lockState == CursorLockMode.Locked;
+            }
+
             return Cursor.lockState == CursorLockMode.Locked && !m_GameFlowManager.GameIsEnding;
         }
 
