@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: e6e68ccc5f096744a807571f6490bd90
+guid: 88a86b088cc7aa6428d5059675bd42ab
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decals
+    second: {fileID: 2100000, guid: e30a82b4dc2f8ee4ba31e7db2caeb0ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Diffuse
+    second: {fileID: 2100000, guid: e0a0c0c4352f51740b5ff1abd3b849a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 362007db69963f441af0b5e1b0b3bbd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: b5f47cc37ee1d844388f57502c5f3e85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: spacebits_texture
+    second: {fileID: 2100000, guid: 543d3b837306d0242a6e77956ea4efa7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
