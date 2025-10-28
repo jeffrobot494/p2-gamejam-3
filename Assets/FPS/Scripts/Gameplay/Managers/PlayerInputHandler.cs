@@ -21,8 +21,6 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Used to flip the horizontal input axis")]
         public bool InvertXAxis = false;
 
-        GameFlowManager m_GameFlowManager;
-        FPSPlayerCharacterController m_PlayerCharacterController;
         bool m_FireInputWasHeld;
 
         private InputAction m_MoveAction;
@@ -38,12 +36,6 @@ namespace Unity.FPS.Gameplay
 
         void Start()
         {
-            m_PlayerCharacterController = GetComponent<FPSPlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<FPSPlayerCharacterController, PlayerInputHandler>(
-                m_PlayerCharacterController, this, gameObject);
-            m_GameFlowManager = FindFirstObjectByType<GameFlowManager>();
-            DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);
-
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
@@ -77,13 +69,7 @@ namespace Unity.FPS.Gameplay
 
         public bool CanProcessInput()
         {
-            // If GameFlowManager doesn't exist, only check cursor lock state
-            if (m_GameFlowManager == null)
-            {
-                return Cursor.lockState == CursorLockMode.Locked;
-            }
-
-            return Cursor.lockState == CursorLockMode.Locked && !m_GameFlowManager.GameIsEnding;
+            return Cursor.lockState == CursorLockMode.Locked;
         }
 
         public Vector3 GetMoveInput()

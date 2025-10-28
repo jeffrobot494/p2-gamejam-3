@@ -101,11 +101,11 @@ namespace Unity.FPS.Gameplay
                 Debug.LogWarning("[DeathManager] FadeCanvasGroup not assigned! Fades will be skipped.");
             }
 
-            // Ensure fade starts invisible
+            // Ensure fade starts invisible and disabled
             if (FadeCanvasGroup != null)
             {
                 FadeCanvasGroup.alpha = 0f;
-                FadeCanvasGroup.gameObject.SetActive(true);
+                FadeCanvasGroup.gameObject.SetActive(false);
             }
         }
 
@@ -268,6 +268,7 @@ namespace Unity.FPS.Gameplay
             // Reset health to full
             if (PlayerHealth != null)
             {
+                PlayerHealth.ResetDeathState();
                 PlayerHealth.Heal(PlayerHealth.MaxHealth);
 
                 if (DebugMode)
@@ -293,6 +294,9 @@ namespace Unity.FPS.Gameplay
         /// </summary>
         IEnumerator FadeToBlack()
         {
+            // Enable the fade overlay
+            FadeCanvasGroup.gameObject.SetActive(true);
+
             float elapsed = 0f;
 
             while (elapsed < FadeOutDuration)
@@ -322,6 +326,9 @@ namespace Unity.FPS.Gameplay
             }
 
             FadeCanvasGroup.alpha = 0f;
+
+            // Disable the fade overlay when done
+            FadeCanvasGroup.gameObject.SetActive(false);
         }
 
         /// <summary>
