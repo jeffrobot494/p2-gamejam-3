@@ -4000,6 +4000,11 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4205022973215787166, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6145509692674227223, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_Enabled
@@ -4197,6 +4202,13 @@ MonoBehaviour:
   huntingStoppingDistance: 1
   huntingSpeed: 10
   prepareAttackDuration: 0.5
+  overshootDistance: 3
+  overshootWallMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  overshootGroundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   patrolColor: {r: 0, g: 0, b: 0, a: 1}
   huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -14517,6 +14529,13 @@ MonoBehaviour:
   huntingStoppingDistance: 1
   huntingSpeed: 10
   prepareAttackDuration: 0.5
+  overshootDistance: 3
+  overshootWallMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  overshootGroundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   patrolColor: {r: 0, g: 0, b: 0, a: 1}
   huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
