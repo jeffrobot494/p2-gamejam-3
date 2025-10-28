@@ -90,5 +90,13 @@ namespace Unity.FPS.Game
                 OnDie?.Invoke();
             }
         }
+
+        /// <summary>
+        /// Resets the death state (used by respawn system)
+        /// </summary>
+        public void ResetDeathState()
+        {
+            m_IsDead = false;
+        }
     }
 }

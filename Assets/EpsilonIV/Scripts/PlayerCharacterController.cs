@@ -225,6 +225,14 @@ namespace Unity.FPS.Gameplay
             EventManager.Broadcast(Events.PlayerDeathEvent);
         }
 
+        /// <summary>
+        /// Resets the death state (called by DeathManager on respawn)
+        /// </summary>
+        public void ResetDeathState()
+        {
+            IsDead = false;
+        }
+
         void GroundCheck()
         {
             // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
