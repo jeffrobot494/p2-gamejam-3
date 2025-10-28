@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.FPS.Gameplay
+namespace EpsilonIV
 {
     /// <summary>
     /// Handles player interaction with objects implementing IInteractable

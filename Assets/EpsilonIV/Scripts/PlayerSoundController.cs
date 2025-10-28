@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Unity.FPS.Gameplay;
+using EpsilonIV;
 
 /// <summary>
 /// Emits sounds based on player movement state using the Sound system.
@@ -10,7 +11,7 @@ using Unity.FPS.Gameplay;
 [RequireComponent(typeof(PlayerCharacterController))]
 [RequireComponent(typeof(SoundEmitter))]
 public class PlayerSoundController : MonoBehaviour
-    {
+{
         [Header("Audio")]
         [Tooltip("Audio source for playing footstep SFX")]
         [SerializeField] private AudioSource audioSource;

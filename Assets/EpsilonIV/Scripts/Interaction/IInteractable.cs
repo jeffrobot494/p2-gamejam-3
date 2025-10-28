@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.FPS.Gameplay
+namespace EpsilonIV
 {
     /// <summary>
     /// Interface for objects that the player can interact with

@@ -2,17 +2,16 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum MovementState
+namespace EpsilonIV
 {
-    Idle,
-    Walking,
-    Running,
-    CrouchWalking,
-    InAir
-}
-
-namespace Unity.FPS.Gameplay
-{
+    public enum MovementState
+    {
+        Idle,
+        Walking,
+        Running,
+        CrouchWalking,
+        InAir
+    }
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
     public class PlayerCharacterController : MonoBehaviour
     {
@@ -103,11 +102,8 @@ namespace Unity.FPS.Gameplay
         {
             get
             {
-                if (m_WeaponsManager.IsAiming)
-                {
-                    return AimingRotationMultiplier;
-                }
-
+                // Removed weapons manager dependency
+                // TODO: Re-implement aiming rotation if needed
                 return 1f;
             }
         }
@@ -115,9 +111,7 @@ namespace Unity.FPS.Gameplay
         Health m_Health;
         PlayerInputHandler m_InputHandler;
         CharacterController m_Controller;
-        PlayerWeaponsManager m_WeaponsManager;
         PlayerLadderController m_LadderController;
-        Actor m_Actor;
         Vector3 m_GroundNormal;
         Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
@@ -133,31 +127,23 @@ namespace Unity.FPS.Gameplay
 
         void Awake()
         {
-            ActorsManager actorsManager = FindFirstObjectByType<ActorsManager>();
-            if (actorsManager != null)
-                actorsManager.SetPlayer(gameObject);
+            // Removed ActorsManager dependency - not needed
         }
 
         void Start()
         {
             // fetch components on the same gameObject
             m_Controller = GetComponent<CharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, PlayerCharacterController>(m_Controller,
-                this, gameObject);
+            if (m_Controller == null)
+                Debug.LogError($"Missing CharacterController component on {gameObject.name}");
 
             m_InputHandler = GetComponent<PlayerInputHandler>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, PlayerCharacterController>(m_InputHandler,
-                this, gameObject);
-
-            m_WeaponsManager = GetComponent<PlayerWeaponsManager>();
-            DebugUtility.HandleErrorIfNullGetComponent<PlayerWeaponsManager, PlayerCharacterController>(
-                m_WeaponsManager, this, gameObject);
+            if (m_InputHandler == null)
+                Debug.LogError($"Missing PlayerInputHandler component on {gameObject.name}");
 
             m_Health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerCharacterController>(m_Health, this, gameObject);
-
-            m_Actor = GetComponent<Actor>();
-            DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
+            if (m_Health == null)
+                Debug.LogError($"Missing Health component on {gameObject.name}");
 
             m_LadderController = GetComponent<PlayerLadderController>();
             // Ladder controller is optional, so no error check
@@ -227,10 +213,7 @@ namespace Unity.FPS.Gameplay
         {
             IsDead = true;
 
-            // Tell the weapons manager to switch to a non-existing weapon in order to lower the weapon
-            m_WeaponsManager.SwitchToWeaponIndex(-1, true);
-
-            EventManager.Broadcast(Events.PlayerDeathEvent);
+            // Death is handled by DeathManager which subscribes to Health.OnDie
         }
 
         /// <summary>
@@ -462,7 +445,6 @@ namespace Unity.FPS.Gameplay
                 m_Controller.height = m_TargetCharacterHeight;
                 m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
                 PlayerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * CameraHeightRatio;
-                m_Actor.AimPoint.transform.localPosition = m_Controller.center;
             }
             // Update smooth height
             else if (m_Controller.height != m_TargetCharacterHeight)
@@ -473,7 +455,6 @@ namespace Unity.FPS.Gameplay
                 m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
                 PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.localPosition,
                     Vector3.up * m_TargetCharacterHeight * CameraHeightRatio, CrouchingSharpness * Time.deltaTime);
-                m_Actor.AimPoint.transform.localPosition = m_Controller.center;
             }
         }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.FPS.Gameplay
+namespace EpsilonIV
 {
     /// <summary>
     /// Simple test interactable object that logs when interacted with

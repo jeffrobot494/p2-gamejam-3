@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.FPS.Gameplay
+namespace EpsilonIV
 {
     /// <summary>
     /// Interface for components that can unlock doors

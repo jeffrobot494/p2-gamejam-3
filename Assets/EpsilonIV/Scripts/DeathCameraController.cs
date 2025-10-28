@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using EpsilonIV;
 
 namespace Unity.FPS.Gameplay
 {

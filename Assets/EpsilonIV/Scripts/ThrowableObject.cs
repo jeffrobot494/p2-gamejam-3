@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.FPS.Gameplay;
+using EpsilonIV;
 
 /// <summary>
 /// Object that can be picked up and thrown by the player.

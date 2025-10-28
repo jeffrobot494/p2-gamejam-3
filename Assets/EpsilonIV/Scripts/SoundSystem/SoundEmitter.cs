@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.FPS.Gameplay;
+using EpsilonIV;
 
 public class SoundEmitter : MonoBehaviour
 {

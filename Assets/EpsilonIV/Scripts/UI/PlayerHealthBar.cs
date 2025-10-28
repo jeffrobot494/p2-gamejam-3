@@ -2,6 +2,7 @@ using Unity.FPS.Game;
 using Unity.FPS.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
+using EpsilonIV;
 
 /// <summary>
 /// Displays the player's health as a fill bar in the UI

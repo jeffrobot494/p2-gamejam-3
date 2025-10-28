@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 using TMPro;
+using EpsilonIV;
 
 namespace Unity.FPS.Gameplay
 {

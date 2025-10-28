@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EpsilonIV;
 
 /// <summary>
 /// Handles player pickup and throwing of ThrowableObjects.
@@ -224,4 +225,15 @@ public class PlayerThrowController : MonoBehaviour
     /// Returns the current charge percentage (0-1) when winding up.
     /// </summary>
     public float ChargePercent => currentState == ThrowState.WindingUp ? (chargeTime / maxChargeTime) : 0f;
+
+    /// <summary>
+    /// Returns the KeyCard component if player is holding a keycard, null otherwise.
+    /// </summary>
+    public KeyCard GetHeldKeyCard()
+    {
+        if (heldObject == null)
+            return null;
+
+        return heldObject.GetComponent<KeyCard>();
+    }
 }
