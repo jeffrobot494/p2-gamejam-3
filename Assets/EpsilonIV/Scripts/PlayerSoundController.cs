@@ -81,6 +81,7 @@ public class PlayerSoundController : MonoBehaviour
         private MovementState m_CurrentState = MovementState.Idle;
         private float m_FootstepSfxDistanceCounter;
         private float m_SoundBroadcastDistanceCounter;
+        private bool m_CanMakeSounds = true;
 
         private void Awake()
         {
@@ -113,6 +114,10 @@ public class PlayerSoundController : MonoBehaviour
 
         private void Update()
         {
+            // Don't process any sounds if sound making is disabled
+            if (!m_CanMakeSounds)
+                return;
+
             // Only track footsteps when in a moving state
             if (m_CurrentState == MovementState.Walking ||
                 m_CurrentState == MovementState.Running ||
@@ -154,6 +159,10 @@ public class PlayerSoundController : MonoBehaviour
         {
             MovementState previousState = m_CurrentState;
             m_CurrentState = newState;
+
+            // Don't process sound events if sound making is disabled
+            if (!m_CanMakeSounds)
+                return;
 
             // Check if transitioning from non-moving to moving state
             bool wasNotMoving = previousState == MovementState.Idle || previousState == MovementState.InAir;
@@ -237,6 +246,10 @@ public class PlayerSoundController : MonoBehaviour
 
         private void OnJumped()
         {
+            // Don't process sound events if sound making is disabled
+            if (!m_CanMakeSounds)
+                return;
+
             // Play jump SFX
             if (audioSource != null && jumpSfx != null)
             {
@@ -252,6 +265,10 @@ public class PlayerSoundController : MonoBehaviour
 
         private void OnLanded()
         {
+            // Don't process sound events if sound making is disabled
+            if (!m_CanMakeSounds)
+                return;
+
             // Play land SFX
             if (audioSource != null && landSfx != null)
             {
@@ -267,6 +284,10 @@ public class PlayerSoundController : MonoBehaviour
 
         private void OnFallDamage()
         {
+            // Don't process sound events if sound making is disabled
+            if (!m_CanMakeSounds)
+                return;
+
             // Play fall damage SFX
             if (audioSource != null && fallDamageSfx != null)
             {
@@ -279,4 +300,17 @@ public class PlayerSoundController : MonoBehaviour
                 m_SoundEmitter.EmitSound(fallDamageLoudness, soundQuality);
             }
         }
+
+        /// <summary>
+        /// Sets whether the player can make sounds (for respawn, cutscenes, etc.)
+        /// </summary>
+        public void SetCanMakeSounds(bool canMakeSounds)
+        {
+            m_CanMakeSounds = canMakeSounds;
+        }
+
+        /// <summary>
+        /// Gets whether the player can currently make sounds
+        /// </summary>
+        public bool CanMakeSounds => m_CanMakeSounds;
     }

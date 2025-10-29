@@ -37,6 +37,9 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Delay while screen is black before respawn (seconds)")]
         public float BlackScreenDelay = 0.5f;
 
+        [Tooltip("Duration to disable player sounds after respawn (seconds)")]
+        public float SoundMuteDuration = 0.5f;
+
         [Header("Debug")]
         [Tooltip("Enable debug logging")]
         public bool DebugMode = true;
@@ -186,7 +189,17 @@ namespace Unity.FPS.Gameplay
                 }
             }
 
-            // 8. Re-lock cursor for gameplay
+            // 8. Temporarily mute player sounds to prevent respawn sounds
+            if (PlayerController != null && SoundMuteDuration > 0f)
+            {
+                PlayerSoundController soundController = PlayerController.GetComponent<PlayerSoundController>();
+                if (soundController != null)
+                {
+                    StartCoroutine(TemporarilyMutePlayerSounds(soundController));
+                }
+            }
+
+            // 9. Re-lock cursor for gameplay
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
@@ -347,5 +360,27 @@ namespace Unity.FPS.Gameplay
         /// Gets whether a respawn is currently in progress
         /// </summary>
         public bool IsRespawning => m_IsRespawning;
+
+        /// <summary>
+        /// Temporarily mutes player sounds after respawn
+        /// </summary>
+        IEnumerator TemporarilyMutePlayerSounds(PlayerSoundController soundController)
+        {
+            soundController.SetCanMakeSounds(false);
+
+            if (DebugMode)
+            {
+                Debug.Log($"[DeathManager] Player sounds muted for {SoundMuteDuration}s");
+            }
+
+            yield return new WaitForSeconds(SoundMuteDuration);
+
+            soundController.SetCanMakeSounds(true);
+
+            if (DebugMode)
+            {
+                Debug.Log("[DeathManager] Player sounds unmuted");
+            }
+        }
     }
 }
