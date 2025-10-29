@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/EpsilonIV/Scenes/Main.unity
     guid: b89884e17fd738d41a767f62014486f1
   - enabled: 0
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/FPS/Scenes/MainScene.unity
     guid: d794a2ef8ba31d847ad3c19d03e2ddb9
-  - enabled: 1
+  - enabled: 0
     path: Assets/EpsilonIV/Scenes/ShaderTest.unity
     guid: beac16123d4d38c41b46b70a3e901560
   m_configObjects:

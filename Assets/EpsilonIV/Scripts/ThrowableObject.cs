@@ -9,9 +9,6 @@ using EpsilonIV;
 [RequireComponent(typeof(Collider))]
 public class ThrowableObject : MonoBehaviour, IInteractable
 {
-    [Header("Pickup Settings")]
-    [Tooltip("Tag used to identify this as a pickupable object")]
-    [SerializeField] private string pickupTag = "Throwable";
 
     [Header("Sound Emission")]
     [Tooltip("Minimum impact velocity to emit sound (m/s)")]
@@ -46,12 +43,6 @@ public class ThrowableObject : MonoBehaviour, IInteractable
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         soundEmitter = GetComponent<SoundEmitter>();
-
-        // Set tag if not already set
-        if (string.IsNullOrEmpty(gameObject.tag) || gameObject.tag == "Untagged")
-        {
-            gameObject.tag = pickupTag;
-        }
 
         if (soundEmitter == null)
         {
