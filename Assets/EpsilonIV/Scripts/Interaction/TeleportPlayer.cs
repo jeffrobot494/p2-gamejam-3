@@ -1,25 +1,59 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TeleportButton : MonoBehaviour
+public class TeleportButtonHighlight : MonoBehaviour
 {
-    [Header("Assign your player object here")]
+    [Header("References")]
     public GameObject player;
-
-    [Header("Assign the target location (empty GameObject in scene)")]
     public Transform targetLocation;
+    public Text teleportText;
 
-    private void OnMouseDown()
+    [Header("Materials")]
+    public Material normalMaterial;
+    public Material highlightMaterial;
+
+    private Renderer rend;
+
+    void Start()
     {
+        rend = GetComponent<Renderer>();
+        rend.material = normalMaterial;
+        Debug.Log("Ran");
+        if (teleportText != null)
+            teleportText.gameObject.SetActive(false);
+            
+    }
+
+    void OnMouseEnter()
+    {
+        Debug.Log("Mouse entered");
+        rend.material = highlightMaterial;
+        if (teleportText != null)
+            teleportText.gameObject.SetActive(true);
+            
+    }
+
+    void OnMouseExit()
+    {
+        rend.material = normalMaterial;
+        if (teleportText != null)
+            teleportText.gameObject.SetActive(false);
+    }
+
+    void OnMouseDown()
+    {
+
+        Debug.Log(player);
+        Debug.Log(targetLocation);
+
         if (player != null && targetLocation != null)
         {
-            // Instantly move player to target position
+            Debug.Log("Triggered");
+            CharacterController cc = player.GetComponent<CharacterController>();
+            cc.enabled = false; // temporarily disable controller
             player.transform.position = targetLocation.position;
+            cc.enabled = true;
 
-            Debug.Log("Player teleported to " + targetLocation.position);
-        }
-        else
-        {
-            Debug.LogWarning("Player or target location not assigned!");
         }
     }
 }
