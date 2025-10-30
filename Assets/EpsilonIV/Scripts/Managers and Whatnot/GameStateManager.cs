@@ -26,8 +26,14 @@ namespace Unity.FPS.Gameplay
         public GameState DebugStartState = GameState.StartScreen;
 
         [Header("References")]
-        [Tooltip("The player character controller")]
-        public PlayerCharacterController PlayerController;
+        [Tooltip("Start screen player object (with StartScreenController and camera)")]
+        public GameObject StartScreenPlayer;
+
+        [Tooltip("The actual player object (with full PlayerCharacterController)")]
+        public GameObject Player;
+
+        [Tooltip("Main camera used for cutscenes")]
+        public GameObject MainCamera;
 
         [Tooltip("Timeline for opening cutscene")]
         public PlayableDirector OpeningCutsceneTimeline;
@@ -213,29 +219,72 @@ namespace Unity.FPS.Gameplay
                 StartScreenPrompt.text = StartPromptText;
             }
 
-            // Disable player control
-            if (PlayerController != null)
+            // Activate StartScreenPlayer (allows looking around)
+            if (StartScreenPlayer != null)
             {
-                PlayerController.enabled = false;
+                StartScreenPlayer.SetActive(true);
             }
 
-            // Unlock cursor for start screen
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Deactivate main player and main camera
+            if (Player != null)
+            {
+                Player.SetActive(false);
+            }
+
+            if (MainCamera != null)
+            {
+                MainCamera.SetActive(false);
+            }
+
+            // Lock cursor for mouse look
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         void ExitStartScreen()
         {
             // Hide start screen UI
             SetUIPanel(StartScreenPanel, false);
+
+            // Deactivate StartScreenPlayer
+            if (StartScreenPlayer != null)
+            {
+                StartScreenPlayer.SetActive(false);
+            }
         }
 
         void EnterOpeningCutscene()
         {
-            // Disable player control during cutscene
-            if (PlayerController != null)
+            // Copy StartScreenPlayer's camera transform to Main Camera for seamless transition
+            if (StartScreenPlayer != null && MainCamera != null)
             {
-                PlayerController.enabled = false;
+                Camera startCamera = StartScreenPlayer.GetComponentInChildren<Camera>();
+                if (startCamera != null)
+                {
+                    // Match Main Camera to StartScreenPlayer's camera position/rotation
+                    MainCamera.transform.position = startCamera.transform.position;
+                    MainCamera.transform.rotation = startCamera.transform.rotation;
+
+                    Debug.Log($"[GameStateManager] Matched Main Camera to start position: {startCamera.transform.position}, rotation: {startCamera.transform.rotation.eulerAngles}");
+                }
+            }
+
+            // Activate main camera for cutscene
+            if (MainCamera != null)
+            {
+                MainCamera.SetActive(true);
+            }
+
+            // Ensure StartScreenPlayer is deactivated
+            if (StartScreenPlayer != null)
+            {
+                StartScreenPlayer.SetActive(false);
+            }
+
+            // Ensure main player is still deactivated
+            if (Player != null)
+            {
+                Player.SetActive(false);
             }
 
             // Play opening cutscene timeline
@@ -263,15 +312,29 @@ namespace Unity.FPS.Gameplay
 
         void EnterGameplay()
         {
+            Debug.Log("[GameStateManager] Entering Gameplay state");
+
             // Show gameplay HUD
             SetUIPanel(StartScreenPanel, false);
             SetUIPanel(GameplayHUDPanel, true);
             SetUIPanel(GameOverPanel, false);
 
-            // Enable player control
-            if (PlayerController != null)
+            // Deactivate main camera
+            if (MainCamera != null)
             {
-                PlayerController.enabled = true;
+                MainCamera.SetActive(false);
+                Debug.Log("[GameStateManager] Main camera disabled");
+            }
+
+            // Activate the main player (with camera)
+            if (Player != null)
+            {
+                Player.SetActive(true);
+                Debug.Log("[GameStateManager] Player activated");
+            }
+            else
+            {
+                Debug.LogWarning("[GameStateManager] Player reference is null!");
             }
 
             // Lock cursor for gameplay
@@ -281,10 +344,10 @@ namespace Unity.FPS.Gameplay
 
         void ExitGameplay()
         {
-            // Disable player control
-            if (PlayerController != null)
+            // Deactivate player
+            if (Player != null)
             {
-                PlayerController.enabled = false;
+                Player.SetActive(false);
             }
         }
 
