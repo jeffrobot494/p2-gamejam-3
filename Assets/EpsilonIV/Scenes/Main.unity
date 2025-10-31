@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 320011228}
   - component: {fileID: 320011232}
   m_Layer: 0
-  m_Name: John
+  m_Name: Victor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1903,19 +1903,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 320011227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2318ea99c2ec137faa7b2fd3527561b7, type: 3}
+  m_Script: {fileID: 11500000, guid: f647b58a729ed3847a33e8eb27b83743, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::player2_sdk.Player2Npc
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioNpc
   npcManager: {fileID: 2110020751}
   customNpc: 0
   shortName: Victor
   fullName: Victor J. Johnson
   characterDescription: I am crazed scientist on the hunt for gold!
   systemPrompt: Victor is a scientist obsessed with finding gold.
-  voiceId: 01955d76-ed5b-75b8-b70f-dfaf400b7c42
-  inputField: {fileID: 1395150673}
+  voiceId: 01955d76-ed5b-755b-9b43-890d73586908
+  inputField: {fileID: 0}
   outputMessage: {fileID: 0}
-  customTraceId: 1
+  customTraceId: 
+  OnRadioResponse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &367765575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,8 +3009,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -289.1, y: 72.2}
+  m_SizeDelta: {x: 200, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &564605580
 MonoBehaviour:
@@ -3056,8 +3059,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3119,6 +3122,8 @@ GameObject:
   - component: {fileID: 568271029}
   - component: {fileID: 568271031}
   - component: {fileID: 568271030}
+  - component: {fileID: 568271032}
+  - component: {fileID: 568271033}
   m_Layer: 6
   m_Name: Chat
   m_TagString: Untagged
@@ -3165,7 +3170,19 @@ MonoBehaviour:
     type: 3}
   OnMessageSubmitted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 568271032}
+        m_TargetAssemblyTypeName: EpsilonIV.ChatView, Assembly-CSharp
+        m_MethodName: AddPlayerMessage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSTTStartRequested:
     m_PersistentCalls:
       m_Calls: []
@@ -3187,6 +3204,45 @@ MonoBehaviour:
   inputField: {fileID: 1395150673}
   inputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
     type: 3}
+--- !u!114 &568271032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568271028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc76e06c7ab30814bb817db6c8009376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.ChatView
+  messageManager: {fileID: 568271033}
+  chatHistoryText: {fileID: 1985323717}
+  scrollRect: {fileID: 1897837185}
+  npcNameText: {fileID: 564605580}
+  maxMessages: 50
+  playerPrefix: 'Player: '
+  playerMessageColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &568271033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568271028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aad468c3bfc14d4d92b4fcdf99d1651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.MessageManager
+  npcManager: {fileID: 2110020751}
+  radioInputHandler: {fileID: 568271030}
+  radioAudioPlayer: {fileID: 0}
+  npcGameObjects:
+  - {fileID: 320011227}
+  OnNpcResponseReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &576661468
 GameObject:
   m_ObjectHideFlags: 0
@@ -22016,7 +22072,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1985323717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22064,15 +22120,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -22198,8 +22254,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 723789813}
   m_HandleRect: {fileID: 723789812}
   m_Direction: 2
-  m_Value: 1.0000002
-  m_Size: 0.6100001
+  m_Value: 1.0000014
+  m_Size: 0.89268297
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22442,6 +22498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2052542131}
   - component: {fileID: 2052542132}
+  - component: {fileID: 2052542133}
   m_Layer: 6
   m_Name: Content
   m_TagString: Untagged
@@ -22467,7 +22524,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2052542132
 MonoBehaviour:
@@ -22482,10 +22539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
-    m_Left: 0
+    m_Left: 5
     m_Right: 0
     m_Top: 0
-    m_Bottom: 0
+    m_Bottom: 5
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -22495,6 +22552,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2052542133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052542130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &2072642272
 GameObject:
   m_ObjectHideFlags: 0
