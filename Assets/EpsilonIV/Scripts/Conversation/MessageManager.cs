@@ -20,12 +20,22 @@ namespace EpsilonIV
         [Tooltip("RadioAudioPlayer for playing NPC responses with effects")]
         public RadioAudioPlayer radioAudioPlayer;
 
+        [Tooltip("Player2 STT component for voice input (Phase 6)")]
+        public Player2STT player2STT;
+
         [Tooltip("Array of NPC GameObjects (each should have a RadioNpc component)")]
         public GameObject[] npcGameObjects;
 
         [Header("Events")]
+        [Tooltip("Fired when player sends a message (text or voice)")]
+        public UnityEvent<string> OnPlayerMessageSent;
+
         [Tooltip("Fired when NPC response is received")]
         public UnityEvent<string, string> OnNpcResponseReceived;
+
+        // Phase 6 - STT state tracking
+        private bool isRecordingVoice = false;
+        private string bufferedTranscript = "";
 
         void Awake()
         {
@@ -55,6 +65,12 @@ namespace EpsilonIV
             {
                 radioInputHandler.OnMessageSubmitted.AddListener(OnPlayerMessageSubmitted);
             }
+
+            // Subscribe to STT transcripts (Phase 6)
+            if (player2STT != null)
+            {
+                player2STT.OnSTTReceived.AddListener(OnSTTTranscriptReceived);
+            }
         }
 
         void OnDisable()
@@ -63,6 +79,11 @@ namespace EpsilonIV
             if (radioInputHandler != null)
             {
                 radioInputHandler.OnMessageSubmitted.RemoveListener(OnPlayerMessageSubmitted);
+            }
+
+            if (player2STT != null)
+            {
+                player2STT.OnSTTReceived.RemoveListener(OnSTTTranscriptReceived);
             }
         }
 
@@ -134,6 +155,9 @@ namespace EpsilonIV
 
             Debug.Log($"MessageManager: Player message received: '{message}'");
 
+            // Fire event for all listeners (ChatView, monster AI, etc.)
+            OnPlayerMessageSent?.Invoke(message);
+
             // Get active NPC
             RadioNpc activeNpc = GetActiveNPC();
             if (activeNpc == null)
@@ -187,15 +211,82 @@ namespace EpsilonIV
             return null;
         }
 
-        // TODO: Phase 6 - Add STT methods
-        // public void StartSTT()
-        // {
-        //     player2STT.StartSTT();
-        // }
-        //
-        // public void StopSTT()
-        // {
-        //     player2STT.StopSTT();
-        // }
+        // Phase 6 - STT Methods
+
+        /// <summary>
+        /// Start speech-to-text listening.
+        /// Called by RadioInputHandler when R key is pressed.
+        /// </summary>
+        public void StartSTT()
+        {
+            if (player2STT == null)
+            {
+                Debug.LogError("MessageManager: Cannot start STT - player2STT is not assigned!");
+                return;
+            }
+
+            Debug.Log("MessageManager: Starting STT");
+            isRecordingVoice = true;
+            bufferedTranscript = "";
+            player2STT.StartSTT();
+        }
+
+        /// <summary>
+        /// Stop speech-to-text listening.
+        /// Called by RadioInputHandler when R key is released.
+        /// </summary>
+        public void StopSTT()
+        {
+            if (player2STT == null)
+            {
+                Debug.LogError("MessageManager: Cannot stop STT - player2STT is not assigned!");
+                return;
+            }
+
+            Debug.Log("MessageManager: Stopping STT");
+            isRecordingVoice = false;
+            player2STT.StopSTT();
+
+            // Send the buffered transcript now that recording is complete
+            if (!string.IsNullOrWhiteSpace(bufferedTranscript))
+            {
+                Debug.Log($"MessageManager: Sending buffered transcript: '{bufferedTranscript}'");
+                OnPlayerMessageSubmitted(bufferedTranscript);
+                bufferedTranscript = "";
+            }
+            else
+            {
+                Debug.LogWarning("MessageManager: No transcript to send (empty buffer)");
+            }
+        }
+
+        /// <summary>
+        /// Called when Player2STT receives a voice transcript.
+        /// Treats transcript as text input - same flow as typed messages.
+        /// </summary>
+        private void OnSTTTranscriptReceived(string transcript)
+        {
+            if (string.IsNullOrWhiteSpace(transcript))
+            {
+                Debug.LogWarning("MessageManager: Received empty STT transcript");
+                return;
+            }
+
+            Debug.Log($"MessageManager: STT transcript received: '{transcript}'");
+
+            // Buffer transcript while recording - don't send yet
+            if (isRecordingVoice)
+            {
+                // Keep updating with latest transcript (handles interim/final results during recording)
+                bufferedTranscript = transcript;
+                Debug.Log($"MessageManager: Buffering transcript (will send when R released)");
+            }
+            else
+            {
+                // If not recording, send immediately (edge case: late transcript after stop)
+                Debug.Log($"MessageManager: Received transcript after recording stopped, sending immediately");
+                OnPlayerMessageSubmitted(transcript);
+            }
+        }
     }
 }

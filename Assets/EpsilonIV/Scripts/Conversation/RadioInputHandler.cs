@@ -15,6 +15,9 @@ namespace EpsilonIV
         [Tooltip("Controller that manages input field focus and provides text")]
         public InputFieldController inputFieldController;
 
+        [Tooltip("MessageManager for STT control (Phase 6)")]
+        public MessageManager messageManager;
+
         [Header("Input Configuration")]
         [Tooltip("Input Action Asset containing player controls")]
         public InputActionAsset inputActionAsset;
@@ -31,6 +34,7 @@ namespace EpsilonIV
 
         private InputAction toggleInputAction;
         private InputAction cancelAction;
+        private InputAction sttAction;  // Phase 6 - R key for voice input
         private bool isWaitingForMessage = false;
 
         void Awake()
@@ -61,6 +65,13 @@ namespace EpsilonIV
                 cancelAction.Enable();
                 cancelAction.performed += OnEscapePressed;
             }
+
+            if (sttAction != null)
+            {
+                sttAction.Enable();
+                sttAction.started += OnRKeyPressed;
+                sttAction.canceled += OnRKeyReleased;
+            }
         }
 
         void OnDisable()
@@ -75,6 +86,13 @@ namespace EpsilonIV
             {
                 cancelAction.performed -= OnEscapePressed;
                 cancelAction.Disable();
+            }
+
+            if (sttAction != null)
+            {
+                sttAction.started -= OnRKeyPressed;
+                sttAction.canceled -= OnRKeyReleased;
+                sttAction.Disable();
             }
         }
 
@@ -98,6 +116,13 @@ namespace EpsilonIV
                 name: "CancelRadioInput",
                 type: InputActionType.Button,
                 binding: "<Keyboard>/escape"
+            );
+
+            // Create R key action for STT (Phase 6)
+            sttAction = new InputAction(
+                name: "PushToTalk",
+                type: InputActionType.Button,
+                binding: "<Keyboard>/r"
             );
         }
 
@@ -164,18 +189,32 @@ namespace EpsilonIV
             isWaitingForMessage = false;
         }
 
-        // TODO: Phase 6 - Add STT input detection
-        // void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.R))
-        //     {
-        //         OnSTTStartRequested?.Invoke();
-        //     }
-        //
-        //     if (Input.GetKeyUp(KeyCode.R))
-        //     {
-        //         OnSTTStopRequested?.Invoke();
-        //     }
-        // }
+        // Phase 6 - STT Input Detection
+
+        private void OnRKeyPressed(InputAction.CallbackContext context)
+        {
+            if (messageManager == null)
+            {
+                Debug.LogError("RadioInputHandler: Cannot start STT - messageManager is not assigned!");
+                return;
+            }
+
+            Debug.Log("RadioInputHandler: R key pressed - starting STT");
+            messageManager.StartSTT();
+            OnSTTStartRequested?.Invoke();
+        }
+
+        private void OnRKeyReleased(InputAction.CallbackContext context)
+        {
+            if (messageManager == null)
+            {
+                Debug.LogError("RadioInputHandler: Cannot stop STT - messageManager is not assigned!");
+                return;
+            }
+
+            Debug.Log("RadioInputHandler: R key released - stopping STT");
+            messageManager.StopSTT();
+            OnSTTStopRequested?.Invoke();
+        }
     }
 }

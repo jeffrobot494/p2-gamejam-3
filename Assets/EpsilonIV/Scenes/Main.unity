@@ -3125,6 +3125,7 @@ GameObject:
   - component: {fileID: 568271032}
   - component: {fileID: 568271033}
   - component: {fileID: 568271034}
+  - component: {fileID: 568271035}
   m_Layer: 6
   m_Name: Chat
   m_TagString: Untagged
@@ -3167,6 +3168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioInputHandler
   inputFieldController: {fileID: 568271031}
+  messageManager: {fileID: 568271033}
   inputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
     type: 3}
   OnMessageSubmitted:
@@ -3239,8 +3241,12 @@ MonoBehaviour:
   npcManager: {fileID: 2110020751}
   radioInputHandler: {fileID: 568271030}
   radioAudioPlayer: {fileID: 568271034}
+  player2STT: {fileID: 568271035}
   npcGameObjects:
   - {fileID: 320011227}
+  OnPlayerMessageSent:
+    m_PersistentCalls:
+      m_Calls: []
   OnNpcResponseReceived:
     m_PersistentCalls:
       m_Calls: []
@@ -3267,6 +3273,40 @@ MonoBehaviour:
   distortionLevel: 0.3
   radioStaticClip: {fileID: 0}
   staticIntensity: 0.4
+--- !u!114 &568271035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568271028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c813427510f542ee9621473260e193cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::player2_sdk.Player2STT
+  sttEnabled: 1
+  heartbeatInterval: 5
+  enableVAD: 0
+  enableInterimResults: 1
+  enableAutoReconnection: 1
+  maxReconnectionAttempts: 5
+  baseReconnectionDelay: 1
+  sampleRate: 44100
+  audioChunkDurationMs: 50
+  npcManager: {fileID: 2110020751}
+  OnSTTReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSTTFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnListeningStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnListeningStopped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &576661468
 GameObject:
   m_ObjectHideFlags: 0
