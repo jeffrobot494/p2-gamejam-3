@@ -10,6 +10,10 @@ namespace EpsilonIV
     /// </summary>
     public class ChatView : MonoBehaviour
     {
+        [Header("Component References")]
+        [Tooltip("MessageManager to subscribe to NPC responses (Phase 3+)")]
+        public MessageManager messageManager;
+
         [Header("UI References")]
         [Tooltip("Text component that displays the chat history")]
         public TextMeshProUGUI chatHistoryText;
@@ -50,6 +54,34 @@ namespace EpsilonIV
             {
                 npcNameText.text = "No Active NPC";
             }
+
+            // Subscribe to MessageManager events (Phase 4)
+            if (messageManager != null)
+            {
+                messageManager.OnNpcResponseReceived.AddListener(OnNpcResponseReceived);
+                Debug.Log("ChatView: Subscribed to MessageManager.OnNpcResponseReceived");
+            }
+        }
+
+        void OnDestroy()
+        {
+            // Unsubscribe from events
+            if (messageManager != null)
+            {
+                messageManager.OnNpcResponseReceived.RemoveListener(OnNpcResponseReceived);
+            }
+        }
+
+        /// <summary>
+        /// Called when MessageManager receives an NPC response.
+        /// Displays the response in chat and updates the active NPC name.
+        /// </summary>
+        private void OnNpcResponseReceived(string npcName, string message)
+        {
+            Debug.Log($"ChatView: OnNpcResponseReceived called - NPC: '{npcName}', Message: '{message}'");
+
+            AddNPCMessage(npcName, message);
+            SetActiveNPCName(npcName);
         }
 
         /// <summary>
