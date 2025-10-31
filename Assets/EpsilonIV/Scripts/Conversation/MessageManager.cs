@@ -17,6 +17,9 @@ namespace EpsilonIV
         [Tooltip("RadioInputHandler to subscribe to message submissions")]
         public RadioInputHandler radioInputHandler;
 
+        [Tooltip("RadioAudioPlayer for playing NPC responses with effects")]
+        public RadioAudioPlayer radioAudioPlayer;
+
         [Tooltip("Array of NPC GameObjects (each should have a RadioNpc component)")]
         public GameObject[] npcGameObjects;
 
@@ -144,6 +147,12 @@ namespace EpsilonIV
                 return;
             }
 
+            // Prepare audio player for incoming response
+            if (radioAudioPlayer != null)
+            {
+                radioAudioPlayer.PrepareNpcAudio(activeNpc.gameObject);
+            }
+
             // Send message to NPC
             string context = ""; // TODO: Phase 7 - Get from SurvivorProfile.knowledgeBase
             activeNpc.SendMessage(message, context);
@@ -158,10 +167,12 @@ namespace EpsilonIV
         {
             Debug.Log($"MessageManager: Received response from '{npcName}': '{responseMessage}'");
 
-            // Fire event for other components (ChatView, RadioAudioPlayer)
+            // Fire event for other components (ChatView)
             OnNpcResponseReceived?.Invoke(npcName, responseMessage);
 
-            // TODO: Phase 5 - Extract audio and send to RadioAudioPlayer
+            // Note: Audio is handled by RadioAudioPlayer via PrepareNpcAudio()
+            // The SDK plays audio automatically through the NPC's AudioSource,
+            // and RadioAudioPlayer applies radio effects to it.
         }
 
         // TODO: Phase 6 - Add STT methods
