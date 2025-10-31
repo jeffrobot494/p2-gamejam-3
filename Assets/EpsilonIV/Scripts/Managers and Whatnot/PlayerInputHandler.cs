@@ -38,6 +38,7 @@ namespace EpsilonIV
         private InputAction m_ReloadAction;
         private InputAction m_NextWeaponAction;
         private InputAction m_InteractAction;
+        private InputAction m_ToggleCursorAction;
 
         void Start()
         {
@@ -59,6 +60,7 @@ namespace EpsilonIV
                     m_ReloadAction = playerMap.FindAction("Reload");
                     m_NextWeaponAction = playerMap.FindAction("NextWeapon");
                     m_InteractAction = playerMap.FindAction("Interact");
+                    m_ToggleCursorAction = playerMap.FindAction("ToggleCursor");
 
                     m_MoveAction?.Enable();
                     m_LookAction?.Enable();
@@ -70,6 +72,7 @@ namespace EpsilonIV
                     m_ReloadAction?.Enable();
                     m_NextWeaponAction?.Enable();
                     m_InteractAction?.Enable();
+                    m_ToggleCursorAction?.Enable();
                 }
                 else
                 {
@@ -85,6 +88,29 @@ namespace EpsilonIV
         void LateUpdate()
         {
             m_FireInputWasHeld = GetFireInputHeld();
+        }
+
+        void Update()
+        {
+            // Toggle cursor lock for UI interaction
+            if (m_ToggleCursorAction != null && m_ToggleCursorAction.WasPressedThisFrame())
+            {
+                ToggleCursorLock();
+            }
+        }
+
+        void ToggleCursorLock()
+        {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         public bool CanProcessInput()
