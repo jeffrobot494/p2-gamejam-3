@@ -29,8 +29,6 @@ namespace EpsilonIV
 
         void Awake()
         {
-            Debug.Log("MessageManager: Awake() called");
-
             if (npcManager == null)
             {
                 Debug.LogError("MessageManager: NpcManager is not assigned!");
@@ -56,7 +54,6 @@ namespace EpsilonIV
             if (radioInputHandler != null)
             {
                 radioInputHandler.OnMessageSubmitted.AddListener(OnPlayerMessageSubmitted);
-                Debug.Log("MessageManager: Subscribed to OnMessageSubmitted");
             }
         }
 
@@ -90,8 +87,6 @@ namespace EpsilonIV
                 // Subscribe to this NPC's responses
                 radioNpc.OnRadioResponse.RemoveListener(OnNpcResponse); // Prevent duplicates
                 radioNpc.OnRadioResponse.AddListener(OnNpcResponse);
-
-                Debug.Log($"MessageManager: Subscribed to responses from {npcObj.name}");
             }
         }
 
@@ -147,12 +142,6 @@ namespace EpsilonIV
                 return;
             }
 
-            // Prepare audio player for incoming response
-            if (radioAudioPlayer != null)
-            {
-                radioAudioPlayer.PrepareNpcAudio(activeNpc.gameObject);
-            }
-
             // Send message to NPC
             string context = ""; // TODO: Phase 7 - Get from SurvivorProfile.knowledgeBase
             activeNpc.SendMessage(message, context);
@@ -167,12 +156,35 @@ namespace EpsilonIV
         {
             Debug.Log($"MessageManager: Received response from '{npcName}': '{responseMessage}'");
 
+            // Find the NPC GameObject by name
+            GameObject npcGameObject = FindNpcByName(npcName);
+            if (npcGameObject != null && radioAudioPlayer != null)
+            {
+                // Prepare audio effects for this NPC's response
+                radioAudioPlayer.PrepareNpcAudio(npcGameObject);
+            }
+
             // Fire event for other components (ChatView)
             OnNpcResponseReceived?.Invoke(npcName, responseMessage);
+        }
 
-            // Note: Audio is handled by RadioAudioPlayer via PrepareNpcAudio()
-            // The SDK plays audio automatically through the NPC's AudioSource,
-            // and RadioAudioPlayer applies radio effects to it.
+        /// <summary>
+        /// Find an NPC GameObject by name.
+        /// </summary>
+        private GameObject FindNpcByName(string npcName)
+        {
+            if (npcGameObjects == null) return null;
+
+            foreach (var npcObj in npcGameObjects)
+            {
+                if (npcObj != null && npcObj.name == npcName)
+                {
+                    return npcObj;
+                }
+            }
+
+            Debug.LogWarning($"MessageManager: Could not find NPC GameObject with name '{npcName}'");
+            return null;
         }
 
         // TODO: Phase 6 - Add STT methods

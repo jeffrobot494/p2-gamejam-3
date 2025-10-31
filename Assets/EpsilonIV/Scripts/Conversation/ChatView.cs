@@ -38,8 +38,6 @@ namespace EpsilonIV
 
         void Start()
         {
-            Debug.Log("ChatView: Start() called");
-
             if (chatHistoryText == null)
             {
                 Debug.LogError("ChatView: chatHistoryText is not assigned!");
@@ -59,7 +57,6 @@ namespace EpsilonIV
             if (messageManager != null)
             {
                 messageManager.OnNpcResponseReceived.AddListener(OnNpcResponseReceived);
-                Debug.Log("ChatView: Subscribed to MessageManager.OnNpcResponseReceived");
             }
         }
 
@@ -78,8 +75,6 @@ namespace EpsilonIV
         /// </summary>
         private void OnNpcResponseReceived(string npcName, string message)
         {
-            Debug.Log($"ChatView: OnNpcResponseReceived called - NPC: '{npcName}', Message: '{message}'");
-
             AddNPCMessage(npcName, message);
             SetActiveNPCName(npcName);
         }
@@ -92,11 +87,8 @@ namespace EpsilonIV
         {
             if (string.IsNullOrWhiteSpace(message))
             {
-                Debug.LogWarning("ChatView: Attempted to add empty player message");
                 return;
             }
-
-            Debug.Log($"ChatView: Adding player message: '{message}'");
 
             string formattedMessage = $"{playerPrefix}{message}";
             AddMessageToHistory(formattedMessage);
@@ -110,11 +102,8 @@ namespace EpsilonIV
         {
             if (string.IsNullOrWhiteSpace(message))
             {
-                Debug.LogWarning("ChatView: Attempted to add empty NPC message");
                 return;
             }
-
-            Debug.Log($"ChatView: Adding NPC message from '{npcName}': '{message}'");
 
             string formattedMessage = $"{npcName}: {message}";
             AddMessageToHistory(formattedMessage);
@@ -129,7 +118,6 @@ namespace EpsilonIV
             if (npcNameText != null)
             {
                 npcNameText.text = npcName;
-                Debug.Log($"ChatView: Active NPC set to: {npcName}");
             }
         }
 
@@ -142,7 +130,6 @@ namespace EpsilonIV
             {
                 chatHistoryText.text = "";
                 messageCount = 0;
-                Debug.Log("ChatView: Chat history cleared");
             }
         }
 

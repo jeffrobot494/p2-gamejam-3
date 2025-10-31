@@ -35,8 +35,6 @@ namespace EpsilonIV
 
         void Awake()
         {
-            Debug.Log("RadioInputHandler: Awake() called");
-
             if (inputFieldController == null)
             {
                 Debug.LogError("RadioInputHandler: InputFieldController is not assigned!");
@@ -56,14 +54,12 @@ namespace EpsilonIV
             {
                 toggleInputAction.Enable();
                 toggleInputAction.performed += OnEnterPressed;
-                Debug.Log("RadioInputHandler: Enter key action enabled");
             }
 
             if (cancelAction != null)
             {
                 cancelAction.Enable();
                 cancelAction.performed += OnEscapePressed;
-                Debug.Log("RadioInputHandler: Escape key action enabled");
             }
         }
 
@@ -103,8 +99,6 @@ namespace EpsilonIV
                 type: InputActionType.Button,
                 binding: "<Keyboard>/escape"
             );
-
-            Debug.Log("RadioInputHandler: Input actions created");
         }
 
         private void OnEnterPressed(InputAction.CallbackContext context)

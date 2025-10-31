@@ -45,11 +45,6 @@ namespace EpsilonIV
         private AudioSource currentAudioSource;
         private GameObject currentNpcGameObject;
 
-        void Awake()
-        {
-            Debug.Log("RadioAudioPlayer: Awake() called");
-        }
-
         /// <summary>
         /// Prepare an NPC's audio for playback with radio effects.
         /// Call this when a message is sent to an NPC, before the response arrives.
@@ -64,14 +59,12 @@ namespace EpsilonIV
 
             Debug.Log($"RadioAudioPlayer: Preparing audio for {npcGameObject.name}");
 
-            // Stop previous audio if interrupt is enabled
-            if (interruptOnNewAudio && currentAudioSource != null && currentAudioSource.isPlaying)
-            {
-                Debug.Log($"RadioAudioPlayer: Interrupting audio from {currentNpcGameObject?.name}");
-                currentAudioSource.Stop();
-            }
-
-            // Store reference for future interruption
+            // Reset for new response (even if same NPC GameObject)
+            // This allows Update() to detect the new AudioSource
+            // NOTE: We don't interrupt here because by the time this is called,
+            // the SDK has already loaded the NEW audio clip and started playing it.
+            // Calling Stop() here would stop the new audio we want to hear!
+            currentAudioSource = null;
             currentNpcGameObject = npcGameObject;
 
             // Get or wait for AudioSource (SDK creates it when audio arrives)
