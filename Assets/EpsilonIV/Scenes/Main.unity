@@ -3263,8 +3263,10 @@ MonoBehaviour:
   lowPassCutoff: 2000
   enableHighPassFilter: 1
   highPassCutoff: 500
+  enableDistortion: 1
+  distortionLevel: 0.3
   radioStaticClip: {fileID: 0}
-  staticIntensity: 0.3
+  staticIntensity: 0.4
 --- !u!1 &576661468
 GameObject:
   m_ObjectHideFlags: 0

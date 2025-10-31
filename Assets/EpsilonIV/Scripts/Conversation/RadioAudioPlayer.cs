@@ -34,6 +34,13 @@ namespace EpsilonIV
         [Range(10f, 1000f)]
         public float highPassCutoff = 300f;
 
+        [Tooltip("Enable distortion filter (adds analog/compression character)")]
+        public bool enableDistortion = false;
+
+        [Tooltip("Distortion amount (0 = clean, 1 = heavily distorted)")]
+        [Range(0f, 1f)]
+        public float distortionLevel = 0.3f;
+
         [Header("Future Effects (TODO)")]
         [Tooltip("Audio clip for radio static overlay (not yet implemented)")]
         public AudioClip radioStaticClip;
@@ -115,7 +122,17 @@ namespace EpsilonIV
                     lowPass = audioSource.gameObject.AddComponent<AudioLowPassFilter>();
                 }
                 lowPass.cutoffFrequency = lowPassCutoff;
-                Debug.Log($"RadioAudioPlayer: Applied low-pass filter ({lowPassCutoff} Hz)");
+                Debug.Log($"RadioAudioPlayer: Applied low-pass filter (cutoff={lowPassCutoff} Hz)");
+            }
+            else
+            {
+                // Remove low-pass if disabled
+                AudioLowPassFilter lowPass = audioSource.GetComponent<AudioLowPassFilter>();
+                if (lowPass != null)
+                {
+                    Destroy(lowPass);
+                    Debug.Log($"RadioAudioPlayer: Removed low-pass filter (disabled)");
+                }
             }
 
             // Apply high-pass filter (remove low rumble)
@@ -127,12 +144,41 @@ namespace EpsilonIV
                     highPass = audioSource.gameObject.AddComponent<AudioHighPassFilter>();
                 }
                 highPass.cutoffFrequency = highPassCutoff;
-                Debug.Log($"RadioAudioPlayer: Applied high-pass filter ({highPassCutoff} Hz)");
+                Debug.Log($"RadioAudioPlayer: Applied high-pass filter (cutoff={highPassCutoff} Hz)");
+            }
+            else
+            {
+                // Remove high-pass if disabled
+                AudioHighPassFilter highPass = audioSource.GetComponent<AudioHighPassFilter>();
+                if (highPass != null)
+                {
+                    Destroy(highPass);
+                    Debug.Log($"RadioAudioPlayer: Removed high-pass filter (disabled)");
+                }
             }
 
-            // TODO: Add audio distortion effect
-            // AudioDistortionFilter distortion = audioSource.gameObject.AddComponent<AudioDistortionFilter>();
-            // distortion.distortionLevel = 0.5f;
+            // Apply distortion filter (analog radio character)
+            if (enableDistortion)
+            {
+                AudioDistortionFilter distortion = audioSource.GetComponent<AudioDistortionFilter>();
+                if (distortion == null)
+                {
+                    distortion = audioSource.gameObject.AddComponent<AudioDistortionFilter>();
+                    Debug.Log($"RadioAudioPlayer: Created new distortion filter");
+                }
+                distortion.distortionLevel = distortionLevel;
+                Debug.Log($"RadioAudioPlayer: Applied distortion filter (level={distortionLevel})");
+            }
+            else
+            {
+                // Remove distortion if disabled
+                AudioDistortionFilter distortion = audioSource.GetComponent<AudioDistortionFilter>();
+                if (distortion != null)
+                {
+                    Destroy(distortion);
+                    Debug.Log($"RadioAudioPlayer: Removed distortion filter (disabled)");
+                }
+            }
 
             // TODO: Mix in radio static overlay
             // This requires more complex audio mixing
@@ -187,6 +233,9 @@ namespace EpsilonIV
 
             AudioHighPassFilter highPass = audioSource.GetComponent<AudioHighPassFilter>();
             if (highPass != null) Destroy(highPass);
+
+            AudioDistortionFilter distortion = audioSource.GetComponent<AudioDistortionFilter>();
+            if (distortion != null) Destroy(distortion);
 
             Debug.Log("RadioAudioPlayer: Removed all effects");
         }
