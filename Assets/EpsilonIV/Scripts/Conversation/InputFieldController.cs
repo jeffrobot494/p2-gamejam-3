@@ -25,8 +25,6 @@ namespace EpsilonIV
 
         void Awake()
         {
-            Debug.Log("InputFieldController: Awake() called");
-
             if (inputField == null)
             {
                 Debug.LogError("InputFieldController: InputField is not assigned!");
@@ -45,23 +43,15 @@ namespace EpsilonIV
             {
                 Debug.LogError("InputFieldController: Could not find 'Player' action map!");
             }
-            else
-            {
-                Debug.Log($"InputFieldController: Found Player action map: {playerActionMap.name}");
-            }
         }
 
         void Start()
         {
-            Debug.Log("InputFieldController: Start() called");
-
             // Ensure input field starts unfocused
             if (inputField != null)
             {
                 inputField.DeactivateInputField();
             }
-
-            Debug.Log("InputFieldController: Initialization complete");
         }
 
         /// <summary>
@@ -76,7 +66,6 @@ namespace EpsilonIV
                 return;
             }
 
-            Debug.Log("InputFieldController: Focusing input field");
             isInputFieldFocused = true;
 
             // Disable player action map to prevent game controls while typing
@@ -103,7 +92,6 @@ namespace EpsilonIV
         /// </summary>
         public void UnfocusInputField()
         {
-            Debug.Log("InputFieldController: Unfocusing input field");
             isInputFieldFocused = false;
 
             // Deactivate input field
@@ -133,7 +121,6 @@ namespace EpsilonIV
         {
             if (inputField != null)
             {
-                Debug.Log("InputFieldController: Clearing input field");
                 inputField.text = "";
             }
         }

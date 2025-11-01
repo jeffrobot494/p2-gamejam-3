@@ -18,6 +18,19 @@ namespace EpsilonIV
 
         private string lastOutputMessage = "";
 
+        /// <summary>
+        /// Public accessor for the NPC ID assigned by Player2 API.
+        /// Returns null if the NPC hasn't been spawned yet.
+        /// </summary>
+        public string NpcID
+        {
+            get
+            {
+                var field = typeof(Player2Npc).GetField("_npcID", BindingFlags.NonPublic | BindingFlags.Instance);
+                return field?.GetValue(this) as string;
+            }
+        }
+
         void Start()
         {
             // Ensure outputMessage is assigned (SDK requires it)
