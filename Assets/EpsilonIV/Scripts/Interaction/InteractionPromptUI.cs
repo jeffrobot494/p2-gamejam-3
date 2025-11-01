@@ -42,6 +42,21 @@ namespace EpsilonIV
         [Tooltip("Size of the brackets")]
         public float BracketSize = 30f;
 
+        [Header("Adaptive Scaling")]
+        [Tooltip("Enable adaptive bracket scaling based on object size")]
+        public bool EnableAdaptiveScaling = true;
+
+        [Tooltip("Reference object size (e.g., player height in meters) - objects this size or larger get full scale")]
+        public float ReferenceObjectSize = 1.8f;
+
+        [Tooltip("Minimum scale for brackets (for very small objects)")]
+        [Range(0.1f, 1f)]
+        public float MinBracketScale = 0.1f;
+
+        [Tooltip("Maximum scale for brackets")]
+        [Range(0.1f, 2f)]
+        public float MaxBracketScale = 1f;
+
         [Header("Animation")]
         [Tooltip("Enable bracket pulsing animation")]
         public bool EnablePulse = true;
@@ -86,6 +101,7 @@ namespace EpsilonIV
         private float m_NextGlitchTime = 0f;
         private Vector2[] m_GlitchOffsets = new Vector2[4];
         private float m_FlickerAlpha = 1f;
+        private float m_CurrentAdaptiveScale = 1f;
 
         void Start()
         {
@@ -133,6 +149,11 @@ namespace EpsilonIV
                 if (EnablePulse)
                 {
                     AnimatePulse();
+                }
+                else if (EnableAdaptiveScaling)
+                {
+                    // Apply adaptive scale without pulse animation
+                    ApplyAdaptiveScale();
                 }
 
                 if (EnableGlitch)
@@ -197,8 +218,43 @@ namespace EpsilonIV
             }
             else
             {
-                // Fallback: use a default size around the object's position
-                bounds = new Bounds(targetTransform.position, Vector3.one);
+                // Try to get collider bounds as fallback
+                Collider targetCollider = targetTransform.GetComponent<Collider>();
+                if (targetCollider != null)
+                {
+                    bounds = targetCollider.bounds;
+                }
+                else
+                {
+                    // Last resort: try to find renderer in children
+                    Renderer childRenderer = targetTransform.GetComponentInChildren<Renderer>();
+                    if (childRenderer != null)
+                    {
+                        bounds = childRenderer.bounds;
+                    }
+                    else
+                    {
+                        // Final fallback: use a small default size
+                        bounds = new Bounds(targetTransform.position, Vector3.one * 0.2f);
+                    }
+                }
+            }
+
+            // Calculate adaptive scale based on object size
+            if (EnableAdaptiveScaling)
+            {
+                // Get the largest dimension of the bounds
+                float objectSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
+
+                // Calculate scale factor relative to reference size
+                float scaleFactor = objectSize / ReferenceObjectSize;
+
+                // Clamp between min and max scale
+                m_CurrentAdaptiveScale = Mathf.Clamp(scaleFactor, MinBracketScale, MaxBracketScale);
+            }
+            else
+            {
+                m_CurrentAdaptiveScale = 1f;
             }
 
             // Get the 8 corners of the bounding box
@@ -277,16 +333,32 @@ namespace EpsilonIV
         void AnimatePulse()
         {
             m_PulseTime += Time.deltaTime * PulseSpeed;
-            float scale = Mathf.Lerp(PulseScaleRange.x, PulseScaleRange.y, (Mathf.Sin(m_PulseTime) + 1f) * 0.5f);
+            float pulseScale = Mathf.Lerp(PulseScaleRange.x, PulseScaleRange.y, (Mathf.Sin(m_PulseTime) + 1f) * 0.5f);
+
+            // Combine pulse scale with adaptive scale
+            float finalScale = pulseScale * m_CurrentAdaptiveScale;
 
             if (BracketTopLeft != null)
-                BracketTopLeft.localScale = Vector3.one * scale;
+                BracketTopLeft.localScale = Vector3.one * finalScale;
             if (BracketTopRight != null)
-                BracketTopRight.localScale = Vector3.one * scale;
+                BracketTopRight.localScale = Vector3.one * finalScale;
             if (BracketBottomLeft != null)
-                BracketBottomLeft.localScale = Vector3.one * scale;
+                BracketBottomLeft.localScale = Vector3.one * finalScale;
             if (BracketBottomRight != null)
-                BracketBottomRight.localScale = Vector3.one * scale;
+                BracketBottomRight.localScale = Vector3.one * finalScale;
+        }
+
+        void ApplyAdaptiveScale()
+        {
+            // Apply only the adaptive scale (no pulse animation)
+            if (BracketTopLeft != null)
+                BracketTopLeft.localScale = Vector3.one * m_CurrentAdaptiveScale;
+            if (BracketTopRight != null)
+                BracketTopRight.localScale = Vector3.one * m_CurrentAdaptiveScale;
+            if (BracketBottomLeft != null)
+                BracketBottomLeft.localScale = Vector3.one * m_CurrentAdaptiveScale;
+            if (BracketBottomRight != null)
+                BracketBottomRight.localScale = Vector3.one * m_CurrentAdaptiveScale;
         }
 
         void ApplyGlitchEffect()
