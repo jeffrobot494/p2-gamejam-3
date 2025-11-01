@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 320011228}
   - component: {fileID: 320011232}
   m_Layer: 0
-  m_Name: Victor
+  m_Name: DrVasquez
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1913,6 +1913,7 @@ MonoBehaviour:
   characterDescription: I am crazed scientist on the hunt for gold!
   systemPrompt: Victor is a scientist obsessed with finding gold.
   voiceId: 01955d76-ed5b-755b-9b43-890d73586908
+  survivorProfile: {fileID: 11400000, guid: 3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f, type: 2}
   inputField: {fileID: 0}
   outputMessage: {fileID: 0}
   customTraceId: 
@@ -3173,19 +3174,7 @@ MonoBehaviour:
     type: 3}
   OnMessageSubmitted:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 568271032}
-        m_TargetAssemblyTypeName: EpsilonIV.ChatView, Assembly-CSharp
-        m_MethodName: AddPlayerMessage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnSTTStartRequested:
     m_PersistentCalls:
       m_Calls: []
@@ -3244,7 +3233,7 @@ MonoBehaviour:
   player2STT: {fileID: 568271035}
   npcGameObjects:
   - {fileID: 320011227}
-  minimumRecordingDurationMs: 3500
+  minimumRecordingDurationMs: 3600
   OnPlayerMessageSent:
     m_PersistentCalls:
       m_Calls: []
@@ -3271,7 +3260,7 @@ MonoBehaviour:
   enableHighPassFilter: 1
   highPassCutoff: 500
   enableDistortion: 1
-  distortionLevel: 0.3
+  distortionLevel: 1
   radioStaticClip: {fileID: 0}
   staticIntensity: 0.4
 --- !u!114 &568271035

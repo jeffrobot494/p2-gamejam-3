@@ -73,6 +73,10 @@ namespace player2_sdk
         [SerializeField]
         public string voiceId;
 
+        [Header("Survivor Profile Integration")]
+        [Tooltip("Optional: Assign a SurvivorProfile to use its personality, voice, and knowledge. Overrides above fields if assigned.")]
+        [SerializeField]
+        private EpsilonIV.SurvivorProfile survivorProfile;
 
         [Header("Events")] [SerializeField] public TMP_InputField inputField;
 
@@ -234,20 +238,46 @@ namespace player2_sdk
             else
                 Debug.Log($"Spawning NPC '{fullName}' with API key authentication");
 
-            Debug.Log($"Spawning NPC '{fullName}' with voice ID: {voiceId}");
+            // Determine spawn data source: SurvivorProfile or hardcoded fields
+            string spawnShortName;
+            string spawnFullName;
+            string spawnCharDesc;
+            string spawnSystemPrompt;
+            string spawnVoiceId;
+
+            if (survivorProfile != null)
+            {
+                Debug.Log($"Using SurvivorProfile '{survivorProfile.name}' for NPC spawn data");
+                spawnShortName = string.IsNullOrEmpty(survivorProfile.displayName) ? shortName : survivorProfile.displayName;
+                spawnFullName = survivorProfile.displayName;
+                spawnCharDesc = survivorProfile.characterDescription;
+                spawnSystemPrompt = survivorProfile.systemPrompt;
+                spawnVoiceId = survivorProfile.voiceId;
+            }
+            else
+            {
+                Debug.LogWarning($"No SurvivorProfile assigned to {gameObject.name}. Using default hardcoded NPC configuration.");
+                spawnShortName = shortName;
+                spawnFullName = fullName;
+                spawnCharDesc = characterDescription;
+                spawnSystemPrompt = systemPrompt;
+                spawnVoiceId = voiceId;
+            }
+
+            Debug.Log($"Spawning NPC '{spawnFullName}' with voice ID: {spawnVoiceId}");
 
             var spawnData = new SpawnNpc
             {
-                short_name = shortName,
-                name = fullName,
-                character_description = characterDescription,
-                system_prompt = systemPrompt,
+                short_name = spawnShortName,
+                name = spawnFullName,
+                character_description = spawnCharDesc,
+                system_prompt = spawnSystemPrompt,
                 commands = npcManager.GetSerializableFunctions(),
                 tts = new TTSInfo
                 {
                     speed = 1.0,
                     audio_format = "mp3",
-                    voice_ids = new List<string> { voiceId }
+                    voice_ids = new List<string> { spawnVoiceId }
                 },
                 keep_game_state = npcManager.keepGameState
             };

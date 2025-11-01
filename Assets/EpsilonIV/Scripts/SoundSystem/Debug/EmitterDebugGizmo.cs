@@ -7,8 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(SoundEmitter))]
 public class EmitterDebugGizmo : MonoBehaviour
 {
-    public float labelYOffset = 1.5f;
-    public float sceneLabelDuration = 1.25f; // seconds
+    [System.NonSerialized] public float labelYOffset = 1.5f;
+    [System.NonSerialized] public float sceneLabelDuration = 1.25f; // seconds
 
     private SoundEmitter _emitter;
 
