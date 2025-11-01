@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 6211600224620035011}
   - component: {fileID: 3704874207379792763}
   - component: {fileID: 3055884147330310237}
+  - component: {fileID: 6687163406864538473}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -324,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3456631360302511216}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.69941264, z: -0, w: 0.7147181}
+  m_LocalRotation: {x: 0, y: -0.69941396, z: 0, w: 0.7147169}
   m_LocalPosition: {x: 31.642792, y: -41.61023, z: -41.3574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -826,6 +827,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Game.Damageable
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.5
+--- !u!114 &6687163406864538473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456631360302511216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acf35cff2957ce4c93db9514b70feea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioInputManager
+  inputField: {fileID: 0}
+  inputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
+    type: 3}
 --- !u!1 &4370304100989285783
 GameObject:
   m_ObjectHideFlags: 0

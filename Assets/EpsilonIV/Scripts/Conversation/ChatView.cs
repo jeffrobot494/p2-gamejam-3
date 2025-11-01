@@ -53,9 +53,10 @@ namespace EpsilonIV
                 npcNameText.text = "No Active NPC";
             }
 
-            // Subscribe to MessageManager events (Phase 4)
+            // Subscribe to MessageManager events
             if (messageManager != null)
             {
+                messageManager.OnPlayerMessageSent.AddListener(AddPlayerMessage);
                 messageManager.OnNpcResponseReceived.AddListener(OnNpcResponseReceived);
             }
         }
@@ -65,6 +66,7 @@ namespace EpsilonIV
             // Unsubscribe from events
             if (messageManager != null)
             {
+                messageManager.OnPlayerMessageSent.RemoveListener(AddPlayerMessage);
                 messageManager.OnNpcResponseReceived.RemoveListener(OnNpcResponseReceived);
             }
         }

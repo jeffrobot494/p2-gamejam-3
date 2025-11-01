@@ -26,6 +26,11 @@ namespace EpsilonIV
         [Tooltip("Array of NPC GameObjects (each should have a RadioNpc component)")]
         public GameObject[] npcGameObjects;
 
+        [Header("STT Configuration")]
+        [Tooltip("Minimum recording duration in milliseconds (ensures server has time to process)")]
+        [Range(1000, 5000)]
+        public int minimumRecordingDurationMs = 3500;
+
         [Header("Events")]
         [Tooltip("Fired when player sends a message (text or voice)")]
         public UnityEvent<string> OnPlayerMessageSent;
@@ -36,6 +41,7 @@ namespace EpsilonIV
         // Phase 6 - STT state tracking
         private bool isRecordingVoice = false;
         private string bufferedTranscript = "";
+        private float recordingStartTime = 0f;
 
         void Awake()
         {
@@ -228,6 +234,7 @@ namespace EpsilonIV
             Debug.Log("MessageManager: Starting STT");
             isRecordingVoice = true;
             bufferedTranscript = "";
+            recordingStartTime = Time.time;
             player2STT.StartSTT();
         }
 
@@ -243,11 +250,35 @@ namespace EpsilonIV
                 return;
             }
 
-            Debug.Log("MessageManager: Stopping STT");
+            Debug.Log("MessageManager: Stopping STT - waiting for final transcripts...");
+
+            // Wait a brief moment for any final transcripts to arrive before stopping
+            StartCoroutine(DelayedStopSTT());
+        }
+
+        private System.Collections.IEnumerator DelayedStopSTT()
+        {
+            // Calculate how long R was held
+            float elapsedTime = Time.time - recordingStartTime;
+            float minimumDuration = minimumRecordingDurationMs / 1000f;
+            float remainingTime = minimumDuration - elapsedTime;
+
+            // If R was released before minimum duration, wait to reach it
+            if (remainingTime > 0)
+            {
+                Debug.Log($"MessageManager: R held for {elapsedTime:F2}s, waiting {remainingTime:F2}s more to reach minimum {minimumDuration:F2}s");
+                yield return new WaitForSeconds(remainingTime);
+            }
+            else
+            {
+                Debug.Log($"MessageManager: R held for {elapsedTime:F2}s (>= minimum {minimumDuration:F2}s)");
+            }
+
+            Debug.Log($"MessageManager: Closing STT. Final buffer: '{bufferedTranscript}'");
             isRecordingVoice = false;
             player2STT.StopSTT();
 
-            // Send the buffered transcript now that recording is complete
+            // Send the buffered transcript
             if (!string.IsNullOrWhiteSpace(bufferedTranscript))
             {
                 Debug.Log($"MessageManager: Sending buffered transcript: '{bufferedTranscript}'");
@@ -256,7 +287,7 @@ namespace EpsilonIV
             }
             else
             {
-                Debug.LogWarning("MessageManager: No transcript to send (empty buffer)");
+                Debug.LogWarning("MessageManager: No transcript received after minimum duration");
             }
         }
 
@@ -277,9 +308,18 @@ namespace EpsilonIV
             // Buffer transcript while recording - don't send yet
             if (isRecordingVoice)
             {
-                // Keep updating with latest transcript (handles interim/final results during recording)
-                bufferedTranscript = transcript;
-                Debug.Log($"MessageManager: Buffering transcript (will send when R released)");
+                // Append to buffer (handles multiple utterances during one recording)
+                if (!string.IsNullOrWhiteSpace(bufferedTranscript))
+                {
+                    bufferedTranscript += " " + transcript;
+                    Debug.Log($"MessageManager: Appending to buffer: '{transcript}'");
+                }
+                else
+                {
+                    bufferedTranscript = transcript;
+                    Debug.Log($"MessageManager: Starting buffer: '{transcript}'");
+                }
+                Debug.Log($"MessageManager: Full buffered transcript: '{bufferedTranscript}'");
             }
             else
             {
