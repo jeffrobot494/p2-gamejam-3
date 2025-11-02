@@ -28,14 +28,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552133146116011010}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7039549, z: -0, w: 0.7102447}
-  m_LocalPosition: {x: -216.74, y: 29.38, z: 397.64}
+  m_LocalRotation: {x: -0, y: -0.94344366, z: -0, w: -0.33153293}
+  m_LocalPosition: {x: -155.82, y: 75.63, z: 459.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 632494768265354189}
   m_Father: {fileID: 4005232596453288392}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.49, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -218.724, z: 0}
 --- !u!114 &510209251692335832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,11 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioNpc
   npcManager: {fileID: 0}
   customNpc: 0
-  shortName: Victor
-  fullName: Victor J. Johnson
-  characterDescription: I am crazed scientist on the hunt for gold!
+  shortName: 
+  fullName: 
+  characterDescription: 
   systemPrompt: 
-  voiceId: 01955d76-ed5b-73e0-a88d-cbeb3c5b499d
+  voiceId: 01955d76-ed5b-7655-98bb-fd7578af9617
   survivorProfile: {fileID: 11400000, guid: 4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a, type: 2}
   inputField: {fileID: 0}
   outputMessage: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4053914330908566148}
   - component: {fileID: 5621620388618197231}
   m_Layer: 6
-  m_Name: survivor_DrVasquez
+  m_Name: survivor_DrLilyKatsumi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,14 +154,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750907020855501466}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7039549, z: -0, w: 0.7102447}
-  m_LocalPosition: {x: -222.388, y: 29.38, z: 397.693}
+  m_LocalRotation: {x: -0, y: 0.100059755, z: -0, w: 0.99498147}
+  m_LocalPosition: {x: -185.26256, y: 50.79923, z: 387.5116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6721992614556556362}
   m_Father: {fileID: 4005232596453288392}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.49, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 11.485, z: 0}
 --- !u!114 &8458836421346138732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,9 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioNpc
   npcManager: {fileID: 0}
   customNpc: 0
-  shortName: Victor
-  fullName: Victor J. Johnson
-  characterDescription: I am crazed scientist on the hunt for gold!
+  shortName: 
+  fullName: 
+  characterDescription: 
   systemPrompt: 
   voiceId: 01955d76-ed5b-73e0-a88d-cbeb3c5b499d
   survivorProfile: {fileID: 11400000, guid: 3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f, type: 2}
@@ -302,11 +302,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioNpc
   npcManager: {fileID: 0}
   customNpc: 0
-  shortName: Victor
-  fullName: Victor J. Johnson
-  characterDescription: I am crazed scientist on the hunt for gold!
+  shortName: 
+  fullName: 
+  characterDescription: 
   systemPrompt: 
-  voiceId: 01955d76-ed5b-73e0-a88d-cbeb3c5b499d
+  voiceId: 01955d76-ed5b-7497-9f8e-0e7448515bf3
   survivorProfile: {fileID: 11400000, guid: 5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b, type: 2}
   inputField: {fileID: 0}
   outputMessage: {fileID: 0}
@@ -409,8 +409,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7039338052368712535}
-  - {fileID: 2256030599469980274}
   - {fileID: 8512600391402609649}
+  - {fileID: 2256030599469980274}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3819220759078986791
