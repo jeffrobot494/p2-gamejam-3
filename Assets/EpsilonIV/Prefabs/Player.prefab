@@ -355,7 +355,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.8
+  m_Height: 1.6
   m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -587,7 +587,7 @@ MonoBehaviour:
   AimingRotationMultiplier: 0.4
   JumpForce: 9
   CameraHeightRatio: 0.9
-  CapsuleHeightStanding: 1.8
+  CapsuleHeightStanding: 1.6
   CapsuleHeightCrouching: 0.9
   CrouchingSharpness: 10
   RecievesFallDamage: 0
@@ -663,8 +663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 775d012ff2b5bdd4ab13a71198d8ab80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EmitterDebugGizmo
-  labelYOffset: 1.5
-  sceneLabelDuration: 1.25
 --- !u!114 &2568258762177274873
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace Unity.FPS.Gameplay
 {
@@ -14,6 +15,10 @@ namespace Unity.FPS.Gameplay
         [Header("Settings")]
         [Tooltip("Default checkpoint to use if none is set")]
         public RoomCheckpoint DefaultCheckpoint;
+
+        [Header("Events")]
+        [Tooltip("Fired when the current checkpoint is changed.")]
+        public UnityEvent<RoomCheckpoint> OnCheckpointChanged;
 
         [Header("Debug")]
         [Tooltip("Enable debug logging")]
@@ -51,7 +56,7 @@ namespace Unity.FPS.Gameplay
             // Set default checkpoint if specified
             if (DefaultCheckpoint != null)
             {
-                SetCurrentCheckpoint(DefaultCheckpoint);
+                SetCurrentCheckpoint(DefaultCheckpoint, false);
             }
             else if (m_AllCheckpoints.Count > 0)
             {
@@ -59,11 +64,11 @@ namespace Unity.FPS.Gameplay
                 RoomCheckpoint defaultCP = m_AllCheckpoints.Find(cp => cp.SetAsDefaultOnStart);
                 if (defaultCP != null)
                 {
-                    SetCurrentCheckpoint(defaultCP);
+                    SetCurrentCheckpoint(defaultCP, false);
                 }
                 else
                 {
-                    SetCurrentCheckpoint(m_AllCheckpoints[0]);
+                    SetCurrentCheckpoint(m_AllCheckpoints[0], false);
                 }
             }
             else
@@ -111,13 +116,17 @@ namespace Unity.FPS.Gameplay
         /// <summary>
         /// Sets the current active checkpoint
         /// </summary>
-        public void SetCurrentCheckpoint(RoomCheckpoint checkpoint)
+        public void SetCurrentCheckpoint(RoomCheckpoint checkpoint, bool fireEvent = true)
         {
+            Debug.Log($"[CheckpointManager] SetCurrentCheckpoint called for '{checkpoint.name}'. Firing event: {fireEvent}");
             if (checkpoint == null)
             {
                 Debug.LogWarning("[CheckpointManager] Attempted to set null checkpoint!");
                 return;
             }
+
+            // Don't do anything if this is already the active checkpoint
+            if (m_CurrentCheckpoint == checkpoint) return;
 
             // Update previous checkpoint
             if (m_CurrentCheckpoint != null)
@@ -132,6 +141,12 @@ namespace Unity.FPS.Gameplay
             if (DebugMode)
             {
                 Debug.Log($"[CheckpointManager] Current checkpoint set to: {checkpoint.gameObject.name}");
+            }
+
+            // Fire the event
+            if (fireEvent)
+            {
+                OnCheckpointChanged?.Invoke(m_CurrentCheckpoint);
             }
         }
 
@@ -180,3 +195,4 @@ namespace Unity.FPS.Gameplay
         }
     }
 }
+

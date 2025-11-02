@@ -62,7 +62,7 @@ namespace EpsilonIV
         public float CameraHeightRatio = 0.9f;
 
         [Tooltip("Height of character when standing")]
-        public float CapsuleHeightStanding = 1.8f;
+        public float CapsuleHeightStanding = 1.6f;
 
         [Tooltip("Height of character when crouching")]
         public float CapsuleHeightCrouching = 0.9f;
