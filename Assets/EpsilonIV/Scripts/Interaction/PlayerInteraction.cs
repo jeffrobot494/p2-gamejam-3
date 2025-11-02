@@ -76,6 +76,18 @@ namespace EpsilonIV
                 // Try to get IInteractable from hit object
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
+                // Skip if the component is disabled
+                if (interactable != null && interactable is MonoBehaviour mb && !mb.enabled)
+                {
+                    interactable = null;
+                }
+
+                // Skip if the interactable returns null prompt (means not interactable right now)
+                if (interactable != null && interactable.GetInteractionPrompt() == null)
+                {
+                    interactable = null;
+                }
+
                 if (interactable != null)
                 {
                     // New interactable detected

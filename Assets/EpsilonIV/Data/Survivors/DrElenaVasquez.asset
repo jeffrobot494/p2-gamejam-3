@@ -25,7 +25,7 @@ MonoBehaviour:
     focus on practical survival strategies. You're cautious, analytical, and tend
     to think through problems methodically before acting.
   voiceId: 21m00Tcm4TlvDq8ikWAM
-  onActivatedPrompt: Tell me a short joke.
+  onActivatedPrompt: State your name BRIEFLY.
   knowledgeBase: "SURVIVOR'S LOCATION & MEMORY:\n- Hiding in Medical Bay Level 2,
     locked inside the quarantine wing\n- Barricaded the doors after the initial breach
     using medical equipment\n- Has been here for approximately 18 hours since the
