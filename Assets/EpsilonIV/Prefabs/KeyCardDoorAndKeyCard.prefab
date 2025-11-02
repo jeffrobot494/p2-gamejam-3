@@ -171,9 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323a17b59189324b9ae8a3673f6567c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.KeyCard
-  KeycardID: Red
+  KeycardID: Jellyfish
   KeycardName: Keycard
-  KeycardColor: {r: 0.7735849, g: 0.08392668, b: 0.08392668, a: 1}
+  KeycardColor: {r: 0.77254903, g: 0.082352936, b: 0.12059762, a: 1}
 --- !u!1 &3636990038304032982
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec102cbac7a2634cb9f0417c5f298c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.KeyCardDoor
-  RequiredKeycardID: Red
+  RequiredKeycardID: Jellyfish
   UnlockSound: {fileID: 0}
   DeniedSound: {fileID: 0}
   DebugMode: 0

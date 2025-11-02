@@ -10,6 +10,8 @@ namespace Unity.FPS.Gameplay
     public class RoomCheckpoint : MonoBehaviour
     {
         [Header("Checkpoint Settings")]
+        [Tooltip("Unique integer identifier for this checkpoint")]
+        public int checkpointID = 0;
         [Tooltip("Transform that defines respawn position/rotation (uses this transform if null)")]
         public Transform RespawnPoint;
 
@@ -84,6 +86,7 @@ namespace Unity.FPS.Gameplay
 
         void OnTriggerEnter(Collider other)
         {
+            Debug.Log($"[RoomCheckpoint] OnTriggerEnter with {other.name}, layer: {other.gameObject.layer}. IsPlayerLayer: {IsPlayerLayer(other.gameObject.layer)}");
             // Check if player entered
             if (IsPlayerLayer(other.gameObject.layer))
             {

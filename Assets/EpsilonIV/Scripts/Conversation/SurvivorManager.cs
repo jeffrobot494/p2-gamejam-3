@@ -17,6 +17,9 @@ namespace EpsilonIV
         public MessageManager messageManager;
 
         [Header("Progression")]
+        [Tooltip("The ID of the checkpoint that will activate the first survivor.")]
+        [SerializeField] private int firstSurvivorActivationCheckpointID = 1;
+
         [Tooltip("Current active survivor index (-1 = none active)")]
         [SerializeField]
         private int currentSurvivorIndex = -1;
@@ -78,6 +81,24 @@ namespace EpsilonIV
             if (debugMode)
             {
                 Debug.Log($"[SurvivorManager] Initialized with {allSurvivors.Count} survivors");
+            }
+        }
+
+        /// <summary>
+        /// Public handler for the CheckpointManager.OnCheckpointChanged event.
+        /// </summary>
+        public void HandleCheckpointChanged(Unity.FPS.Gameplay.RoomCheckpoint checkpoint)
+        {
+            Debug.Log($"[SurvivorManager] HandleCheckpointChanged received event for checkpoint ID: {checkpoint.checkpointID}. Comparing against activation ID: {firstSurvivorActivationCheckpointID}");
+
+            // Check if this is the trigger for the first survivor and if no survivor is currently active
+            if (checkpoint.checkpointID == firstSurvivorActivationCheckpointID && currentSurvivorIndex == -1)
+            {
+                if (debugMode)
+                {
+                    Debug.Log($"[SurvivorManager] First survivor activation checkpoint reached. Activating first survivor.");
+                }
+                ActivateFirstSurvivor();
             }
         }
 
@@ -158,6 +179,7 @@ namespace EpsilonIV
         /// </summary>
         public void ActivateFirstSurvivor()
         {
+            Debug.Log($"[SurvivorManager] ActivateFirstSurvivor called. Current survivor index: {currentSurvivorIndex}");
             if (allSurvivors.Count == 0)
             {
                 Debug.LogError("[SurvivorManager] Cannot activate first survivor - no survivors found!");
