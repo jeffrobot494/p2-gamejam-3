@@ -31,6 +31,11 @@ namespace EpsilonIV
         [Tooltip("Player2 TTS voice ID for this survivor")]
         public string voiceId = "01955d76-ed5b-7451-92d6-5ef579d3ed28";
 
+        [Header("Activation")]
+        [Tooltip("Message sent to survivor when they become active (prompts their greeting). Leave empty for no automatic greeting.")]
+        [TextArea(2, 5)]
+        public string onActivatedPrompt = "";
+
         [Header("Survivor's Knowledge Base")]
         [Tooltip("All factual information this survivor knows - sent as game_state_info with each message")]
         [TextArea(15, 50)]
@@ -61,20 +66,5 @@ ENVIRONMENTAL DETAILS:
 
         [Tooltip("Unique identifier for the trigger zone that detects when player finds this survivor")]
         public string triggerID = "location_id";
-
-        [Header("Mission Status")]
-        [Tooltip("Current state of this survivor in the rescue mission")]
-        public RescueState rescueState = RescueState.Undiscovered;
-    }
-
-    /// <summary>
-    /// Tracks the current state of a survivor in the rescue mission
-    /// </summary>
-    public enum RescueState
-    {
-        Undiscovered,   // Player hasn't opened communication yet
-        Active,         // Radio channel open, player can talk to them
-        Located,        // Player physically found them (entered trigger)
-        Rescued         // Successfully led back to ship
     }
 }

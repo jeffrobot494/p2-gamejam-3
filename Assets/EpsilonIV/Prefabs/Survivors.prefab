@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &445452126719902156
+--- !u!1 &2282718534203807298
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 414497564101765948}
+  - component: {fileID: 3361849849344758211}
   m_Layer: 0
   m_Name: Survivors
   m_TagString: Untagged
@@ -16,23 +16,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &414497564101765948
+--- !u!4 &3361849849344758211
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 445452126719902156}
+  m_GameObject: {fileID: 2282718534203807298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 638.8375, y: 0, z: -6406.4062}
+  m_LocalPosition: {x: -205.70976, y: 34.48641, z: 400.34402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2232577440019740850}
+  - {fileID: 7589606616272096481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6220046869234510795
+--- !u!1 &4322020188957584973
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +40,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2232577440019740850}
-  - component: {fileID: 1991743083030706628}
+  - component: {fileID: 7589606616272096481}
+  - component: {fileID: 7457893614425999454}
   m_Layer: 0
   m_Name: DrVasquez
   m_TagString: Untagged
@@ -49,28 +49,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2232577440019740850
+--- !u!4 &7589606616272096481
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220046869234510795}
+  m_GameObject: {fileID: 4322020188957584973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 414497564101765948}
+  m_Father: {fileID: 3361849849344758211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1991743083030706628
+--- !u!114 &7457893614425999454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220046869234510795}
+  m_GameObject: {fileID: 4322020188957584973}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f647b58a729ed3847a33e8eb27b83743, type: 3}
@@ -78,9 +78,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioNpc
   npcManager: {fileID: 0}
   customNpc: 0
-  shortName: 
-  fullName: 
-  characterDescription: 
+  shortName: Victor
+  fullName: Victor J. Johnson
+  characterDescription: I am crazed scientist on the hunt for gold!
   systemPrompt: 
   voiceId: 01955d76-ed5b-73e0-a88d-cbeb3c5b499d
   survivorProfile: {fileID: 11400000, guid: 3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f, type: 2}
