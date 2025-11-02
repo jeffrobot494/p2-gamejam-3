@@ -251,7 +251,7 @@ namespace player2_sdk
                 spawnShortName = string.IsNullOrEmpty(survivorProfile.displayName) ? shortName : survivorProfile.displayName;
                 spawnFullName = survivorProfile.displayName;
                 spawnCharDesc = survivorProfile.characterDescription;
-                spawnSystemPrompt = survivorProfile.systemPrompt;
+                spawnSystemPrompt = $"{survivorProfile.systemPrompt}\n{survivorProfile.knowledgeBase}";
                 spawnVoiceId = survivorProfile.voiceId;
             }
             else
