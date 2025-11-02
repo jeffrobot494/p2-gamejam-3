@@ -408,8 +408,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2256030599469980274}
   - {fileID: 7039338052368712535}
+  - {fileID: 2256030599469980274}
   - {fileID: 8512600391402609649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.SurvivorManager
   messageManager: {fileID: 0}
+  firstSurvivorActivationCheckpointID: 1
   currentSurvivorIndex: -1
   OnSurvivorActivated:
     m_PersistentCalls:
