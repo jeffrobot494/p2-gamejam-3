@@ -590,7 +590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000049082835}
+  m_AnchoredPosition: {x: 0, y: -0.00014684645}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &9098843827608816892
@@ -907,9 +907,7 @@ GameObject:
   - component: {fileID: 390068285386818843}
   - component: {fileID: 4198137686387357033}
   - component: {fileID: 6955497966899445210}
-  - component: {fileID: 4336769774404014320}
   - component: {fileID: 2591162397234577713}
-  - component: {fileID: 325484052560993653}
   m_Layer: 6
   m_Name: Chat
   m_TagString: Untagged
@@ -967,7 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioInputHandler
   inputFieldController: {fileID: 390068285386818843}
-  messageManager: {fileID: 4336769774404014320}
+  messageManager: {fileID: 0}
   inputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
     type: 3}
   OnMessageSubmitted:
@@ -991,38 +989,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc76e06c7ab30814bb817db6c8009376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.ChatView
-  messageManager: {fileID: 4336769774404014320}
+  messageManager: {fileID: 0}
   chatHistoryText: {fileID: 8771403816008058566}
   scrollRect: {fileID: 8335227519012622751}
   npcNameText: {fileID: 6803524542749735177}
   maxMessages: 50
   playerPrefix: 'Player: '
   playerMessageColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &4336769774404014320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2844803670325467231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aad468c3bfc14d4d92b4fcdf99d1651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.MessageManager
-  npcManager: {fileID: 0}
-  radioInputHandler: {fileID: 4198137686387357033}
-  radioAudioPlayer: {fileID: 2591162397234577713}
-  player2STT: {fileID: 325484052560993653}
-  npcGameObjects:
-  - {fileID: 0}
-  minimumRecordingDurationMs: 3600
-  OnPlayerMessageSent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNpcResponseReceived:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2591162397234577713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,40 +1019,6 @@ MonoBehaviour:
   distortionLevel: 1
   radioStaticClip: {fileID: 0}
   staticIntensity: 0.4
---- !u!114 &325484052560993653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2844803670325467231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c813427510f542ee9621473260e193cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::player2_sdk.Player2STT
-  sttEnabled: 1
-  heartbeatInterval: 5
-  enableVAD: 0
-  enableInterimResults: 0
-  enableAutoReconnection: 1
-  maxReconnectionAttempts: 5
-  baseReconnectionDelay: 1
-  sampleRate: 44100
-  audioChunkDurationMs: 50
-  npcManager: {fileID: 0}
-  OnSTTReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnSTTFailed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnListeningStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  OnListeningStopped:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3297903779985131586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,7 +1822,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6507600668990997281}
   m_HandleRect: {fileID: 1988860973857012671}
   m_Direction: 2
-  m_Value: 1.0000035
+  m_Value: 1.0000062
   m_Size: 0.8926829
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2917,6 +2856,10 @@ MonoBehaviour:
   BracketPadding: 20
   DefaultPromptText: '[E] INTERACT'
   BracketSize: 30
+  EnableAdaptiveScaling: 1
+  ReferenceObjectSize: 1.8
+  MinBracketScale: 0.1
+  MaxBracketScale: 1
   EnablePulse: 1
   PulseSpeed: 2
   PulseScaleRange: {x: 0.9, y: 1.1}
