@@ -1332,7 +1332,7 @@
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
-    "m_ZWriteControl": 0,
+    "m_ZWriteControl": 2,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": false,
@@ -2961,7 +2961,7 @@
     "m_ObjectId": "dc7c81e5e1784e98a7314cbc96eea8ef",
     "m_Title": "Reflection",
     "m_Position": {
-        "x": -1006.39990234375,
+        "x": -1006.3998413085938,
         "y": 385.6000061035156
     }
 }
