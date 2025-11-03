@@ -8,29 +8,27 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: 055eab4e84dc70a47ae75b3125a22de6, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9811a975b6d99df45b93bb716dacc497,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _BRDF_MODE_LAMBERT
-  - _FOG_ON
-  - _LIGHTING_BAKED_ON
-  - _LIGHTING_DYNAMIC_ON
-  - _SHADING_EVALUATION_MODE_PER_VERTEX
-  - _TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_4450AB74:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -101,11 +99,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Boolean_193028D2: 0
+    - Boolean_3F1A8DAB: 0
+    - Boolean_43476D73: 0
+    - Boolean_7165A49C: 1
+    - Boolean_85059BBE: 1
+    - Boolean_8BBF99CD: 1
+    - Boolean_D258FF8E: 0
+    - DeformMagnitude: 0
+    - Vector1_21C41D02: 256
+    - Vector1_6F288C5B: 0.5
+    - Vector1_B2CC132F: 16
+    - Vector1_B9994903: 11
+    - Vector1_E8746023: 16
     - _AddPrecomputedVelocity: 0
     - _AffineTextureWarpingWeight: 1
     - _AlphaClip: 0
     - _AlphaClippingDitherIsEnabled: 0
     - _AlphaToMask: 0
+    - _Alpha_Clipping: 0.1
+    - _Alpha_Multiplier: 1
     - _BRDFMode: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -137,6 +150,7 @@ Material:
     - _PrecisionColorOverrideMode: 0
     - _PrecisionGeometryOverrideMode: 0
     - _PrecisionGeometryWeight: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Reflection: 0
@@ -158,6 +172,8 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_2E5415DE: {r: 1, g: 1, b: 1, a: 0}
+    - Vector2_8044833E: {r: 1, g: 1, b: 0, a: 0}
     - _AlphaClippingScaleBiasMinMax: {r: 1, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
