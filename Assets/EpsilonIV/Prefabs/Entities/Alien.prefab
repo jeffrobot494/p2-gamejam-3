@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5724318013713816907}
+  - component: {fileID: 6673598055460952196}
   - component: {fileID: 6563593207189146754}
   - component: {fileID: 6157401543194513844}
   - component: {fileID: 7385330352518086530}
-  - component: {fileID: 6673598055460952196}
   - component: {fileID: 3800592328680370092}
   - component: {fileID: 1165047669581170391}
   - component: {fileID: 893243118103895501}
@@ -40,6 +40,49 @@ Transform:
   - {fileID: 620642279614827796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6673598055460952196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850119097709613605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4b05e6a3528534199c60afa25f32db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  meshRenderer: {fileID: 0}
+  patrolCenterObject: {fileID: 0}
+  defaultPatrolRadius: 5
+  patrolSpeed: 1
+  investigativePatrolRadius: 4
+  investigateDuration: 20
+  idleDuration: 2
+  huntingStoppingDistance: 1
+  huntingSpeed: 10
+  prepareAttackDuration: 0.5
+  childAnimator: {fileID: 0}
+  idleStateName: Idle
+  walkingStateName: Walking
+  gallopingStateName: Galloping
+  attackStateName: Attack
+  animCrossfade: 0.1
+  animPlaybackSpeed: 1
+  overshootDistance: 3
+  overshootWallMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  overshootGroundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  patrolColor: {r: 0, g: 0, b: 0, a: 1}
+  huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  prepareAttackColor: {r: 1, g: 0.5, b: 0, a: 1}
+  attackingColor: {r: 1, g: 0, b: 0, a: 1}
+  investigatingColor: {r: 0, g: 1, b: 1, a: 1}
+  showDebugVisualization: 1
 --- !u!195 &6563593207189146754
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -102,49 +145,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6673598055460952196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850119097709613605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4b05e6a3528534199c60afa25f32db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  meshRenderer: {fileID: 0}
-  patrolCenterObject: {fileID: 0}
-  defaultPatrolRadius: 5
-  patrolSpeed: 1
-  investigativePatrolRadius: 4
-  investigateDuration: 20
-  idleDuration: 2
-  huntingStoppingDistance: 1
-  huntingSpeed: 10
-  prepareAttackDuration: 0.5
-  childAnimator: {fileID: 0}
-  idleStateName: Idle
-  walkingStateName: Walking
-  gallopingStateName: Galloping
-  attackStateName: Attack
-  animCrossfade: 0.1
-  animPlaybackSpeed: 1
-  overshootDistance: 3
-  overshootWallMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  overshootGroundLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  patrolColor: {r: 0, g: 0, b: 0, a: 1}
-  huntingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  prepareAttackColor: {r: 1, g: 0.5, b: 0, a: 1}
-  attackingColor: {r: 1, g: 0, b: 0, a: 1}
-  investigatingColor: {r: 0, g: 1, b: 1, a: 1}
-  showDebugVisualization: 1
 --- !u!136 &3800592328680370092
 CapsuleCollider:
   m_ObjectHideFlags: 0

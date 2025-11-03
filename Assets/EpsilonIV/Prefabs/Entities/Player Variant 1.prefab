@@ -428,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6006557466354289335}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7276112, z: 0, w: 0.68598986}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -436,7 +436,7 @@ Transform:
   - {fileID: 5080635987894738231}
   - {fileID: 2531517288996589470}
   m_Father: {fileID: 7884015444651373956}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -93.373, z: 0}
 --- !u!20 &2348542822684808406
 Camera:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 300
   field of view: 60
   orthographic: 0
@@ -485,7 +485,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!81 &3933267291076982209
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_CameraType: 0
   m_Cameras:
   - {fileID: 4827735035167501465}
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -612,7 +612,6 @@ GameObject:
   - component: {fileID: 5523473133074681524}
   - component: {fileID: 2691103569470417552}
   - component: {fileID: 5678185014354698604}
-  - component: {fileID: 5581463612713034177}
   m_Layer: 0
   m_Name: Player Variant 1
   m_TagString: Player
@@ -628,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9219362002482182106}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0018163174, y: -0.99624205, z: 0.08388147, w: 0.021506071}
+  m_LocalRotation: {x: -0.0018193547, y: 0.9962418, z: -0.08388418, w: -0.021503938}
   m_LocalPosition: {x: 22.64852, y: 4.0117598, z: 24.655636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -639,7 +638,7 @@ Transform:
   - {fileID: 5639610977024223868}
   - {fileID: 8884472603513953809}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.626, y: 182.473, z: -0.001}
 --- !u!143 &9197610812742669188
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1128,18 +1127,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Game.Damageable
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.5
---- !u!114 &5581463612713034177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9219362002482182106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7acf35cff2957ce4c93db9514b70feea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.RadioInputManager
-  inputField: {fileID: 0}
-  inputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
-    type: 3}
