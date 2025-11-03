@@ -17,17 +17,17 @@ namespace EpsilonIV
         public Transform MovingObject;
 
         [Tooltip("The animation type for this part of the door.")]
-        public DoorAnimationType AnimationType = DoorAnimationType.Slide;
+        public DoorAnimationType AnimationType;
 
         [Tooltip("Direction/axis for sliding (local space of the moving object).")]
-        public Vector3 SlideDirection = Vector3.right;
+        public Vector3 SlideDirection;
         [Tooltip("Distance to slide.")]
-        public float OpenDistance = 1f;
+        public float OpenDistance;
 
         [Tooltip("Rotation axis for rotating (local space of the moving object).")]
-        public Vector3 RotationAxis = Vector3.up;
+        public Vector3 RotationAxis;
         [Tooltip("Rotation angle for rotating.")]
-        public float RotationAngle = 90f;
+        public float RotationAngle;
 
         // Internal state, not shown in inspector
         [System.NonSerialized] public Vector3 ClosedPosition;
