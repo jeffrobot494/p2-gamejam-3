@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94673e86fe250445b7f08f7314ce98d, type: 3}
   m_Name: PSXRenderPipeline
   m_EditorClassIdentifier: 
-  renderPipelineResources: {fileID: 11400000, guid: 444c631dc9ea6f5469b4e8f4cff2133b,
+  renderPipelineResources: {fileID: 11400000, guid: 74df8d81adc482b4fba529a9dfb0c363,
     type: 2}
