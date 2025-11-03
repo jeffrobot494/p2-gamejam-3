@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace EpsilonIV
 {
@@ -10,36 +10,9 @@ namespace EpsilonIV
         Rotate
     }
 
-    [System.Serializable]
-    public class DoorPart
-    {
-        [Tooltip("The transform that will actually slide/rotate.")]
-        public Transform MovingObject;
-
-        [Tooltip("The animation type for this part of the door.")]
-        public DoorAnimationType AnimationType;
-
-        [Tooltip("Direction/axis for sliding (local space of the moving object).")]
-        public Vector3 SlideDirection;
-        [Tooltip("Distance to slide.")]
-        public float OpenDistance;
-
-        [Tooltip("Rotation axis for rotating (local space of the moving object).")]
-        public Vector3 RotationAxis;
-        [Tooltip("Rotation angle for rotating.")]
-        public float RotationAngle;
-
-        // Internal state, not shown in inspector
-        [System.NonSerialized] public Vector3 ClosedPosition;
-        [System.NonSerialized] public Quaternion ClosedRotation;
-        [System.NonSerialized] public Vector3 OpenPosition;
-        [System.NonSerialized] public Quaternion OpenRotation;
-    }
-
     /// <summary>
     /// Base door component
-    /// Handles opening/closing and animation for one or more moving parts.
-    /// Doesn't care about unlock mechanisms - that's handled by IDoorUnlocker components.
+    /// Handles opening/closing and animation for one or two moving parts.
     /// </summary>
     public class Door : MonoBehaviour
     {
@@ -54,18 +27,27 @@ namespace EpsilonIV
         [Tooltip("Speed of door animation")]
         public float OpenSpeed = 2f;
 
-        [Header("Door Parts")]
-        [Tooltip("A list of all the parts that make up this door.")]
-        public List<DoorPart> DoorParts = new List<DoorPart>();
+        [Header("Part 1 Settings")]
+        [Tooltip("The first transform that will slide/rotate.")]
+        public Transform MovingPart1;
+        public DoorAnimationType AnimationType1 = DoorAnimationType.Slide;
+        public Vector3 SlideDirection1 = Vector3.left;
+        public float OpenDistance1 = 1.5f;
+        public Vector3 RotationAxis1 = Vector3.up;
+        public float RotationAngle1 = 90f;
+
+        [Header("Part 2 Settings (Optional)")]
+        [Tooltip("The second transform that will slide/rotate.")]
+        public Transform MovingPart2;
+        public DoorAnimationType AnimationType2 = DoorAnimationType.Slide;
+        public Vector3 SlideDirection2 = Vector3.right;
+        public float OpenDistance2 = 1.5f;
+        public Vector3 RotationAxis2 = Vector3.up;
+        public float RotationAngle2 = 90f;
 
         [Header("Audio")]
-        [Tooltip("Sound played when door opens")]
         public AudioClip OpenSound;
-
-        [Tooltip("Sound played when door closes")]
         public AudioClip CloseSound;
-
-        [Tooltip("Sound played when trying to open locked door")]
         public AudioClip LockedSound;
 
         [Header("Events")]
@@ -75,265 +57,124 @@ namespace EpsilonIV
         public UnityEvent OnDoorUnlocked;
 
         [Header("Debug")]
-        [Tooltip("Enable debug logging")]
         public bool DebugMode = false;
 
-        // State
         private bool m_IsAnimating = false;
         private AudioSource m_AudioSource;
 
+        private Vector3 m_ClosedPosition1, m_OpenPosition1;
+        private Quaternion m_ClosedRotation1, m_OpenRotation1;
+
+        private Vector3 m_ClosedPosition2, m_OpenPosition2;
+        private Quaternion m_ClosedRotation2, m_OpenRotation2;
+
         void Awake()
         {
-            // Get or create audio source
             m_AudioSource = GetComponent<AudioSource>();
             if (m_AudioSource == null && (OpenSound != null || CloseSound != null || LockedSound != null))
             {
                 m_AudioSource = gameObject.AddComponent<AudioSource>();
-                m_AudioSource.playOnAwake = false;
-                m_AudioSource.spatialBlend = 1f; // 3D sound
             }
 
-            // Initialize all door parts
-            if (DebugMode)
+            if (MovingPart1 != null)
             {
-                Debug.Log($"[Door] Awake() called. DoorParts.Count = {DoorParts.Count}");
-            }
-
-            foreach (var part in DoorParts)
-            {
-                if (part.MovingObject != null)
+                m_ClosedPosition1 = MovingPart1.localPosition;
+                m_ClosedRotation1 = MovingPart1.localRotation;
+                if (AnimationType1 == DoorAnimationType.Slide)
                 {
-                    CacheAndComputePoses(part);
+                    m_OpenPosition1 = m_ClosedPosition1 + (SlideDirection1.normalized * OpenDistance1);
+                    m_OpenRotation1 = m_ClosedRotation1;
+                }
+                else
+                {
+                    m_OpenPosition1 = m_ClosedPosition1;
+                    m_OpenRotation1 = m_ClosedRotation1 * Quaternion.AngleAxis(RotationAngle1, RotationAxis1);
+                }
+            }
+
+            if (MovingPart2 != null)
+            {
+                m_ClosedPosition2 = MovingPart2.localPosition;
+                m_ClosedRotation2 = MovingPart2.localRotation;
+                if (AnimationType2 == DoorAnimationType.Slide)
+                {
+                    m_OpenPosition2 = m_ClosedPosition2 + (SlideDirection2.normalized * OpenDistance2);
+                    m_OpenRotation2 = m_ClosedRotation2;
+                }
+                else
+                {
+                    m_OpenPosition2 = m_ClosedPosition2;
+                    m_OpenRotation2 = m_ClosedRotation2 * Quaternion.AngleAxis(RotationAngle2, RotationAxis2);
                 }
             }
         }
 
-        void Start()
-        {
-            // Start is now empty, initialization is in Awake
-        }
-
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            // Keep open pose previews consistent in the editor as you tweak fields
-            foreach (var part in DoorParts)
-            {
-                if (part.MovingObject != null)
-                {
-                    CacheAndComputePoses(part);
-                }
-            }
-        }
-#endif
-
-        /// <summary>
-        /// Opens the door (if unlocked)
-        /// </summary>
         public void Open()
         {
-            if (DebugMode) Debug.Log($"[Door] Open() called. IsOpen: {IsOpen}, IsLocked: {IsLocked}, IsAnimating: {m_IsAnimating}");
-
-            if (IsOpen) return;
+            if (IsOpen || m_IsAnimating) return;
             if (IsLocked)
             {
-                if (DebugMode) Debug.Log($"[Door] {gameObject.name} is locked, cannot open");
                 PlaySound(LockedSound);
                 return;
             }
-            if (m_IsAnimating) return;
-
-            if (DebugMode) Debug.Log($"[Door] Opening {gameObject.name}");
-
-            IsOpen = true;
-            PlaySound(OpenSound);
             StartCoroutine(Animate(true));
-            OnDoorOpened?.Invoke();
         }
 
-        /// <summary>
-        /// Closes the door
-        /// </summary>
         public void Close()
         {
-            if (!IsOpen) return;
-            if (m_IsAnimating) return;
-
-            if (DebugMode) Debug.Log($"[Door] Closing {gameObject.name}");
-
-            IsOpen = false;
-            PlaySound(CloseSound);
+            if (!IsOpen || m_IsAnimating) return;
             StartCoroutine(Animate(false));
-            OnDoorClosed?.Invoke();
         }
 
-        /// <summary>
-        /// Unlocks the door
-        /// </summary>
-        public void Unlock()
-        {
-            if (!IsLocked) return;
-            IsLocked = false;
-            if (DebugMode) Debug.Log($"[Door] {gameObject.name} unlocked");
-            OnDoorUnlocked?.Invoke();
-        }
+        public void Toggle() => _ = IsOpen ? Animate(false) : Animate(true);
+        public void Unlock() { IsLocked = false; OnDoorUnlocked?.Invoke(); }
+        public void Lock() { IsLocked = true; OnDoorLocked?.Invoke(); }
 
-        /// <summary>
-        /// Locks the door
-        /// </summary>
-        public void Lock()
-        {
-            if (IsLocked) return;
-            IsLocked = true;
-            if (DebugMode) Debug.Log($"[Door] {gameObject.name} locked");
-            OnDoorLocked?.Invoke();
-        }
-
-        /// <summary>
-        /// Toggles door open/closed
-        /// </summary>
-        public void Toggle()
-        {
-            if (IsOpen) Close();
-            else Open();
-        }
-
-        /// <summary>
-        /// Animates all door parts to their target open or closed state.
-        /// </summary>
-        System.Collections.IEnumerator Animate(bool opening)
+        private IEnumerator Animate(bool opening)
         {
             m_IsAnimating = true;
-            if (DebugMode) Debug.Log($"[Door] Animate coroutine started. Opening: {opening}");
+            IsOpen = opening;
 
-            float elapsed = 0f;
+            PlaySound(opening ? OpenSound : CloseSound);
 
-            // Store start/end poses for all parts before the loop
-            var startPositions = new Vector3[DoorParts.Count];
-            var startRotations = new Quaternion[DoorParts.Count];
-            var endPositions = new Vector3[DoorParts.Count];
-            var endRotations = new Quaternion[DoorParts.Count];
+            Vector3 startPos1 = MovingPart1 != null ? MovingPart1.localPosition : Vector3.zero;
+            Quaternion startRot1 = MovingPart1 != null ? MovingPart1.localRotation : Quaternion.identity;
+            Vector3 endPos1 = opening ? m_OpenPosition1 : m_ClosedPosition1;
+            Quaternion endRot1 = opening ? m_OpenRotation1 : m_ClosedRotation1;
 
-            for (int i = 0; i < DoorParts.Count; i++)
+            Vector3 startPos2 = MovingPart2 != null ? MovingPart2.localPosition : Vector3.zero;
+            Quaternion startRot2 = MovingPart2 != null ? MovingPart2.localRotation : Quaternion.identity;
+            Vector3 endPos2 = opening ? m_OpenPosition2 : m_ClosedPosition2;
+            Quaternion endRot2 = opening ? m_OpenRotation2 : m_ClosedRotation2;
+
+            float time = 0;
+            while (time < 1)
             {
-                var part = DoorParts[i];
-                if (part.MovingObject == null) continue;
+                time += Time.deltaTime * OpenSpeed;
+                float t = Mathf.Clamp01(time);
 
-                startPositions[i] = part.MovingObject.localPosition;
-                startRotations[i] = part.MovingObject.localRotation;
-                endPositions[i] = opening ? part.OpenPosition : part.ClosedPosition;
-                endRotations[i] = opening ? part.OpenRotation : part.ClosedRotation;
-
-                if (DebugMode) Debug.Log($"[Door] Part {i} ({part.MovingObject.name}): StartPos={startPositions[i]}, EndPos={endPositions[i]}");
-            }
-
-            bool hasLoggedTime = false;
-
-            while (elapsed < 1f)
-            {
-                elapsed += Time.deltaTime * OpenSpeed;
-                float t = Mathf.Clamp01(elapsed);
-
-                if (DebugMode && !hasLoggedTime)
+                if (MovingPart1 != null) 
                 {
-                    Debug.Log($"[Door] Animation frame. t = {t}");
-                    hasLoggedTime = true;
+                    MovingPart1.localPosition = Vector3.Lerp(startPos1, endPos1, t);
+                    MovingPart1.localRotation = Quaternion.Slerp(startRot1, endRot1, t);
                 }
-
-                for (int i = 0; i < DoorParts.Count; i++)
+                if (MovingPart2 != null) 
                 {
-                    var part = DoorParts[i];
-                    if (part.MovingObject == null) continue;
-
-                    part.MovingObject.localPosition = Vector3.Lerp(startPositions[i], endPositions[i], t);
-                    part.MovingObject.localRotation = Quaternion.Slerp(startRotations[i], endRotations[i], t);
+                    MovingPart2.localPosition = Vector3.Lerp(startPos2, endPos2, t);
+                    MovingPart2.localRotation = Quaternion.Slerp(startRot2, endRot2, t);
                 }
-
                 yield return null;
             }
 
-            // Ensure final state for all parts
-            for (int i = 0; i < DoorParts.Count; i++)
-            {
-                var part = DoorParts[i];
-                if (part.MovingObject == null) continue;
-
-                part.MovingObject.localPosition = endPositions[i];
-                part.MovingObject.localRotation = endRotations[i];
-            }
+            if (opening) OnDoorOpened?.Invoke();
+            else OnDoorClosed?.Invoke();
 
             m_IsAnimating = false;
         }
 
-        void PlaySound(AudioClip clip)
+        private void PlaySound(AudioClip clip)
         {
-            if (clip != null && m_AudioSource != null)
-            {
-                m_AudioSource.PlayOneShot(clip);
-            }
-        }
-
-        void OnDrawGizmosSelected()
-        {
-            // Visualize the open pose for all door parts
-            foreach (var part in DoorParts)
-            {
-                if (part == null || part.MovingObject == null) continue;
-
-                // Re-calculate poses in case they changed in editor without OnValidate firing
-                Vector3 closedPos = part.MovingObject.position;
-                Quaternion closedRot = part.MovingObject.rotation;
-                Vector3 openPos;
-                Quaternion openRot;
-
-                if (part.AnimationType == DoorAnimationType.Slide)
-                {
-                    openPos = closedPos + part.MovingObject.TransformDirection(part.SlideDirection.normalized * part.OpenDistance);
-                    openRot = closedRot;
-                }
-                else // Rotate
-                {
-                    openPos = closedPos;
-                    openRot = closedRot * Quaternion.AngleAxis(part.RotationAngle, part.RotationAxis);
-                }
-
-                Gizmos.color = Color.green;
-                Gizmos.DrawLine(closedPos, openPos);
-                
-                // To properly draw the rotated cube, we need to set the gizmo matrix
-                Matrix4x4 originalMatrix = Gizmos.matrix;
-                Gizmos.matrix = Matrix4x4.TRS(openPos, openRot, part.MovingObject.lossyScale);
-                Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
-                Gizmos.matrix = originalMatrix;
-            }
-        }
-
-        // ---- Helpers ----
-
-        private void CacheAndComputePoses(DoorPart part)
-        {
-            if (part.MovingObject == null) return;
-
-            // 1. Cache the closed pose
-            part.ClosedPosition = part.MovingObject.localPosition;
-            part.ClosedRotation = part.MovingObject.localRotation;
-
-            // 2. Compute the open pose based on the closed pose
-            if (part.AnimationType == DoorAnimationType.Slide)
-            {
-                part.OpenPosition = part.ClosedPosition + (part.SlideDirection.normalized * part.OpenDistance);
-                part.OpenRotation = part.ClosedRotation;
-            }
-            else // Rotate
-            {
-                part.OpenPosition = part.ClosedPosition;
-                part.OpenRotation = part.ClosedRotation * Quaternion.AngleAxis(part.RotationAngle, part.RotationAxis);
-            }
-
-            if (DebugMode)
-            {
-                Debug.Log($"[Door] Caching poses for {part.MovingObject.name}: OpenDistance={part.OpenDistance}, SlideDirection={part.SlideDirection}, Calculated OpenPos={part.OpenPosition}");
-            }
+            if (clip != null && m_AudioSource != null) m_AudioSource.PlayOneShot(clip);
         }
     }
 }
