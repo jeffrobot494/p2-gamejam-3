@@ -82,10 +82,10 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -110, y: -10, z: 0}
-  m_EntryPosition: {x: 250, y: 150, z: 0}
+  m_EntryPosition: {x: 220, y: 140, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -7523986095920950210}
+  m_DefaultState: {fileID: -8497945910445050704}
 --- !u!1102 &-2481015457539845652
 AnimatorState:
   serializedVersion: 6
@@ -146,7 +146,13 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: AlienAnims
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: state
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

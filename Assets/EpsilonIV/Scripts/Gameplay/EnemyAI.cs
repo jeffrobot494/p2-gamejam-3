@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.FPS.Game;
+using UnityEngine.Animations;
 
 public enum EnemyState
 {
@@ -60,6 +61,28 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Time spent preparing/winding up before leap")]
     [SerializeField] private float prepareAttackDuration = 0.5f;
 
+    [Header("Animation")]
+    [Tooltip("Animator on the child object that plays 'Idle' and 'Walking' states")]
+    [SerializeField] private Animator childAnimator;
+
+    [Tooltip("Animator state name for idle loop")]
+    [SerializeField] private string idleStateName = "Idle";
+
+    [Tooltip("Animator state name for walk loop")]
+    [SerializeField] private string walkingStateName = "Walking";
+    
+    [Tooltip("Animator state name for galloping/running (Hunting)")]
+    [SerializeField] private string gallopingStateName = "Galloping";
+
+    [Tooltip("Animator state name for attacking animation")]
+    [SerializeField] private string attackStateName = "Attack";
+
+    [Tooltip("Crossfade duration (seconds) when switching states")]
+    [SerializeField] private float animCrossfade = 0.1f;
+
+    [Tooltip("Animator playback speed (1 = normal)")]
+    [SerializeField] private float animPlaybackSpeed = 1f;
+
     private float prepareAttackTimer = 0f;
 
     [Header("Leap Overshoot Settings")]
@@ -107,16 +130,16 @@ public class EnemyAI : MonoBehaviour
         leapAttack = GetComponent<IAlienAttack>();
 
         if (meshRenderer != null)
-        {
             material = meshRenderer.material;
-        }
 
         if (patrolCenterObject != null)
-        {
             defaultPatrolCenter = patrolCenterObject.transform.position;
-        }
 
         currentPatrolCenter = defaultPatrolCenter;
+
+        // Auto-find child Animator if not wired in Inspector
+        if (childAnimator == null)
+            childAnimator = GetComponentInChildren<Animator>(true);
     }
 
     private void Start()
@@ -373,33 +396,34 @@ public class EnemyAI : MonoBehaviour
             case EnemyState.Idle:
                 idleTimer = 0f;
                 agent.isStopped = true;
+                PlayAnimSafe(idleStateName);
                 break;
 
             case EnemyState.Patrol:
                 agent.isStopped = false;
                 agent.speed = patrolSpeed;
                 SetRandomPatrolDestination();
+                PlayAnimSafe(walkingStateName);
                 break;
 
             case EnemyState.Hunting:
                 agent.isStopped = false;
                 agent.speed = huntingSpeed;
                 agent.SetDestination(lastHeardSoundPosition);
+                // Optional: choose which anim to play while hunting (walk/run). For now, reuse Walking:
+                PlayAnimSafe(gallopingStateName);
                 break;
 
             case EnemyState.PrepareAttack:
                 prepareAttackTimer = 0f;
-                agent.isStopped = true; // Stop moving during preparation
-                // Face toward target
-                Vector3 directionToTarget = (lastHeardSoundPosition - transform.position).normalized;
-                if (directionToTarget != Vector3.zero)
-                {
-                    transform.rotation = Quaternion.LookRotation(directionToTarget);
-                }
+                agent.isStopped = true;
+                // keep current animation or play a windup later
+                FaceTarget(lastHeardSoundPosition);
                 break;
 
             case EnemyState.Attacking:
-                agent.isStopped = true; // Stop NavMesh movement during leap
+                agent.isStopped = true;
+                PlayAnimSafe(attackStateName);
                 if (leapAttack != null)
                 {
                     Vector3 predictedPosition = CalculatePredictedPosition();
@@ -410,16 +434,16 @@ public class EnemyAI : MonoBehaviour
 
             case EnemyState.Investigating:
                 Debug.Log($"[EnemyAI] Entering Investigating state. stateBeforeIdle: {stateBeforeIdle}, investigateTimer: {investigateTimer}");
-                // Only reset timer when first entering from Attacking, not when returning from Idle
                 if (stateBeforeIdle != EnemyState.Investigating)
                 {
-                    investigateTimer = 0f; // Reset timer
-                    currentPatrolCenter = lastHeardSoundPosition; // Set patrol center to last heard sound
+                    investigateTimer = 0f;
+                    currentPatrolCenter = lastHeardSoundPosition;
                     Debug.Log($"[EnemyAI] Reset timer and patrol center to: {currentPatrolCenter}");
                 }
                 agent.isStopped = false;
-                agent.speed = patrolSpeed; // Use patrol speed
-                SetRandomPatrolDestination(); // Start patrolling around the sound location
+                agent.speed = patrolSpeed;
+                SetRandomPatrolDestination();
+                PlayAnimSafe(walkingStateName);
                 break;
         }
     }
@@ -481,6 +505,33 @@ public class EnemyAI : MonoBehaviour
 
         material.color = targetColor;
     }
+
+        // Robust helper for playing Animator states by name
+    private void PlayAnimSafe(string stateName)
+    {
+        if (childAnimator == null || string.IsNullOrEmpty(stateName)) return;
+
+        childAnimator.speed = animPlaybackSpeed;
+
+        // Layer 0 assumed; adjust if you use layers
+        int hash = Animator.StringToHash(stateName);
+        if (!childAnimator.HasState(0, hash))
+        {
+            Debug.LogWarning($"[EnemyAI] Animator missing state '{stateName}' on layer 0 (object: {childAnimator.gameObject.name}).");
+            return;
+        }
+
+        // Use CrossFadeInFixedTime for deterministic blending across frame rates
+        childAnimator.CrossFadeInFixedTime(hash, animCrossfade);
+    }
+
+    private void FaceTarget(Vector3 target)
+    {
+        Vector3 dir = (target - transform.position).normalized;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(dir);
+    }
+
 
     private void OnSoundHeard(float loudness, Vector3 soundPosition, float quality, Vector3 soundVelocity)
     {
