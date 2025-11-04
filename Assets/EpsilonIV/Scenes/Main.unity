@@ -658,7 +658,7 @@ Transform:
   m_GameObject: {fileID: 197725431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.73, y: 0.19, z: -20.3}
+  m_LocalPosition: {x: 17.871, y: 0.40969086, z: 1.049}
   m_LocalScale: {x: 1.7299705, y: 1.4891006, z: 2.320279}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1305,7 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f461acec7751049a995d2546542e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.CheckpointManager
-  DefaultCheckpoint: {fileID: 0}
+  DefaultCheckpoint: {fileID: 197725433}
   OnCheckpointChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1688,6 +1688,89 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518569111}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &555721979
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.87626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.87626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.87626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.893
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.40477
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.526
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.030209031
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9995436
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -176.538
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164773968098489914, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504601554197523584, guid: cfe5b2566d1103c4c87a31dfe11b5e8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Worker@Base_fromtest
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cfe5b2566d1103c4c87a31dfe11b5e8f, type: 3}
 --- !u!1 &576661468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2306,6 +2389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.Door
   IsLocked: 1
   IsOpen: 0
+  openParticles: {fileID: 0}
   OpenSpeed: 2
   MovingPart1: {fileID: 0}
   AnimationType1: 0
@@ -2495,6 +2579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.Door
   IsLocked: 1
   IsOpen: 0
+  openParticles: {fileID: 0}
   OpenSpeed: 1.5
   MovingPart1: {fileID: 0}
   AnimationType1: 0
@@ -15335,6 +15420,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff9e1763abe892245964219061c4d5f4, type: 3}
+--- !u!1001 &48430779790472662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2672257
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240173165211658255, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187767938464650132, guid: 80cc37a7b771d98488d2ae45228e29c4,
+        type: 3}
+      propertyPath: m_Name
+      value: BioCapsule
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80cc37a7b771d98488d2ae45228e29c4, type: 3}
 --- !u!23 &328720989552567948
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16514,17 +16667,17 @@ PrefabInstance:
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.62
+      value: 19.37
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.19
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.78
+      value: 5.17
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
@@ -16585,6 +16738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.Door
   IsLocked: 1
   IsOpen: 0
+  openParticles: {fileID: 0}
   OpenSpeed: 1.5
   MovingPart1: {fileID: 0}
   AnimationType1: 0
@@ -16948,3 +17102,5 @@ SceneRoots:
   - {fileID: 2912234059267563809}
   - {fileID: 460595511}
   - {fileID: 1385038543}
+  - {fileID: 48430779790472662}
+  - {fileID: 555721979}

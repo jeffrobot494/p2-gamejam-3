@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using EpsilonIV;
 
 namespace Unity.FPS.Gameplay
 {
@@ -74,6 +75,18 @@ namespace Unity.FPS.Gameplay
             else
             {
                 Debug.LogWarning("[CheckpointManager] No checkpoints registered! Respawn will fail.");
+            }
+
+             var player = FindFirstObjectByType<PlayerCharacterController>();
+            if (player != null && m_CurrentCheckpoint != null)
+            {
+                player.transform.SetPositionAndRotation(
+                    m_CurrentCheckpoint.GetRespawnPosition(),
+                    m_CurrentCheckpoint.GetRespawnRotation()
+                );
+
+                if (DebugMode)
+                    Debug.Log($"[CheckpointManager] Moved player to default checkpoint: {m_CurrentCheckpoint.name}");
             }
         }
 
