@@ -23,6 +23,9 @@ namespace EpsilonIV
         [Tooltip("Is the door currently open?")]
         public bool IsOpen = false;
 
+        [Header("VFX")]
+        [SerializeField] private ParticleSystem openParticles;
+
         [Header("Animation")]
         [Tooltip("Speed of door animation")]
         public float OpenSpeed = 2f;
@@ -136,6 +139,9 @@ namespace EpsilonIV
             IsOpen = opening;
 
             PlaySound(opening ? OpenSound : CloseSound);
+            
+            if (opening && openParticles != null)      // NEW
+                openParticles.Play(true);
 
             Vector3 startPos1 = MovingPart1 != null ? MovingPart1.localPosition : Vector3.zero;
             Quaternion startRot1 = MovingPart1 != null ? MovingPart1.localRotation : Quaternion.identity;
