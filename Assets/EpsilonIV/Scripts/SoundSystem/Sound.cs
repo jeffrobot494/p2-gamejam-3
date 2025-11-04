@@ -7,6 +7,7 @@ public class Sound : MonoBehaviour
     // Config
     private const float MinRadius = 0.5f;
     private const float MaxRadius = 50f;
+    private const float CapsuleHeight = 4f; // Height limit for vertical sound propagation (prevents floor-to-floor sound travel)
 
     // Assigned at spawn
     private Vector3 sourcePos;
@@ -16,6 +17,8 @@ public class Sound : MonoBehaviour
     private LayerMask wallMask;
     private float wallPenalty;      // e.g., 0.8f
     private bool drawDebug;
+    private float capsuleHeight;
+    private Quaternion sourceRotation;
 
     // Reusable buffers to avoid GC
     private static readonly Collider[] overlapBuffer = new Collider[256];
@@ -23,7 +26,7 @@ public class Sound : MonoBehaviour
     /// <summary>
     /// Factory to spawn a transient Sound processor.
     /// </summary>
-    public static void Spawn(Vector3 pos, float loudness, float quality, LayerMask wallMask, float wallPenalty = 0.8f, bool drawDebug = false, Vector3 velocity = default)
+    public static void Spawn(Vector3 pos, float loudness, float quality, LayerMask wallMask, float wallPenalty = 0.8f, bool drawDebug = false, Vector3 velocity = default, float capsuleHeight = 0f, Quaternion rotation = default)
     {
         var go = new GameObject("Sound");
         var s = go.AddComponent<Sound>();
@@ -34,6 +37,8 @@ public class Sound : MonoBehaviour
         s.wallMask = wallMask;
         s.wallPenalty = Mathf.Clamp(wallPenalty, 0.1f, 1f);
         s.drawDebug = drawDebug;
+        s.capsuleHeight = capsuleHeight > 0f ? capsuleHeight : CapsuleHeight;
+        s.sourceRotation = rotation == default ? Quaternion.identity : rotation;
         go.transform.position = pos;
     }
 
@@ -51,11 +56,19 @@ public class Sound : MonoBehaviour
         float radiusScale = originalLoudness * originalLoudness;
         float radius = Mathf.Lerp(MinRadius, MaxRadius, radiusScale);
 
-        int count = Physics.OverlapSphereNonAlloc(sourcePos, radius, overlapBuffer, ~0, QueryTriggerInteraction.Ignore);
+        // DEBUG: Log capsule dimensions
+        Debug.Log($"Sound spawned at {sourcePos} with capsuleHeight={capsuleHeight}, radius={radius}");
+
+        // Use box cast to limit vertical propagation with independent control of horizontal and vertical extent
+        // Box gives us precise control: wide horizontally (radius), short vertically (capsuleHeight)
+        // Box rotates with source to propagate sound in the direction the source is facing
+        Vector3 boxHalfExtents = new Vector3(radius, capsuleHeight * 0.5f, radius);
+
+        int count = Physics.OverlapBoxNonAlloc(sourcePos, boxHalfExtents, overlapBuffer, sourceRotation, ~0, QueryTriggerInteraction.Ignore);
 
         if (drawDebug)
         {
-            DrawSphereGizmo(sourcePos, radius, 0.75f);
+            DrawBoxGizmo(sourcePos, radius, capsuleHeight, sourceRotation, 0.75f);
         }
 
         for (int i = 0; i < count; i++)
@@ -63,11 +76,19 @@ public class Sound : MonoBehaviour
             var col = overlapBuffer[i];
             if (!col) continue;
 
+            // DEBUG: Log every collider found
+            Debug.Log($"Collider found: '{col.gameObject.name}' at {col.transform.position}, bounds: {col.bounds.center} size: {col.bounds.size}");
+
             // Identify listeners by component, not tags
             if (!col.TryGetComponent<Listener>(out var listener)) continue;
 
             Vector3 listenerPos = listener.transform.position;
             float distance = Vector3.Distance(sourcePos, listenerPos);
+
+            // DEBUG: Log listener detection
+            float verticalDistance = Mathf.Abs(listenerPos.y - sourcePos.y);
+            Debug.Log($"Listener '{listener.gameObject.name}' found at {listenerPos}, distance={distance:F2}, verticalDistance={verticalDistance:F2}, capsuleHeight={capsuleHeight}");
+
             if (distance > radius) continue; // out of range
 
             // Distance falloff (inverse square)
@@ -108,26 +129,44 @@ public class Sound : MonoBehaviour
     }
 
     // --- Debug helpers ---
-    private void DrawSphereGizmo(Vector3 center, float radius, float duration)
+    private void DrawBoxGizmo(Vector3 center, float radius, float height, Quaternion rotation, float duration)
     {
-        // Approximate with 3 circles
-        int segments = 32;
-        float step = Mathf.PI * 2f / segments;
+        float halfHeight = height * 0.5f;
 
-        void DrawCircle(Vector3 a, Vector3 b, Vector3 c)
+        // Define the 8 corners of the box in local space
+        Vector3[] localCorners = new Vector3[8];
+        localCorners[0] = new Vector3(-radius, -halfHeight, -radius); // bottom front left
+        localCorners[1] = new Vector3(radius, -halfHeight, -radius);  // bottom front right
+        localCorners[2] = new Vector3(radius, -halfHeight, radius);   // bottom back right
+        localCorners[3] = new Vector3(-radius, -halfHeight, radius);  // bottom back left
+        localCorners[4] = new Vector3(-radius, halfHeight, -radius);  // top front left
+        localCorners[5] = new Vector3(radius, halfHeight, -radius);   // top front right
+        localCorners[6] = new Vector3(radius, halfHeight, radius);    // top back right
+        localCorners[7] = new Vector3(-radius, halfHeight, radius);   // top back left
+
+        // Rotate corners and move to world position
+        Vector3[] corners = new Vector3[8];
+        for (int i = 0; i < 8; i++)
         {
-            Vector3 prev = center + a * radius;
-            for (int i = 1; i <= segments; i++)
-            {
-                float t = i * step;
-                Vector3 p = center + (a * Mathf.Cos(t) + b * Mathf.Sin(t)) * radius + c * 0f;
-                Debug.DrawLine(prev, p, Color.cyan, duration);
-                prev = p;
-            }
+            corners[i] = center + rotation * localCorners[i];
         }
 
-        DrawCircle(Vector3.right, Vector3.forward, Vector3.zero);
-        DrawCircle(Vector3.up, Vector3.right, Vector3.zero);
-        DrawCircle(Vector3.up, Vector3.forward, Vector3.zero);
+        // Draw bottom face
+        Debug.DrawLine(corners[0], corners[1], Color.cyan, duration);
+        Debug.DrawLine(corners[1], corners[2], Color.cyan, duration);
+        Debug.DrawLine(corners[2], corners[3], Color.cyan, duration);
+        Debug.DrawLine(corners[3], corners[0], Color.cyan, duration);
+
+        // Draw top face
+        Debug.DrawLine(corners[4], corners[5], Color.cyan, duration);
+        Debug.DrawLine(corners[5], corners[6], Color.cyan, duration);
+        Debug.DrawLine(corners[6], corners[7], Color.cyan, duration);
+        Debug.DrawLine(corners[7], corners[4], Color.cyan, duration);
+
+        // Draw vertical edges
+        Debug.DrawLine(corners[0], corners[4], Color.cyan, duration);
+        Debug.DrawLine(corners[1], corners[5], Color.cyan, duration);
+        Debug.DrawLine(corners[2], corners[6], Color.cyan, duration);
+        Debug.DrawLine(corners[3], corners[7], Color.cyan, duration);
     }
 }

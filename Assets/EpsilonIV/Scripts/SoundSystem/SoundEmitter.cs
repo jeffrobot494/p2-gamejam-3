@@ -18,6 +18,10 @@ public class SoundEmitter : MonoBehaviour
     public LayerMask wallMask;
     [Range(0.1f, 1f)] public float wallPenalty = 0.8f;
 
+    [Header("Capsule Shape")]
+    [Tooltip("Height of the sound capsule (0 = use default). Limits vertical sound propagation to prevent floor-to-floor sound travel.")]
+    [Range(0f, 20f)] public float capsuleHeight = 0f;
+
     [Header("Debug")]
     public bool debugRuntimePopups = true;   // runtime TMP popups
     public bool debugSceneLabels  = true;    // Scene-view labels via Handles
@@ -47,8 +51,8 @@ public class SoundEmitter : MonoBehaviour
         // Use emitPosition if set, otherwise use this transform
         Vector3 soundPosition = emitPosition != null ? emitPosition.position : transform.position;
 
-        // Spawn the actual sound with velocity
-        Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity);
+        // Spawn the actual sound with velocity, capsule height, and rotation
+        Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity, capsuleHeight, transform.rotation);
 
         // Record debug state for Scene labels
         lastEmitLoudness = loudness;
