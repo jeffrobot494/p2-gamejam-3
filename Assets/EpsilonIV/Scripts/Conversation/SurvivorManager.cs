@@ -366,5 +366,47 @@ namespace EpsilonIV
             DeactivateAllSurvivors();
             currentSurvivorIndex = -1;
         }
+
+        [ContextMenu("Activate Survivor Index 0")]
+        void TestActivateSurvivor0() => ActivateSurvivorByIndex(0);
+
+        [ContextMenu("Activate Survivor Index 1")]
+        void TestActivateSurvivor1() => ActivateSurvivorByIndex(1);
+
+        [ContextMenu("Activate Survivor Index 2")]
+        void TestActivateSurvivor2() => ActivateSurvivorByIndex(2);
+
+        [ContextMenu("Activate Survivor Index 3")]
+        void TestActivateSurvivor3() => ActivateSurvivorByIndex(3);
+
+        [ContextMenu("Activate Survivor Index 4")]
+        void TestActivateSurvivor4() => ActivateSurvivorByIndex(4);
+
+        /// <summary>
+        /// Activate a specific survivor by index for testing.
+        /// Use "Log All Survivors" context menu to see indices.
+        /// </summary>
+        public void ActivateSurvivorByIndex(int index)
+        {
+            if (index < 0 || index >= allSurvivors.Count)
+            {
+                Debug.LogError($"[SurvivorManager] Cannot activate survivor - index {index} out of range (0-{allSurvivors.Count - 1})");
+                return;
+            }
+
+            // Deactivate current survivor if any
+            if (currentSurvivorIndex >= 0 && currentSurvivorIndex < allSurvivors.Count)
+            {
+                Survivor current = allSurvivors[currentSurvivorIndex];
+                if (current != null)
+                {
+                    current.gameObject.SetActive(false);
+                    current.SetState(SurvivorState.Waiting);
+                }
+            }
+
+            // Activate the requested survivor
+            ActivateSurvivor(index);
+        }
     }
 }
