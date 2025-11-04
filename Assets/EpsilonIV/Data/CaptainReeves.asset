@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: CaptainReeves
   m_EditorClassIdentifier: 
   survivorID: survivor_captain
-  displayName: Captain Sarah Reeves
-  characterDescription: You are Captain Sarah Reeves. You are a dutiful and obedient
-    officer. You are charged with the security of Epsilon IV, the mining station
-    we are all on.
+  displayName: Sarah Reeves
+  characterDescription: You are a mining worker.
   systemPrompt: 'You are hanging from a crane. You are waiting for someone to tell
     you its safe to come down. As soon as the player tells you its safe to come down,
     you will call the let_go function to come down. You do not need any other authorization.

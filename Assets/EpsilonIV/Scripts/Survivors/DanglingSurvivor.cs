@@ -35,7 +35,7 @@ namespace EpsilonIV
         [Tooltip("Delay before executing let go (gives time for final dialogue)")]
         [SerializeField] private float letGoDelay = 2f;
 
-        [Tooltip("Time it takes to fall/move to landing position")]
+        [Tooltip("Time it takes to fall/move to landing position (only used for lerp-based falls, not physics)")]
         [SerializeField] private float fallDuration = 1.5f;
 
         [Header("Events")]
@@ -71,12 +71,35 @@ namespace EpsilonIV
 
         #region Unity Lifecycle
 
+        void OnEnable()
+        {
+            // Called when GameObject is activated
+            if (debugMode)
+                Debug.Log($"[DanglingSurvivor] OnEnable() called on {gameObject.name}");
+
+            // Set IsDangling immediately when activated
+            if (isDangling && animator != null)
+            {
+                animator.SetBool("IsDangling", true);
+                if (debugMode)
+                    Debug.Log($"[DanglingSurvivor] OnEnable: Set IsDangling = true");
+            }
+        }
+
         void Start()
         {
+            if (debugMode)
+                Debug.Log($"[DanglingSurvivor] Start() called on {gameObject.name}");
+
             // Note: Survivor.Start() runs automatically, we don't need to call it
             // Auto-find components if not assigned
             if (animator == null)
-                animator = GetComponent<Animator>();
+            {
+                // Search in children as well since animator might be on child GameObject
+                animator = GetComponentInChildren<Animator>();
+                if (debugMode)
+                    Debug.Log($"[DanglingSurvivor] Auto-found animator: {(animator != null ? "SUCCESS on " + animator.gameObject.name : "FAILED")}");
+            }
 
             if (rb == null)
                 rb = GetComponent<Rigidbody>();
@@ -94,12 +117,34 @@ namespace EpsilonIV
                 rb.useGravity = false;
             }
 
+            // Debug: Check animator state
+            if (debugMode)
+            {
+                Debug.Log($"[DanglingSurvivor] isDangling={isDangling}, animator={animator}, animator!=null={animator != null}");
+                if (animator != null)
+                {
+                    Debug.Log($"[DanglingSurvivor] Animator controller: {(animator.runtimeAnimatorController != null ? animator.runtimeAnimatorController.name : "NULL")}");
+                }
+            }
+
             // Set dangling animation if applicable
             if (isDangling && animator != null)
             {
                 animator.SetBool("IsDangling", true);
                 if (debugMode)
+                {
                     Debug.Log($"[DanglingSurvivor] Set animator IsDangling = true");
+                    // Verify it was set
+                    bool currentValue = animator.GetBool("IsDangling");
+                    Debug.Log($"[DanglingSurvivor] Verified IsDangling parameter value: {currentValue}");
+                }
+            }
+            else if (debugMode)
+            {
+                if (!isDangling)
+                    Debug.LogWarning($"[DanglingSurvivor] Not setting IsDangling because isDangling=false");
+                if (animator == null)
+                    Debug.LogError($"[DanglingSurvivor] Cannot set IsDangling - animator is NULL!");
             }
 
             if (debugMode)
@@ -183,16 +228,17 @@ namespace EpsilonIV
             if (debugMode)
                 Debug.Log($"[DanglingSurvivor] Starting fall sequence!");
 
-            isDangling = false;
+            // Note: Keep isDangling true and IsDangling animation playing during fall
+            // We only set it to false when they actually land
             OnStartFalling?.Invoke();
 
-            // Update animator - stop dangling, start falling
-            if (animator != null)
+            // Trigger fall if you have a separate fall animation
+            // (But keep IsDangling true so the dangling animation keeps playing)
+            if (animator != null && HasAnimatorParameter("Fall"))
             {
-                animator.SetBool("IsDangling", false);
                 animator.SetTrigger("Fall");
                 if (debugMode)
-                    Debug.Log($"[DanglingSurvivor] Set IsDangling=false, triggered 'Fall' animation");
+                    Debug.Log($"[DanglingSurvivor] Triggered 'Fall' animation (keeping IsDangling=true)");
             }
 
             // Disable colliders during fall if configured
@@ -226,6 +272,7 @@ namespace EpsilonIV
 
         /// <summary>
         /// Physics-based fall using Rigidbody
+        /// Waits for OnCollisionEnter to detect landing
         /// </summary>
         private IEnumerator PhysicsBasedFall()
         {
@@ -235,11 +282,35 @@ namespace EpsilonIV
                 rb.useGravity = true;
 
                 if (debugMode)
-                    Debug.Log($"[DanglingSurvivor] Enabled physics for fall");
+                    Debug.Log($"[DanglingSurvivor] Enabled physics for fall - waiting for ground collision");
             }
 
-            // Wait for fall duration
-            yield return new WaitForSeconds(fallDuration);
+            // Just wait indefinitely - OnCollisionEnter will handle landing
+            // This coroutine will be stopped by StopAllCoroutines() when we land
+            while (true)
+            {
+                yield return null;
+            }
+        }
+
+        /// <summary>
+        /// Called by Unity when this collider/rigidbody touches another collider
+        /// </summary>
+        void OnCollisionEnter(Collision collision)
+        {
+            if (debugMode)
+                Debug.Log($"[DanglingSurvivor] OnCollisionEnter CALLED! Hit: {collision.gameObject.name}, isKinematic={rb?.isKinematic}, isDangling={isDangling}");
+
+            // If we're falling (not kinematic) and hit something, we've landed
+            if (rb != null && !rb.isKinematic)
+            {
+                if (debugMode)
+                    Debug.Log($"[DanglingSurvivor] OnCollisionEnter with {collision.gameObject.name} - triggering landing");
+
+                // Stop the fall coroutine and immediately land
+                StopAllCoroutines();
+                HandleLanding();
+            }
         }
 
         /// <summary>
@@ -274,6 +345,9 @@ namespace EpsilonIV
             if (debugMode)
                 Debug.Log($"[DanglingSurvivor] {gameObject.name} landed!");
 
+            // Set dangling to false NOW that they've landed
+            isDangling = false;
+
             // Re-enable colliders
             if (disableCollisionDuringFall && cachedColliders != null)
             {
@@ -287,15 +361,17 @@ namespace EpsilonIV
             // Disable physics if it was enabled
             if (rb != null)
             {
+                rb.velocity = Vector3.zero; // Set velocity BEFORE making kinematic
                 rb.isKinematic = true;
                 rb.useGravity = false;
-                rb.velocity = Vector3.zero;
             }
 
-            // Trigger landing animation
+            // Update animator - stop dangling animation, return to idle
             if (animator != null)
             {
-                animator.SetTrigger("Land");
+                animator.SetBool("IsDangling", false);
+                if (debugMode)
+                    Debug.Log($"[DanglingSurvivor] Set IsDangling=false, should transition to Idle");
             }
 
             // Fire landing event
@@ -304,6 +380,21 @@ namespace EpsilonIV
             // Now survivor can be rescued normally
             if (debugMode)
                 Debug.Log($"[DanglingSurvivor] {gameObject.name} can now be rescued!");
+        }
+
+        /// <summary>
+        /// Helper to check if animator has a specific parameter
+        /// </summary>
+        private bool HasAnimatorParameter(string paramName)
+        {
+            if (animator == null) return false;
+
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == paramName)
+                    return true;
+            }
+            return false;
         }
 
         #endregion
