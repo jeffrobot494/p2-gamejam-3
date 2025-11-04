@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   survivorID: survivor_captain
   displayName: Sarah Reeves
-  characterDescription: You are a mining worker.
+  characterDescription: You are a mining worker. You never speak more than one or
+    two sentences at a time.
   systemPrompt: 'You are hanging from a crane. You are waiting for someone to tell
     you its safe to come down. As soon as the player tells you its safe to come down,
     you will call the let_go function to come down. You do not need any other authorization.
+    You never speak more than one or two sentences at a time.
 
 
-    You
-    are 37 years old.'
+    You are 37 years
+    old.'
   voiceId: EXAVITQu4vr4xnSDxMaL
   onActivatedPrompt: State your name BRIEFLY.
   knowledgeBase: 
