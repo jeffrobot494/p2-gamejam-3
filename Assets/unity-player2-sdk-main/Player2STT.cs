@@ -149,6 +149,7 @@ namespace player2_sdk
         public STTFailedEvent OnSTTFailed;
         public UnityEvent OnListeningStarted;
         public UnityEvent OnListeningStopped;
+        public AudioDataEvent OnAudioData;
 
         public bool Listening { get; private set; }
 
@@ -292,6 +293,9 @@ namespace player2_sdk
         {
             if (audioData == null || audioData.Length == 0)
                 return;
+
+            // Expose audio data for other components (e.g., VoiceSoundBroadcaster)
+            OnAudioData?.Invoke(audioData);
 
             // Only send audio data if WebSocket is connected and ready
             if (webSocket == null || webSocket.State != WebSocketState.Open)
@@ -777,6 +781,9 @@ namespace player2_sdk
                         Array.Copy(secondPartData, 0, audioData, firstPartLength, secondPartLength);
                     }
 
+                    // Expose audio data for other components (e.g., VoiceSoundBroadcaster)
+                    OnAudioData?.Invoke(audioData);
+
                     var audioBytes = ConvertAudioToBytes(audioData);
 
                     if (audioBytes.Length > 0)
@@ -1057,6 +1064,11 @@ namespace player2_sdk
 
     [Serializable]
     public class STTFailedEvent : UnityEvent<string, int>
+    {
+    }
+
+    [Serializable]
+    public class AudioDataEvent : UnityEvent<float[]>
     {
     }
 
