@@ -213,13 +213,13 @@ MonoBehaviour:
   active: 1
   fogDensity:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 7
   fogDistance:
     m_OverrideState: 1
-    m_Value: 4.7
+    m_Value: 0
   fogColor:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 0}
+    m_Value: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 0}
   ambientColor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 0}
@@ -234,10 +234,10 @@ MonoBehaviour:
     m_Value: 10
   fogThinning:
     m_OverrideState: 1
-    m_Value: 458
+    m_Value: 277
   noiseScale:
     m_OverrideState: 1
-    m_Value: 843
+    m_Value: 632
   noiseStrength:
     m_OverrideState: 1
     m_Value: 0.029
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.Bloom
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
@@ -627,17 +627,6 @@ MonoBehaviour:
   - {fileID: 2817321362563126756}
   - {fileID: 570505865322032495}
   - {fileID: 4439214170112568056}
-  - {fileID: -7246845106591534283}
-  - {fileID: -1491758219799132683}
-  - {fileID: -3803884917251735835}
-  - {fileID: -5463602003304696267}
-  - {fileID: -128864571101317985}
-  - {fileID: -1222143692931894929}
-  - {fileID: 1585190216077724561}
-  - {fileID: -196152116110569063}
-  - {fileID: 3358387055224544905}
-  - {fileID: -3323585601996165728}
-  - {fileID: 4268141408837894096}
   - {fileID: -3431960538004025262}
   - {fileID: -8409358710182923616}
   - {fileID: -5472039941679347594}
