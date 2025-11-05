@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Runtime.InteropServices;
 
 namespace EpsilonIV
@@ -60,8 +61,16 @@ namespace EpsilonIV
         [Range(0f, 1f)]
         public float staticIntensity = 0.3f;
 
+        [Header("Events")]
+        [Tooltip("Fired when TTS audio starts playing")]
+        public UnityEvent OnTTSStarted;
+
+        [Tooltip("Fired when TTS audio stops (finished or interrupted)")]
+        public UnityEvent OnTTSStopped;
+
         private AudioSource currentAudioSource;
         private GameObject currentNpcGameObject;
+        private bool wasPlayingLastFrame = false;
 
         /// <summary>
         /// Prepare an NPC's audio for playback with radio effects.
@@ -101,6 +110,31 @@ namespace EpsilonIV
                     ApplyRadioEffects(npcAudioSource);
                     currentAudioSource = npcAudioSource;
                 }
+            }
+
+            // Monitor playback state and fire events
+            if (currentAudioSource != null)
+            {
+                bool isPlayingNow = currentAudioSource.isPlaying;
+
+                // Detect start of playback
+                if (isPlayingNow && !wasPlayingLastFrame)
+                {
+                    Debug.Log("RadioAudioPlayer: TTS playback started");
+                    OnTTSStarted?.Invoke();
+                }
+                // Detect end of playback
+                else if (!isPlayingNow && wasPlayingLastFrame)
+                {
+                    Debug.Log("RadioAudioPlayer: TTS playback stopped");
+                    OnTTSStopped?.Invoke();
+                }
+
+                wasPlayingLastFrame = isPlayingNow;
+            }
+            else
+            {
+                wasPlayingLastFrame = false;
             }
         }
 
@@ -246,7 +280,11 @@ namespace EpsilonIV
             if (currentAudioSource != null && currentAudioSource.isPlaying)
             {
                 currentAudioSource.Stop();
-                Debug.Log("RadioAudioPlayer: Stopped audio");
+                Debug.Log("RadioAudioPlayer: Stopped audio (interrupted)");
+
+                // Fire stopped event immediately (don't wait for Update)
+                OnTTSStopped?.Invoke();
+                wasPlayingLastFrame = false;
             }
         }
 

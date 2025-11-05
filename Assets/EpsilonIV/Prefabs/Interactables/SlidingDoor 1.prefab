@@ -157,7 +157,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e30a82b4dc2f8ee4ba31e7db2caeb0ab, type: 2}
-  - {fileID: -4973734387028869240, guid: a1e8627f87b9f504f9e304b78b5e6b73, type: 3}
+  - {fileID: -4973734387028869240, guid: f4c0e6132b9bf9648a62081b59ac3bd5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.Door
   IsLocked: 0
   IsOpen: 0
+  openParticles: {fileID: 0}
   OpenSpeed: 2
   MovingPart1: {fileID: 3671491218280037784}
   AnimationType1: 0
@@ -386,7 +387,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e30a82b4dc2f8ee4ba31e7db2caeb0ab, type: 2}
-  - {fileID: -4973734387028869240, guid: a1e8627f87b9f504f9e304b78b5e6b73, type: 3}
+  - {fileID: -4973734387028869240, guid: f4c0e6132b9bf9648a62081b59ac3bd5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
