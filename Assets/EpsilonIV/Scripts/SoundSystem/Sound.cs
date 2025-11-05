@@ -56,9 +56,6 @@ public class Sound : MonoBehaviour
         float radiusScale = originalLoudness * originalLoudness;
         float radius = Mathf.Lerp(MinRadius, MaxRadius, radiusScale);
 
-        // DEBUG: Log capsule dimensions
-        Debug.Log($"Sound spawned at {sourcePos} with capsuleHeight={capsuleHeight}, radius={radius}");
-
         // Use box cast to limit vertical propagation with independent control of horizontal and vertical extent
         // Box gives us precise control: wide horizontally (radius), short vertically (capsuleHeight)
         // Box rotates with source to propagate sound in the direction the source is facing
@@ -76,18 +73,11 @@ public class Sound : MonoBehaviour
             var col = overlapBuffer[i];
             if (!col) continue;
 
-            // DEBUG: Log every collider found
-            Debug.Log($"Collider found: '{col.gameObject.name}' at {col.transform.position}, bounds: {col.bounds.center} size: {col.bounds.size}");
-
             // Identify listeners by component, not tags
             if (!col.TryGetComponent<Listener>(out var listener)) continue;
 
             Vector3 listenerPos = listener.transform.position;
             float distance = Vector3.Distance(sourcePos, listenerPos);
-
-            // DEBUG: Log listener detection
-            float verticalDistance = Mathf.Abs(listenerPos.y - sourcePos.y);
-            Debug.Log($"Listener '{listener.gameObject.name}' found at {listenerPos}, distance={distance:F2}, verticalDistance={verticalDistance:F2}, capsuleHeight={capsuleHeight}");
 
             if (distance > radius) continue; // out of range
 

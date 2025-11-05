@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 namespace EpsilonIV
 {
@@ -19,6 +20,13 @@ namespace EpsilonIV
 
         [Tooltip("Input Action Asset containing player controls")]
         public InputActionAsset inputActionAsset;
+
+        [Header("Events")]
+        [Tooltip("Fired when input field gains focus (player starts typing)")]
+        public UnityEvent OnInputFieldFocused;
+
+        [Tooltip("Fired when input field loses focus (player stops typing)")]
+        public UnityEvent OnInputFieldUnfocused;
 
         private InputActionMap playerActionMap;
         private bool isInputFieldFocused = false;
@@ -84,6 +92,9 @@ namespace EpsilonIV
 
             // Move caret to end of text
             inputField.caretPosition = inputField.text.Length;
+
+            // Fire focused event
+            OnInputFieldFocused?.Invoke();
         }
 
         /// <summary>
@@ -111,6 +122,9 @@ namespace EpsilonIV
             // Lock cursor back to game
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            // Fire unfocused event
+            OnInputFieldUnfocused?.Invoke();
         }
 
         /// <summary>

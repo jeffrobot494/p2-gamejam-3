@@ -329,7 +329,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[EnemyAI] Attack complete, transitioning to Investigating");
+        // Attack complete, transition to Investigating
         // Leap complete, transition to investigating
         TransitionToState(EnemyState.Investigating);
     }
@@ -342,7 +342,7 @@ public class EnemyAI : MonoBehaviour
         // Time to return to default patrol?
         if (investigateTimer >= investigateDuration)
         {
-            Debug.Log($"[EnemyAI] Investigation duration elapsed ({investigateTimer:F2}/{investigateDuration:F2}), returning to Patrol");
+            // Investigation duration elapsed, return to Patrol
             // Investigation over, return to default patrol
             TransitionToState(EnemyState.Patrol);
             return;
@@ -433,12 +433,10 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Investigating:
-                Debug.Log($"[EnemyAI] Entering Investigating state. stateBeforeIdle: {stateBeforeIdle}, investigateTimer: {investigateTimer}");
                 if (stateBeforeIdle != EnemyState.Investigating)
                 {
                     investigateTimer = 0f;
                     currentPatrolCenter = lastHeardSoundPosition;
-                    Debug.Log($"[EnemyAI] Reset timer and patrol center to: {currentPatrolCenter}");
                 }
                 agent.isStopped = false;
                 agent.speed = patrolSpeed;
@@ -587,16 +585,11 @@ public class EnemyAI : MonoBehaviour
         {
             // Wall detected - aim just before it
             idealOvershoot = obstacleHit.point - (direction * 0.5f);
-
-            if (showDebugVisualization)
-            {
-                Debug.Log($"[EnemyAI] Wall detected at overshoot, adjusting target");
-            }
         }
 
         // Find ground at overshoot point (handles elevation changes)
         RaycastHit groundHit;
-        Vector3 rayStart = new Vector3(idealOvershoot.x, idealOvershoot.y + 10f, idealOvershoot.z);
+        Vector3 rayStart = new Vector3(idealOvershoot.x, idealOvershoot.y + 2f, idealOvershoot.z);
 
         if (Physics.Raycast(rayStart, Vector3.down, out groundHit, 50f, overshootGroundLayer))
         {

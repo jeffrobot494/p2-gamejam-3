@@ -24,8 +24,6 @@ namespace Unity.FPS.Game
 
         public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource)
         {
-            Debug.Log($"[Damageable] InflictDamage called on {gameObject.name}. Damage: {damage}, Source: {damageSource?.name}");
-
             if (Health)
             {
                 var totalDamage = damage;
@@ -42,7 +40,6 @@ namespace Unity.FPS.Game
                     totalDamage *= SensibilityToSelfdamage;
                 }
 
-                Debug.Log($"[Damageable] Applying {totalDamage} damage to Health component");
                 // apply the damages
                 Health.TakeDamage(totalDamage, damageSource);
             }
