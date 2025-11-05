@@ -47,6 +47,28 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-6112825322162988496
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LiftGammaGain
+  active: 1
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 0.9943364, y: 1, z: 0.48100543, w: 0.10091744}
+  gamma:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  gain:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
 --- !u!114 &-5759657298589282633
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -93,6 +115,7 @@ MonoBehaviour:
   - {fileID: 1801531139289746853}
   - {fileID: 7827985127269028407}
   - {fileID: 2950893884365311496}
+  - {fileID: -6112825322162988496}
 --- !u!114 &1801531139289746853
 MonoBehaviour:
   m_ObjectHideFlags: 3
