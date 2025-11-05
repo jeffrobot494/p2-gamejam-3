@@ -145,7 +145,11 @@ PlayerSettings:
   tvOSBundleVersion: 1.0
   bundleVersion: 5.0.4
   preloadedAssets:
-  - {fileID: -944628639613478452, guid: 05b4aeda8533b704f9be24b556a43d98, type: 3}
+  - {fileID: 2100000, guid: e30a82b4dc2f8ee4ba31e7db2caeb0ab, type: 2}
+  - {fileID: 2100000, guid: b5f47cc37ee1d844388f57502c5f3e85, type: 2}
+  - {fileID: 2100000, guid: e0a0c0c4352f51740b5ff1abd3b849a6, type: 2}
+  - {fileID: 2100000, guid: 4adb096cdb4111a4b807c68d5e4d147d, type: 2}
+  - {fileID: 2100000, guid: 5b8ce755cfcfb2142a458ede44dd7a20, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -490,7 +494,10 @@ PlayerSettings:
     m_TextureStreamingPriority: 0
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding: []
-  m_BuildTargetDefaultTextureCompressionFormat: []
+  m_BuildTargetDefaultTextureCompressionFormat:
+  - serializedVersion: 3
+    m_BuildTarget: WebGL
+    m_Formats: 05000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
