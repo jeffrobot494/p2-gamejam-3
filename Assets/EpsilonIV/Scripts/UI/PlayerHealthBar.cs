@@ -61,10 +61,20 @@ public class PlayerHealthBar : MonoBehaviour
         float healthRatio = m_PlayerHealth.GetRatio();
         HealthFillImage.fillAmount = healthRatio;
 
-        // Update color gradient if enabled
+        // Calculate alpha: 100% health = 1.0 alpha, 0% health = 0.0 alpha
+        float alpha = healthRatio;
+
+        // Update color gradient if enabled, with alpha
         if (useColorGradient)
         {
-            HealthFillImage.color = Color.Lerp(noHealthColor, fullHealthColor, healthRatio);
+            Color gradientColor = Color.Lerp(noHealthColor, fullHealthColor, healthRatio);
+            HealthFillImage.color = new Color(gradientColor.r, gradientColor.g, gradientColor.b, alpha);
+        }
+        else
+        {
+            // Just update alpha, keep existing color
+            Color currentColor = HealthFillImage.color;
+            HealthFillImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
         }
     }
 }
