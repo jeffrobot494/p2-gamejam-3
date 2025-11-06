@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace EpsilonIV
 {
@@ -34,6 +35,11 @@ namespace EpsilonIV
         [Tooltip("Color for player messages (optional)")]
         public Color playerMessageColor = Color.white;
 
+        [Header("Scroll Settings")]
+        [Tooltip("Mouse wheel scroll speed (works even when cursor is locked)")]
+        [Range(0.1f, 2f)]
+        public float scrollSpeed = 0.5f;
+
         private int messageCount = 0;
 
         void Start()
@@ -58,6 +64,25 @@ namespace EpsilonIV
             {
                 messageManager.OnPlayerMessageSent.AddListener(AddPlayerMessage);
                 messageManager.OnNpcResponseReceived.AddListener(OnNpcResponseReceived);
+            }
+        }
+
+        void Update()
+        {
+            // Handle mouse wheel scrolling even when cursor is locked (Gameplay state)
+            if (scrollRect != null && Mouse.current != null)
+            {
+                Vector2 scrollDelta = Mouse.current.scroll.ReadValue();
+
+                if (scrollDelta.y != 0)
+                {
+                    // Scroll the chat (positive scroll = scroll up, negative = scroll down)
+                    // verticalNormalizedPosition: 0 = bottom, 1 = top
+                    float currentPos = scrollRect.verticalNormalizedPosition;
+                    float scrollAmount = scrollDelta.y * scrollSpeed * 0.1f; // scrollSpeed multiplied by 100x
+                    float newPos = currentPos + scrollAmount;
+                    scrollRect.verticalNormalizedPosition = Mathf.Clamp01(newPos);
+                }
             }
         }
 
