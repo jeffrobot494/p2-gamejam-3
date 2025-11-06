@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: fdebf04ef117f324186a42c22b61b82e, type: 2}
+    second: {fileID: 2100000, guid: 5b8ce755cfcfb2142a458ede44dd7a20, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -23,7 +23,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: player
-    second: {fileID: 2100000, guid: 1038353f11250c74fb8e99821ebd0813, type: 2}
+    second: {fileID: 2100000, guid: 3984abeb87185334988c926d5aad639f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

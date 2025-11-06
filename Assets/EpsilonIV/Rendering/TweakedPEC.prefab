@@ -71,22 +71,22 @@ PrefabInstance:
     - target: {fileID: 2551384919952017199, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: ditherScale
-      value: 2.13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2551384919952017199, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: ditherStrength
-      value: 1.84
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 2551384919952017199, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: ditherThreshold
-      value: 3.82
+      value: 2.81
       objectReference: {fileID: 0}
     - target: {fileID: 2591069896340512380, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: m_Name
-      value: PostEffectController Variant
+      value: TweakedPEC
       objectReference: {fileID: 0}
     - target: {fileID: 6346403675970205572, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
@@ -166,12 +166,12 @@ PrefabInstance:
     - target: {fileID: 6865353116063181011, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: widthPixelation
-      value: 512
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 6865353116063181011, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: heightPixelation
-      value: 512
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 8158999144256608585, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
@@ -185,13 +185,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
+      propertyPath: noiseWeight
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: screenBendX
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: screenBendY
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
       propertyPath: vignetteSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: grilleOpacity
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: chromaticRed.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: chromaticRed.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
         type: 3}
       propertyPath: vignetteAmount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: scanlinesWeight
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: chromaticGreen.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: chromaticGreen.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: grilleBrightness
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: grilleResolution
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: vignetteRounding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: vignetteSmoothing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: grilleCounterOpacity
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483077891151334321, guid: e3fbe050ccbb9384699cc182a09bb450,
+        type: 3}
+      propertyPath: grilleCounterResolution
+      value: 540
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
