@@ -13,6 +13,8 @@ namespace player2_sdk
     {
         public IEnumerator PlayAudioFromDataUrl(string dataUrl, AudioSource audioSource, string identifier)
         {
+            Debug.Log($"[DefaultAudioPlayer] PlayAudioFromDataUrl called for {identifier}");
+
             // Validate input parameters
             if (string.IsNullOrEmpty(dataUrl))
             {
@@ -98,9 +100,24 @@ namespace player2_sdk
                         var clip = DownloadHandlerAudioClip.GetContent(request);
                         if (clip != null)
                         {
+                            Debug.Log($"[DefaultAudioPlayer] AudioSource volume BEFORE setting: {audioSource.volume}");
+
+                            // Check if there's a RadioAudioPlayer to get volume settings from
+                            var radioAudioPlayer = Object.FindObjectOfType<EpsilonIV.RadioAudioPlayer>();
+                            if (radioAudioPlayer != null)
+                            {
+                                Debug.Log($"[DefaultAudioPlayer] Found RadioAudioPlayer with volume: {radioAudioPlayer.volume}");
+                                audioSource.volume = radioAudioPlayer.volume;
+                                Debug.Log($"[DefaultAudioPlayer] AudioSource volume AFTER setting: {audioSource.volume}");
+                            }
+                            else
+                            {
+                                Debug.LogWarning("[DefaultAudioPlayer] No RadioAudioPlayer found in scene!");
+                            }
+
                             audioSource.clip = clip;
                             audioSource.Play();
-                            Debug.Log($"Playing audio for {identifier} (duration: {clip.length}s)");
+                            Debug.Log($"[DefaultAudioPlayer] Playing audio for {identifier} (duration: {clip.length}s, volume: {audioSource.volume})");
                         }
                         else
                         {
