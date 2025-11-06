@@ -1,11 +1,22 @@
 using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Runtime.InteropServices;
 
 namespace EpsilonIV
 {
     public class PlayerInputHandler : MonoBehaviour
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        // Import JavaScript function to force canvas focus (WebGL only)
+        [DllImport("__Internal")]
+        private static extern void FocusCanvas();
+#endif
+        [Header("State Management")]
+        [Tooltip("Reference to InputStateManager (handles Menu vs Gameplay states)")]
+        public InputStateManager stateManager;
+
         [Header("Input Actions")]
         [Tooltip("Input Action Asset containing player controls")]
         public InputActionAsset InputActionAsset;
@@ -42,8 +53,15 @@ namespace EpsilonIV
 
         void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Find InputStateManager if not assigned
+            if (stateManager == null)
+            {
+                stateManager = FindFirstObjectByType<InputStateManager>();
+                if (stateManager == null)
+                {
+                    Debug.LogError("PlayerInputHandler: No InputStateManager found in scene! Please add one.");
+                }
+            }
 
             if (InputActionAsset != null)
             {
@@ -92,29 +110,63 @@ namespace EpsilonIV
 
         void Update()
         {
-            // Toggle cursor lock for UI interaction
+            // Toggle between Menu and Gameplay states
             if (m_ToggleCursorAction != null && m_ToggleCursorAction.WasPressedThisFrame())
             {
-                ToggleCursorLock();
+                Debug.Log("[PlayerInputHandler] Toggle cursor action pressed");
+                if (stateManager != null)
+                {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                    // Force canvas focus in WebGL when unlocking cursor
+                    if (stateManager.IsInGameplayState)
+                    {
+                        FocusCanvas();
+                    }
+#endif
+                    stateManager.ToggleState();
+                }
+                else
+                {
+                    Debug.LogWarning("[PlayerInputHandler] ToggleCursorAction pressed but no StateManager assigned!");
+                }
+            }
+
+            // In Menu state: clicking in game world enters Gameplay state
+            // This allows clicking UI buttons without entering Gameplay
+            if (stateManager != null && stateManager.IsInMenuState)
+            {
+                if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    bool overUI = IsPointerOverUI();
+                    Debug.Log($"[PlayerInputHandler] Click in Menu state - Over UI: {overUI}");
+
+                    // Only enter Gameplay if NOT clicking on UI
+                    if (!overUI)
+                    {
+                        stateManager.EnterGameplayState();
+                    }
+                }
             }
         }
 
-        void ToggleCursorLock()
+        /// <summary>
+        /// Check if mouse is over a UI element
+        /// </summary>
+        bool IsPointerOverUI()
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            if (EventSystem.current == null)
+                return false;
+
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         public bool CanProcessInput()
         {
+            // Only process gameplay input when in Gameplay state
+            if (stateManager != null)
+                return stateManager.IsInGameplayState;
+
+            // Fallback if no state manager
             return Cursor.lockState == CursorLockMode.Locked;
         }
 
