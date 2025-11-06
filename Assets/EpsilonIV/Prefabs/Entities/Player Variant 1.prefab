@@ -612,6 +612,9 @@ GameObject:
   - component: {fileID: 5523473133074681524}
   - component: {fileID: 2691103569470417552}
   - component: {fileID: 5678185014354698604}
+  - component: {fileID: 632313602929135449}
+  - component: {fileID: 4544346333639318332}
+  - component: {fileID: 7167687074806374810}
   m_Layer: 0
   m_Name: Player Variant 1
   m_TagString: Player
@@ -881,7 +884,7 @@ MonoBehaviour:
   MaxSpeedOnGround: 5
   MovementSharpnessOnGround: 15
   MaxSpeedCrouchedRatio: 0.5
-  MaxSpeedInAir: 10
+  MaxSpeedInAir: 4
   AccelerationSpeedInAir: 25
   SprintSpeedModifier: 1.5
   KillHeight: -50
@@ -946,10 +949,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   wallPenalty: 0.8
+  capsuleHeight: 0
   debugRuntimePopups: 0
   debugSceneLabels: 0
   drawDebug: 1
-  emitAction: {fileID: 0}
   lastEmitLoudness: 0
   lastEmitQuality: 0
   lastEmitTime: 0
@@ -1076,6 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8309978c08bd10d4ab3b3c05a1ef8174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.PlayerInputHandler
+  stateManager: {fileID: 0}
   InputActionAsset: {fileID: -944628639613478452, guid: 29874cd4ba8cd1f44a58ae1360efb885,
     type: 3}
   LookSensitivity: 1
@@ -1127,3 +1131,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Game.Damageable
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.5
+--- !u!114 &632313602929135449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219362002482182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04acac1b3776cd4580148ed4838a851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TypingSoundBroadcaster
+  keystrokeLoudness: 0.408
+  keystrokeQuality: 1
+  onlyWhenChatActive: 1
+  debugMode: 1
+--- !u!114 &4544346333639318332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219362002482182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45279453716504942801fe8a01e1980b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VoiceSoundBroadcaster
+  player2STT: {fileID: 0}
+  minVolumeThreshold: 0.01
+  minLoudness: 0.035
+  maxLoudness: 0.862
+  loudnessMultiplier: 2
+  soundQuality: 1
+  broadcastCooldown: 0.3
+  debugMode: 0
+--- !u!114 &7167687074806374810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219362002482182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8d7b44675a78f4d8a3fa47700907c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TTSSoundBroadcaster
+  radioAudioPlayer: {fileID: 0}
+  broadcastLoudness: 0.311
+  soundQuality: 1
+  broadcastInterval: 0.3
+  debugMode: 0

@@ -1,10 +1,17 @@
 // SoundEmitter.cs (additions for debug toggles and last-emit tracking)
 using UnityEngine;
+using UnityEngine.Events;
 using Unity.FPS.Gameplay;
 using EpsilonIV;
 
 public class SoundEmitter : MonoBehaviour
 {
+    /// <summary>
+    /// Static event fired whenever ANY SoundEmitter emits a sound.
+    /// Parameters: (loudness, quality, position)
+    /// </summary>
+    public static UnityEvent<float, float, Vector3> OnAnySoundEmitted = new UnityEvent<float, float, Vector3>();
+
     [Header("Defaults (used if EmitSound called without args)")]
     [Range(0f, 1f)] public float defaultLoudness = 1f;
     public float defaultQuality = 0f;
@@ -46,6 +53,9 @@ public class SoundEmitter : MonoBehaviour
 
         // Spawn the actual sound with velocity, capsule height, and rotation
         Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity, capsuleHeight, transform.rotation);
+
+        // Fire the static event for decibel meter and other listeners
+        OnAnySoundEmitted?.Invoke(loudness, quality, soundPosition);
 
         // Record debug state for Scene labels
         lastEmitLoudness = loudness;
