@@ -19,6 +19,9 @@ namespace EpsilonIV
 
         [DllImport("__Internal")]
         private static extern void RemoveRadioFiltersWebGL(string audioSourceName);
+
+        [DllImport("__Internal")]
+        private static extern void SetWebGLAudioVolume(string audioSourceName, float volume);
 #endif
         [Header("Audio Settings")]
         [Tooltip("Master volume for radio audio playback")]
@@ -151,7 +154,10 @@ namespace EpsilonIV
             }
 
             // Set volume (works on all platforms)
+            Debug.Log($"[RadioAudioPlayer] ApplyRadioEffects called - setting volume to {volume}");
+            Debug.Log($"[RadioAudioPlayer] AudioSource volume BEFORE: {audioSource.volume}");
             audioSource.volume = volume;
+            Debug.Log($"[RadioAudioPlayer] AudioSource volume AFTER: {audioSource.volume}");
 
             // Disable 3D audio (make it 2D) for radio effect (works on all platforms)
             if (disable3DAudio)
@@ -190,7 +196,10 @@ namespace EpsilonIV
                     enableDistortion,
                     distortionLevel
                 );
-                Debug.Log($"RadioAudioPlayer: WebGL filters applied successfully");
+
+                // Set volume via Web Audio API gain node (applied AFTER distortion)
+                SetWebGLAudioVolume(npc.NpcID, volume);
+                Debug.Log($"RadioAudioPlayer: WebGL filters applied successfully (volume: {volume})");
             }
             catch (System.Exception e)
             {

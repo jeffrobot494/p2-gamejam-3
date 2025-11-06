@@ -22,8 +22,11 @@ MonoBehaviour:
     can press hold \"R\" to open their comms channel and speak with me\r\n-the player
     can press enter to focus the chat window to speak with me\r\n-the creature was
     attracted to loud noise\r\n-there was a major accident in the mine\r\n-I think
-    there are other survivors on the base\r\n-Please find the other survivors"
-  systemPrompt: Your responses should always be one sentence or less.
+    there are other survivors on the base\r\n-Please find the other survivors\n\nYou
+    speak in short sentences, and you never use more than one or two sentences at
+    a time."
+  systemPrompt: Your responses should always be one sentence or less. You speak in
+    short sentences, and you never use more than one or two sentences at a time.
   voiceId: 21m00Tcm4TlvDq8ikWAM
   onActivatedPrompt: Hello? I just saw a ship land. Is someone here?
   knowledgeBase: 

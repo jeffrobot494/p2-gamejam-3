@@ -7,6 +7,11 @@ mergeInto(LibraryManager.library, {
 
         console.log('[WebGLAudio] Playing audio for ' + identifier);
 
+        // Initialize volume storage if not already done
+        if (!window._webGLAudioVolumes) {
+            window._webGLAudioVolumes = {};
+        }
+
         // Initialize storage on window if not already done
         if (!window._webGLAudioInstances) {
             window._webGLAudioInstances = {};
@@ -128,6 +133,11 @@ mergeInto(LibraryManager.library, {
 
             // Always add gain node at the end
             nodeChain.push(gainNode);
+
+            // Set gain node volume (check if volume was set, otherwise default to 1.0)
+            var volume = window._webGLAudioVolumes[identifier] !== undefined ? window._webGLAudioVolumes[identifier] : 1.0;
+            gainNode.gain.value = volume;
+            console.log('[WebGLAudio] Set gain node volume to ' + volume + ' for ' + identifier);
 
             // Connect the filter chain: source -> filters -> gainNode -> destination
             try {
@@ -307,6 +317,29 @@ mergeInto(LibraryManager.library, {
             delete window._webGLAudioInstances[identifier];
         }
         console.log('[WebGLAudio] Removed all filters for ' + identifier);
+    },
+
+    // Set volume for WebGL audio (called from Unity)
+    SetWebGLAudioVolume: function(identifierPtr, volume) {
+        var identifier = UTF8ToString(identifierPtr);
+
+        // Initialize storage if needed
+        if (!window._webGLAudioVolumes) {
+            window._webGLAudioVolumes = {};
+        }
+
+        // Store the volume for this identifier
+        window._webGLAudioVolumes[identifier] = volume;
+        console.log('[WebGLAudio] Stored volume ' + volume + ' for ' + identifier);
+
+        // If audio instance already exists, update its gain node immediately
+        if (window._webGLAudioInstances && window._webGLAudioInstances[identifier]) {
+            var instance = window._webGLAudioInstances[identifier];
+            if (instance.gainNode) {
+                instance.gainNode.gain.value = volume;
+                console.log('[WebGLAudio] Updated gain node volume to ' + volume + ' for active audio ' + identifier);
+            }
+        }
     }
 
 });

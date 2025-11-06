@@ -34,13 +34,8 @@ namespace EpsilonIV
                 Debug.LogError($"[DoorInteractable] No Door component found on {gameObject.name}!");
             }
 
-            // Get all unlocker components
+            // Get all unlocker components (optional - door can be unlocked by default)
             m_Unlockers = GetComponents<IDoorUnlocker>();
-
-            if (m_Unlockers.Length == 0)
-            {
-                Debug.LogWarning($"[DoorInteractable] No IDoorUnlocker components found on {gameObject.name}! Door will never unlock.");
-            }
         }
 
         public void Interact()

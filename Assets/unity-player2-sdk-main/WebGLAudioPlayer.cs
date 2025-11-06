@@ -101,9 +101,18 @@ namespace player2_sdk
                         var clip = DownloadHandlerAudioClip.GetContent(request);
                         if (clip != null)
                         {
+                            // Check if there's a RadioAudioPlayer to get volume settings from
+                            var radioAudioPlayer = UnityEngine.Object.FindObjectOfType<EpsilonIV.RadioAudioPlayer>();
+                            if (radioAudioPlayer != null)
+                            {
+                                audioSource.volume = radioAudioPlayer.volume;
+                                Debug.Log($"[WebGLAudioPlayer] Set AudioSource volume to {radioAudioPlayer.volume} from RadioAudioPlayer");
+                            }
+
                             audioSource.clip = clip;
                             audioSource.Play();
-                            Debug.Log($"Playing audio for {identifier} (duration: {clip.length}s)");
+                            Debug.Log($"[WebGLAudioPlayer] Playing audio for {identifier} (duration: {clip.length}s, volume: {audioSource.volume})");
+                            Debug.Log($"[WebGLAudioPlayer] AudioSource.isPlaying: {audioSource.isPlaying}, AudioSource enabled: {audioSource.enabled}");
                         }
                         else
                         {

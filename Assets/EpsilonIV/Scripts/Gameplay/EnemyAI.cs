@@ -548,20 +548,31 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Calculates predicted target position based on velocity and preparation time.
     /// If target has low/zero velocity, returns original position (stationary target).
+    /// Snaps result to nearest NavMesh point for valid landing.
     /// </summary>
     private Vector3 CalculatePredictedPosition()
     {
+        Vector3 predictedPosition;
+
         // If no significant velocity, target is stationary
         if (lastHeardSoundVelocity.magnitude < 0.1f)
         {
-            return lastHeardSoundPosition;
+            predictedPosition = lastHeardSoundPosition;
+        }
+        else
+        {
+            // Linear prediction: position + (velocity * time)
+            Vector3 predictedOffset = lastHeardSoundVelocity * prepareAttackDuration;
+            predictedPosition = lastHeardSoundPosition + predictedOffset;
         }
 
-        // Linear prediction: position + (velocity * time)
-        Vector3 predictedOffset = lastHeardSoundVelocity * prepareAttackDuration;
-        Vector3 predictedPosition = lastHeardSoundPosition + predictedOffset;
+        // Snap to nearest NavMesh point to ensure valid landing position
+        if (NavMesh.SamplePosition(predictedPosition, out NavMeshHit navHit, 5f, NavMesh.AllAreas))
+        {
+            return navHit.position;
+        }
 
-        // Don't snap to NavMesh - allow full 3D targeting
+        // If no NavMesh found nearby, return original (might be off-mesh but better than nothing)
         return predictedPosition;
     }
 
