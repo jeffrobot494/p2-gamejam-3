@@ -108,36 +108,16 @@ namespace EpsilonIV
         /// <summary>
         /// Called by Ladder component to enter ladder mode
         /// </summary>
-        public void EnterLadder(Ladder ladder, int climbDirection)
+        public void EnterLadder(Ladder ladder)
         {
-            if (IsOnLadder)
-            {
-                if (DebugMode)
-                {
-                    Debug.LogWarning("[PlayerLadderController] Already on a ladder!");
-                }
-                return;
-            }
+            if (IsOnLadder) return;
 
             IsOnLadder = true;
             CurrentLadder = ladder;
-            ClimbDirection = climbDirection;
-            //m_ClimbCycleTime = 0f; // DISABLED - rhythmic climbing
-
-            // Reset velocity
             m_PlayerController.CharacterVelocity = Vector3.zero;
 
-            // DISABLED FOR SIMPLICITY - Animation
-            //// Set animation
-            //if (PlayerAnimator != null)
-            //{
-            //    PlayerAnimator.SetBool(IsClimbingParam, true);
-            //}
-
             if (DebugMode)
-            {
-                Debug.Log($"[PlayerLadderController] Entered ladder. Direction: {(ClimbDirection > 0 ? "UP" : "DOWN")}");
-            }
+                Debug.Log($"[PlayerLadderController] Entered ladder: {ladder.name}");
         }
 
         /// <summary>
@@ -156,8 +136,8 @@ namespace EpsilonIV
             // Apply small push away from ladder if jumping off
             if (withPush && exitedLadder != null)
             {
-                Vector3 pushDirection = -exitedLadder.transform.forward;
-                m_PlayerController.CharacterVelocity = pushDirection * ExitPushForce;
+                Vector3 pushDir = -CurrentLadder.transform.forward + Vector3.up * 0.5f;
+                m_PlayerController.CharacterVelocity = pushDir.normalized * ExitPushForce;
             }
 
             // DISABLED FOR SIMPLICITY - Animation
@@ -177,46 +157,44 @@ namespace EpsilonIV
         /// <summary>
         /// Handles climbing movement (SIMPLIFIED - constant speed)
         /// </summary>
-        void HandleLadderClimbing()
+        private void HandleLadderClimbing()
         {
-            // Get input
-            Vector3 moveInput = m_InputHandler.GetMoveInput();
+            Vector3 input = m_InputHandler.GetMoveInput();
+            float verticalInput = input.z;
+            float horizontalInput = input.x;
 
-            // Forward/backward input controls vertical movement (climbing)
-            float verticalInput = moveInput.z;
-
-            // Update climb direction based on input
-            if (verticalInput > 0.1f)
-            {
-                ClimbDirection = 1; // Climbing up
-            }
-            else if (verticalInput < -0.1f)
-            {
-                ClimbDirection = -1; // Climbing down
-            }
-
-            // SIMPLIFIED - Constant climb speed (no rhythmic motion)
-            float verticalSpeed = verticalInput * ClimbSpeed;
-            Vector3 climbVelocity = Vector3.up * verticalSpeed;
-
-            // Add slight horizontal movement (left/right adjustments)
-            float horizontalInput = moveInput.x;
-            Vector3 horizontalVelocity = transform.right * horizontalInput * LadderHorizontalSpeed;
-
-            // Combine velocities
+            // Smooth climbing motion
+            Vector3 climbVelocity = Vector3.up * verticalInput * ClimbSpeed;
+            Vector3 horizontalVelocity = transform.right * horizontalInput * 2;
             Vector3 finalVelocity = climbVelocity + horizontalVelocity;
 
-            // Apply movement
+            // Move the player
             m_CharacterController.Move(finalVelocity * Time.deltaTime);
 
-            // DISABLED FOR SIMPLICITY - Animation updates
-            //// Update animation
-            //if (PlayerAnimator != null)
-            //{
-            //    float animSpeed = Mathf.Abs(verticalInput);
-            //    PlayerAnimator.SetFloat(ClimbSpeedParam, animSpeed);
-            //}
+            // --- Smooth top/bottom auto exit ---
+            if (CurrentLadder)
+            {
+                float topY = CurrentLadder.TopY;
+                float bottomY = CurrentLadder.BottomY;
+                float playerFeetY = transform.position.y;
+                float playerHeadY = playerFeetY + m_CharacterController.height;
+
+                // 🟩 Exit slightly *before* colliding with the floor
+                if (playerHeadY > topY - 0.1f && verticalInput > 0f)
+                {
+                    ExitLadder(withPush: true);
+                    return;
+                }
+
+                // 🟦 Exit slightly before dropping below the ladder bottom
+                if (playerFeetY < bottomY + 0.1f && verticalInput < 0f)
+                {
+                    ExitLadder();
+                    return;
+                }
+            }
         }
+
 
         /// <summary>
         /// Checks for player input to exit ladder
