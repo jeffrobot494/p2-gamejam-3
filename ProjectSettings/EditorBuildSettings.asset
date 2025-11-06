@@ -20,19 +20,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/FPS/Scenes/MainScene.unity
     guid: d794a2ef8ba31d847ad3c19d03e2ddb9
-  - enabled: 0
+  - enabled: 1
     path: Assets/EpsilonIV/Scenes/ShaderTest.unity
     guid: beac16123d4d38c41b46b70a3e901560
   - enabled: 1
     path: Assets/EpsilonIV/Scenes/Final.unity
     guid: c1f652a89482dbd40a82a6484294a418
-  - enabled: 0
+  - enabled: 1
     path: Assets/EpsilonIV/Scenes/Cutscene Scenes/OpeningScene.unity
     guid: 4b390a1e730a9a840b4b54007442d564
-  - enabled: 0
+  - enabled: 1
     path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene.unity
     guid: 2deb6ae57f54553408b0991e3c48ef5c
-  - enabled: 0
+  - enabled: 1
     path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene.unity
     guid: 9912151faf4bcd94496b7e12ed9eec46
   m_configObjects:
