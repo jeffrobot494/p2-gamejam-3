@@ -18,8 +18,16 @@ MonoBehaviour:
   m_PlatformId: 84a3bb9e7420477f885e98145999eb20
   m_PlatformBuildProfile:
     rid: 6718445000591409232
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/EpsilonIV/Scenes/Cutscene Scenes/OpeningScene.unity
+  - m_enabled: 1
+    m_path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene.unity
+  - m_enabled: 1
+    m_path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene.unity
+  - m_enabled: 1
+    m_path: Assets/EpsilonIV/Scenes/Final.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
@@ -29,7 +37,7 @@ MonoBehaviour:
     - rid: 6718445000591409232
       type: {class: WebGLPlatformSettings, ns: UnityEditor.WebGL, asm: UnityEditor.WebGL.Extensions}
       data:
-        m_Development: 1
+        m_Development: 0
         m_ConnectProfiler: 1
         m_BuildWithDeepProfilingSupport: 0
         m_AllowDebugging: 0

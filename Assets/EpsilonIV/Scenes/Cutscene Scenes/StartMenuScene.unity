@@ -850,7 +850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0fd83741c0dc19c4089877c5b574b5df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4ec14ac518a2c44a8d9f1b5bfb47c85, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -981,6 +981,10 @@ PlayableDirector:
     value: {fileID: 1258120103}
   - key: {fileID: -6113563700446099957, guid: a6e0131cdfbcbad49b9f3884a58c9ae4, type: 2}
     value: {fileID: 6738199821750597186}
+  - key: {fileID: 7987435692606720686, guid: a6e0131cdfbcbad49b9f3884a58c9ae4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4321880274955903438, guid: a6e0131cdfbcbad49b9f3884a58c9ae4, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1052480585
@@ -1301,7 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62380daac213cb54a890123efa332072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  nextSceneName: AfterStartMenuScene
+  nextSceneName: AcceptMenuScene
   startSound: {fileID: 0}
 --- !u!4 &1736030517
 Transform:
