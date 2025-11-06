@@ -502,6 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052480585}
   - component: {fileID: 1052480584}
+  - component: {fileID: 1052480586}
   m_Layer: 0
   m_Name: SOSDirector
   m_TagString: Untagged
@@ -542,6 +543,8 @@ PlayableDirector:
     value: {fileID: 6738199821750597186}
   - key: {fileID: 7987435692606720686, guid: 54099e4fc81e9d140a62b47a017068b8, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -2655838273403582138, guid: 54099e4fc81e9d140a62b47a017068b8, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1052480585
@@ -559,6 +562,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -78.416, z: 0}
+--- !u!114 &1052480586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052480583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154d2e234d0696d4382cca3476e67b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneEndSceneLoader
+  director: {fileID: 1052480584}
+  nextSceneName: StartMenuScene
 --- !u!1 &1174253421
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,52 +773,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1736030515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1736030517}
-  - component: {fileID: 1736030516}
-  m_Layer: 0
-  m_Name: SceneChanger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1736030516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736030515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62380daac213cb54a890123efa332072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  nextSceneName: AfterStartMenuScene
-  startSound: {fileID: 0}
---- !u!4 &1736030517
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736030515}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1268.2676, y: -34.97675, z: 1676.0287}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &241138284463980376
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,5 +1432,4 @@ SceneRoots:
   - {fileID: 1052480585}
   - {fileID: 1019023320270925948}
   - {fileID: 1174253424}
-  - {fileID: 1736030517}
   - {fileID: 1503373914}
