@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   widthPixelation:
     m_OverrideState: 1
-    m_Value: 512
+    m_Value: 256
   heightPixelation:
     m_OverrideState: 1
-    m_Value: 512
+    m_Value: 256
   colorPrecision:
     m_OverrideState: 1
     m_Value: 32
@@ -74,13 +74,13 @@ MonoBehaviour:
     m_Value: 1
   ditherThreshold:
     m_OverrideState: 1
-    m_Value: 1.31
+    m_Value: 2.81
   ditherStrength:
     m_OverrideState: 1
     m_Value: 0.95
   ditherScale:
     m_OverrideState: 1
-    m_Value: 1.95
+    m_Value: 2
 --- !u!114 &-5463602003304696267
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.Bloom
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
@@ -475,7 +475,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.317
+    m_Value: 0.16
   smoothness:
     m_OverrideState: 1
     m_Value: 1
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.Tonemapping
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 0
@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70afe9e12c7a7ed47911bb608a23a8ff, type: 3}
   m_Name: SplitToning
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.SplitToning
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -671,7 +671,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.16288212}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.14876026}
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd486065ce11414fa40e631affc4900, type: 3}
   m_Name: ProbeVolumesOptions
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolumesOptions
-  active: 1
+  active: 0
   normalBias:
     m_OverrideState: 1
     m_Value: 0.05
@@ -1080,10 +1080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ChromaticAberration
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0
 --- !u!114 &5738740634986667528
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb4b772797da9440885e8bd939e9560, type: 3}
   m_Name: ColorCurves
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ColorCurves
-  active: 1
+  active: 0
   master:
     m_OverrideState: 1
     m_Value:
@@ -1395,10 +1395,10 @@ MonoBehaviour:
     m_Value: 250
   chromaticRed:
     m_OverrideState: 1
-    m_Value: {x: 0.002, y: -0.002}
+    m_Value: {x: 0, y: 0}
   chromaticGreen:
     m_OverrideState: 1
-    m_Value: {x: -0.002, y: 0.002}
+    m_Value: {x: 0, y: 0}
   chromaticBlue:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0}
