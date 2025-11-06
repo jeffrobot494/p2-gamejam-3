@@ -3,7 +3,17 @@ guid: e74d9434c0dffa84bb4a352fe0114b50
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decals
+    second: {fileID: 2100000, guid: e30a82b4dc2f8ee4ba31e7db2caeb0ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Diffuse
+    second: {fileID: 2100000, guid: e0a0c0c4352f51740b5ff1abd3b849a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
