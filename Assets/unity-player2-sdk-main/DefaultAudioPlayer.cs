@@ -103,7 +103,7 @@ namespace player2_sdk
                             Debug.Log($"[DefaultAudioPlayer] AudioSource volume BEFORE setting: {audioSource.volume}");
 
                             // Check if there's a RadioAudioPlayer to get volume settings from
-                            var radioAudioPlayer = Object.FindObjectOfType<EpsilonIV.RadioAudioPlayer>();
+                            var radioAudioPlayer = UnityEngine.Object.FindObjectOfType<EpsilonIV.RadioAudioPlayer>();
                             if (radioAudioPlayer != null)
                             {
                                 Debug.Log($"[DefaultAudioPlayer] Found RadioAudioPlayer with volume: {radioAudioPlayer.volume}");
