@@ -29,7 +29,7 @@ public class PlayerSoundController : MonoBehaviour
         [SerializeField] private AudioClip fallDamageSfx;
 
         [Header("Sound Settings")]
-        [Tooltip("Loudness of footstep sounds [0-1]")]
+        [Tooltip("Loudness of footstep sounds for Sound system [0-1]")]
         [Range(0f, 1f)]
         [SerializeField] private float walkingLoudness = 0.3f;
 
@@ -38,6 +38,19 @@ public class PlayerSoundController : MonoBehaviour
 
         [Range(0f, 1f)]
         [SerializeField] private float crouchWalkingLoudness = 0.15f;
+
+        [Header("Audio Source Volume")]
+        [Tooltip("AudioSource volume when walking [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float walkVolume = 0.5f;
+
+        [Tooltip("AudioSource volume when running [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float runVolume = 0.7f;
+
+        [Tooltip("AudioSource volume when crouch walking [0-1]")]
+        [Range(0f, 1f)]
+        [SerializeField] private float crouchVolume = 0.3f;
 
         [Header("Audio SFX Frequencies")]
         [Tooltip("Footstep SFX played per meter when walking")]
@@ -160,6 +173,12 @@ public class PlayerSoundController : MonoBehaviour
             MovementState previousState = m_CurrentState;
             m_CurrentState = newState;
 
+            // Update audio source volume based on new state
+            if (audioSource != null)
+            {
+                audioSource.volume = GetVolumeForState(newState);
+            }
+
             // Don't process sound events if sound making is disabled
             if (!m_CanMakeSounds)
                 return;
@@ -221,6 +240,21 @@ public class PlayerSoundController : MonoBehaviour
                     return runningLoudness;
                 case MovementState.CrouchWalking:
                     return crouchWalkingLoudness;
+                default:
+                    return 0f;
+            }
+        }
+
+        private float GetVolumeForState(MovementState state)
+        {
+            switch (state)
+            {
+                case MovementState.Walking:
+                    return walkVolume;
+                case MovementState.Running:
+                    return runVolume;
+                case MovementState.CrouchWalking:
+                    return crouchVolume;
                 default:
                     return 0f;
             }

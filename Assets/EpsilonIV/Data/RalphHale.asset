@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d320f688b631a9d43b3a47ab0061e998, type: 3}
-  m_Name: CaptainReeves
+  m_Name: RalphHale
   m_EditorClassIdentifier: 
   survivorID: survivor_hale
   displayName: Ralph Hale

@@ -57,8 +57,8 @@ MonoBehaviour:
   patrolCenterObject: {fileID: 0}
   defaultPatrolRadius: 5
   patrolSpeed: 1
-  investigativePatrolRadius: 4
-  investigateDuration: 20
+  investigativePatrolRadius: 3
+  investigateDuration: 5
   idleDuration: 2
   huntingStoppingDistance: 1
   huntingSpeed: 10
