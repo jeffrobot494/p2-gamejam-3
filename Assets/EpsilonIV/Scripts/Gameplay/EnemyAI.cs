@@ -627,8 +627,9 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Find ground at overshoot point (handles elevation changes)
+        // Use alien's Y position to ensure landing on same floor level
         RaycastHit groundHit;
-        Vector3 rayStart = new Vector3(idealOvershoot.x, idealOvershoot.y + 2f, idealOvershoot.z);
+        Vector3 rayStart = new Vector3(idealOvershoot.x, startPos.y + 2f, idealOvershoot.z);
 
         if (Physics.Raycast(rayStart, Vector3.down, out groundHit, 50f, overshootGroundLayer))
         {
