@@ -117,6 +117,7 @@ namespace EpsilonIV
         PlayerInputHandler m_InputHandler;
         CharacterController m_Controller;
         PlayerLadderController m_LadderController;
+        SprintStaminaManager m_StaminaManager;
         Vector3 m_GroundNormal;
         Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
@@ -152,6 +153,9 @@ namespace EpsilonIV
 
             m_LadderController = GetComponent<PlayerLadderController>();
             // Ladder controller is optional, so no error check
+
+            m_StaminaManager = GetComponent<SprintStaminaManager>();
+            // Stamina manager is optional, if not present sprinting has no stamina limitation
 
             m_Controller.enableOverlapRecovery = true;
 
@@ -375,6 +379,40 @@ namespace EpsilonIV
                     else
                     {
                         isSprinting = SetCrouchingState(false, false);
+                    }
+
+                    // Check stamina system if present
+                    if (isSprinting && m_StaminaManager != null)
+                    {
+                        // If we're trying to start sprinting, check if we can
+                        if (!m_IsSprinting && !m_StaminaManager.CanSprint())
+                        {
+                            isSprinting = false;
+                        }
+                        // If stamina is depleted mid-sprint, stop
+                        else if (m_IsSprinting && m_StaminaManager.GetStaminaPercent() <= 0f)
+                        {
+                            isSprinting = false;
+                        }
+                    }
+                }
+
+                // Update stamina manager state
+                if (m_StaminaManager != null)
+                {
+                    if (isSprinting && !m_IsSprinting)
+                    {
+                        // Starting to sprint
+                        m_StaminaManager.StartSprinting();
+                    }
+                    else if (!isSprinting && m_IsSprinting)
+                    {
+                        // Stopped sprinting
+                        m_StaminaManager.StopSprinting();
+                    }
+                    else if (isSprinting && m_IsSprinting)
+                    {
+                        // Continue sprinting (stamina drains automatically in SprintStaminaManager.Update)
                     }
                 }
 
