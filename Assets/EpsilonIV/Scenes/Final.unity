@@ -33961,7 +33961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50cf371073739b46a1e6bb477d448f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.GameTimer
-  InitialTime: 10
+  InitialTime: 1000
   DeathPenalty: 20
   StartAutomatically: 1
   OnTimerExpired:

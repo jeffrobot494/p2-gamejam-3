@@ -21,7 +21,7 @@ namespace EpsilonIV
         {
             Debug.Log("[CreditsSceneController] Displaying credits message.");
 
-            int success = PlayerPrefs.GetInt("MissionSuccess", 1000);
+            int success = PlayerPrefs.GetInt("MissionSuccess", 0);
             Debug.Log($"[CreditsSceneController] MissionSuccess value: {success}");
 
             messageText.text = success == 1 ? successMessage : failureMessage;
