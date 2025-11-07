@@ -28,6 +28,15 @@ public class ElevatorController : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public Vector3 DeltaMovement { get; private set; }
+    private Vector3 lastPosition;
+
+    private void LateUpdate()
+    {
+        DeltaMovement = transform.position - lastPosition;
+        lastPosition = transform.position;
+    }
+
     private void Awake()
     {
         // Set starting position to bottom
