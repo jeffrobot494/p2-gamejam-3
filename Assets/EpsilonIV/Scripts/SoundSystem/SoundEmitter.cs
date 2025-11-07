@@ -29,9 +29,9 @@ public class SoundEmitter : MonoBehaviour
     [Range(0f, 20f)] public float capsuleHeight = 0f;
 
     [Header("Debug")]
-    public bool debugRuntimePopups = true;   // runtime TMP popups
-    public bool debugSceneLabels  = true;    // Scene-view labels via Handles
-    public bool drawDebug = false;           // rays/lines from your Sound.cs
+    public bool debugRuntimePopups = false;   // runtime TMP popups
+    public bool debugSceneLabels  = true;     // Scene-view labels via Handles
+    public bool drawDebug = false;            // rays/lines from your Sound.cs
 
     // --- Debug state (read by Scene gizmo) ---
     [HideInInspector] public float lastEmitLoudness;

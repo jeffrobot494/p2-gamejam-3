@@ -119,8 +119,6 @@ namespace EpsilonIV
             Survivor activeSurvivor = survivorManager.GetCurrentSurvivor();
             if (activeSurvivor == null || !activeSurvivor.IsActive())
             {
-                if (debugMode)
-                    Debug.Log("[SurvivorPrompter] No active survivor for idle prompt");
                 return;
             }
 
