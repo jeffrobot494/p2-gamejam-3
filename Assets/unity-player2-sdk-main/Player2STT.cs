@@ -394,6 +394,7 @@ namespace player2_sdk
 
         private void StartSTTWeb()
         {
+            Debug.Log("[STT_DEBUG] StartSTTWeb / InitializeWebSocket");
             if (audioStreamRunning) StopAllTimers();
 
             currentTranscript = "";
@@ -442,11 +443,12 @@ namespace player2_sdk
                 };
 
                 var configJson = JsonConvert.SerializeObject(config);
+                Debug.Log($"[STT_DEBUG] Sending STT configuration: interim_results={enableInterimResults}, vad_events={enableVAD}");
                 _ = webSocket.SendText(configJson);
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Failed to send STT configuration: {ex.Message}");
+                Debug.LogError($"[STT_DEBUG] Failed to send STT configuration: {ex.Message}");
             }
         }
 
@@ -535,12 +537,13 @@ namespace player2_sdk
                 {
                     try
                     {
+                        Debug.Log($"[STT_DEBUG] WebSocket.OnMessage fired - received {bytes.Length} bytes");
                         var message = Encoding.UTF8.GetString(bytes);
                         OnWebSocketText(message);
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogError($"Error processing WebSocket message: {ex.Message}");
+                        Debug.LogError($"[STT_DEBUG] Error processing WebSocket message: {ex.Message}");
                     }
                 };
 
@@ -638,10 +641,11 @@ namespace player2_sdk
 #else
             if (string.IsNullOrEmpty(microphoneDevice))
             {
-                Debug.LogError("Cannot start microphone: no device selected");
+                Debug.LogError("[STT_DEBUG] Cannot start microphone - no device selected");
                 return;
             }
 
+            Debug.Log($"[STT_DEBUG] Starting microphone '{microphoneDevice}' at {sampleRate}Hz");
             StopMicrophone();
 
             microphoneClip = Microphone.Start(microphoneDevice, true, 10, sampleRate);
@@ -649,10 +653,11 @@ namespace player2_sdk
 
             if (microphoneClip == null)
             {
-                Debug.LogError($"Player2STT: Failed to start microphone recording for device '{microphoneDevice}'");
+                Debug.LogError($"[STT_DEBUG] Failed to start microphone recording for device '{microphoneDevice}'");
                 return;
             }
 
+            Debug.Log($"[STT_DEBUG] Microphone started successfully, beginning audio stream");
             if (audioStreamCoroutine != null)
                 StopCoroutine(audioStreamCoroutine);
             audioStreamCoroutine = StartCoroutine(StreamAudioData());
@@ -790,10 +795,15 @@ namespace player2_sdk
                         try
                         {
                             _ = webSocket.Send(audioBytes);
+                            // Log first few sends to confirm audio streaming
+                            if (lastMicrophonePosition < sampleRate * 2) // First 2 seconds
+                            {
+                                Debug.Log($"[STT_DEBUG] Sent audio chunk: {audioBytes.Length} bytes, {audioData.Length} samples");
+                            }
                         }
                         catch (Exception ex)
                         {
-                            Debug.LogError($"Failed to send audio data: {ex.Message}");
+                            Debug.LogError($"[STT_DEBUG] Failed to send audio data: {ex.Message}");
                         }
 
                     lastMicrophonePosition = currentPosition;
@@ -977,12 +987,13 @@ namespace player2_sdk
         {
             try
             {
+                Debug.Log($"[STT_DEBUG] Received WebSocket message: {message}");
                 var response = JsonConvert.DeserializeObject<STTResponse>(message);
                 ProcessSTTResponse(response);
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error parsing STT response: {ex.Message}");
+                Debug.LogError($"[STT_DEBUG] Error parsing STT response: {ex.Message}\nMessage: {message}");
             }
         }
 

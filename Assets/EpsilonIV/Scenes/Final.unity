@@ -9260,6 +9260,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: World4 1 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4904055740608882304, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5569803713262259123, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
       propertyPath: m_Mesh
@@ -22333,6 +22338,11 @@ PrefabInstance:
       propertyPath: stateManager
       value: 
       objectReference: {fileID: 7136807251424039993}
+    - target: {fileID: 2691103569470417552, guid: 03ec2b0927d0e1a45998951dd14cb353,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4544346333639318332, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: player2STT
@@ -23810,7 +23820,7 @@ MonoBehaviour:
   sttEnabled: 1
   heartbeatInterval: 5
   enableVAD: 0
-  enableInterimResults: 0
+  enableInterimResults: 1
   enableAutoReconnection: 1
   maxReconnectionAttempts: 5
   baseReconnectionDelay: 1
