@@ -119,12 +119,10 @@ namespace EpsilonIV
             if (slider != null)
             {
                 slider.value = currentLevel;
-                Debug.Log($"[DecibelMeter] Updated slider value to {currentLevel}");
             }
             else if (fillImage != null)
             {
                 fillImage.fillAmount = currentLevel;
-                Debug.Log($"[DecibelMeter] Updated fillImage.fillAmount to {currentLevel}, Image type: {fillImage.type}");
             }
 
             // Update color zones
