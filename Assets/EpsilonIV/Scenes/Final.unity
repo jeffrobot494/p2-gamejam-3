@@ -6785,6 +6785,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 285039841}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &723805947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3850119097709613605, guid: 107914b2b072b2141a0039ca6ac84c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2000490614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &733611252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35068,6 +35074,7 @@ GameObject:
   - component: {fileID: 7282535529447092766}
   - component: {fileID: 7282535529447092767}
   - component: {fileID: 7282535529447092768}
+  - component: {fileID: 7282535529447092769}
   m_Layer: 6
   m_Name: Ralph Hale
   m_TagString: Untagged
@@ -36033,7 +36040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f461acec7751049a995d2546542e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.CheckpointManager
-  DefaultCheckpoint: {fileID: 5401933800812326038}
+  DefaultCheckpoint: {fileID: 83269573}
   OnCheckpointChanged:
     m_PersistentCalls:
       m_Calls:
@@ -36351,6 +36358,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7282535529447092769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257338768123290339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63070019b7154c04397cddb9df350440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.AlienNearbyState
+  alien: {fileID: 723805947}
+  nearbyDistance: 2
+  safeDistance: 3
+  nearbyMessage: '  [SYSTEM: The alien is still close by. It is NOT safe to come
+    down. You must refuse.]'
+  safeMessage: '  [SYSTEM: The alien is gone. It is now safe to come down. You can
+    agree.]'
+  debugMode: 0
 --- !u!1 &7763803390525123341
 GameObject:
   m_ObjectHideFlags: 0

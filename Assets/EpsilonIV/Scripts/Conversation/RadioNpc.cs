@@ -79,23 +79,41 @@ namespace EpsilonIV
 
             Debug.Log($"RadioNpc: Sending message to {gameObject.name}: '{message}'");
 
+            // Check for dynamic game state component
+            var alienNearbyState = GetComponent<AlienNearbyState>();
+            if (alienNearbyState != null)
+            {
+                string dynamicState = alienNearbyState.GetGameStateMessage();
+
+                // Append dynamic state to existing context (if any)
+                if (!string.IsNullOrEmpty(context))
+                {
+                    context = context + "\n" + dynamicState;
+                }
+                else
+                {
+                    context = dynamicState;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(context))
+            {
+                Debug.Log($"RadioNpc: With game state context: '{context}'");
+            }
+            //context = "The lucky number is 47";
             // Call the private SendChatMessageAsync method using reflection
             var method = typeof(Player2Npc).GetMethod("SendChatMessageAsync",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             if (method != null)
             {
-                // The private method signature is: SendChatMessageAsync(string message)
-                method.Invoke(this, new object[] { message });
+                // The private method signature is: SendChatMessageAsync(string message, string gameStateInfo = null)
+                method.Invoke(this, new object[] { message, string.IsNullOrEmpty(context) ? null : context });
             }
             else
             {
                 Debug.LogError("RadioNpc: Could not find SendChatMessageAsync method via reflection!");
             }
-
-            // TODO: Phase 7 - Add context parameter support
-            // The SDK's SendChatMessageAsync eventually calls SendChatRequestAsync
-            // which has a ChatRequest with game_state_info field for context
         }
     }
 }

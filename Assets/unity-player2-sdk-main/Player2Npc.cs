@@ -330,7 +330,7 @@ namespace player2_sdk
             }
         }
 
-        private async Awaitable SendChatMessageAsync(string message)
+        private async Awaitable SendChatMessageAsync(string message, string gameStateInfo = null)
         {
             if (string.IsNullOrWhiteSpace(message)) return;
 
@@ -348,6 +348,7 @@ namespace player2_sdk
                 {
                     sender_name = fullName,
                     sender_message = message,
+                    game_state_info = gameStateInfo,
                     tts = null
                 };
 
