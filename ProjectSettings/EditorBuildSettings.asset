@@ -23,18 +23,39 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/EpsilonIV/Scenes/ShaderTest.unity
     guid: beac16123d4d38c41b46b70a3e901560
+  - enabled: 0
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/OpeningScene01.unity
+    guid: 2409f327ca73c994a8aa3d18fc63fe35
+  - enabled: 0
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene02.unity
+    guid: 02f870d36bbb7254c921e9bfaa7d2ad6
+  - enabled: 0
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AcceptMenuScene03.unity
+    guid: 24d66cbfd47386f4190f52e08ae8e9cf
+  - enabled: 0
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene04.unity
+    guid: 8edf7b4e5af83784d92d454dc0ab6826
+  - enabled: 1
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/OpeningScene.unity
+    guid: 4b390a1e730a9a840b4b54007442d564
+  - enabled: 1
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene.unity
+    guid: 2deb6ae57f54553408b0991e3c48ef5c
+  - enabled: 1
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AcceptMenuScene.unity
+    guid: 448bfcd3a15c87943bca99d918316877
+  - enabled: 1
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene.unity
+    guid: 9912151faf4bcd94496b7e12ed9eec46
   - enabled: 1
     path: Assets/EpsilonIV/Scenes/Final.unity
     guid: c1f652a89482dbd40a82a6484294a418
+  - enabled: 1
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/CreditScene.unity
+    guid: 598b0f51e383e1445b183de4bc2cd307
   - enabled: 0
-    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/OpeningScene.unity
-    guid: 4b390a1e730a9a840b4b54007442d564
-  - enabled: 0
-    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene.unity
-    guid: 2deb6ae57f54553408b0991e3c48ef5c
-  - enabled: 0
-    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene.unity
-    guid: 9912151faf4bcd94496b7e12ed9eec46
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/CreditScene05.unity
+    guid: c672b14749762174f9cd00e4b44abc88
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 05b4aeda8533b704f9be24b556a43d98,
       type: 3}

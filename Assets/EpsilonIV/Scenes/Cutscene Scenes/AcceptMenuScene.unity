@@ -521,7 +521,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 54099e4fc81e9d140a62b47a017068b8, type: 2}
   m_InitialState: 1
-  m_WrapMode: 1
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneEndSceneLoader
   director: {fileID: 1052480584}
-  nextSceneName: StartMenuScene
+  nextSceneName: AfterStartMenuScene
 --- !u!1 &1174253421
 GameObject:
   m_ObjectHideFlags: 0
