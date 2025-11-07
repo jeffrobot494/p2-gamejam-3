@@ -180,6 +180,9 @@ namespace EpsilonIV
 
         private void PlaySound(AudioClip clip)
         {
+
+            Debug.Log("Playing sound");
+            Debug.Log(clip);
             if (clip != null && m_AudioSource != null) m_AudioSource.PlayOneShot(clip);
         }
     }

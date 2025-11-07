@@ -4778,6 +4778,21 @@ PrefabInstance:
       propertyPath: IsLocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: OpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 25fd9469088855d488d333cd3271338b, type: 3}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: CloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 25fd9469088855d488d333cd3271338b, type: 3}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: LockedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 25fd9469088855d488d333cd3271338b, type: 3}
     - target: {fileID: 6287181075203528632, guid: ff9e1763abe892245964219061c4d5f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5817,6 +5832,21 @@ PrefabInstance:
       propertyPath: IsLocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: OpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: CloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
+    - target: {fileID: 5979937457993863887, guid: ff9e1763abe892245964219061c4d5f4,
+        type: 3}
+      propertyPath: LockedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 25fd9469088855d488d333cd3271338b, type: 3}
     - target: {fileID: 6287181075203528632, guid: ff9e1763abe892245964219061c4d5f4,
         type: 3}
       propertyPath: m_LocalScale.z
@@ -18677,6 +18707,16 @@ PrefabInstance:
       propertyPath: IsLocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2610581453714204972, guid: fdff9f77fa1bda04b87bc7c59c4793ea,
+        type: 3}
+      propertyPath: OpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
+    - target: {fileID: 2610581453714204972, guid: fdff9f77fa1bda04b87bc7c59c4793ea,
+        type: 3}
+      propertyPath: CloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
     - target: {fileID: 3022930912069931519, guid: fdff9f77fa1bda04b87bc7c59c4793ea,
         type: 3}
       propertyPath: m_Name
@@ -23207,6 +23247,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 681658572}
     m_Modifications:
+    - target: {fileID: 130170728095630428, guid: d97bd5999c7580c4b8dddb5699118449,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1504710947038544323, guid: d97bd5999c7580c4b8dddb5699118449,
         type: 3}
       propertyPath: player
@@ -23217,6 +23262,11 @@ PrefabInstance:
       propertyPath: targetLocation
       value: 
       objectReference: {fileID: 1224586303}
+    - target: {fileID: 4325039635407665108, guid: d97bd5999c7580c4b8dddb5699118449,
+        type: 3}
+      propertyPath: movingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 36a7b2618014e464f980e152175856bf, type: 3}
     - target: {fileID: 4967430505430780013, guid: d97bd5999c7580c4b8dddb5699118449,
         type: 3}
       propertyPath: player
@@ -23286,6 +23336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145442411331055253, guid: d97bd5999c7580c4b8dddb5699118449,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 54.93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
