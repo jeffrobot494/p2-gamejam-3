@@ -251,7 +251,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 9.516666
-        value: {x: 0, y: -148.711, z: 0}
+        value: {x: 0, y: -151.197, z: 0}
         inSlope: {x: Infinity, y: Infinity, z: Infinity}
         outSlope: {x: Infinity, y: Infinity, z: Infinity}
         tangentMode: 0
@@ -259,7 +259,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: {x: 0, y: -151.197, z: 0}
         inSlope: {x: Infinity, y: Infinity, z: Infinity}
         outSlope: {x: Infinity, y: Infinity, z: Infinity}
@@ -340,7 +340,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 9.516666
-        value: {x: -2.7962646, y: -2.6899986, z: 319.05994}
+        value: {x: -2.7962646, y: -2.5499992, z: 319.25}
         inSlope: {x: Infinity, y: Infinity, z: Infinity}
         outSlope: {x: Infinity, y: Infinity, z: Infinity}
         tangentMode: 0
@@ -348,7 +348,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: {x: -2.7962646, y: -2.5499992, z: 319.25}
         inSlope: {x: Infinity, y: Infinity, z: Infinity}
         outSlope: {x: Infinity, y: Infinity, z: Infinity}
@@ -535,7 +535,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -602,7 +602,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 9.516666
-        value: -148.711
+        value: -151.197
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -610,7 +610,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: -151.197
         inSlope: Infinity
         outSlope: Infinity
@@ -685,7 +685,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -778,7 +778,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: -2.7962646
         inSlope: Infinity
         outSlope: Infinity
@@ -872,7 +872,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 9.516666
-        value: -2.6899986
+        value: -2.5499992
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -880,7 +880,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: -2.5499992
         inSlope: Infinity
         outSlope: Infinity
@@ -974,7 +974,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 9.516666
-        value: 319.05994
+        value: 319.25
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -982,7 +982,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 9.533334
+        time: 9.566667
         value: 319.25
         inSlope: Infinity
         outSlope: Infinity
@@ -1439,10 +1439,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.3833333333333333
-    m_ClipIn: 0
+    m_Start: 2.711188726623853
+    m_ClipIn: 1.3278553932905197
     m_Asset: {fileID: 7467776923364991239}
-    m_Duration: 21.116666666666667
+    m_Duration: 19.788811273376144
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3915715446721954750}
     m_EaseInDuration: 0
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 0.7
+    volume: 0.49
 --- !u!114 &-577351146158607929
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 0.7
+    volume: 0.49
 --- !u!114 &5005728998533183307
 MonoBehaviour:
   m_ObjectHideFlags: 1
