@@ -34882,6 +34882,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 235306208153406361, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
+      propertyPath: crouchWalkingLoudness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 235306208153406361, guid: 03ec2b0927d0e1a45998951dd14cb353,
+        type: 3}
       propertyPath: crouchWalkingSfxFrequency
       value: 0.5
       objectReference: {fileID: 0}
@@ -35925,7 +35930,7 @@ MonoBehaviour:
   fullName: 
   characterDescription: 
   systemPrompt: 
-  voiceId: 01955d76-ed5b-7655-98bb-fd7578af9617
+  voiceId: 01955d76-ed5b-7606-9e21-8b236fbe12a8
   survivorProfile: {fileID: 11400000, guid: 4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a, type: 2}
   inputField: {fileID: 0}
   outputMessage: {fileID: 0}
@@ -36040,7 +36045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f461acec7751049a995d2546542e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.CheckpointManager
-  DefaultCheckpoint: {fileID: 83269573}
+  DefaultCheckpoint: {fileID: 342020891}
   OnCheckpointChanged:
     m_PersistentCalls:
       m_Calls:

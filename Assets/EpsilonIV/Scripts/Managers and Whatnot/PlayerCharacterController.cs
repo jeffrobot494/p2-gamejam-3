@@ -12,6 +12,7 @@ namespace EpsilonIV
         CrouchWalking,
         InAir
     }
+
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
     public class PlayerCharacterController : MonoBehaviour
     {
@@ -97,6 +98,10 @@ namespace EpsilonIV
         public bool HasJumpedThisFrame { get; private set; }
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
+
+        private ElevatorController currentElevator;
+        private float elevatorYOffset; // Player's Y offset from elevator surface
+
 
         public float RotationMultiplier
         {
@@ -207,6 +212,49 @@ namespace EpsilonIV
             HandleCharacterMovement();
 
             UpdateMovementState();
+
+            if (currentElevator != null && !IsGrounded)
+            {
+                currentElevator = null;
+            }
+        }
+
+        void LateUpdate()
+        {
+            // Snap player Y position to elevator to prevent jitter
+            if (currentElevator != null && IsGrounded && !HasJumpedThisFrame)
+            {
+                // Snap Y position to elevator using the stored offset, apply XZ delta for diagonal movement
+                Vector3 newPosition = transform.position;
+                newPosition.y = currentElevator.transform.position.y + elevatorYOffset;
+                newPosition.x += currentElevator.DeltaMovement.x;
+                newPosition.z += currentElevator.DeltaMovement.z;
+
+                transform.position = newPosition;
+
+                Debug.Log($"Snapped to elevator Y: {newPosition.y}, Offset: {elevatorYOffset}, Delta: {currentElevator.DeltaMovement}");
+            }
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            // Check if the collider has an elevator
+            ElevatorController elevator = hit.collider.GetComponent<ElevatorController>();
+            if (elevator != null)
+            {
+                // First time landing on this elevator - calculate offset
+                if (currentElevator != elevator)
+                {
+                    currentElevator = elevator;
+                    // Store the current Y distance from elevator surface
+                    elevatorYOffset = transform.position.y - elevator.transform.position.y;
+                    Debug.Log($"Landed on elevator, Y offset: {elevatorYOffset}");
+                }
+            }
+            else if (hit.moveDirection.y > 0.1f) // e.g., hitting ceiling, clear reference
+            {
+                currentElevator = null;
+            }
         }
 
         void OnDie()
@@ -252,8 +300,8 @@ namespace EpsilonIV
                     {
                         IsGrounded = true;
 
-                        // handle snapping to the ground
-                        if (hit.distance > m_Controller.skinWidth)
+                        // handle snapping to the ground (but not on elevators - LateUpdate handles that)
+                        if (hit.distance > m_Controller.skinWidth && currentElevator == null)
                         {
                             m_Controller.Move(Vector3.down * hit.distance);
                         }
