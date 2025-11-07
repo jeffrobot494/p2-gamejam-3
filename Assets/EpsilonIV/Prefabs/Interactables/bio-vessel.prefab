@@ -4848,6 +4848,7 @@ GameObject:
   - component: {fileID: 8617385523692166485}
   - component: {fileID: 7455059269388273869}
   - component: {fileID: 7229547434009646012}
+  - component: {fileID: 6613450590648553967}
   m_Layer: 6
   m_Name: model
   m_TagString: Untagged
@@ -4956,6 +4957,32 @@ CapsuleCollider:
   m_Height: 3.46
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6613450590648553967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531328589315054143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf4768687154494ea7bd1806d7ee94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.ScheduledSoundEmitter
+  triggerMode: 3
+  triggerTag: Player
+  scheduledSounds:
+  - clip: {fileID: 8300000, guid: 9b93b118d808d7b429187aaa6a5d630f, type: 3}
+    volume: 1
+    loudness: 1
+    quality: 0.25
+    delay: 0
+    loop: 0
+    repeatInterval: 0
+  interactionPrompt: '[E] ACTIVATE'
+  singleUse: 0
+  interactionCooldown: 0
+  debugMode: 0
 --- !u!1 &2901265921794974046
 GameObject:
   m_ObjectHideFlags: 0
