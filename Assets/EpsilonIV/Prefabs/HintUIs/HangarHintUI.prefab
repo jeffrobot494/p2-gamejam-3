@@ -11,10 +11,8 @@ PrefabInstance:
     - target: {fileID: 1871583371687903003, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_text
-      value: 'Some workers are panicked.
-
-        you might need to calm them down
-        before they can help you.'
+      value: talk to workers using ur radio or chat. Gather info from them, and rescue
+        them to win.
       objectReference: {fileID: 0}
     - target: {fileID: 3181586952567502930, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
@@ -65,7 +63,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b0d41a0cc0551d4418c6514de4bdce2c,
+      objectReference: {fileID: 21300000, guid: 597df0dc896e3ad4881a69295b9ac676,
         type: 3}
     - target: {fileID: 4480434562287515632, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
@@ -125,17 +123,17 @@ PrefabInstance:
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.01
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.01
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.01
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
@@ -150,52 +148,52 @@ PrefabInstance:
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 435.491
+      value: 402.09692
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8377892
+      value: -0.6997218
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.031431958
+      value: 0.09832364
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5447052
+      value: 0.70102704
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.02043611
+      value: 0.096348934
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -118.102
+      value: -186.705
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 72.256
+      value: 32.05
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -4.297
+      value: -15.824
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 66.061
+      value: 269.86798
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 6882609953227928312, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
@@ -205,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 7688613042808064032, guid: 773a9985db4677344bec48e5c8773e60,
         type: 3}
       propertyPath: m_Name
-      value: HintUI Variant
+      value: HangarHintUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
