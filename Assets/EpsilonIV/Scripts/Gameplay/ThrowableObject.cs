@@ -12,6 +12,8 @@ public class ThrowableObject : MonoBehaviour, IInteractable
 
     [Header("Sound Emission")]
     [Tooltip("Minimum impact velocity to emit sound (m/s)")]
+
+    [SerializeField] private AudioClip impactSound;
     [SerializeField] private float minImpactVelocity = 1f;
 
     [Tooltip("Maximum impact velocity for loudness scaling (m/s)")]
@@ -69,6 +71,12 @@ public class ThrowableObject : MonoBehaviour, IInteractable
             // Emit sound
             if (soundEmitter != null)
             {
+                AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
+                if (audioSource != null && impactSound != null)
+                {
+                    audioSource.PlayOneShot(impactSound, loudness);
+                }
+
                 soundEmitter.EmitSound(loudness, soundQuality);
             }
 
