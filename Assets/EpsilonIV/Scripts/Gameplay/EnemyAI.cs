@@ -293,9 +293,14 @@ public class EnemyAI : MonoBehaviour
 
             if (distanceToSound <= leapAttack.GetAttackRange() && leapAttack.CanAttack(lastHeardSoundPosition))
             {
-                // Within attack range and ready - prepare to leap!
-                TransitionToState(EnemyState.PrepareAttack);
-                return;
+                // Check line of sight before preparing to leap
+                if (HasLineOfSightToTarget(lastHeardSoundPosition))
+                {
+                    // Within attack range, ready, and clear line of sight - prepare to leap!
+                    TransitionToState(EnemyState.PrepareAttack);
+                    return;
+                }
+                // else: no line of sight, continue hunting to get closer/around obstacle
             }
         }
 
@@ -530,6 +535,28 @@ public class EnemyAI : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(dir);
     }
 
+    /// <summary>
+    /// Checks if there's a clear line of sight from the alien to the target position.
+    /// Returns false if a wall/obstacle blocks the path.
+    /// </summary>
+    private bool HasLineOfSightToTarget(Vector3 targetPosition)
+    {
+        Vector3 startPos = transform.position;
+        Vector3 direction = (targetPosition - startPos).normalized;
+        float distance = Vector3.Distance(startPos, targetPosition);
+
+        // Raycast from alien to target
+        RaycastHit hit;
+        if (Physics.Raycast(startPos, direction, out hit, distance, overshootWallMask))
+        {
+            // Something is blocking the path
+            return false;
+        }
+
+        // Clear line of sight
+        return true;
+    }
+
 
     private void OnSoundHeard(float loudness, Vector3 soundPosition, float quality, Vector3 soundVelocity)
     {
@@ -580,6 +607,7 @@ public class EnemyAI : MonoBehaviour
     /// Calculates the final leap target with smart overshoot.
     /// Handles obstacles, terrain elevation, and pits/edges.
     /// Falls back to predicted position if overshoot is unsafe.
+    /// NOTE: Line of sight is checked before this function is called in UpdateHunting()
     /// </summary>
     private Vector3 CalculateLeapTarget(Vector3 predictedPosition)
     {
