@@ -9260,6 +9260,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: World4 1 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4904055740608882304, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5569803713262259123, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
       propertyPath: m_Mesh

@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 632313602929135449}
   - component: {fileID: 4544346333639318332}
   - component: {fileID: 7167687074806374810}
+  - component: {fileID: 2172852255940827940}
   m_Layer: 0
   m_Name: Player Variant 1
   m_TagString: Player
@@ -913,7 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.PlayerSoundController
   audioSource: {fileID: 4263304860145848474}
-  footstepSfx: {fileID: 8300000, guid: f404f8d3c2a4b4f48989fb1120e78fb8, type: 3}
+  footstepSfx: {fileID: 0}
   jumpSfx: {fileID: 0}
   landSfx: {fileID: 0}
   fallDamageSfx: {fileID: 0}
@@ -1184,3 +1185,30 @@ MonoBehaviour:
   soundQuality: 1
   broadcastInterval: 0.3
   debugMode: 0
+--- !u!114 &2172852255940827940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219362002482182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ba2fc272517404699806fbf9aec271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
+  footstepsSource: {fileID: 4263304860145848474}
+  actionSource: {fileID: 4263304860145848474}
+  walkClips:
+  - {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
+  runClips:
+  - {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
+  crouchClips:
+  - {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
+  walkStepRate: 0.5
+  runStepRate: 0.3
+  crouchStepRate: 0.7
+  jumpClip: {fileID: 0}
+  landClip: {fileID: 0}
+  fallDamageClip: {fileID: 0}
+  footstepCooldown: 1
