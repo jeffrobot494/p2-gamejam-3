@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2009707271824038149}
-  - component: {fileID: 2885216259079495980}
   - component: {fileID: 5640758518048302728}
   m_Layer: 0
   m_Name: Audio Point
@@ -33,26 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2885216259079495980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6198102526808765860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eaba12589f8243418e681cf4d86e908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentSound
-  ambientClips: []
-  loop: 1
-  randomDelayRange: {x: 5, y: 10}
-  volume: 1
-  spatialBlend: 1
-  minDistance: 2
-  maxDistance: 20
-  rolloffMode: 0
 --- !u!82 &5640758518048302728
 AudioSource:
   m_ObjectHideFlags: 0
