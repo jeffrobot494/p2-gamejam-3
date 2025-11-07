@@ -252,7 +252,7 @@ namespace player2_sdk
                 spawnFullName = survivorProfile.displayName;
                 spawnCharDesc = survivorProfile.characterDescription;
                 spawnSystemPrompt = $"{survivorProfile.systemPrompt}\n{survivorProfile.knowledgeBase}";
-                spawnVoiceId = survivorProfile.voiceId;
+                spawnVoiceId = voiceId; // Always use Player2Npc's voiceId field
             }
             else
             {
