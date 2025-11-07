@@ -28,9 +28,6 @@ namespace EpsilonIV
             "You are [name], [description of personality and behavior]. " +
             "[How they communicate]. [Their current mental/emotional state].";
 
-        [Tooltip("Player2 TTS voice ID for this survivor")]
-        public string voiceId = "01955d76-ed5b-7451-92d6-5ef579d3ed28";
-
         [Header("Activation")]
         [Tooltip("Message sent to survivor when they become active (prompts their greeting). Leave empty for no automatic greeting.")]
         [TextArea(2, 5)]
