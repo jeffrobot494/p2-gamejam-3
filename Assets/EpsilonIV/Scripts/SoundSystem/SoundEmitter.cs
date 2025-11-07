@@ -51,8 +51,9 @@ public class SoundEmitter : MonoBehaviour
         // Use emitPosition if set, otherwise use this transform
         Vector3 soundPosition = emitPosition != null ? emitPosition.position : transform.position;
 
-        // Spawn the actual sound with velocity, capsule height, and rotation
-        Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity, capsuleHeight, transform.rotation);
+        // Spawn the actual sound with velocity, capsule height, and world-space rotation
+        // Always use Quaternion.identity to prevent rotated objects from casting sound in wrong direction
+        Sound.Spawn(soundPosition, loudness, quality, wallMask, wallPenalty, drawDebug, velocity, capsuleHeight, Quaternion.identity);
 
         // Fire the static event for decibel meter and other listeners
         OnAnySoundEmitted?.Invoke(loudness, quality, soundPosition);
