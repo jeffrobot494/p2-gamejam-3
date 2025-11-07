@@ -8,6 +8,7 @@ namespace EpsilonIV
     /// </summary>
     public class CreditsSceneController : MonoBehaviour
     {
+        
         [SerializeField] private TMP_Text messageText;
 
         [TextArea]
@@ -18,7 +19,11 @@ namespace EpsilonIV
 
         void Start()
         {
+            Debug.Log("[CreditsSceneController] Displaying credits message.");
+
             int success = PlayerPrefs.GetInt("MissionSuccess", 0);
+            Debug.Log($"[CreditsSceneController] MissionSuccess value: {success}");
+
             messageText.text = success == 1 ? successMessage : failureMessage;
 
             // Optional: clear PlayerPrefs so it doesn't persist between runs
