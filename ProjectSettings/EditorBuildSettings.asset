@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/EpsilonIV/Scenes/Cutscene Scenes/StartMenuScene.unity
     guid: 2deb6ae57f54553408b0991e3c48ef5c
   - enabled: 1
-    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AcceptMenuScene.unity
+    path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AcceptSOSScene.unity
     guid: 448bfcd3a15c87943bca99d918316877
   - enabled: 1
     path: Assets/EpsilonIV/Scenes/Cutscene Scenes/AfterStartMenuScene.unity

@@ -15,6 +15,15 @@ public class CutsceneEndSceneLoader : MonoBehaviour
         director.stopped += OnCutsceneEnd;
     }
 
+    void Update()
+    {
+        //if enter pressed, skip
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            OnCutsceneEnd(director);
+        }
+    }
+
     void OnCutsceneEnd(PlayableDirector obj)
     {
         SceneManager.LoadScene(nextSceneName);
