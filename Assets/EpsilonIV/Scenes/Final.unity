@@ -6225,11 +6225,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 568221566}
+    - target: {fileID: 1704607584435123891, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Name
+      value: ladderNew
+      objectReference: {fileID: 0}
     - target: {fileID: 2041511422883367934, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 851238963}
+    - target: {fileID: 2103933176000814655, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: LadderHeight
+      value: 0.92
+      objectReference: {fileID: 0}
     - target: {fileID: 3382310615632204734, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
       propertyPath: m_Mesh
@@ -9255,15 +9265,35 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 851238963}
+    - target: {fileID: 4235616862402347715, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 8.791397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235616862402347715, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.3128357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235616862402347715, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.2240659
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235616862402347715, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -4.4314775
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235616862402347715, guid: dcb7929fd08ea614a83005f7b0722f59,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.46671516
+      objectReference: {fileID: 0}
     - target: {fileID: 4904055740608882304, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
       propertyPath: m_Name
       value: World4 1 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904055740608882304, guid: dcb7929fd08ea614a83005f7b0722f59,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5569803713262259123, guid: dcb7929fd08ea614a83005f7b0722f59,
         type: 3}
@@ -16340,8 +16370,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.2315216, y: 8.362301, z: 28.800446}
-  m_Center: {x: -8.949135, y: 1.4498272, z: 2.0511627}
+  m_Size: {x: 3.7662811, y: 8.362301, z: 28.800446}
+  m_Center: {x: -9.181755, y: 1.4498272, z: 2.0511627}
 --- !u!4 &1605394399
 Transform:
   m_ObjectHideFlags: 0
@@ -22341,7 +22371,7 @@ PrefabInstance:
     - target: {fileID: 2691103569470417552, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: MaxHealth
-      value: 100
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4544346333639318332, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
@@ -22356,17 +22386,17 @@ PrefabInstance:
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -164.58
+      value: -196.06
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 71.84
+      value: 44.8
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 396.36
+      value: 390.88
       objectReference: {fileID: 0}
     - target: {fileID: 7884015444651373956, guid: 03ec2b0927d0e1a45998951dd14cb353,
         type: 3}
@@ -23820,7 +23850,7 @@ MonoBehaviour:
   sttEnabled: 1
   heartbeatInterval: 5
   enableVAD: 0
-  enableInterimResults: 1
+  enableInterimResults: 0
   enableAutoReconnection: 1
   maxReconnectionAttempts: 5
   baseReconnectionDelay: 1
