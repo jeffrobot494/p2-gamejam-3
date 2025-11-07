@@ -6,7 +6,7 @@ namespace EpsilonIV
 {
     /// <summary>
     /// Handles function calls from the Player2 LLM for the dangling survivor.
-    /// When the LLM decides the survivor is convinced to let go, it calls the "let_go" function.
+    /// When the LLM decides the survivor is convinced to come down, it calls the "come_down" function.
     /// This handler intercepts that call and triggers the DanglingSurvivor's LetGo() method.
     ///
     /// Setup Instructions:
@@ -65,7 +65,7 @@ namespace EpsilonIV
             // Route to appropriate handler based on function name
             switch (functionCall.name)
             {
-                case "let_go":
+                case "come_down":
                     HandleLetGo(functionCall);
                     break;
 
@@ -81,7 +81,7 @@ namespace EpsilonIV
         #region Private Methods
 
         /// <summary>
-        /// Handles the "let_go" function call from the LLM.
+        /// Handles the "come_down" function call from the LLM.
         /// This is invoked when the AI believes the survivor is convinced to come down.
         /// </summary>
         private void HandleLetGo(FunctionCall functionCall)
@@ -91,7 +91,7 @@ namespace EpsilonIV
 
             if (enableDebugLogging)
             {
-                Debug.Log($"[DanglingNpcFunctionHandler] LLM called let_go! Reason: '{reason}'");
+                Debug.Log($"[DanglingNpcFunctionHandler] LLM called come_down! Reason: '{reason}'");
             }
 
             // Trigger the survivor's LetGo method
@@ -128,12 +128,12 @@ namespace EpsilonIV
 
         #region Testing / Debug
 
-        [ContextMenu("Test: Simulate LLM Let Go Call")]
+        [ContextMenu("Test: Simulate LLM Come Down Call")]
         private void TestSimulateLetGo()
         {
             if (danglingSurvivor != null)
             {
-                Debug.Log("[DanglingNpcFunctionHandler] Simulating LLM let_go call for testing...");
+                Debug.Log("[DanglingNpcFunctionHandler] Simulating LLM come_down call for testing...");
                 danglingSurvivor.LetGo("Test call from context menu");
             }
             else
