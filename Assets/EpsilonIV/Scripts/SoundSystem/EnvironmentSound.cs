@@ -17,14 +17,6 @@ public class EnvironmentSound : MonoBehaviour
 
     [Range(0f, 1f)] 
     public float volume = 1f;
-
-    [Header("3D Sound Settings")]
-    [Range(0f, 1f)]
-    public float spatialBlend = 1f; // 1 = fully 3D
-    public float minDistance = 2f;
-    public float maxDistance = 20f;
-    public AudioRolloffMode rolloffMode = AudioRolloffMode.Logarithmic;
-
     private AudioSource source;
     private Coroutine playRoutine;
 
@@ -34,10 +26,6 @@ public class EnvironmentSound : MonoBehaviour
         source.playOnAwake = false;
         source.loop = loop;
         source.volume = volume;
-        source.spatialBlend = spatialBlend;
-        source.minDistance = minDistance;
-        source.maxDistance = maxDistance;
-        source.rolloffMode = rolloffMode;
     }
 
     private void Start()
