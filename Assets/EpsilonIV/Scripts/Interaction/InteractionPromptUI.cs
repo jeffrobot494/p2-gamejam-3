@@ -288,6 +288,18 @@ namespace EpsilonIV
             min -= Vector2.one * BracketPadding;
             max += Vector2.one * BracketPadding;
 
+            // Clamp to screen bounds to prevent brackets from going off-screen
+            // Add 10% margin from each edge
+            float screenWidth = Screen.width;
+            float screenHeight = Screen.height;
+            float marginX = screenWidth * 0.1f;
+            float marginY = screenHeight * 0.1f;
+
+            min.x = Mathf.Max(min.x, marginX);
+            min.y = Mathf.Max(min.y, marginY);
+            max.x = Mathf.Min(max.x, screenWidth - marginX);
+            max.y = Mathf.Min(max.y, screenHeight - marginY);
+
             // Calculate target positions
             m_TargetTopLeft = new Vector2(min.x, max.y);
             m_TargetTopRight = new Vector2(max.x, max.y);

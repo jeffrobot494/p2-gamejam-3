@@ -35868,7 +35868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f461acec7751049a995d2546542e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.CheckpointManager
-  DefaultCheckpoint: {fileID: 2601429283240151944}
+  DefaultCheckpoint: {fileID: 342020891}
   OnCheckpointChanged:
     m_PersistentCalls:
       m_Calls:
@@ -36294,6 +36294,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: bio-vessel
       objectReference: {fileID: 0}
+    - target: {fileID: 6613450590648553967, guid: 4d3c053123960ad4f9d35d8a83a46d88,
+        type: 3}
+      propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8365340344446722703, guid: 4d3c053123960ad4f9d35d8a83a46d88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36344,6 +36349,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8617385523692166485, guid: 4d3c053123960ad4f9d35d8a83a46d88,
+        type: 3}
+      propertyPath: OpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9b93b118d808d7b429187aaa6a5d630f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

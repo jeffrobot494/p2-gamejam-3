@@ -4902,7 +4902,7 @@ MonoBehaviour:
   OpenDistance2: 1.5
   RotationAxis2: {x: 0, y: 1, z: 0}
   RotationAngle2: 90
-  OpenSound: {fileID: 0}
+  OpenSound: {fileID: 8300000, guid: 9b93b118d808d7b429187aaa6a5d630f, type: 3}
   CloseSound: {fileID: 0}
   LockedSound: {fileID: 0}
   OnDoorOpened:
@@ -4982,7 +4982,7 @@ MonoBehaviour:
   interactionPrompt: '[E] ACTIVATE'
   singleUse: 0
   interactionCooldown: 0
-  debugMode: 0
+  debugMode: 1
 --- !u!1 &2901265921794974046
 GameObject:
   m_ObjectHideFlags: 0
