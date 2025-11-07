@@ -68,8 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 05e860512b5d40746ad0541388ad1d5e, type: 2}
-  - {fileID: 2100000, guid: 3441f6441092d3c459a48c3c48ea63c6, type: 2}
+  - {fileID: 2100000, guid: 543d3b837306d0242a6e77956ea4efa7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb920b872f51af245bec818bfdcc051e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrowableObject
+  impactSound: {fileID: 0}
   minImpactVelocity: 1
   maxImpactVelocity: 10
   minLoudness: 0.3
@@ -382,7 +382,6 @@ MonoBehaviour:
   debugRuntimePopups: 1
   debugSceneLabels: 1
   drawDebug: 0
-  emitAction: {fileID: 0}
   lastEmitLoudness: 0
   lastEmitQuality: 0
   lastEmitTime: 0
@@ -454,8 +453,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3441f6441092d3c459a48c3c48ea63c6, type: 2}
   - {fileID: 2100000, guid: e0a0c0c4352f51740b5ff1abd3b849a6, type: 2}
+  - {fileID: 2830586123353343259, guid: f4c0e6132b9bf9648a62081b59ac3bd5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
