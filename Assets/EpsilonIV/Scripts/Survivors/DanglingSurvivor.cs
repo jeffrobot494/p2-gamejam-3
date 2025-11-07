@@ -159,7 +159,7 @@ namespace EpsilonIV
 
         /// <summary>
         /// Survivor decides to let go and come down.
-        /// Called by the function handler when LLM calls the let_go function.
+        /// Called by the function handler when LLM calls the come_down function.
         /// </summary>
         /// <param name="reason">Optional reason why survivor decided to let go</param>
         public void LetGo(string reason = "I trust you")
