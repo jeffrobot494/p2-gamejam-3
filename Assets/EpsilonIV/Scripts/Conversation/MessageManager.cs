@@ -26,11 +26,6 @@ namespace EpsilonIV
         [Tooltip("Array of NPC GameObjects (each should have a RadioNpc component)")]
         public GameObject[] npcGameObjects;
 
-        [Header("STT Configuration")]
-        [Tooltip("Minimum recording duration in milliseconds (ensures server has time to process)")]
-        [Range(1000, 5000)]
-        public int minimumRecordingDurationMs = 3500;
-
         [Header("Events")]
         [Tooltip("Fired when player sends a message (text or voice)")]
         public UnityEvent<string> OnPlayerMessageSent;
@@ -38,10 +33,9 @@ namespace EpsilonIV
         [Tooltip("Fired when NPC response is received")]
         public UnityEvent<string, string> OnNpcResponseReceived;
 
-        // Phase 6 - STT state tracking
+        // STT state tracking
         private bool isRecordingVoice = false;
         private string bufferedTranscript = "";
-        private float recordingStartTime = 0f;
 
         void Awake()
         {
@@ -234,7 +228,6 @@ namespace EpsilonIV
             Debug.Log("MessageManager: Starting STT");
             isRecordingVoice = true;
             bufferedTranscript = "";
-            recordingStartTime = Time.time;
             player2STT.StartSTT();
         }
 
@@ -250,44 +243,20 @@ namespace EpsilonIV
                 return;
             }
 
-            Debug.Log("MessageManager: Stopping STT - waiting for final transcripts...");
-
-            // Wait a brief moment for any final transcripts to arrive before stopping
-            StartCoroutine(DelayedStopSTT());
-        }
-
-        private System.Collections.IEnumerator DelayedStopSTT()
-        {
-            // Calculate how long R was held
-            float elapsedTime = Time.time - recordingStartTime;
-            float minimumDuration = minimumRecordingDurationMs / 1000f;
-            float remainingTime = minimumDuration - elapsedTime;
-
-            // If R was released before minimum duration, wait to reach it
-            if (remainingTime > 0)
-            {
-                Debug.Log($"MessageManager: R held for {elapsedTime:F2}s, waiting {remainingTime:F2}s more to reach minimum {minimumDuration:F2}s");
-                yield return new WaitForSeconds(remainingTime);
-            }
-            else
-            {
-                Debug.Log($"MessageManager: R held for {elapsedTime:F2}s (>= minimum {minimumDuration:F2}s)");
-            }
-
-            Debug.Log($"MessageManager: Closing STT. Final buffer: '{bufferedTranscript}'");
+            Debug.Log("MessageManager: Stopping STT");
             isRecordingVoice = false;
             player2STT.StopSTT();
 
-            // Send the buffered transcript
+            // Send buffered transcript immediately
             if (!string.IsNullOrWhiteSpace(bufferedTranscript))
             {
-                Debug.Log($"MessageManager: Sending buffered transcript: '{bufferedTranscript}'");
+                Debug.Log($"MessageManager: Sending transcript: '{bufferedTranscript}'");
                 OnPlayerMessageSubmitted(bufferedTranscript);
                 bufferedTranscript = "";
             }
             else
             {
-                Debug.LogWarning("MessageManager: No transcript received after minimum duration");
+                Debug.LogWarning("MessageManager: No transcript to send");
             }
         }
 
@@ -305,26 +274,16 @@ namespace EpsilonIV
 
             Debug.Log($"MessageManager: STT transcript received: '{transcript}'");
 
-            // Buffer transcript while recording - don't send yet
+            // Always update buffer with latest transcript while recording
             if (isRecordingVoice)
             {
-                // Append to buffer (handles multiple utterances during one recording)
-                if (!string.IsNullOrWhiteSpace(bufferedTranscript))
-                {
-                    bufferedTranscript += " " + transcript;
-                    Debug.Log($"MessageManager: Appending to buffer: '{transcript}'");
-                }
-                else
-                {
-                    bufferedTranscript = transcript;
-                    Debug.Log($"MessageManager: Starting buffer: '{transcript}'");
-                }
-                Debug.Log($"MessageManager: Full buffered transcript: '{bufferedTranscript}'");
+                bufferedTranscript = transcript; // Replace buffer with latest (not append)
+                Debug.Log($"MessageManager: Updated transcript buffer: '{bufferedTranscript}'");
             }
             else
             {
-                // If not recording, send immediately (edge case: late transcript after stop)
-                Debug.Log($"MessageManager: Received transcript after recording stopped, sending immediately");
+                // Late transcript after recording stopped, send immediately
+                Debug.Log($"MessageManager: Received transcript after stop, sending immediately");
                 OnPlayerMessageSubmitted(transcript);
             }
         }

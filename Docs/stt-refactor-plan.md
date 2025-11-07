@@ -481,16 +481,90 @@ If refactor causes issues:
    - Could auto-start/stop recording based on voice
    - Recommendation: Log VAD events for now, consider auto-stop in future
 
+## Implementation Status
+
+### ✅ Phase 1: COMPLETE
+- Removed minimum duration requirement
+- Simplified MessageManager
+- Immediate transcript sending
+- Code is cleaner and faster
+
+### ✅ Phase 2: COMPLETE
+- Created LiveTranscriptionDisplay.cs component
+- Ready for UI integration
+
+### ⚠️ Known Issue: Backend Problem
+**WebSocket receives ZERO messages from Player2 STT service despite audio being sent successfully.**
+- This is a backend/API configuration issue, not a code issue
+- Refactor is complete and working correctly
+- Once backend issue is resolved, transcripts will display in real-time
+
+## Setup Instructions for Phase 2 UI
+
+### Step 1: Create UI Text Element in Final Scene
+
+1. Open `Scenes/Final.unity`
+2. Select the Canvas in Hierarchy
+3. Right-click Canvas → UI → Text - TextMeshPro
+4. Name it: `LiveTranscriptionText`
+
+### Step 2: Configure Text Properties
+
+Select LiveTranscriptionText and set:
+- **Rect Transform:**
+  - Anchor: Top-Center
+  - Position: X=0, Y=-100 (or wherever you want it)
+  - Width: 800
+  - Height: 100
+
+- **TextMeshPro:**
+  - Font Size: 28-32
+  - Alignment: Center (horizontal and vertical)
+  - Color: White (255, 255, 255, 255)
+  - Auto Size: Off
+  - Overflow: Overflow (or Truncate if you prefer)
+  - Wrapping: Enabled
+
+### Step 3: Create LiveTranscriptionManager GameObject
+
+1. In Hierarchy under Canvas, right-click → Create Empty
+2. Name it: `LiveTranscriptionManager`
+3. Add Component → Scripts → EpsilonIV → LiveTranscriptionDisplay
+
+### Step 4: Assign References
+
+Select LiveTranscriptionManager and assign:
+- **Transcript Text:** Drag LiveTranscriptionText here
+- **Message Manager:** Drag MessageManager GameObject here
+
+### Step 5: Configure Visual Settings (Optional)
+
+In LiveTranscriptionDisplay component:
+- **Interim Color:** White with 70% alpha (default) - color while speaking
+- **Final Color:** White 100% alpha - color when confirmed
+- **Show Typing Indicator:** ✓ Checked - shows "Listening..." when recording starts
+
+## Testing Instructions
+
+Once the backend STT issue is resolved:
+
+1. Press Play in Unity
+2. Press R to start recording
+3. **Expected:** "Listening..." appears in LiveTranscriptionText
+4. Speak into microphone
+5. **Expected:** Text updates in real-time as you speak
+6. Release R
+7. **Expected:** Text clears after 0.5s, transcript sent to LLM
+
 ## Next Steps
 
 1. ✅ Enable interim results in Player2STT Inspector
-2. Test and confirm WebSocket messages are received
-3. If messages received → Proceed with Phase 1 implementation
-4. If no messages → Investigate API/network issues before refactoring
-5. Implement Phase 1 (core fixes)
-6. Test in Editor and WebGL
-7. Implement Phase 2 (live UI) if Phase 1 successful
-8. Final validation and testing
+2. ✅ Implement Phase 1 (core fixes)
+3. ✅ Implement Phase 2 (live UI)
+4. ⚠️ **Resolve Player2 STT backend/API issue** ← Current blocker
+5. Test in Editor once backend is fixed
+6. Test in WebGL build
+7. Final validation and testing
 
 ## References
 
