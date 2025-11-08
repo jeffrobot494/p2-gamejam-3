@@ -88,10 +88,12 @@ namespace EpsilonIV
 
         void Start()
         {
+
+            base.Start();
+
             if (debugMode)
                 Debug.Log($"[DanglingSurvivor] Start() called on {gameObject.name}");
 
-            // Note: Survivor.Start() runs automatically, we don't need to call it
             // Auto-find components if not assigned
             if (animator == null)
             {
