@@ -78,7 +78,7 @@ namespace EpsilonIV
         [Tooltip("Minimun fall speed for recieving fall damage")]
         public float MinSpeedForFallDamage = 10f;
 
-        [Tooltip("Fall speed for recieving th emaximum amount of fall damage")]
+        [Tooltip("Fall speed for recieving the maximum amount of fall damage")]
         public float MaxSpeedForFallDamage = 30f;
 
         [Tooltip("Damage recieved when falling at the mimimum speed")]
@@ -99,19 +99,7 @@ namespace EpsilonIV
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
 
-        private ElevatorController currentElevator;
-        private float elevatorYOffset; // Player's Y offset from elevator surface
-
-
-        public float RotationMultiplier
-        {
-            get
-            {
-                // Removed weapons manager dependency
-                // TODO: Re-implement aiming rotation if needed
-                return 1f;
-            }
-        }
+        public float RotationMultiplier => 1f;
 
         Health m_Health;
         PlayerInputHandler m_InputHandler;
@@ -131,14 +119,10 @@ namespace EpsilonIV
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
 
-        void Awake()
-        {
-            // Removed ActorsManager dependency - not needed
-        }
+        void Awake() { }
 
         void Start()
         {
-            // fetch components on the same gameObject
             m_Controller = GetComponent<CharacterController>();
             if (m_Controller == null)
                 Debug.LogError($"Missing CharacterController component on {gameObject.name}");
@@ -152,23 +136,18 @@ namespace EpsilonIV
                 Debug.LogError($"Missing Health component on {gameObject.name}");
 
             m_LadderController = GetComponent<PlayerLadderController>();
-            // Ladder controller is optional, so no error check
-
             m_StaminaManager = GetComponent<SprintStaminaManager>();
-            // Stamina manager is optional, if not present sprinting has no stamina limitation
 
             m_Controller.enableOverlapRecovery = true;
 
             m_Health.OnDie += OnDie;
 
-            // force the crouch state to false when starting
             SetCrouchingState(false, true);
             UpdateCharacterHeight(true);
         }
 
         void Update()
         {
-            // check for Y kill
             if (!IsDead && transform.position.y < KillHeight)
             {
                 m_Health.Kill();
@@ -176,17 +155,14 @@ namespace EpsilonIV
 
             HasJumpedThisFrame = false;
 
-            // Skip ground check if on ladder
             bool wasGrounded = IsGrounded;
             if (m_LadderController == null || !m_LadderController.IsOnLadder)
             {
                 GroundCheck();
             }
 
-            // landing
             if (IsGrounded && !wasGrounded)
             {
-                // Fall damage
                 float fallSpeed = -Mathf.Min(CharacterVelocity.y, m_LatestImpactSpeed.y);
                 float fallSpeedRatio = (fallSpeed - MinSpeedForFallDamage) /
                                        (MaxSpeedForFallDamage - MinSpeedForFallDamage);
@@ -194,83 +170,29 @@ namespace EpsilonIV
                 {
                     float dmgFromFall = Mathf.Lerp(FallDamageAtMinSpeed, FallDamageAtMaxSpeed, fallSpeedRatio);
                     m_Health.TakeDamage(dmgFromFall, null);
-
-                    // Invoke fall damage event
                     OnFallDamage?.Invoke();
                 }
                 else
                 {
-                    // Invoke land event
                     OnLanded?.Invoke();
                 }
             }
 
-            // crouching
             if (m_InputHandler.GetCrouchInputDown())
             {
                 SetCrouchingState(!IsCrouching, false);
             }
 
             UpdateCharacterHeight(false);
-
             HandleCharacterMovement();
-
             UpdateMovementState();
-
-            if (currentElevator != null && !IsGrounded)
-            {
-                currentElevator = null;
-            }
-        }
-
-        void LateUpdate()
-        {
-            // Snap player Y position to elevator to prevent jitter
-            if (currentElevator != null && IsGrounded && !HasJumpedThisFrame)
-            {
-                // Snap Y position to elevator using the stored offset, apply XZ delta for diagonal movement
-                Vector3 newPosition = transform.position;
-                newPosition.y = currentElevator.transform.position.y + elevatorYOffset;
-                newPosition.x += currentElevator.DeltaMovement.x;
-                newPosition.z += currentElevator.DeltaMovement.z;
-
-                transform.position = newPosition;
-
-                Debug.Log($"Snapped to elevator Y: {newPosition.y}, Offset: {elevatorYOffset}, Delta: {currentElevator.DeltaMovement}");
-            }
-        }
-
-        private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            // Check if the collider has an elevator
-            ElevatorController elevator = hit.collider.GetComponent<ElevatorController>();
-            if (elevator != null)
-            {
-                // First time landing on this elevator - calculate offset
-                if (currentElevator != elevator)
-                {
-                    currentElevator = elevator;
-                    // Store the current Y distance from elevator surface
-                    elevatorYOffset = transform.position.y - elevator.transform.position.y;
-                    Debug.Log($"Landed on elevator, Y offset: {elevatorYOffset}");
-                }
-            }
-            else if (hit.moveDirection.y > 0.1f) // e.g., hitting ceiling, clear reference
-            {
-                currentElevator = null;
-            }
         }
 
         void OnDie()
         {
             IsDead = true;
-
-            // Death is handled by DeathManager which subscribes to Health.OnDie
         }
 
-        /// <summary>
-        /// Resets the death state (called by DeathManager on respawn)
-        /// </summary>
         public void ResetDeathState()
         {
             IsDead = false;
@@ -278,34 +200,26 @@ namespace EpsilonIV
 
         void GroundCheck()
         {
-            // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
             float chosenGroundCheckDistance =
                 IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
 
-            // reset values before the ground check
             IsGrounded = false;
             m_GroundNormal = Vector3.up;
 
-            // only try to detect ground if it's been a short amount of time since last jump; otherwise we may snap to the ground instantly after we try jumping
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
-                // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
                 if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
                     m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))
                 {
-                    // storing the upward direction for the surface found
                     m_GroundNormal = hit.normal;
 
-                    // Only consider this a valid ground hit if the ground normal goes in the same direction as the character up
-                    // and if the slope angle is lower than the character controller's limit
                     if (Vector3.Dot(hit.normal, transform.up) > 0f &&
                         IsNormalUnderSlopeLimit(m_GroundNormal))
                     {
                         IsGrounded = true;
 
-                        // handle snapping to the ground (but not on elevators - LateUpdate handles that)
-                        if (hit.distance > m_Controller.skinWidth && currentElevator == null)
+                        if (hit.distance > m_Controller.skinWidth)
                         {
                             m_Controller.Move(Vector3.down * hit.distance);
                         }
@@ -316,62 +230,20 @@ namespace EpsilonIV
 
         void HandleCharacterMovement()
         {
-            // Skip normal movement if on ladder
             if (m_LadderController != null && m_LadderController.IsOnLadder)
             {
-                // Still allow camera rotation
-                // vertical camera rotation
-                {
-                    // add vertical inputs to the camera's vertical angle
-                    m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * RotationSpeed * RotationMultiplier;
-
-                    // limit the camera's vertical angle to min/max
-                    m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
-
-                    // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
-                    PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
-                }
-
-                // horizontal character rotation
-                {
-                    // rotate the transform with the input speed around its local Y axis
-                    transform.Rotate(
-                        new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier),
-                            0f), Space.Self);
-                }
-
-                return; // Skip the rest of normal movement
+                HandleCameraRotation();
+                return;
             }
 
-            // horizontal character rotation
-            {
-                // rotate the transform with the input speed around its local Y axis
-                transform.Rotate(
-                    new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier),
-                        0f), Space.Self);
-            }
+            HandleCameraRotation();
 
-            // vertical camera rotation
-            {
-                // add vertical inputs to the camera's vertical angle
-                m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * RotationSpeed * RotationMultiplier;
-
-                // limit the camera's vertical angle to min/max
-                m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
-
-                // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
-                PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
-            }
-
-            // character movement handling
             bool isSprinting = m_InputHandler.GetSprintInputHeld();
             {
                 if (isSprinting)
                 {
-                    // Can only sprint when moving forward (or forward+strafe)
                     Vector3 moveInput = m_InputHandler.GetMoveInput();
-                    bool isMovingForward = moveInput.z > 0f; // z is forward/backward axis
-
+                    bool isMovingForward = moveInput.z > 0f;
                     if (!isMovingForward)
                     {
                         isSprinting = false;
@@ -381,15 +253,12 @@ namespace EpsilonIV
                         isSprinting = SetCrouchingState(false, false);
                     }
 
-                    // Check stamina system if present
                     if (isSprinting && m_StaminaManager != null)
                     {
-                        // If we're trying to start sprinting, check if we can
                         if (!m_IsSprinting && !m_StaminaManager.CanSprint())
                         {
                             isSprinting = false;
                         }
-                        // If stamina is depleted mid-sprint, stop
                         else if (m_IsSprinting && m_StaminaManager.GetStaminaPercent() <= 0f)
                         {
                             isSprinting = false;
@@ -397,126 +266,93 @@ namespace EpsilonIV
                     }
                 }
 
-                // Update stamina manager state
                 if (m_StaminaManager != null)
                 {
                     if (isSprinting && !m_IsSprinting)
-                    {
-                        // Starting to sprint
                         m_StaminaManager.StartSprinting();
-                    }
                     else if (!isSprinting && m_IsSprinting)
-                    {
-                        // Stopped sprinting
                         m_StaminaManager.StopSprinting();
-                    }
-                    else if (isSprinting && m_IsSprinting)
-                    {
-                        // Continue sprinting (stamina drains automatically in SprintStaminaManager.Update)
-                    }
                 }
 
                 m_IsSprinting = isSprinting;
-
                 float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
 
-                // converts move input to a worldspace vector based on our character's transform orientation
                 Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
-                // handle grounded movement
                 if (IsGrounded)
                 {
-                    // calculate the desired velocity from inputs, max speed, and current slope
                     Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
-                    // reduce speed if crouching by crouch speed ratio
                     if (IsCrouching)
                         targetVelocity *= MaxSpeedCrouchedRatio;
+
                     targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) *
                                      targetVelocity.magnitude;
 
-                    // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
                     CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity,
                         MovementSharpnessOnGround * Time.deltaTime);
 
-                    // jumping
                     if (IsGrounded && m_InputHandler.GetJumpInputDown())
                     {
-                        // force the crouch state to false
                         if (SetCrouchingState(false, false))
                         {
-                            // start by canceling out the vertical component of our velocity
                             CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
-
-                            // then, add the jumpSpeed value upwards
                             CharacterVelocity += Vector3.up * JumpForce;
-
-                            // Invoke jump event
                             OnJumped?.Invoke();
-
-                            // remember last time we jumped because we need to prevent snapping to ground for a short time
                             m_LastTimeJumped = Time.time;
                             HasJumpedThisFrame = true;
-
-                            // Force grounding to false
                             IsGrounded = false;
                             m_GroundNormal = Vector3.up;
                         }
                     }
                 }
-                // handle air movement
                 else
                 {
-                    // add air acceleration
                     CharacterVelocity += worldspaceMoveInput * AccelerationSpeedInAir * Time.deltaTime;
-
-                    // limit air speed to a maximum, but only horizontally
                     float verticalVelocity = CharacterVelocity.y;
                     Vector3 horizontalVelocity = Vector3.ProjectOnPlane(CharacterVelocity, Vector3.up);
                     horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, MaxSpeedInAir * speedModifier);
                     CharacterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
-
-                    // apply the gravity to the velocity
                     CharacterVelocity += Vector3.down * GravityDownForce * Time.deltaTime;
                 }
             }
 
-            // apply the final calculated velocity value as a character movement
             Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
             Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(m_Controller.height);
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
 
-            // detect obstructions to adjust velocity accordingly
             m_LatestImpactSpeed = Vector3.zero;
             if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, m_Controller.radius,
                 CharacterVelocity.normalized, out RaycastHit hit, CharacterVelocity.magnitude * Time.deltaTime, -1,
                 QueryTriggerInteraction.Ignore))
             {
-                // We remember the last impact speed because the fall damage logic might need it
                 m_LatestImpactSpeed = CharacterVelocity;
-
                 CharacterVelocity = Vector3.ProjectOnPlane(CharacterVelocity, hit.normal);
             }
         }
 
-        // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
+        void HandleCameraRotation()
+        {
+            m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * RotationSpeed * RotationMultiplier;
+            m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
+            PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
+            transform.Rotate(new Vector3(0f, (m_InputHandler.GetLookInputsHorizontal() * RotationSpeed * RotationMultiplier), 0f), Space.Self);
+        }
+
         bool IsNormalUnderSlopeLimit(Vector3 normal)
         {
             return Vector3.Angle(transform.up, normal) <= m_Controller.slopeLimit;
         }
 
-        // Gets the center point of the bottom hemisphere of the character controller capsule    
         Vector3 GetCapsuleBottomHemisphere()
         {
             return transform.position + (transform.up * m_Controller.radius);
         }
 
-        // Gets the center point of the top hemisphere of the character controller capsule    
         Vector3 GetCapsuleTopHemisphere(float atHeight)
         {
             return transform.position + (transform.up * (atHeight - m_Controller.radius));
         }
 
-        // Gets a reoriented direction that is tangent to a given slope
         public Vector3 GetDirectionReorientedOnSlope(Vector3 direction, Vector3 slopeNormal)
         {
             Vector3 directionRight = Vector3.Cross(direction, transform.up);
@@ -525,17 +361,14 @@ namespace EpsilonIV
 
         void UpdateCharacterHeight(bool force)
         {
-            // Update height instantly
             if (force)
             {
                 m_Controller.height = m_TargetCharacterHeight;
                 m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
                 PlayerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * CameraHeightRatio;
             }
-            // Update smooth height
             else if (m_Controller.height != m_TargetCharacterHeight)
             {
-                // resize the capsule and adjust camera position
                 m_Controller.height = Mathf.Lerp(m_Controller.height, m_TargetCharacterHeight,
                     CrouchingSharpness * Time.deltaTime);
                 m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
@@ -546,12 +379,10 @@ namespace EpsilonIV
 
         void UpdateMovementState()
         {
-            // Determine new state based on current conditions
             MovementState newState;
-
             if (!IsGrounded)
                 newState = MovementState.InAir;
-            else if (CharacterVelocity.magnitude < 0.1f) // threshold for "standing still"
+            else if (CharacterVelocity.magnitude < 0.1f)
                 newState = MovementState.Idle;
             else if (IsCrouching)
                 newState = MovementState.CrouchWalking;
@@ -560,7 +391,6 @@ namespace EpsilonIV
             else
                 newState = MovementState.Walking;
 
-            // Only fire event if state actually changed
             if (newState != m_CurrentMovementState)
             {
                 m_CurrentMovementState = newState;
@@ -568,17 +398,14 @@ namespace EpsilonIV
             }
         }
 
-        // returns false if there was an obstruction
         bool SetCrouchingState(bool crouched, bool ignoreObstructions)
         {
-            // set appropriate heights
             if (crouched)
             {
                 m_TargetCharacterHeight = CapsuleHeightCrouching;
             }
             else
             {
-                // Detect obstructions
                 if (!ignoreObstructions)
                 {
                     Collider[] standingOverlaps = Physics.OverlapCapsule(
@@ -599,11 +426,7 @@ namespace EpsilonIV
                 m_TargetCharacterHeight = CapsuleHeightStanding;
             }
 
-            if (OnStanceChanged != null)
-            {
-                OnStanceChanged.Invoke(crouched);
-            }
-
+            OnStanceChanged?.Invoke(crouched);
             IsCrouching = crouched;
             return true;
         }
