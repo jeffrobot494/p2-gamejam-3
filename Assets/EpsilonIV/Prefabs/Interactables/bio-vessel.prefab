@@ -4905,7 +4905,7 @@ MonoBehaviour:
   OpenSound: {fileID: 8300000, guid: 9b93b118d808d7b429187aaa6a5d630f, type: 3}
   CloseSound: {fileID: 0}
   LockedSound: {fileID: 0}
-  DoorSoundLoudness: 0.4
+  DoorSoundLoudness: 0.6
   DoorSoundQuality: 1
   OnDoorOpened:
     m_PersistentCalls:
@@ -4971,7 +4971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd8a7b8584eea647bae01dd8eb3fc4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundEmitter
-  defaultLoudness: 0.531
+  defaultLoudness: 0.555
   defaultQuality: 0.25
   emitPosition: {fileID: 2716509597867893432}
   wallMask:

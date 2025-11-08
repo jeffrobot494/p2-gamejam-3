@@ -82,8 +82,8 @@ MonoBehaviour:
     whispers over the radio.\u201D\n\u201C(panicked) I can\u2019t move!\u201D\n\nStay
     fully in character as a voice on the comms \u2014 only words a person would actually
     say aloud."
-  onActivatedPrompt: It looks like the reactor is going to blow any minute and you
-    need help getting down.
+  onActivatedPrompt: It looks like the reactor is going to blow any minute. Ask for
+    help.
   knowledgeBase: 
   hidingSpotPosition: {x: 0, y: 15, z: 0}
   triggerID: command_center_deck
