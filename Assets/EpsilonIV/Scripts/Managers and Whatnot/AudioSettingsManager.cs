@@ -1,4 +1,5 @@
 using UnityEngine;
+using player2_sdk;
 
 namespace EpsilonIV
 {
@@ -9,11 +10,11 @@ namespace EpsilonIV
     public class AudioSettingsManager : MonoBehaviour
     {
         [Header("References")]
-        [Tooltip("RadioAudioPlayer to control NPC TTS audio")]
-        [SerializeField] private RadioAudioPlayer radioAudioPlayer;
-
         [Tooltip("AudioListener to control all game audio (usually on player camera)")]
         [SerializeField] private AudioListener audioListener;
+
+        [Tooltip("NpcManager to control NPC TTS audio")]
+        [SerializeField] private NpcManager npcManager;
 
         [Header("Default Settings")]
         [Tooltip("Is NPC audio enabled by default?")]
@@ -39,25 +40,25 @@ namespace EpsilonIV
         void Awake()
         {
             // Auto-find references if not assigned
-            if (radioAudioPlayer == null)
-            {
-                radioAudioPlayer = FindFirstObjectByType<RadioAudioPlayer>();
-            }
-
             if (audioListener == null)
             {
                 audioListener = FindFirstObjectByType<AudioListener>();
             }
 
-            // Validate references
-            if (radioAudioPlayer == null)
+            if (npcManager == null)
             {
-                Debug.LogWarning("[AudioSettingsManager] No RadioAudioPlayer found. NPC audio toggle will not work.");
+                npcManager = FindFirstObjectByType<NpcManager>();
             }
 
+            // Validate references
             if (audioListener == null)
             {
                 Debug.LogWarning("[AudioSettingsManager] No AudioListener found. Game audio toggle will not work.");
+            }
+
+            if (npcManager == null)
+            {
+                Debug.LogWarning("[AudioSettingsManager] No NpcManager found. NPC audio toggle will not work.");
             }
         }
 
@@ -96,13 +97,12 @@ namespace EpsilonIV
         {
             npcAudioEnabled = enabled;
 
-            if (radioAudioPlayer != null)
+            if (npcManager != null)
             {
-                // Mute the NPC audio (inverse of enabled)
-                radioAudioPlayer.SetMuted(!enabled);
-
+                npcManager.TTS = enabled;
                 if (debugMode)
-                    Debug.Log($"[AudioSettingsManager] NPC Audio: {(enabled ? "ENABLED" : "MUTED")}");
+                    Debug.Log($"[AudioSettingsManager] NPC TTS: {(enabled ? "ENABLED" : "MUTED")}");
+                
             }
 
             // Save setting
