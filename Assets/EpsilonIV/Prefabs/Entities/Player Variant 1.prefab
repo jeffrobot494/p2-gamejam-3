@@ -893,7 +893,7 @@ MonoBehaviour:
   AimingRotationMultiplier: 0.4
   JumpForce: 9
   CameraHeightRatio: 0.9
-  CapsuleHeightStanding: 1.6
+  CapsuleHeightStanding: 1.8
   CapsuleHeightCrouching: 0.9
   CrouchingSharpness: 10
   RecievesFallDamage: 0
@@ -921,6 +921,9 @@ MonoBehaviour:
   walkingLoudness: 0.5
   runningLoudness: 0.7
   crouchWalkingLoudness: 0.35
+  walkVolume: 0.5
+  runVolume: 0.7
+  crouchVolume: 0.3
   walkingSfxFrequency: 0.27
   runningSfxFrequency: 0.4
   crouchWalkingSfxFrequency: 0.25

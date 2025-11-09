@@ -49,7 +49,7 @@ MonoBehaviour:
     fully in character as a voice on the comms \u2014 only words a person would actually
     say aloud.\r\n"
   onActivatedPrompt: You just heard the big creature below you smash a vegetation
-    pod to pieces.
+    pod to pieces. Ask for help.
   knowledgeBase: 
   hidingSpotPosition: {x: -67.5, y: -8, z: 12.3}
   triggerID: engineering_section_c
