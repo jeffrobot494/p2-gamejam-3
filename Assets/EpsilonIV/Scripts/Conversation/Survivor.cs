@@ -46,7 +46,7 @@ namespace EpsilonIV
         /// </summary>
         public SurvivorProfile Profile => m_Profile;
 
-        void Start()
+        protected virtual void Start()
         {
             // Auto-find RadioNpc if not assigned
             if (radioNpc == null)

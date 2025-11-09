@@ -4848,6 +4848,7 @@ GameObject:
   - component: {fileID: 8617385523692166485}
   - component: {fileID: 7455059269388273869}
   - component: {fileID: 7229547434009646012}
+  - component: {fileID: 8856273379291114454}
   m_Layer: 6
   m_Name: model
   m_TagString: Untagged
@@ -4904,6 +4905,8 @@ MonoBehaviour:
   OpenSound: {fileID: 8300000, guid: 9b93b118d808d7b429187aaa6a5d630f, type: 3}
   CloseSound: {fileID: 0}
   LockedSound: {fileID: 0}
+  DoorSoundLoudness: 0.6
+  DoorSoundQuality: 1
   OnDoorOpened:
     m_PersistentCalls:
       m_Calls: []
@@ -4956,6 +4959,32 @@ CapsuleCollider:
   m_Height: 3.46
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8856273379291114454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531328589315054143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd8a7b8584eea647bae01dd8eb3fc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundEmitter
+  defaultLoudness: 0.555
+  defaultQuality: 0.25
+  emitPosition: {fileID: 2716509597867893432}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 0
+  wallPenalty: 0.8
+  capsuleHeight: 2.67
+  debugRuntimePopups: 0
+  debugSceneLabels: 0
+  drawDebug: 0
+  lastEmitLoudness: 0
+  lastEmitQuality: 0
+  lastEmitTime: 0
 --- !u!1 &2901265921794974046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5076,6 +5105,7 @@ Transform:
   m_Children:
   - {fileID: 8534663320847911561}
   - {fileID: 8877927997269631985}
+  - {fileID: 2716509597867893432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5908087491710906475
@@ -5257,3 +5287,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8154143145076076429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2716509597867893432}
+  m_Layer: 6
+  m_Name: emit_position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2716509597867893432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154143145076076429}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.97, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8365340344446722703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

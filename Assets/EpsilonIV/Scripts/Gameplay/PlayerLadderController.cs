@@ -117,7 +117,7 @@ namespace EpsilonIV
             m_PlayerController.CharacterVelocity = Vector3.zero;
 
             if (DebugMode)
-                Debug.Log($"[PlayerLadderController] Entered ladder: {ladder.name}");
+                Debug.Log($"[PlayerLadderController] Entered ladder: {ladder.name} at Y={transform.position.y:F2}");
         }
 
         /// <summary>
@@ -182,6 +182,8 @@ namespace EpsilonIV
                 // 🟩 Exit slightly *before* colliding with the floor
                 if (playerHeadY > topY - 0.1f && verticalInput > 0f)
                 {
+                    if (DebugMode)
+                        Debug.Log($"[PlayerLadderController] Auto-exit at top: playerHeadY={playerHeadY:F2}, topY={topY:F2}");
                     ExitLadder(withPush: true);
                     return;
                 }

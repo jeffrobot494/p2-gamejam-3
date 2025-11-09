@@ -172,6 +172,17 @@ namespace Unity.FPS.Gameplay
             // 5. Perform respawn (while screen is black)
             PerformRespawn();
 
+            // 5.5. Reset camera to normal position (while screen is still black)
+            if (DeathCamera != null)
+            {
+                DeathCamera.ResetCamera();
+
+                if (DebugMode)
+                {
+                    Debug.Log("[DeathManager] Camera reset (while screen black)");
+                }
+            }
+
             // 6. Fade from black
             if (FadeCanvasGroup != null)
             {
@@ -271,12 +282,6 @@ namespace Unity.FPS.Gameplay
                 {
                     Debug.Log($"[DeathManager] Player teleported to: {respawnPosition}");
                 }
-            }
-
-            // Reset camera to normal position
-            if (DeathCamera != null)
-            {
-                DeathCamera.ResetCamera();
             }
 
             // Reset health to full

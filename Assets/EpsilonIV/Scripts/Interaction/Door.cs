@@ -53,6 +53,14 @@ namespace EpsilonIV
         public AudioClip CloseSound;
         public AudioClip LockedSound;
 
+        [Header("Sound Propagation")]
+        [Tooltip("Loudness of door sounds for AI (0-1). 0 = silent, 1 = very loud")]
+        [Range(0f, 1f)]
+        public float DoorSoundLoudness = 0.5f;
+
+        [Tooltip("Quality of door sounds (used by AI for sound identification)")]
+        public float DoorSoundQuality = 0f;
+
         [Header("Events")]
         public UnityEvent OnDoorOpened;
         public UnityEvent OnDoorClosed;
@@ -64,6 +72,7 @@ namespace EpsilonIV
 
         private bool m_IsAnimating = false;
         private AudioSource m_AudioSource;
+        private SoundEmitter m_SoundEmitter;
 
         private Vector3 m_ClosedPosition1, m_OpenPosition1;
         private Quaternion m_ClosedRotation1, m_OpenRotation1;
@@ -78,6 +87,9 @@ namespace EpsilonIV
             {
                 m_AudioSource = gameObject.AddComponent<AudioSource>();
             }
+
+            // Get SoundEmitter component (optional)
+            m_SoundEmitter = GetComponent<SoundEmitter>();
 
             if (MovingPart1 != null)
             {
@@ -180,10 +192,27 @@ namespace EpsilonIV
 
         private void PlaySound(AudioClip clip)
         {
+            if (clip != null && m_AudioSource != null)
+            {
+                // Play audio locally
+                m_AudioSource.PlayOneShot(clip);
 
-            Debug.Log("Playing sound");
-            Debug.Log(clip);
-            if (clip != null && m_AudioSource != null) m_AudioSource.PlayOneShot(clip);
+                // Emit sound for AI detection (if SoundEmitter is present)
+                if (m_SoundEmitter != null)
+                {
+                    if (DebugMode)
+                    {
+                        Debug.Log($"[Door] About to emit sound: Loudness={DoorSoundLoudness}, Quality={DoorSoundQuality}");
+                    }
+
+                    m_SoundEmitter.EmitSound(DoorSoundLoudness, DoorSoundQuality);
+
+                    if (DebugMode)
+                    {
+                        Debug.Log($"[Door] Sound emitted. SoundEmitter.lastEmitLoudness={m_SoundEmitter.lastEmitLoudness}");
+                    }
+                }
+            }
         }
     }
 }
