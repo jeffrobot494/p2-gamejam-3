@@ -396,8 +396,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.038866375, y: 0.00062357914, z: 0.0073318956}
-  m_Center: {x: 0, y: 0.022531416, z: 0.0019490534}
+  m_Size: {x: 0.038866375, y: 0.00062357914, z: 0.0073872604}
+  m_Center: {x: 0, y: 0.022531427, z: 0.0019767361}
 --- !u!65 &2681346867505338539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   topPosition: {fileID: 8145442411331055253}
   bottomPosition: {fileID: 921152653541731647}
-  moveSpeed: 2
+  moveSpeed: 2.5
   startDelay: 3
   movingSound: {fileID: 0}
   startSound: {fileID: 0}
@@ -609,8 +609,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.038866375, y: 0.045454316, z: 0.01853752}
-  m_Center: {x: -0.00000011920929, y: -1.27889534e-17, z: 0.0075519276}
+  m_Size: {x: 0.04676666, y: 0.04938814, z: 0.01558755}
+  m_Center: {x: 0.00005249023, y: 0.0007628632, z: 0.0090269195}
 --- !u!1 &6858340662213868287
 GameObject:
   m_ObjectHideFlags: 0

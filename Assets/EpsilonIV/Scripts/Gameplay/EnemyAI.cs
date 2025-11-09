@@ -452,7 +452,7 @@ public class EnemyAI : MonoBehaviour
         if (currentTime - lastTime < cooldown) return;
 
         AudioClip clip = clips[Random.Range(0, clips.Length)];
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip, 2f);
         lastTime = currentTime;
     }
 
