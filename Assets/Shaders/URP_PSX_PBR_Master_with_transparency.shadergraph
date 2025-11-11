@@ -1719,8 +1719,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": {
         "x": 1.0,
         "y": 1.0,
@@ -1749,24 +1747,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 0.0,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": -0.20000000298023225,
         "y": 0.20000000298023225
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -1892,8 +1878,8 @@
     "m_ObjectId": "06297855918f4a8597b0291eb421156f",
     "m_Title": "UnityObjectToClipPos",
     "m_Position": {
-        "x": -3497.60009765625,
-        "y": -437.6000061035156
+        "x": -3496.999755859375,
+        "y": -435.99993896484377
     }
 }
 
@@ -2001,8 +1987,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": true
 }
 
@@ -2324,8 +2308,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": false
 }
 
@@ -2461,8 +2443,8 @@
     "m_ObjectId": "163095e37d5b4845811276c3c08a45d7",
     "m_Title": "Texture Sampling",
     "m_Position": {
-        "x": -314.4000244140625,
-        "y": 902.4002075195313
+        "x": -314.0,
+        "y": 693.0
     }
 }
 
@@ -2724,7 +2706,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "",
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -2932,8 +2914,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": {
         "r": 1.0,
         "g": 1.0,
@@ -2999,7 +2979,7 @@
     "m_Group": {
         "m_Id": "710a06698a86418482a89fa7b834d9f7"
     },
-    "m_Name": "Vertex Jitter",
+    "m_Name": "VertexJitter",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -3105,8 +3085,8 @@
     "m_ObjectId": "27310de0be7b470ca90811146354b310",
     "m_Title": "Pixelation",
     "m_Position": {
-        "x": -1350.4000244140625,
-        "y": 835.2002563476563
+        "x": -1350.0001220703125,
+        "y": 837.0001220703125
     }
 }
 
@@ -3218,8 +3198,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": true
 }
 
@@ -3619,8 +3597,8 @@
     "m_ObjectId": "357682327595428396dd70b037035968",
     "m_Title": "Color Precision",
     "m_Position": {
-        "x": 268.800048828125,
-        "y": 651.9999389648438
+        "x": 269.0000305175781,
+        "y": 656.0
     }
 }
 
@@ -3979,24 +3957,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 0.10000000149011612,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -4059,7 +4025,7 @@
     "m_Group": {
         "m_Id": "e052191ab8f8498ca34c4e4282031a4b"
     },
-    "m_Name": "Calculate Lighting",
+    "m_Name": "CalculateLighting",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -4131,24 +4097,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -4445,7 +4399,7 @@
     "m_Group": {
         "m_Id": "357682327595428396dd70b037035968"
     },
-    "m_Name": "Color Precision",
+    "m_Name": "ColorPrecision",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -4577,15 +4531,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": {
-        "m_SerializedTexture": "",
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
         "m_Guid": ""
     },
     "isMainTexture": false,
     "useTilingAndOffset": false,
-    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -4732,8 +4683,8 @@
     "m_ObjectId": "54c9b4db117640d88c810254761c0769",
     "m_Title": "Skybox Color",
     "m_Position": {
-        "x": 2512.80029296875,
-        "y": 1355.999755859375
+        "x": 2513.000244140625,
+        "y": 1358.000244140625
     }
 }
 
@@ -4843,7 +4794,6 @@
     "m_SourceType": 1,
     "m_FunctionName": "UNITY_Z_0_FAR_FROM_CLIPSPACE",
     "m_FunctionSource": "",
-    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "//https://forum.unity.com/threads/what-is-the-equivalent-of-unityobjecttoclippos-inside-shader-graph.809778/\nOut = UNITY_Z_0_FAR_FROM_CLIPSPACE(In);\r\n"
 }
 
@@ -4897,24 +4847,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 0.5,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -5655,7 +5593,7 @@
     "m_Group": {
         "m_Id": "8cf16f3b7cfc4473a9acd11a46188d78"
     },
-    "m_Name": "Affine Texture Mapping",
+    "m_Name": "AffineTextureMapping",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -5785,8 +5723,8 @@
     "m_ObjectId": "710a06698a86418482a89fa7b834d9f7",
     "m_Title": "Vertex Snapping",
     "m_Position": {
-        "x": 504.000244140625,
-        "y": -418.39996337890627
+        "x": 503.99969482421877,
+        "y": -419.9998779296875
     }
 }
 
@@ -5801,15 +5739,12 @@
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
-    "m_ZWriteControl": 1,
+    "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
-    "m_DisableTint": false,
-    "m_AdditionalMotionVectorMode": 0,
-    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -5835,8 +5770,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": false
 }
 
@@ -6079,8 +6012,8 @@
     "m_ObjectId": "77e3cb953a2441c6a7be9cccb8ed4a49",
     "m_Title": "UNITY_Z_0_FAR_FROM_CLIPSPACE",
     "m_Position": {
-        "x": -2603.199951171875,
-        "y": -632.0
+        "x": -2603.0,
+        "y": -629.9999389648438
     }
 }
 
@@ -6214,8 +6147,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": false
 }
 
@@ -6256,24 +6187,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 16.0,
     "m_FloatType": 2,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -6580,8 +6499,8 @@
     "m_ObjectId": "8cf16f3b7cfc4473a9acd11a46188d78",
     "m_Title": "Affine Mapping",
     "m_Position": {
-        "x": -2247.199951171875,
-        "y": 535.9999389648438
+        "x": -2247.150146484375,
+        "y": 538.0
     }
 }
 
@@ -6967,24 +6886,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 16.0,
     "m_FloatType": 2,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -7160,24 +7067,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 11.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -7548,8 +7443,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": true
 }
 
@@ -8218,8 +8111,8 @@
     "m_ObjectId": "bd80a2ed3cc5412a91d5464c1cb65125",
     "m_Title": "Regular UVs",
     "m_Position": {
-        "x": -1833.5999755859375,
-        "y": 837.5999145507813
+        "x": -1833.0,
+        "y": 839.0000610351563
     }
 }
 
@@ -8380,24 +8273,12 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": 256.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
+    }
 }
 
 {
@@ -8407,7 +8288,7 @@
     "m_Group": {
         "m_Id": "e3991ab816a3455a84ecb1a85a45ddfc"
     },
-    "m_Name": "Camera Clipping",
+    "m_Name": "CameraClipping",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -8589,8 +8470,8 @@
     "m_ObjectId": "c6fcbeddf7bf44b5a75bd3aaa636e58b",
     "m_Title": "Using Vertex Jitter",
     "m_Position": {
-        "x": 1490.400146484375,
-        "y": 9.59991455078125
+        "x": 1490.999755859375,
+        "y": 8.000003814697266
     }
 }
 
@@ -8712,8 +8593,8 @@
     "m_ObjectId": "cb59536d9da847f19e551cbd8d729765",
     "m_Title": "Specular",
     "m_Position": {
-        "x": 1344.800048828125,
-        "y": 1381.599853515625
+        "x": 10.0,
+        "y": 10.0
     }
 }
 
@@ -8993,8 +8874,8 @@
     "m_ObjectId": "d4c377a597e94a7c8b9eea7a9224ee02",
     "m_Title": "Diffuse",
     "m_Position": {
-        "x": 1676.000244140625,
-        "y": 943.9999389648438
+        "x": 1676.0,
+        "y": 947.9999389648438
     }
 }
 
@@ -9381,8 +9262,6 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
     "m_Value": false
 }
 
@@ -9406,8 +9285,8 @@
     "m_ObjectId": "e052191ab8f8498ca34c4e4282031a4b",
     "m_Title": "Lighting",
     "m_Position": {
-        "x": 709.60009765625,
-        "y": 1362.4000244140625
+        "x": 710.0,
+        "y": 1362.9998779296875
     }
 }
 
@@ -9456,8 +9335,8 @@
     "m_ObjectId": "e3991ab816a3455a84ecb1a85a45ddfc",
     "m_Title": "Camera Clipping",
     "m_Position": {
-        "x": -558.4000244140625,
-        "y": -144.00003051757813
+        "x": -558.0,
+        "y": -144.9998779296875
     }
 }
 
@@ -9822,8 +9701,8 @@
     "m_ObjectId": "ece1d9454d1a446cbc9b6d3790b30553",
     "m_Title": "Not Using Camera or Vertex Jitter",
     "m_Position": {
-        "x": 1633.60009765625,
-        "y": 437.59991455078127
+        "x": 1633.999755859375,
+        "y": 436.0001220703125
     }
 }
 
@@ -10042,7 +9921,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "",
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -10177,8 +10056,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 1.0,
-        "y": 1.0
+        "x": 0.0,
+        "y": 0.0
     },
     "m_Labels": [
         "X",
@@ -10328,8 +10207,8 @@
     "m_ObjectId": "fd05a7d3776640eaadbe1cf31b16fc6e",
     "m_Title": "Using CameraClipping",
     "m_Position": {
-        "x": -165.5999755859375,
-        "y": -196.0
+        "x": -165.00001525878907,
+        "y": -196.9998779296875
     }
 }
 
