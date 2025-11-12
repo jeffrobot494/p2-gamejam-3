@@ -13,6 +13,9 @@ namespace EpsilonIV
         [Tooltip("Unique identifier for this survivor (used internally)")]
         public string survivorID = "survivor_id";
 
+        [Tooltip("Caller ID shown in radio UI (e.g., 'MEDICAL BAY - DR. KATSUMI')")]
+        public string callerId = "UNKNOWN CALLER";
+
         [Tooltip("Display name shown to player")]
         public string displayName = "Survivor Name";
 

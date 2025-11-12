@@ -176,20 +176,42 @@ namespace EpsilonIV
         /// <summary>
         /// Called when NPC response is received from RadioNpc.OnRadioResponse event.
         /// </summary>
-        private void OnNpcResponse(string npcName, string responseMessage)
+        private void OnNpcResponse(string displayName, string callerId, string responseMessage)
         {
-            Debug.Log($"MessageManager: Received response from '{npcName}': '{responseMessage}'");
+            Debug.Log($"MessageManager: Received response from '{displayName}' (callerId: '{callerId}'): '{responseMessage}'");
 
-            // Find the NPC GameObject by name
-            GameObject npcGameObject = FindNpcByName(npcName);
+            // Update caller ID in ChatView
+            UpdateCallerIdUI(callerId);
+
+            // Find the NPC GameObject for audio
+            GameObject npcGameObject = FindNpcByName(displayName);
             if (npcGameObject != null && radioAudioPlayer != null)
             {
                 // Prepare audio effects for this NPC's response
                 radioAudioPlayer.PrepareNpcAudio(npcGameObject);
             }
 
-            // Fire event for other components (ChatView)
-            OnNpcResponseReceived?.Invoke(npcName, responseMessage);
+            // Fire event for other components (ChatView) - displayName for chat messages
+            OnNpcResponseReceived?.Invoke(displayName, responseMessage);
+        }
+
+        /// <summary>
+        /// Update the caller ID display in ChatView
+        /// </summary>
+        private void UpdateCallerIdUI(string callerId)
+        {
+            Debug.Log($"MessageManager: Setting caller ID to '{callerId}'");
+
+            // Find ChatView and update its caller ID display
+            var chatView = FindObjectOfType<ChatView>();
+            if (chatView != null)
+            {
+                chatView.SetActiveNPCName(callerId);
+            }
+            else
+            {
+                Debug.LogWarning("MessageManager: ChatView not found!");
+            }
         }
 
         /// <summary>

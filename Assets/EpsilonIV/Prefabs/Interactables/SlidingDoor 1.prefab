@@ -270,6 +270,8 @@ MonoBehaviour:
   OpenSound: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
   CloseSound: {fileID: 8300000, guid: 38c2dda65a4b9a74e807c8efb92dea93, type: 3}
   LockedSound: {fileID: 8300000, guid: 25fd9469088855d488d333cd3271338b, type: 3}
+  DoorSoundLoudness: 0.5
+  DoorSoundQuality: 0
   OnDoorOpened:
     m_PersistentCalls:
       m_Calls: []

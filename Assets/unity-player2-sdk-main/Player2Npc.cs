@@ -248,7 +248,7 @@ namespace player2_sdk
             if (survivorProfile != null)
             {
                 Debug.Log($"Using SurvivorProfile '{survivorProfile.name}' for NPC spawn data");
-                spawnShortName = string.IsNullOrEmpty(survivorProfile.displayName) ? shortName : survivorProfile.displayName;
+                spawnShortName = "";
                 spawnFullName = survivorProfile.displayName;
                 spawnCharDesc = survivorProfile.characterDescription;
                 spawnSystemPrompt = $"{survivorProfile.systemPrompt}\n{survivorProfile.knowledgeBase}";

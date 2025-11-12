@@ -13,8 +13,8 @@ namespace EpsilonIV
     public class RadioNpc : Player2Npc
     {
         [Header("Radio NPC Events")]
-        [Tooltip("Fired when this NPC sends a response")]
-        public UnityEvent<string, string> OnRadioResponse = new UnityEvent<string, string>();
+        [Tooltip("Fired when this NPC sends a response: (displayName, callerId, message)")]
+        public UnityEvent<string, string, string> OnRadioResponse = new UnityEvent<string, string, string>();
 
         private string lastOutputMessage = "";
 
@@ -28,6 +28,40 @@ namespace EpsilonIV
             {
                 var field = typeof(Player2Npc).GetField("_npcID", BindingFlags.NonPublic | BindingFlags.Instance);
                 return field?.GetValue(this) as string;
+            }
+        }
+
+        /// <summary>
+        /// Public accessor for the SurvivorProfile from the base Player2Npc class.
+        /// Returns null if no profile is assigned.
+        /// </summary>
+        public SurvivorProfile SurvivorProfile
+        {
+            get
+            {
+                var field = typeof(Player2Npc).GetField("survivorProfile", BindingFlags.NonPublic | BindingFlags.Instance);
+                return field?.GetValue(this) as SurvivorProfile;
+            }
+        }
+
+        /// <summary>
+        /// Gets the caller ID from the SurvivorProfile, or falls back to displayName or GameObject name.
+        /// </summary>
+        public string CallerId
+        {
+            get
+            {
+                if (SurvivorProfile != null)
+                {
+                    if (!string.IsNullOrEmpty(SurvivorProfile.callerId))
+                    {
+                        Debug.Log($"RadioNpc: Using callerId '{SurvivorProfile.callerId}' from SurvivorProfile");
+                        return SurvivorProfile.callerId;
+                    }
+                    if (!string.IsNullOrEmpty(SurvivorProfile.displayName))
+                        return SurvivorProfile.displayName;
+                }
+                return gameObject.name;
             }
         }
 
@@ -57,10 +91,33 @@ namespace EpsilonIV
                 if (!string.IsNullOrEmpty(currentMessage) && currentMessage != lastOutputMessage)
                 {
                     lastOutputMessage = currentMessage;
-                    string npcName = gameObject.name;
 
-                    Debug.Log($"RadioNpc: Response received from {npcName}: '{currentMessage}'");
-                    OnRadioResponse.Invoke(npcName, currentMessage);
+                    // Get displayName and callerId from SurvivorProfile
+                    string displayName = gameObject.name;
+                    string callerId = gameObject.name;
+
+                    if (SurvivorProfile != null && !string.IsNullOrEmpty(SurvivorProfile.displayName))
+                    {
+                        displayName = SurvivorProfile.displayName;
+                    }
+
+                    if (SurvivorProfile != null && !string.IsNullOrEmpty(SurvivorProfile.callerId))
+                    {
+                        callerId = SurvivorProfile.callerId;
+                        Debug.Log($"RadioNpc: Using callerId '{SurvivorProfile.callerId}' from SurvivorProfile");
+                    }
+
+                    // Strip out <NAME> prefix if present (e.g., "<DR LILY KATSUMI> message" -> "message")
+                    string cleanedMessage = currentMessage;
+                    int closingBracketIndex = cleanedMessage.IndexOf('>');
+                    if (closingBracketIndex >= 0 && closingBracketIndex + 1 < cleanedMessage.Length)
+                    {
+                        // Remove everything up to and including "> " (with TrimStart to handle any extra spaces)
+                        cleanedMessage = cleanedMessage.Substring(closingBracketIndex + 1).TrimStart();
+                    }
+
+                    Debug.Log($"RadioNpc: Response received from {displayName}: '{cleanedMessage}'");
+                    OnRadioResponse.Invoke(displayName, callerId, cleanedMessage);
                 }
             }
         }

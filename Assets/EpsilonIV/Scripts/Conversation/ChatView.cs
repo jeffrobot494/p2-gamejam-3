@@ -56,7 +56,7 @@ namespace EpsilonIV
 
             if (npcNameText != null)
             {
-                npcNameText.text = "No Active NPC";
+                npcNameText.text = "";
             }
 
             // Subscribe to MessageManager events
@@ -98,12 +98,12 @@ namespace EpsilonIV
 
         /// <summary>
         /// Called when MessageManager receives an NPC response.
-        /// Displays the response in chat and updates the active NPC name.
+        /// Displays the response in chat. Caller ID is updated separately by MessageManager.
         /// </summary>
         private void OnNpcResponseReceived(string npcName, string message)
         {
             AddNPCMessage(npcName, message);
-            SetActiveNPCName(npcName);
+            // Note: SetActiveNPCName is now called by MessageManager with callerId, not here
         }
 
         /// <summary>
@@ -142,9 +142,14 @@ namespace EpsilonIV
         /// </summary>
         public void SetActiveNPCName(string npcName)
         {
+            Debug.Log($"ChatView: SetActiveNPCName called with '{npcName}'");
             if (npcNameText != null)
             {
                 npcNameText.text = npcName;
+            }
+            else
+            {
+                Debug.LogWarning("ChatView: npcNameText is null!");
             }
         }
 

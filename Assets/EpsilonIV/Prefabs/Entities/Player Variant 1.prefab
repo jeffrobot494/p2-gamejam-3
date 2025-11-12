@@ -410,9 +410,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7974394985332232320}
   - component: {fileID: 2348542822684808406}
-  - component: {fileID: 3933267291076982209}
   - component: {fileID: 1647968174425045307}
   - component: {fileID: 6765400174249054621}
+  - component: {fileID: 3896778799087743895}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -488,14 +488,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3933267291076982209
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6006557466354289335}
-  m_Enabled: 1
 --- !u!114 &1647968174425045307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +550,14 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: df837a1f5737d5a489993708ca80ccc9, type: 2}
+--- !u!81 &3896778799087743895
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6006557466354289335}
+  m_Enabled: 1
 --- !u!1 &8138649322273120728
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +600,6 @@ GameObject:
   - component: {fileID: 7884015444651373956}
   - component: {fileID: 9197610812742669188}
   - component: {fileID: 4263304860145848474}
-  - component: {fileID: 8258160271445463399}
   - component: {fileID: 930666001475081867}
   - component: {fileID: 235306208153406361}
   - component: {fileID: 4163121125385337318}
@@ -616,6 +615,7 @@ GameObject:
   - component: {fileID: 4544346333639318332}
   - component: {fileID: 7167687074806374810}
   - component: {fileID: 2172852255940827940}
+  - component: {fileID: 3338088923086078121}
   m_Layer: 0
   m_Name: Player Variant 1
   m_TagString: Player
@@ -680,9 +680,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243893235630832048, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: f404f8d3c2a4b4f48989fb1120e78fb8, type: 3}
+  m_Resource: {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -692,104 +692,6 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &8258160271445463399
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9219362002482182106}
-  m_Enabled: 0
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243216109797877232, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
-    type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 01a15bd1861d7914abbedc36aad1f4d6, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 491.6802
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -887,7 +789,7 @@ MonoBehaviour:
   MaxSpeedCrouchedRatio: 0.5
   MaxSpeedInAir: 4
   AccelerationSpeedInAir: 25
-  SprintSpeedModifier: 1.5
+  SprintSpeedModifier: 2
   KillHeight: -50
   RotationSpeed: 200
   AimingRotationMultiplier: 0.4
@@ -914,19 +816,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unity.FPS.Gameplay.PlayerSoundController
   audioSource: {fileID: 4263304860145848474}
-  footstepSfx: {fileID: 0}
+  footstepSfx: {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
   jumpSfx: {fileID: 0}
-  landSfx: {fileID: 0}
+  landSfx: {fileID: 8300000, guid: de796c787e978f74aa572da04703c832, type: 3}
   fallDamageSfx: {fileID: 0}
-  walkingLoudness: 0.5
-  runningLoudness: 0.7
-  crouchWalkingLoudness: 0.35
-  walkVolume: 0.5
-  runVolume: 0.7
-  crouchVolume: 0.3
-  walkingSfxFrequency: 0.27
-  runningSfxFrequency: 0.4
-  crouchWalkingSfxFrequency: 0.25
+  walkingLoudness: 0.427
+  runningLoudness: 0.634
+  crouchWalkingLoudness: 0.25
+  walkVolume: 0.2
+  runVolume: 0.5
+  crouchVolume: 0.1
+  walkingSfxFrequency: 0.5
+  runningSfxFrequency: 0.5
+  crouchWalkingSfxFrequency: 0.5
   walkingBroadcastFrequency: 3
   runningBroadcastFrequency: 5
   crouchWalkingBroadcastFrequency: 2
@@ -1195,7 +1097,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9219362002482182106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94ba2fc272517404699806fbf9aec271, type: 3}
   m_Name: 
@@ -1215,3 +1117,27 @@ MonoBehaviour:
   landClip: {fileID: 0}
   fallDamageClip: {fileID: 0}
   footstepCooldown: 1
+--- !u!114 &3338088923086078121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219362002482182106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cbde5852fff3d42bc77bb896a45ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EpsilonIV.SprintStaminaManager
+  sprintDuration: 2
+  rechargeTime: 8
+  OnStaminaChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStaminaDepleted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStaminaRecharged:
+    m_PersistentCalls:
+      m_Calls: []
+  debugMode: 0
