@@ -337,6 +337,7 @@ namespace player2_sdk
             try
             {
                 Debug.Log("Sending message to NPC: " + message);
+                Debug.Log($"Player2Npc.SendChatMessageAsync received gameStateInfo: {(gameStateInfo == null ? "NULL" : $"'{gameStateInfo}'")}");
 
                 if (string.IsNullOrEmpty(_npcID))
                 {

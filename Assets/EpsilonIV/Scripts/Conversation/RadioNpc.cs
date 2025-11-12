@@ -165,7 +165,9 @@ namespace EpsilonIV
             if (method != null)
             {
                 // The private method signature is: SendChatMessageAsync(string message, string gameStateInfo = null)
-                method.Invoke(this, new object[] { message, string.IsNullOrEmpty(context) ? null : context });
+                var contextToSend = string.IsNullOrEmpty(context) ? null : context;
+                Debug.Log($"RadioNpc: Invoking SendChatMessageAsync with message='{message}' and gameStateInfo={(contextToSend == null ? "NULL" : $"'{contextToSend}'")}");
+                method.Invoke(this, new object[] { message, contextToSend });
             }
             else
             {
