@@ -138,8 +138,8 @@ Material:
     - _AlphaClip: 1
     - _AlphaClippingDitherIsEnabled: 0
     - _AlphaToMask: 1
-    - _Alpha_Clipping: 0.1
-    - _Alpha_Multiplier: 0.5
+    - _Alpha_Clipping: 0.2
+    - _Alpha_Multiplier: 1
     - _BRDFMode: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
