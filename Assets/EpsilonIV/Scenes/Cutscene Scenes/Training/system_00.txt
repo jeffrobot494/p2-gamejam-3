@@ -1,0 +1,22 @@
+1. INTRO
+Prompt:
+"My parents found an old wedding photo and would love to remove the two people on the left side of the photo"
+
+Photo: the people are on a floor with perspective. There is a set of three stairs/platforms behind the group. At the back of the room are some curtains on the left and right sides. At the back of the room in the center is a gray wall. The shadows from the group of people fall on the stairs but only very slightly on the wall, only behind the bride. The two people on the left, who need to be removed, are covering parts of the curtain on the left side, parts of all three stairs, and part of the grey wall. All of that will need to be replaced. The top of the third stair is totally hidden behind the group. The removed persons shadows will need to be removed from the stars and left side curtains. The brides shadow will need to be added to the stairs and maybe the wall behind her. The parts where the bride and the person to her left are touching will need to be cleaned up very carefully. To balance the composition of the photo, some of the left hand side elements, like the curtains, could be cropped out.
+
+Our rubric:
+1) Are the lady in black and lady in brown removed from the picture?
+2) Is there a clean edge where the bride, her bouquet, and the lady in brown were touching?
+3) Are the missing sections of the stairs filled in?
+4) Is the missing section of the curtains filled in?
+5) Is the missing section of the back wall filled in?
+6) Are the two ladies shadows removed from the floor, stairs, and curtains?
+7) Does the brides shadow appear on the stairs and wall behind her?
+
+2. Make a list of each change. Identify how it scores on each axis, then identify which axis it belongs to. 
+
+3. Group edits by primary axis
+
+4. Write draft rational and assign score.
+
+If an edit conflicts with the instructions, then it falls under Image Consistency, but that also necessarily impacts Instruction Following. 

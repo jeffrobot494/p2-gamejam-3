@@ -1,0 +1,326 @@
+Crowns
+Reproduce this radiograph exactly the same, except make the crown of tooth 46 appear within normal limits.
+
+I'm not a dentist, so I looked up what "within normal limits" means in the context of a crown inside a tooth. In this instance, it's referring to the dark gaps where the crown isn't fitting totally snugly with the rest of the tooth. So, the instructions are to change the image so it looks like the crown is fitting snugly inside the tooth. I hope this dentist isn't trying to deceive someone into thinking he did a better job than he actually died. 
+
+IF
+-Were the gaps between the crown and the tooth eliminated?
+-Does the crown still look like the crown? 
+-Is the rest of thee radiograph absent significant changes?
+
+	
+Am I just looking at how little darkness there is in the image?
+Am I looking specifically for darkness that looks like a gap?
+
+IC
+-Likeness of the crown
+-Likeness of the teeth and gums
+-Don't count sharpness/blurring
+
+Anyways, our rubric:
+
+Are the gaps between the tooth and the crown eliminated? 5/5
+Is the rest of the radiograph absent significant changes? 5/5
+
+Multiple gap elimination times 1.5 for weight
+---
+Translated prompt: Reproduce this radiograph exactly the same, except make the crown of tooth 46 appear within normal limits.
+
+1) Were the gaps between the crown and the tooth eliminated?
+2) Is the rest of the radiograph absent of significant changes?
+
+For the second rubric item, I interpreted "reproduce this radiograph exactly the same" to mean "there are no other significant changes that look like the model did on purpose", per our instructions. In effect, that rubric item became a measurement of how blurry or sharp the completion is, with sharpness being a significant change.
+---
+1) Are the gaps between the crown and the tooth eliminated?
+2) Is the shape of the crown identifiable and believable?
+3) Are there no other significant changes to the image?
+
+IF ORDER FINAL
+D, H, B, C, F, E, G, A
+How much did it eliminate the gaps while retaining the shape of the crown? Which completion struck the best balance?
+Are the gaps eliminated while the crown is still believable?
+
+D
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps appear to be totally eliminated 7/7
+2) Is the shape of the crown identifiable and believable?
+The crown is still in a recognizable capsule shape, though not exactly the same as the original. 4/5
+3) Are there no other significant changes to the image?
+The image is noticeably sharper than the original 3/5
+14/17
+
+H
+1) Are the gaps between the crown and the tooth eliminated?
+There are what look like very slight gaps existing, though the gaps have been reduced. 6/7
+2) Is the shape of the crown identifiable and believable?
+The shape of the crown is nearly identical to the original. 5/5
+3) Are there no other significant changes to the image?
+The image is slightly sharper than the original. 4/5
+15/17
+
+B
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps are totally eliminated. 7/7
+2) Is the shape of the crown identifiable and believable?
+The shape of the crown has changed noticeably 3/5
+3) Are there no other significant changes to the image?
+The image is quite a bit sharper than the original. 2/5
+12/17
+
+C
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps are reduced but there is still a clear gap on the bottom. 4/7
+2) Is the shape of the crown identifiable and believable?
+The shape of the crown is perfectly reproduced. 5/5
+3) Are there no other significant changes to the image?
+The image is slightly sharper than the original. 4/5
+13/17
+
+F
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps are almost totally eliminated, though there seems to be a tiny one on the bottom. 6/7
+2) Is the shape of the crown identifiable and believable?
+The crown has an obvious upward bend 2/5
+3) Are there no other significant changes to the image?
+The image is sharper then the original. 3/5
+11/17
+
+E
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps appear to be totally eliminated. 7/7
+2) Is the shape of the crown identifiable and believable?
+The crown seems to have the right shape, but there is a blue that keeps us from seeing. 2/5
+3) Are there no other significant changes to the image?
+The image is much sharper than the original. 2/5
+11/17
+
+G
+1) Are the gaps between the crown and the tooth eliminated?'
+The gaps appear to be entirely eliminated except for a tiny black line on the bottom. 6/7
+2) Is the shape of the crown identifiable and believable?
+The crown seems to be wider on the left side, and have a major upward bend. 1/5
+3) Are there no other significant changes to the image?
+The competion is much sharper than the original 1/5
+8/17
+
+A
+1) Are the gaps between the crown and the tooth eliminated?
+The gaps were not eliminated at all. 1/7
+2) Is the shape of the crown identifiable and believable?
+Yes, the shape is perfectly retained. 5/5
+3) Are there no other significant changes to the image?
+The image is sharper than the original 4/5
+10/17
+
+F
+gap elimination 8/10
+blur detail 5/7
+crown likeness 3/7
+16 points
+
+E
+gap elimination 10/10
+blurriness/detail 1/7
+crown likeness 2/7
+13 points
+
+B
+gap elimination 9/10
+blur detail 2/7
+crown likeness 3/7
+14 points
+
+H
+gap elimination 3/10
+blur/detail 6/7
+Crown likeness 5/7
+14 points
+
+C
+gap elimination 2/10
+blur/detail 6/7
+crown likeness 7/7
+15 points
+
+D
+gap elimination 5/10
+blur detail 4/7
+crown likeness 4/7
+13 points
+
+G
+gap elimination 6/10
+blur detail 3/7
+crown likeness 1/7
+10 points
+
+A
+gap elimination 1/10
+blur detail 7/7
+crown likeness 6/7
+14 points
+
+IMAGE CONSISTENCY
+A, C, H, D, E, B, F, G
+A = copy
+C, H = blurry, least changes
+D = the crown is still distinct
+B = the crown is mostly distinct
+EFG = the crown is blended in with the tooth. They all have about the same number of inconsistencies.
+
+IMAGE CONSISTENCY
+For image consistency, I looked likeness in all areas except for the crown, because I looked at crown likeness in IF.
+
+fine likeness of all areas except the crown.
+The main elements that changed are the sharpness of the image, and the roots of the teeth. I refer to the teeth as 1, 2, and 3 going left to right.
+
+A
+Strengths:
+-Similar sharpness
+-Tooth 2 has the same shape
+-The little pill between the tops of teeth 1 and 2 remains
+
+Weaknesses:
+-The left root of tooth 1 curves left at the bottom.
+-The roots of tooth 3 are straight at the bottom when they should curve right
+
+B
+Weaknesses
+-The image is much sharper
+-The bottom of tooth 1 is joined
+-The bottom of the roots of tooth 2 straighten
+-The bottom of the roots of tooth 3 don't curve right
+-The little pill between the tops of teeth 1 and 2is gone
+
+C
+Strengths:
+-The pill between the tops of teeth 1 and 2 remains
+-Tooth 1 is mostly consistent
+-Tooth 2 is mostly consistent
+-Tooth 3 is mostly consistent
+
+Weaknesses:
+-The completion is a little sharper than the original
+
+D
+Strengths:
+-The pill between the tops of teeth 1 and 2 remains
+-The shape of the teeth is consistent
+
+Weaknesses:
+-The image is much sharper than the original 
+-The bottom of the left root of tooth 1 curves to the left
+
+E
+Strengths
+Weaknesses:
+-The image is much sharper than the original
+-The bottom of tooth 3 doesn't curve right
+-The roots of tooth 2 point straight down instead of curving outward then inward
+-The pill between teeth 1 and 2 is conjoined with tooth 1
+-The right root of tooth 1 ends prematurely
+
+F
+Weaknesses:
+-The image is sharper than the original
+-The roots of tooth 1 straighten at the bottom
+-The roots of tooth 2 have lost some of their curvature
+-The little pill between the tops of teeth 1 and 2 is gone
+-The root of tooth 3 doesn't curve to the right
+
+G
+Strengths:
+-Tooth 1 is pretty consistent
+-Tooth 2 is pretty consistent
+-Tooth 3 is pretty consistent
+Weaknesses:
+-The image is much sharper
+-The little between the tops of teeth 1 and 2 is missing
+-The top of the root of tooth 3 is straight
+-The color of the tissue between the roots of teeth 2 and 3 is gone from light to dark.
+
+H
+Strengths:
+-Tooth 1 is very consistent
+-The little pill between the tops of teeth 1 and 2 remains
+-The shape of tooth 2 is pretty consistent
+-The shape of tooth 3 is pretty consistent
+
+Weaknesses:
+-The roots of tooth 2 have shifted a little
+-The bottom of the roots of tooth 3 should curve a little more to the right
+
+
+
+QUALITY
+Don't consider the prompt. Just consider overall quality.
+A = copy NA
+C looks pretty good. the crown is clear.
+H got clear crowns
+D got clear crown
+B the crown is getting blended
+E, F, G the crown is very blended
+F, G the crown looks bent
+
+Sharpness
+B, E
+F, G
+H, C
+
+i dont know enough about tooth anatomy to know whether any of these are anatomically inaccurate.
+
+Weighting: crown is clear > sharpness
+D, C, B, H, F, E, G
+
+There are four completions where the crown is distinct: D, C, B, H. 
+There where it isn't: E, F, G
+
+C
+C has the best combination of sharpness and crown distinctiveness.
+
+H
+It's pretty blurry, but the crown has retained its shape.
+
+D 
+Thr crown is starting to lose its shape. Its rounded on the top and bottom where it shouldn't be.
+
+F
+F is pretty blurry on the crown area, but the crown seems to have a pretty good crown shape. Its got a flat top and roughly cylindrical body.
+
+B
+The crown is losing more of its shape. Its looking a little like a donut here.
+
+E
+The crown has a serious blur/smear on the left side where it loses all distinction. Clear image, though. 
+
+G
+The crown is clearly bent in this one, which it shouldn't be.
+
+AI/Naturalness
+Im not going to penalize any of these for being blurry because they're radiographs, and it's "natural" for them to be blurry. Same exact order as Quality.
+A - copy - NA
+C is the most natural.
+H is still pretty natural
+D its losing some shape.
+F got some shaoe
+B less shape
+E super mseared
+G obviously bent
+
+None of these completions have AI-tells, so I'm 
+
+How should I rate these for naturalness? It's a radiograph - does that change anything? No. You can have high-res radiographs. 
+
+For naturalness, I ranked them based on how misshapen the crown is. I broke ties with sharpness.
+
+
+Overall
+A - copy
+H is the winner because it reduces the gaps on the bottom the most while still keeping the general shape of the crown.
+D has even better gap reduction than H, but the crown has lost its shape a little. 
+C has some gap reduction, and the crown is clear
+B has excellent gap reduction, but the crown is too rounded.
+F is super blurry, but its got good gap reduction. The problem is the right side where its bent upward.
+E Good gap reduction, but the blurry area makes you unsure if youre really seeing everything.
+G Great gap reduction, but the bend in the crown is too big, the patient will think they've got a broken crown.
+

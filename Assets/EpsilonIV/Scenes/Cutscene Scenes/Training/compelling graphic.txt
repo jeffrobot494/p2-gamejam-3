@@ -1,0 +1,221 @@
+Goal: create a methodology schematic that concisely and visually describes the logic and sequence of steps in the experiment. It should be green.
+
+Rubric:
+
+1) **** The information can be understood
+2) *** A diagram with nodes was created
+3) *** Its got a nice green theme
+4) ** The steps in the schematic match the steps in the description
+	a) Problem/opening statement
+	b) Qualitative method literature review
+	c) Quantitative method survey
+	d) Data analysis
+	e) Findings
+5) ** The steps are in the right order
+6) ** The nodes in the diagram present a concise summary of information
+
+Ranking best to worst
+D72 - 7, E60 - 6, A52 - 5, B51 - 4, H51 - 3, F50 - 2, C48 + G48 - 1, 
+
+IF
+H
+1) The broad strokes of the experiment can be inferred, but most of the information is lost. 2/5 (8)
+2) There is a diagram, but it has weird flaws with headers and text being separated. 4/5 (12)
+3) There is a green theme. 5/5 (15)
+4) The information is so lost that most of the steps can't be parsed from the text. 2/5 (4)
+5) The steps are in the right order 5/5 (10)
+6) The information is not presented concisely at all. 1/5 (2)
+total 51/80
+
+G
+1) The information is nearly all there and understandable, only a little lost to malformed text. 4/5 (16)
+2) There is no diagram 1/5 (3)
+3) There is a green theme 5/5 (15)
+4) The steps are present but they aren't called out in any way 1/5 (2)
+5) The steps are in the right order 5/5 (10)
+6) The information is not concise, its word-for-word with the description. 1/5 (2)
+total 48/80
+
+F
+1) Most of the information is lost to malformed text and sentences. 2/5 (8)
+2) There is a sort of diagram, but not enough nodes, and the sequence drawn by the arrows is wrong. 3/5 (9)
+3) It has a green theme 5/5 (15)
+4) The steps are all present 5/5 (10)
+5) The steps are not all in the right order, as Qualitative and Quantitative should be equal. 3/5 (6)
+6) The information is not very concise, there's about as much text as in the description. 1/5 (2)
+total 50/80
+
+E
+1) Some of the information is present but most of it is lost due to malformed text and sentences. 2/5 (8)
+2) There is a diagram with nodes 5/5 (15)
+3) There is a green theme 5/5 (15)
+4) The steps are mostly right, though analysis and findings aren't called out 3/5 (6)
+5) The steps are in the right order 5/5 (10)
+6) The nodes are concise, but some of the information is used mostly word-for-word 3/5 (6)
+total 60/80
+
+D
+1) The information is nearly all present, but some was cut off at the bottom. 4/5 (16)
+2) There is a diagram with nodes 5/5 (15)
+3) It has a green theme 5/5 (15)
+4) The steps are all there but Analysis and Findings aren't called out 4/5 (8)
+5) The steps are in the right order. 5/5 (10)
+6) The information is presented somewhat concisely, but still probably more text than is needed. 4/5 (8)
+total 72/80
+
+C
+1) The information can mostly be understood, but some is lost to malformed text. 4/5 (16)
+2) There is no diagram 1/5 (3)
+3) It does have a green theme 5/5 (15)
+4) All the steps are present, but they aren't called out in any way. 1/5 (2)
+5) The steps are in the right order. 5/5 (10)
+6) There is no summary of information, all the text is present 1/5 (2)
+total 48/80
+
+B
+1) The broad strokes of the methodology are present, but just barely. Some of the information can be understood, but much of it is garbled by malformed text and sentences. 2/5 (8)
+2) There is a diagram with arrows showing some relationships, but some nodes are missing. 3/5 (9)
+3) It does have a green theme. 5/5 (15)
+4) The steps from the description are all present, but they aren't all properly called out. 3/5 (6)
+5) The steps are in the right order. 5/5 (10)
+6) The nodes are not concise at all. 1/5 (2)
+total 51/80
+
+A
+1) The information cannot be understood at all, except the titles of the nodes 1/5 (4)
+2) It's very much a diagram 5/5 (15)
+3) It's got a nice green theme 5/5 (15)
+4) All the nodes in the diagram map to a portion of the prompt, except Analysis of Results is repeated and there is no node for "Findings". 4/5 (8)
+5) The steps vaguely move from top to bottom in the right order, but there are sideways arrows and down arrows that don't make sense. 2/5 (4)
+6) The nodes in the diagram appear to concisely present the information 3/5 (6)
+total 52/80
+
+Overall Score
+Best to worst: 
+D7, B6, E5, H4, F3, A2, C1 + G1
+
+D - 7
+The instructions were accurately followed by creating a diagram of the methodology, in light green. The diagram isn't the best, and the sequence isn't quite logical, but this completion compensates by having excellent, accurate text. The best overall.
+
+B - 6
+There is enough of a diagram to help illustrate the logical flow of the experiment, and the text can be understood. This makes it the second-best completion.
+
+E - 5
+This one is rated highly mostly because the diagram looks excellent. It has good headers and nice concise summaries inside the nodes. It rates poorly because there are major AI artifacts, much of the text can't be read, and the sequence of the diagram isn't quite right (Qualitative shouldn't lead into Survey Sections).
+
+H - 4
+This one scores high because the diagram looks very much like a diagram. However, its worse than E because the diagram actually has major flaws. Some of the headings are separate from their bodies of text ("Qualitative" is a different node than the text below it). It also has major AI-tells and can hardly be read.
+
+F - 3
+This one is at least a diagram, though it is over simplified and doesn't show a logical sequence (Qualitative should not lead to Quantitative). Its also full of AI-tells and can hardly be understood.
+
+C - 2
+This one failed to create a diagram at all, which is the reason I score it so low. It didn't separate the text into sections at all, either. It can be read to convey the overview of the experiment, however, which makes it better than A.
+
+G -2 
+This one has the same problems as C. It didn't make a diagram at all. However, the text can still be understood.
+
+A - 1
+Despite making an attractive diagram, the experiment cannot be grasped due to the unintelligible text and the misleading sequences created by the arrows. Also obviously AI.
+
+AI-ness
+Best to worst: D 1, G 2, B 3, C + E 4, H 5, F 6, A 7
+
+D
+The text is properly formed, nearly-all grammatically correct, correctly spelled, and sensical. The best completion. This is the only completion that could pass as human-made.
+
+G
+There are a lot of misspellings and grammatical errors (like periods in the middle of sentences), but overall the meaning can still be gotten from the sentences. There are also obvious AI-tells in some malformed words, but comparatively it's very good. Very high score.
+
+B
+The malformed words are the main AI-tells, and there are misspellings and grammatical errors, but fewer than C, and the sentences make more sense than C's.
+
+C
+The main AI-tells here are the malformed words, but there are also misspellings and grammatical errors. The meaning of the sentences can still be understood. Average for AI-ness.
+
+E
+The malformed words and symbols are the main AI-tells here. Some of the sentences are nonsense. Below average.
+
+H
+Besides the obvious malformed words, the sentences themselves are mostly incomprehensible. Worse than E.
+
+F
+Has about the same number of incomprehensible sentences as H, but the malformed words and symbols are more obvious. Almost the worst. At least the arrows still point in a consistent direction.
+
+A
+There is so much malformed text and strange symbols that almost none of the sentences can even be read. The arrows leading from one diagram to the next don't follow a logical sequence. This is the worst for AI-ness.
+
+Quality
+We're comparing the amount of malformed text in each completion, basically. Im just gonna rank them.
+Best to worst: D, G, (B + C), E, H, A, F. F is definitely the worst because it also has some weird-looking arrows.
+
+D
+This completion has almost no malformed text and the arrows and boxes all look good. Highest score.
+
+G
+This completion several areas with malformed text, but its very little compared to the other completions. 
+
+B
+The malformed text is pretty noticeable in this one, particularly the lines at the bottom, but still comparatively little. The arrows look good.
+
+C
+There's a lot of malformed text in this one, but it's more subtle because its kind of blurry. This is a close tie with B.
+
+E
+The boxes and arrows look good, but the malformed text in the bottom half is bold and extremely malformed, very noticeable.
+
+H
+The arrows and boxes look good, but there is malformed text all over this one. Near the worst of the completions. 
+
+A
+The boxes, icons, and arrows all look good. The malformed text is egregious in this one. It's bold, there are strange symbols, lots of characters partially erased, etc. One of the worst.
+
+F
+Between the amount of malformed text and how strange it looks, this completion is the worst for quality. There's blurring, strange characters, odd spaces, and its all over the page.
+
+
+IC
+There is no reference image that is being used to create the completions, so Image Consistency can't be measured. Therefore, I'll score each completion a 4 per the instructions.
+
+IF
+
+A
+1) The information cannot be understood at all, except the titles of the nodes 1/5 (4)
+2) It's very much a diagram 5/5 (15)
+3) It's got a nice green theme 5/5 (15)
+4) All the nodes in the diagram map to a portion of the prompt, except Analysis of Results is repeated and there is no node for "Findings". 4/5 (8)
+5) The steps vaguely move from top to bottom in the right order, but there are sideways arrows and down arrows that don't make sense. 2/5 (4)
+6) The nodes in the diagram appear to concisely present the information 3/5 (6)
+total 52/80
+
+The steps are:
+1) Statement/problem: the influence of family on a)student eating habits, b) processed food consumption, c) dietary and lifestyle choices
+2) mixed-method approach to understanding the topic: a) qualitative literature review: previous research on nutrition, health behaviors, family dyanmics. sources:RFK Library OneSearch, UOG e-Publications, and Google Scholar
+b) quantitative: anonymous survey open to all UG students for three weeks w/ 47 respondents.
+
+The Survey's three key areas:
+1) "Eating habits and processed food consumption" 
+a) frequenyc of fast food and sugary snacks, 
+b)preference for home-cooked or convenient foods, factors in decision-making: taste, cost, accessibility.
+
+2) "Family influence on dietary choices"
+a) grocery shopping
+b) cooking routines
+c) shared mealtime practices
+d) cultural traditions
+e) family attitude toward processed foods
+f) health and nutrition discussion at home
+
+3) "Physical activity and lifestyle"
+a) how often do you exercise?
+b) do you exercise alone or with family?
+c) level of family support for maintaining active lifestyle?
+
+Data Analysis
+1) Chi-square tests
+2) ANOVA (analysis of variance)
+Used to evaluate statistical relationships and group differences across variables
+3) Open-ended responses were analyzed using "thematic analysis" to identify recurring themes
+
+Findings
+"the study highlighted the interconnected role of cultural values, family support, and personal choice in shaping dietary habits"

@@ -1,0 +1,13 @@
+Christmas Present B
+
+IF
+The AI attempted to bring the characters into focus, but failed. The women's faces do have more detail and the features of the woman on the left are easier to discern, particularly the black and white parts of her eyes, her cheeks, and her teeth. The clothes are mostly still out of focus. In trying to "clear up" the photo, it over-exposed it, making the women look pale and turning many pixels in the image bright white. Some of the flaws in the original were addressed: the white line above the woman's left shoulder is gone, the sepia tint is gone, the white grain mostly gone, the black spot on the shorter woman's cheek is gone, and the black spot on her dress is nearly invisible. However, the failure to comply with instructions and conflicting edits lead to a very low score.
+
+IC:
+There are no changes unrelated to the instructions. The women's faces are the same, their clothes are the same, and the background elements are the same. There are obviously many changes to the image, but these are all related to the instructions and therefore do not affect Image Consistency.
+
+Q:
+With a few exceptions, the edits are poorly done and make the image look worse. The corrections to the photos have made small improvements to the focus, particularly in the shorter woman's eyes and teeth, but the taller woman's face is now marred by artifacts, including a blurry shape on the left of her mouth, and a pair of thin white lines on the right side of her face. The negative changes to the face include stark gradations in the shadows under her eyebrows, which gives her face a blurred look. The cloth around the buttons on the red coat is pixelated. The over-exposure has caused the blue skirt to lose the variation in blacks critical to natural shadows, causing the top to look flat and odd, and the folds in the hem to look strange. Lastly, the faint white line above the woman's right shoulder, while removed in the top half of the photo, is now more plainly visible in the bottom half. All in all, nearly all of the edits have created more problems than they solved.
+
+AI:
+There are many flaws in the completion due to poor edits, but none of them look like AI. They all look like traditional blunders that could be made in Photoshop by a human.

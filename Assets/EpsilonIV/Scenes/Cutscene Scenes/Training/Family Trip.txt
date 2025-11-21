@@ -1,0 +1,22 @@
+Family Trip
+Prompt:
+My sister loves this picture from our family trip, but it was on a busy walkway!
+Recently we went on a family trip to Tennessee. I took this photo of my sister and her boyfriend. She loves the picture but it would be even better if the two girls in the background above her head were removed. There are also people in the far background, but that’s not as much of a priority. The main desired fix would be the two girls closer to the foreground. Thank you!!
+
+Rubric:
+1) The two girls in the foreground are removed (most important)
+2) The people in the background are removed 
+
+A
+IF
+The prompt follows the instructions accurately. Both the two girls and the group of people behind them are removed from the image. The shift in color and brightness was not requested, but does not conflict with the instructions.
+7
+
+IC
+
+
+Q
+The section of the building's roof that was created to replace the group of people is much brighter than the rest of the roof and isn't blended well.
+
+AIness
+The black bars on the side of the bridge are supposed to be single continuous lines that go from the bottom to the top of the railings. However, some of the black bars where the girls were removed have misaligned top and bottom halves. The end of the bridge has three problems: the left-side railing appears to taper off in mid-air, the railing has no metal bar running along its bottom like it does in the foreground, and the end of the bridge is very blurry and not recognizable as any kind of normal end to a bridge. These are all AI-tells that impact the score.

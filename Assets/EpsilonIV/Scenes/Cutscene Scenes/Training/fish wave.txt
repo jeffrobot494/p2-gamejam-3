@@ -1,0 +1,301 @@
+AIness
+A
+The way the fish's mouth is open looks like it should be somehow interacting with the signal, but the signal passes directly behind it. It looks like the kind of mistake AI makes.
+3
+
+B
+The AIness in this one comes from the issues I previously raised in Quality. They look like the kinds of mistakes AI would make it. However, they're fairly subtle, so it gets a good score.
+
+C
+If you told me this was a picture of a fish shooting a laser, and I couldn't see the half of the signal behind the fish, I would believe you and rate it pretty natural. But because I can see the signal behind the fish, I know it's not supposed to look like he's shooting a laser. Therefore I conclude that an AI made a mistake. It's pretty obvious.
+4
+
+D
+This one looks very natural. The signal coming out of his mouth doesn't necessarily look like a mistake. It could be interpreted as done on purpose. So I rate this one most natural.
+1
+
+E
+This one, some of the others, just doesn't make sense. It looks like he's biting the signal, which is fine, but it's also flowing into his mouth and out his side... it just isn't clear what is trying to be shown, and tells me an AI made it. Also, the bottom fins look like they are connected on his right side, but one of them should be connected to his bottom ridge. That's another minor AI-tell.
+4
+
+F
+Nothing about this immediately says AI. It's only when you look closer and try to figure out what exactly is being depicted that it starts to feel illogical. There is a laser beam travelling behind the fish, okay, fine. But then there's an explosion where his mouth is - why? There's no apparent logic to the explosion. Minor AI-tell.
+2
+
+G
+This one is a major AI issue. It's not clear at all what is being depicted. From the fish's expression and the way the laser its his top, it looks like he's being dealt a mortal blow. But if that were the case, we wouldn't expect the laser to then wrap around him, we would expect it to blast straight through him. It's very unnatural-looking.
+5
+
+H
+This one appears fairly natural at first glance, then you start taking in the details and it stops  making sense. There's some kind of laser going into his mouth and out his gill? Weird but ok. Why is the explosion only behind him? Why his rear end occluded by the water? That would look normal if he was breaching the surface of the water, but he's fully submerged, so there should be no occlusion. Lots of logical issues.
+4
+
+Quality
+A
+no flaws
+7
+
+B
+-The signal is behind the fish, but on the fish's tail, part of it is in front of the fish
+-The way the sparks are cut out over the fish's mouth isn't done well. They should continue in a complete circle.
+-The vein on one of the fish's bottom fins blends with a spark
+5
+
+C
+- The way the signal comes directly out of the fish's mouth and tapers down to where the explosion is doesn't look right. The far side of the fish's mouth should be occluding the signal a little.
+4
+
+D
+-Where the signal comes out of the side of the fish doesn't look quite right. It looks like its coming directly out of the fish, like its connected to him, rather than it was broken. 
++The fish's mouth looks great.
+6
+
+E
+- The signal REALLY looks like its attached directly to the side of the fish in this one. 
+- A few of the fish don't quite have the right silhouette, like the one on the far left directly above the signal.
+3
+
+F
+-The dark blue coloring on the top of the image ends prematurely where it meets the slightly lighter blue area.
+This one the signal does NOT look like its coming out of the fish's mouth or connected to him, just that it's behind him. That's kind of a plus.
+6
+
+G
+-The way the signal crosses over the fish's body looks like odd but im not sure if its actually a Quality issue. 
+-The lighting on the fish looks inconsistent. It seems the whole side of the fish facing the viewer should be lit up because the signal passes over that side of him, but there are parts of the fish in shadow.
+2
+
+H
+-The way signal directly enters the fish's mouth and comes out one of his gills makes it seem like the explosion of sparks should be centered directly on his mouth, and therefore some of the sparks should be in front of the fish. But they're all behind the fish. 
+-The rear lower half of the fish is blended into the signal and the ocean when it shouldn't be.
+-The shape of the signal changes and sort of loses part of it where it enters the fish's mouth.
+-On the fish's bottom row of the teeth, the far side of his mouth reaches up to the top of his tooth, but it should meet the tooth lower done.
+1
+
+Rubric:
+TIER 1 INSTRUCTIONS
+1) An undersea scene, including a seabed
+2) There are electric signals moving across the scene
+3) The subject of the scene is a red herring
+4) The red herring is biting an electric signal in half
+5) The red herring is a gradient of bright red and yellow
+6) In the background there are many small fish
+7) The style of the image is mystical fantasy
+8) The style of the image is hand-drawn illustration
+
+TIER 2 INSTRUCTIONS
+9) The signals look like water waves, but are clearly electric signals
+10) The signals are generated by sparks on the seabed
+11) The small fish have dark outlines
+12) The small fish are darting away/scared away from the energy waves
+13) The small fish are scattered all over
+14) The style uses grainy brushstroke textures
+15) The style uses a minimal color palette
+16) The style uses grainy color gradients
+17) The style uses strong contrast between warm and cool tones
+
+Style-prompt images:
+18) Does it look inspired by the prompt images?
+
+IC
+As the image is a totally new creation, there is no original with which to compare consistency, so I will give them all a 4 per the instructions on feather.
+
+H
+T1
+1) - The sense of a scene is very weak. No details, just abstract water
+2) - There is only one signal
+3) + The subject of the scene is a red herring
+4) - It doesn't look like the red herring is biting the electrical signal, it looks like he's drinking it.
+5) - The gradient of red to yellow is there, but there's too much orange and not enough red.
+6) + There are many small fish in the background
+7) - It doesn't look mystical or fantastic
+8) + It does look hand-drawn
+
+T2
+9) + Because the electric signal is blue, it does kind of look like water
+10) - The signal does not appear to be generated by sparks on the seabed
+11) - The fish do not have dark outlines
+12) - The fish are not darting away from the energy wave
+13) - The fish are not scattered, they are uniformly distributed and all swimming in one direction
+14) - There are no brushstrokes
+15) - The color palette is not minimal
+16) + It is grainy, with grainy gradients
+17) + There is strong contrast between warm and cool tones
+
+SPL:
+18) - No, it's too simplistic, too abstract, too non-sensical. No sense of what is happening. 
+
+G
+1) - The sense of a scene is weak
+2) - There is a single electrical signal
+3) + The subject of the scene is a red herring
+4) - The herring does not look at all like its biting the signal in half
+5) - The gradient on the herring is quite poor. Theres very little red, its mostly orange, and the gradient goes back and forth.
+6) + There are many small fish in the background
+7) - There's nothing mystical or fantastic about it
+8) + It does look hand-drawn
+
+T2
+9) - The signal does not look like waves of water
+10) - The signal is not being generated by sparks on the seabed
+11) - The small fish do not have dark outlines
+12) - The fish are not darting away from the signal
+13) - The distribution of the fish is less uniform than most of the other completions, but they still don't look scattered. They're swimming in a spiral
+14) - There are no brushstrokes
+15) - The color palette is not minimal
+16) + The gradients are grainy
+17) + There is strong contrast between warm and cool tones
+
+SPL:
+18) No, the image is too simple and abstract, not mythical, no sense of character
+
+F
+T1	
+1) - The different shades of blue give a bit more of a sense of scene than some completions. And the fact that all the fish seem more distant also gives it some depth. So its better than some completions, but still far away from what the user intended based on the images he supplied with the prompt.
+2) + There are multiple signals in this one.
+3) + The subject of the scene is a red herring
+4) - The red herring is not biting the signal. It almost looks like its shooting out of his mouth.
+5) + The herring is a gradient of red and yellow
+6) + There are many small fish in the background
+7) + The fish's expression is kind of anthropomorphic, like a human's, which actually lends it that mythical sense. 
+8) + The image is hand drawn
+
+T2
+9) + The signals actually do look like the waves of the water and blend in with them
+10) - There is no seabed and the signals dont appear to be generated by sparks
+11) - The small fish do not have dark outlines
+12) - The fish are not darting away from the energy waves
+13) - The distribution of the fish is the least uniform of all the completions so far, but they still do not appear scattered
+14) - There are no discernable brushstrokes
+15) - The color palette is not minimal
+16) + There are grainy gradients
+17) + There is strong contrast between warm and cool tones
+
+18) - No, it's still too simplistic and abstract.
+
+E
+T1
+1) - The sense of a scene is weak. It's still just fish swimming in a very abstract way.
+2) - There are two signals now, but still not enough
+3) + The subject of the scene is a red herring
+4) + This is the only completion where the red herring actually looks like he's biting the signal
+5) + The herring is a gradient of red and yellow
+6) + There are many small fish in the background
+7) - It still doesn't feel very mystical or fantastic to me. Mainly because theres so little to it.
+8) + It definitely looks hand-drawn
+
+T2
+9) - The signal does not look like water waves
+10) - The signals are not generated by sparks, and there's no sea bed
+11) - The small fish do not have dark outlines
+12) - The fish are not darting away from the energy
+13) - The small fish do not look scattered, they're still uniformly distributed
+14) - There are no visible brushstrokes
+15) - The color palette is not minimal
+16) + It does have grainy color gradients
+17) + There is strong contrast between warm and cool tones
+
+18) - No, the scene is still too simplistic and abstract. 
+
+D
+T1
+1) - The lighter and darker areas, and the way some of the fish appear further in the background, is beginning to lend the appearance of some kind of real scene, but theres not nearly as much detail as in the style prompt images
+2) - There is still only one signal
+3) + The subject of the scene is a red herring
+4) - The herring is not biting the signal in half, he's swimming through it
+5) + The herring is gradient from red to yellow
+6) + There are many small fish in the background
+7) + It's looking a little bit mystical, mostly thanks to the fish in the background
+8) + The style is sort of hand-drawn looking 
+
+T2
+9) - The signal does not look like a water wave
+10) - The signals are not generated by sparks and there is no seabed
+11) - The small fish do not have outlines
+12) - The fish are not darting away from the energy
+13) - The fish look a little more scattered than in the previous completions, but they're still very uniform
+14) - The style is grainy, but there are no brushstrokes
+15) - The color palette is not minimal
+16) + The color gradients are grainy
+17) + There is strong contrast between warm and cool tones
+
+Prompt-images:
+18) - No, it failed to properly take inspiration from the prompt images. The scene is too simple.
+
+
+
+
+C
+T1
+1) - The sea looks better in this one, but there is still no detail to the scene, no seabed
+2) - There is a single electrical signal moving across the scene and it barely looks like a signal its so flat
+3) + The subject of the scene is a red herring
+4) + It looks a little like the red herring is biting the signal in half, but the signal still isn't actually in his mouth and between his teeth
+5) + The herring is gradient of red and yellow
+6) + There are small fish in the background, and they look decent. They have little eyes
+7) + The style of the image is starting to approach mystical fantasy the way the fish has some actual character in his eyes now
+8) + The style does look hand-drawn
+
+T2
+9) - The signals do not look like waves of water
+10) - The signals are not generated by sparks on the seabed
+11) - The small fish do not have dark outlines
+12) - The fish are not scared away from the energy waves, but neither are they swimming directly towards them
+13) - The fish still don't look scattered
+14) - It does look grainy, but there are no discernable brushstrokes
+15) - The color palette is not minimal: red, yellow, blue
+16) + There are grainy color gradients
+17) + There is a strong contrast between warm and cool tones
+
+SPL:
+18) - The scene is too abstract and simple to resemble the first couple of images, and the composition is too bad to resemble the others.
+
+B
+T1
+1) - The undersea scene is just a blue background. Very weak
+2) - There is one electric signal in the scene
+3) + The subject of the scene is a red herring
+4) + The red herring actually looks like its biting the signal in half, at least more than in A.
+5) + The herring has a gradient of bright yellow to red
+6) + There are small fish in the background, and they actually look slightly different and more realistic in this competion
+7) - The style of the image is not mystical fantasy
+8) - It doesn't look hand-drawn either
+
+T2
+9) - The signals don't look like water waves
+10) - The signals do not look like they were generated by sparks, there is no seabed!
+11) -- The small fish actually have outlines of slightly brighter blue than the water around them, so thats a conflicting edit
+12) -- The fish are not darting away from the waves, they swimming towards the waves. Conflict.
+13) - The small fish still don't look scattered, theyre uniformly distributed
+14) - The style does not use any brushstrokes
+15) - The color palette is not minimalist
+16) + The image is grainy
+17) + There is strong contrast between warm and cool tones
+
+SPL:
+18) No, it looks like crap. Too simplistic.
+
+A
+T1
+1) -The scene is technically underwater but its very simplistic. It's just a blue background. There are no elements like coral or sand. 
+2) -There is a single electrical signal
+3) + The subject of the scene is a red herring
+4) - The red herring is not biting a signal in half, but its mouth is over it
+5) + The herring has some yellow light reflected on him, which produces a red to yellow gradient
+6) - There are many small fish, but theirs no differentiation between them, they're just little dark blobs, and they way they're all placed looks unnatural
+7) - The style of the image is not mystical fantasy. There's nothing mystical or fantastical about it.
+8) + The style does look like a hand-drawn illustration
+
+T2
+9) - The one signal does not look like a water wave
+10) - There are some sparks, but there's no seabed, and it doesn't look like the wave was generated by the sparks
+11) - The small fish have no outlines
+12) -- The small fish are not darting away, they're swimming toward the wave
+13) - The small fish are all over the scene, but they don't look scattered. They're uniformly distributed
+14) - There are no brushstrokes anywhere in the image
+15) - The color palette doesn't feel minimalist. The blue, red, and yellow are strong and starkly contrasted form one another.
+16) + The image is grainy
+17) + There is a strong contrast between warm and cool tones
+
+Prompt-images
+18) No, it doesn't. The characters have no life to them, the image is too simple.

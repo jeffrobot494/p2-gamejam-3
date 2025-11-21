@@ -1,0 +1,46 @@
+Cake
+"Remove the candles on the cake, add a "Happy Birthday" topper, and make the scene a cartoon"
+
+1) Make the scene a cartoon
+2) Put a "Happy Birthday" topper on the cake
+3) Remove the candles
+
+A
+1) The scene is not a cartoon, though it has some cartoon characters made out of paper
+2) It tried to put a Happy Birthday topper on the cake, but it made a physical monstrosoity that is paper blended with cake
+3) The candles were not removed AT ALL
+
+IC
+The background is the same
+The cake in the foreground is consistent
+The type of cake is totally different, there are no fruit - BAD!
+
+Quality
+Horrible
+The flame on the candles look good, and the background is the same, and the front of the cake is fine
+But all of the edits are a mess. Paper, candles, and cake are all blurred together into impossible objects
+
+AIness
+The mixing of different materials/substances and the physical impossibilities that abound, and the unreadable, gibberish characters
+are all massive AI-tells.
+
+B
+1) The scene is largely a cartoon, however: the background is not a cartoon, and the front of the cake, while looking a little hand-drawn, is not really a cartoon.
+2) There is a nice Happy Birthday topper on the cake
+3) the candles were removed
+
+
+IC
+Nothing changed that wasn't supposed to change (like the background)
+The currents, peach slices, and grapes are all largely consistent in their positions
+The cake bottom is consistent
+
+Q
+Great quality overall
+The edges of the Birthday Topper have problems
+There's one or two places in the fruit that don't look blended properly, are a little malformed, etc
+Some of the letters in the topper are a little squashed
+
+AI-ness
+The malformed currents is a subtle AI-tell
+The birthday topper is fairly obvious, particularly the way the letters are malformed

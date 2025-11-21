@@ -1,0 +1,66 @@
+"Help focus
+Can someone help focus and clear up this photo? Want to give my mom and aunt for Christmas. TIA"
+
+OUR RUBRIC:
+The user's instructions has two parts. First, to bring the photo into focus. We infer that the object of the focus should be the women, particularly their faces. This will require adding pixels in the form of new detail in the image. Second, the user asked for the photo to be "cleared up", which is vague but implies a general restoration to as good a quality as possible. They specified that it will be a gift for the two women in the photo, from which we infer that restoring the women's faces is particularly important. Our rubric is:
+1) For bringing the image into focus:
+a) Are the women's faces in focus?
+b) Are the women's clothes in focus?
+2) For clearing up the photograph:
+a) Is the sepia tint removed?
+b) Is proper color restored?
+c) Is the black dot on the shorter woman's face removed?
+d) Are the two dots on the shorter woman's clothes removed?
+e) Is the faint white line above the shorter woman's left arm removed?
+f) Are the two small white spots in the tree above and to the right of the taller woman's head removed?
+g) Is the subtle layer of white grain over the entire photo removed?
+
+List of changes:
+1) Removed sepia tone. This is a good change in accord with the instructions.
+2) Yellow pall over top third of picture. This is a bad change not in accord with the instructions. 
+3) Lots of white specks all over the photograph. This is a bad change not in accord with the instructions. Also the result of a bad edit, likely something to do with contrast. 
+4) Spot on cheek is removed. Good change in accord with IF.
+5) New spots on face, including above eye. Bad change, not in accord with IF, bad edit.
+6) New shading on cheeks looks weird. Bad change, bad IF, bad edit, contrast.
+7) Top half of white line is gone, but now its more visible on the bottom half of the picture. Bad IC, good IF, bad edit contrast.
+8) Reflections on lower lip look weird. Bad IC, good IF, bad edit contrast.
+9) right woman's face is covered in strange artifacts. Good IF (focus), bad IC, bad edit contrast.
+10) Right woman's face has visible shadow gradation rather than smooth (see eyebrows)
+Good IF, bad IC, bad contrast edit.
+11) Strange high contrast bits on her nose and cheek. Good IF, bad IC, bad contrast edit.
+12) Skin tones are bad on the highlights of the women: see face, tall woman's neck/chest.
+Good IF, bad IC, bad contrast edit.
+13) Pixelated artifacts all over image, see red woman's button line.
+Good IF, bad IC, bad edit due to attempts to sharpen
+14) The lighting on the skirt looks weird and flat, colors look flat
+Good IF, bad IC, result of poor edit.
+15) Colors on all clothes look dull, though this is maybe consistent.
+Good IF, okay IC, due to bad edit changing levels.
+16) Shadows on hem of skirt look unnatural
+Good IF, bad IC, due to bad editing of levels.
+17) The background is looks the same except for improved color
+Good IF, Good IC, good edit to remove sepia and grain.
+18) The clothes are not really in focus anymore
+Good IF, bad IC, bad edits to levels.
+19) the film grain is gone, and the photo looks worse for it
+Good IF, bad IC, bad edits to levels.
+20) Minor white spots in original are now bright white pixels in completion
+Bad IF, bad IC, due to bad edits to levels.
+21) Black spot on dress is nearly gone
+Good IF, good IC, good edit.
+23) Colors are more accurate in general
+Good IF, good ic, good change to levels (removal of sepia)
+24) The contrast between the dark and white parts of the eye are much clearer, which is an improvement.
+Good IF, good IC, good edit due to enhanced levels, maybe some pixel generation.
+25) Women on the left is more defined, but less pretty. Women on the right is less defined.
+Bad IF, bad IC, bad edits due to levels.
+26) Image is darker, too dark, overall now.
+Due to IF, bad IC, poor edit, need to brighten?
+27) Colors on the women's faces look wrong
+Bad IF, bad IC, bad edits presumably some kind of color balance/contrast issue.
+
+IF
+The AI attempted to follow most of the instructions. The first part of the task was to bring the women, particularly their faces, more into focus. Their faces do have more detail and the features of the woman on the left are easier to discern, particularly the black and white parts of her eyes, her cheeks, and her teeth. The clothes are mostly still out of focus. The second part of the instructions is to "clear up" the photo, and most of the flaws present were either addressed or attempted: the white line above the woman's left shoulder is gone, the sepia tint is gone, the white grain mostly gone, the black spot on the shorter woman's cheek is gone, and the black spot on her dress is nearly invisible. The two white spots on the trees above the taller woman's shoulder, however, are both still present and even more noticeable.
+
+IC
+The image looks quite different from the original, but most of that difference is due to changes related to the instructions. 

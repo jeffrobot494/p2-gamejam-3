@@ -1,0 +1,5 @@
+Hi Ben, a question about IF vs the other axes. In the Instructions tab in Feather, in the [Image] Edit Comparison Instructions, under the subheading "MORE EXAMPLE", there's the example where Lady Gaga needs to be inserted into the dance scene. This example is showing us how we should penalize Instruction Following more and more as the character being inserted into the scene is less and less like Lady Gaga. 
+
+In my mind, this is contradicting what I've read elsewhere that defines Instruction Following only as coverage of the request in the prompt. IE, as long as the AI attempted to fulfill all the requests in the prompt, it gets a high score. I know I've read somewhere that we aren't supposed to penalize IF for poor execution. In my mind, the AI did try to put Lady Gaga into the scene, but it messed up.
+
+Maybe my confusion here is that I'm interpreting the wrong person being put into the scene as poor execution when really its the LLM not understanding or ignoring parts of the prompt? Could you shed some light on this?

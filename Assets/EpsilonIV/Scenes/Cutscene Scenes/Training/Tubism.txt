@@ -1,0 +1,151 @@
+Tubism
+"Create this scene using the Tubism style: Show a man carrying a large rock, preparing to place it onto a wagon which is positioned on a railroad"
+
+IF
+rubric
+1) There is a man carrying a large rock
+2) The man is preparing to place the rock onto a wagon
+3) The wagon is positioned on a railroad
+4) The image is in the style of Tubist painting
+
+A
+Has some tubist elements but its minor. Got the other stuff mostly correct.
+1) There is a man and he is carrying a large rock. 5/5
+2) The man is preparing to place the rock onto a wagon 5/5
+3) The wagon is positioned on a railroad 5/5
+4) The image has some tubism, but more importantly its fairly abstract-looking, particularly the man and the sky. 
+To be a properly tubist image, it should be more abstract: the man, the rock, the cart, should be less distinct and less proportionally accurate. The cart, the track, the rock, and the sky should be more abstract and made of tubes. 
+Still, it's the most abstract of all the completions, so it gets the best score. 4/5
+19/20
+
+B
+The man's body is made of tubes, but that's it.
+1) There is a man and he is carrying a large rock. 5/5
+2) The man is near the wagon, but it's clear whether he's going to carry the rock somewhere or put it down into the wagon. 3/5
+3) The wagon is positioned on a railroad 5/5
+4) It's not abstract enough to really be considered tubism. The man's body is made of cylinders, but the proportions are all correct, they're connected properly, it's too naturalistic. None of the other elements in the scene are made of tubes. And everything is far too naturalistic. 1/5
+14/20
+
+C
+The man is sort of tubist, but that's it.
+1) There is a man and he is carrying a rock 5/5
+2) The man looks like he is probably going to place the rock in a wagon, as he's directing his gaze at one, but it could be more clear. 4/5
+3) There are two wagons and they are both positioned on railroads 5/5
+4) This is the second-most tubist image after A. The man's body is too well-proportioned, like in B, but his face is very abstract, which aligns with tubism, and puts it above B. The rock and the background are both pretty abstract-looking, which helps. 3/5.
+17/20
+
+
+D
+The man is sort of tubes, and there are some tubes on the track, but that's it.
+1) There is a man and he is carrying a rock, but he's also got a second set of arms and is carrying a second rock, so it's not perfect IF there. 4/5
+2) The man is walking away from the wagon so it doesn't look at all like he's getting ready to place the rock inside it. 1/5
+3) The wagon is positioned on the railroad 5/5
+4) The man is made of cylinders like in B and C, but once again the proportions are too accurate. This one also has fairly-realistic lighting and shadow on him, which is very unlike tubism. So, despite the somewhat abstract face, I rank this man the least-abstract of them all. The rest of the image is sort of abstract but not really tubist at all. This one is pretty close with B in how untubist they both are, but ultimately I think this one is the least tubist just because of all the nice lighting and shadows on the man, the cart, and in the background.
+
+
+IC
+How well does it match the tubist example given?
+For Image Consistency, I'm rating how well the art style in the completion matches the example given by the reference image.
+
+IC rubric
+     4a) Is the painting abstract and not naturalistic?
+     4b) Does it use a simple color palette with bright color and few variations?
+     4c) 
+simple, bright color palette
+tubes with perspected tops
+abstraction
+thick, sketchy strokes
+figures not fully painted in with color
+NEW: -Parts of the image, like the railroad tie under the cart's wheels, have a very odd, gloopy-looking texture similar to dried paint?
+
+A
+-The man's lower body has the same simplified, two-color shading, with stark white strokes representing the lit portions. 
+-His body parts while looking somewhat tube-shaped, aren't as rounded-looking as the reference.
+-The elements outside the man aren't tubes at all.
+-The cart and the track are too naturalistic.
+-The blue and red colors were used, but that's not required in tubism so it doesn't really count as using the reference. The reference is a guide to shape and abstraction, not color.
+-Tubism does seem to feature a lot of reds and blues, though, so maybe it is good. 
+-Tubism color palette is defined by lack of shading, there is one red, one green, one blue, etc. This image doesn't adhere to that, it has shades of yellow and orange, shades of blue, shades of grey, etc.
+Overall, aspects properly copied from the reference image:
+-a level of abstraction
+-red and blue colors
+-this completion alone has some of the bright colors seen in tubism. It does have too many shades, particularly of yellow and blue, though. 3/5
+-the tubes are barely tubes, and they dont have the perspected tops 1/5
+-The man is the most abstract of all the completions, given the odd face and the totally flat legs and arms. The sky is also fairly abstract. The rock is the most abstract rock in all the completions. However, the cart and the railroad are fairly naturalistic. 3/5
+-some of the strokes look sketchy, particularly the ones on the  man 3/5
+-The colored areas are not perfectly-filled, though filled more than in the reference image 3/5
+13/25
+
+B
+This completion failed to capture the simplicity or brightness of the color palette. the colors are dull and in various shades. 1/5
+The tubes don't have the perspected tops 1/5
+It's a little abstract, particularly in the background, but the man's face has clearly defined features, his but not enough 3/5
+the strokes are too finished-looking, not sketchy-enough 2/5
+Each colored area is perfectly filled 1/5
+8/25
+
+C
+-The color palette in C is better than B. The red and blue on the man is a little brighter. There are fewer shades than in B, but still too many for a Tubist color palette, particularly on the wagons. 2/5
+-The tubes do not have the perspected tops, they are more like cylinders, but they are at least flat-looking. 2/5
+-This one is more abstracted than B due to the man's face, but less than A, as the proportions of the man are too realistic. he should be barely recognizably human. 2/5
+-The strokes are mostly not sketchy, but fairly even and finished looking. 2/5
+-The colored areas are fully painted 1/5
+9/25
+
+D
+-The color palette here is way too complex, and way too warm. There is fine shading and tinting all over the image, and the colors are all sort of earthy and yellow. 1/5
+-The tubes are not tubist tubes, they're cylinders. 1/5
+-It's really not very abstract at all. The shading on the man is very well-done. His proportions are basically realistic. The cart and its wheels are realistic. The background and the sky are a little abstract. 2/5
+-The strokes are well-defined, not sketchy at all. 1/5
+-The colored areas are filled in perfectly. 1/5
+6/25
+
+Q
+Judging Quality in an abstract painting, where nothing is supposed to look natural, is difficult.
+
+A
+I think a Quality issue might be that there are two styles clashing here. The man is very abstract and flat. But wheels on the cart are very well-shaded, with clear depth. I think that combining of two styles could be considered a flaw. Other than that, I'm really not sure what to go for. Plenty in the image looks bad, but that could be chalked up to abstraction. Part of me wants to point out the weird cones on the front of the cart. That's probably some kind of misinterpretation of tubism.
+-When you zoom in close to the image, where the main is painted in his legs and some other places looks a little pixelated.
+
+B
+This one has an obvious flaw in that there are a pair of wheels on the end of the wagon that are facing perpendicular to the track - but is this a mistake or is this part of the abstract art? It's impossible to say for sure, but I think the mundanity of it, and the ugliness, leads me to consider it a mistake.
+-I would also say the strokes on the man's left knee don't look right. If you look at the right leg, the thigh and the shin are discrete pieces and their strokes overlap logically. But the left thigh and knee aren't drawn in the same way. Instead, a third piece that looks like some kind of knee-guard is added.
+
+C
+I considered mentioning the second railtrack and cart here, but I'm gonna to give that a pass as part of the abstraction. However, there does appear to be an extra stroke on the upper wagon, above the front right wheel, where maybe a fifth wheel was partially drawn. I'd consider that a mistake.
+
+D
+This one has what looks to me like several flaws in how the AI drew the man. First, he has a second set of arms which doesn't come off as "abstract", because the rest of him is fairly logical, ie two legs, normal torso, etc. Second, behind the second set of arms, attached on the left, is what looks like a piece of leg. It's the same color blue as his pants. This seems like an obvious AI artifact, and I'll count it both here as a flaw and in AI-ness.
+-The way the railroad track disappears after it goes under the wheel of the cart, and how everything in that area is sort of blended together, and the cart, and the track, and the ground all lose distinction, also looks like a flaw to me.
+
+AI-ness
+Once again, it's difficult to delineate between malformities from AI generation and intentional abstract design choices, but I'll do my best.
+
+A
+-To me, the clashing art styles aren't necessarily an AI-tell, as a human artist might do something like that. I want to mention the odd cones on the front of the wagon as an AI-tell, because they're so ugly I can hardly imagine a human artist painting them on purpose, but I hesitate to do so. 
+-I think the only major AI-tell here is the odd texture I mentioned on the railroad tie under the wagon's wheels. It almost looks like stone. It really isn't recognizable as any kind of paint, pencil, or charcoal. It just looks strange. So I'll count it as an AI-tell.
+-Really you could almost sort of make the same criticism about the whole image. When you look closely, the texture of the image is quite odd in many places. It isn't clear what medium the AI was trying to imitate. Look at the stone in the cart for example. It sort of looks like water colors, but it has those subtle veins that you wouldn't find in water colors. I think it's an AI-tell.
+
+B
+-The wheels on the front are a fairly-obvious AI-tell. It's just the sort of illogical thing an AI would do in an abstract image.
+
+C
+For AI-tells, I would look at the railroad ties on the tracks. The sections on either side of the rails are misaligned with the sections inside the rails. They never line up. This could be abstraction, or a subtle AI-tell. It's kind of a coinflip. I'll take one point off for it. 
+There are lots of other oddities and illogical parts of the image, but they can all equally be hand-waived as "abstract".
+
+D
+The big AI-tells here are the extra arms and the leg attached to the extra arm on the left. Technically this could be abstract, but it doesn't fit with any kind of "duplicative" abstract theme elsewhere in the image. For that reason it looks like a mistake, and one an AI would make.
+-Part of me wants to mention the odd little cylinders in the bottom right corner of the image, but that too easily could be abstraction. Same goes for the area under the card I mentioned in Quality where the floor, cart, and tracks blend together.
+
+Overall
+A
+So, none of the completions captured tubism very well. But this one got part of the color palette, has a some tube-like shapes, and in my opinion looks the most abstract, despite the wagon and train track. It also does the best at showing the man preparing to put the stone in the cart. He is very obviously standing over the cart getting ready to drop the stone inside. So it followed the instructions the best. The flaws in Q and AI are all subtle, don't do enough to change it's ranking. 
+
+B
+Again, none of the completions capture tubism very well. But this one did it very poorly. The color palette wasn't captured, and the subject of the image is not very abstract at all. He has a well-proportioned body and visible,  normal facial features. The background is quite abstract, but that doesn't make up for the subject looking relatively natural. As for the rest of the instructions, as I mentioned in IF, its ambiguous what he's doing with the stone. This one is third for me, because A and C are both more abstract and more-clearly depict the man putting the stone in the cart.
+
+C
+Again, didn't capture tubism well, but this one at least is fairly abstract. His body looks flat, with minimal shading, and his face has no discernable features, which is all quite abstract. The background is abstract as well. The man is also clearly facing one of the carts with a stone, and looks like he's getting ready to put the stone in the cart. So it followed that part of the instruction fairly accurately. No serious flaws to hurt its ranking. This puts it just below A as the second-best.
+
+D
+The main problem with D is how well it is shaded. All the sections of the body look very rounded as they go from light to dark. But that's not abstract, that's naturalistic. Yes, the background is somewhat abstract, but it has the most naturalistic-looking subject. Secondly, the man is clearly not putting the stone into the cart, so it scores very low on IF all around. The worst completion.

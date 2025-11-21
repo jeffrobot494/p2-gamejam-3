@@ -1,0 +1,14 @@
+Prompt:
+Can someone please remove the balloon in front of my partner?
+I love this picture of us but the balloon in front of my partner is driving me nuts. If someone can remove it that would be amazing!
+
+Contains copyrighted material!!!
+
+Rubric:
+Is the balloon in front of the man's face gone?
+
+List all the changes
+Which ones conflict with the prompt?
+Which ones affect IC
+Which ones have poor Quality?
+Which ones look like AI?

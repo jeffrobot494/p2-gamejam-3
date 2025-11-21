@@ -1,0 +1,50 @@
+When issues span across several axes:
+Conflicts with the prompt → penalize Instruction-Following
+Departures from the original/logical fit → penalize Image Consistency
+Artifacts/tech flaws where the image has changed → penalize Quality
+Artificial look introduced by the changes → penalize AI-ness/Naturaless
+
+Human likeness in Image Consistency: If the prompt does not mention edits to a face or body, the completion should maintain the person’s likeness to the Original in fine detail.
+
+Likeness can help break ties among weak completions, but it never outweighs Instruction Following.
+A copy that ignores the prompt receives a low IF score even if likeness is high. Example for Instruction Following + Image Consistency scoring: “Insert Lady Gaga into a dance scene”: A dance scene is added and if:
+A person resembling Lady Gaga is included (fine-grained likeness, facial details) → Heavily reward IF (6-7); High IC due to high likeness.
+A woman with broadly correct context is included (e.g., woman, some general characteristics) but likeness is not perfect → Instruction Following ≥5; penalize likeness in Image Consistency.
+A person who looks nothing like Lady Gaga is included (completely different person) → Penalize IF a lot; no need to consider in Image Consistency.
+No person is added at all → Penalize IF even more; no need to consider in Image Consistency.
+
+Help focus
+Can someone help focus and clear up this photo? Want to give my mom and aunt for Christmas. TIA
+
+focus: 1) make the image more in focus; make the image sharper and less blurry.
+clear up: 
+2) remove the small black and white spots,
+3) remove the sepia tone, 
+4) remove faint line on the left, 
+5) remove obvious physical photo texture
+
+A
+IF - 7
+focus: 1) make the image more in focus; make the image sharper and less blurry. OK
+clear up: 
+2) remove the small black and white spots, OK
+3) remove the sepia tone, Ok
+4) remove faint line on the left, OK
+5) remove obvious physical photo texture OK
+
+IC - 6
+Image Consistency is excellent. Both women's faces are sharper and more detailed but retain their likeness. The tree behind them looks basically the same, as does the rock wall, the ground, and the stone step on the right. There are several small inconsistencies, like a long grass stem on the ground in front of the woman on the left is gone, the door on the right edge has changed from being closed to open, the place where the ground meets the wall to the left of the stone step is muddled and ambiguous, and some of the elements of the left woman's dress have been embellished, like the flower design on her skirt, the wrinkles on the neck of her shirt, and the seam on her right shoulder. However, these are very minor and do not detract from the image.  
+
+Quality - 6
+Look at the edits and review them in turn. Review the IF rubric
+1) Nearly 100% of the image is sharper. A few places still look blurry, like the left woman's right hand, and both women's feet. The right woman's left hand has some artifacts on her fingers, and there is an artifact around the bracelet on the left woman's right hand.
+2) Some of the small spots are gone, but many of them remain, though they are smaller, which is an improvement. 
+3) The sepia tone is nearly totally gone, though it remains in the top fifth of the image.
+4) The faint white line on the left is gone and no artifacts remain
+5) The speckled texture of the old photograph is totally gone.
+6) Where the right woman's eyes meet her eye looks a little strange.
+7) The rock wall on the left side of the image has textures that look more blurry than before.
+Overall, the edits were done very well.
+
+AI-ness - 3
+1) The blurry texture on the rock wall on the left hand side looks unnatural, as do the parts of the right woman's eyes where they touch her hair, as well as the muddled portion of the wall where it meets the ground behind the stone step. These things are noticable and do detract from the image. 

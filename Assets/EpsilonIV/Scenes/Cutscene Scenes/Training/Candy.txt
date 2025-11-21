@@ -1,0 +1,6 @@
+Candy
+Prompt:
+Remove all the brown pieces of candy from the glass bowl.
+
+Rubric:
+Was every piece of brown candy removed from the bowl?

@@ -1,0 +1,47 @@
+Meat
+"Make the meat cooked"
+
+1) The meat is cuts of beef (implicit)
+2) The meat is fully cooked (explicit)
+
+A
+The meat is in various stages of transformation into chicken
+All of the meat is barbecued chicken-colored, golden, yellow.
+Besides the three on the bottom right, the meat looks like chicken breasts.
+The two on the far-left are very obviously chicken breasts.
+
+IC 
+Excellent.
+The color of the image has changed very slightly. 
+No other changes besides the meat.
+
+Q
+The meat looks very real. Some of the pieces are steak-shaped with the color of chicken,
+but still very skillfully done.
+The details on the front edge of the grill, under the first row of chicken, have changed slightly.
+The details on the grill between the two rows of chicken is nearly identical.
+The depth of field is good.
+
+AI
+I've never seen a cross-between steak and chicken like this. While the edit is very realistic-looking, the concept in itself is quite unnatural. Impossible even. 
+Steak would never turn that color after being cooked. Only white meat becomes a golden color lik ethat.
+
+Overall
+It's a great-looking completion, but it's not helpful as it shows cooked chicken, not cooked steak. 
+
+B
+IF
+The meat is still steak. It looks cooked. Perfect instructions following.
+It even added tons of juice cooking out of the meat! Wow!
+The shape of the cuts of meat is a little uniform. They don't accurately reflect the original shapes of meat. They all kind of look like cutlets, whereas the original had fairly diverse shapes.
+
+
+IC
+The IC is about perfect.
+
+Q
+Incredible quality. The shadows under the meat, the textures of the meat are all very believable. You can see the juices pooling on the surface.
+Nice depth of field.
+
+AI
+Maybe the only AI-tell is that the texture on the surface of the meat is in bands, like it was cooked on a barbecue, but this is a flat-top grill.

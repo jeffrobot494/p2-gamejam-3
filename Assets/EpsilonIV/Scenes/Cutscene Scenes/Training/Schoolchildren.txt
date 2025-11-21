@@ -1,0 +1,46 @@
+Schoolchildren
+"Insert a group of schoolkids on an excursion"
+
+1) There is a group of school kids that look like they're on a school fieldtrip
+
+A
+IF
+1) There are a group of kids, but they don't necessarily look like they're on a school field trip. They might just be hanging out. 
+
+IC
+The image is shifted down to show less of the sky and more of the ground
+The buildings in the background are a little smaller/further away
+There is now a path through the grass
+The grass that remains in the image is shorter and less thick overall
+The building on top of the bridge is a little shorter, a little squashed.
+-the roof of the bridge building isn't the same consistent black, it's like it has a few green pixels blended in
+
+Q
+The details on the buildings in the background, like the windows, are a little squashed and blurred
+Many details on the bridge are kind of smashed and blurred together, like the railing on the edge
+The kids look pretty good, but have a lot of subtle flaws. The hand of the boy on the right has fingers sort of blended together into a clar.
+The girl in the orange shirt has an uidentifiable brown object on her head
+the little boy in the red jacket's hand really looks like a claw
+The new dirt path looks good.
+
+AI
+the two claw-hands are AI-tells, but they're subtle.
+
+B
+IF
+A large group of school children was added, and there are details that confirm they are on a school trip: the school uniforms and the teachers present. And the way one teacher is pointing at something for the kids to look at is very good.
+
+IC
+The rest of the image is nearly identical
+Some of the blades closer to the foreground have shifted slightly
+The grass closer to the children is all different, but it looks essentially the same/is insignficiant
+the left-most column of windows on the left-most building is gone
+
+Q
+The school children and teachers have overall good shape and the details on the clothes and hats looks good. The main problem with them is the lack of details in the face. A few of the teachers have features that look good, like eyes and mouth, but some of the children's faces are kind of uniform blurs. The left-most teacher's face is obviously missing details. The right-most teacher's face actually looks very good. 
+The grass looks good. 
+The buildings look better than A, but still soem of the details, like the windows, look a little squashed.
+Some very minor details on the bridge don't look quite right, like the posts that dot the railing are a little thicker and misshapen.
+
+AI
+The only real AI-tells are the blurry faces. Unfortunately, the eye is always drawn to faces, so this is fairly noticeable.

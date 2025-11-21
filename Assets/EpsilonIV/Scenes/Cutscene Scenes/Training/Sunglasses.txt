@@ -1,0 +1,64 @@
+Sunglasses
+"Convert the glasses to equally fashionable sunglasses"
+
+IF
+Is the subject wearing sun glasses that equally fashionable as the rest of his outfit? (explicit)
+Do the sunglasses match the rest of his outfit? (implicit)
+
+A
+Is the subject wearing sun glasses that equally fashionable as the rest of his outfit? (explicit)
+The black sunglasses are fashionable and sleek. However, their style is more conventional and subdued than the rest of the outfit. They are fashionable. But the rest of the outfit is almost designer-level fashionable, like something that would be seen in a catalogue. There's kind of a mismatch in levels of fashionable. So I don't think they are "equally fashionable". I give it 4/5 for that reason. Flashier, more ostentatious sunglasses would score better, and less sleek, cheaper-looking sun glasses would score worse.
+Do the sunglasses match the rest of his outfit? (implicit)
+The sun glasses do a pretty good job of matching the outfit. They are black with gold trim. There is black in the outfit. There's no gold in the outfit, but there's yellow and orange, which are both close. So the glasses somewhat match the outfit. 4/5
+8/10
+
+B
+Is the subject wearing sun glasses that equally fashionable as the rest of his outfit? (explicit)
+The glasses look kind of cheap. They have good colors. They're ostentatious. But they kind of look like cheap sunglasses you'd get at a supermarket. It's really the raised, thin line of plastic that runs the length of the arms.
+I score them 3/5 because they look cheap. If they looked nicer/more expensive and had similar colors, they might get a 5.
+Do the sunglasses match the rest of his outfit? (implicit)
+The dull yellow of the frames does match the rest of his outfit. The black mixed in on the frames matches as well. The yellow is much darker than the yellows elsewhere in the outfit, so it's not a perfect match. But close. So 4/5.
+
+7/10
+
+I give B higher instruction following because the sunglasses look expensive and fairly fashionable, which matches the explicit instruction, and they decently match the outfit which was my implicit item. 
+
+A is worse overall because the glasses stand out to me as looking cheap, which contrasts with the rest of his outfit which looks very high quality, especially the leather hat and the tie. The colors match okay, but not so much better than A that it would raise this completion above A.
+
+IC
+A
+Inconsistencies:
+There are areas where pixels have shifted slightly, but that's just part of the image generation process. There aren't any real inconsistencies in this completion.
+
+
+B
+Inconsistencies:
+-The button on top of the hat is slightly different
+-There's a very subtle shift in the pixels across the image that looks worse. You can see it particularly on his cheek and nose. The pixels are a little more obvious. The image is a little sharper/focused but the new pixels weren't drawn in quite correctly. It looks a little pixelated. You can see it pretty plainly if you switch back and forth between images and look at where the light reflects on his nose.
+
+Quality
+A
+-The glasses were applied perfectly to the man's face. 
+     -The light that was shining through the original glasses lens is gone because the tinted lenses should block it.
+     -The glasses are sitting a little higher on the man's nose, but the seam where they meet the bridge of his nose is perfect. The shadow on his skin looks perfect.
+-No flaws. In fact, this completion actually improves on the original in some places. For example, in the original around the bill of the hat there is some pixelation. This completion blended that in better.
+
+B
+I see two flaws in this completion:
+-The glasses are slightly smaller and the man's eyebrow is now visible. The right half of the eyebrow has hair which looks natural, but the left half appears to not have hair, and is just skin. It's a minor flaw.
+-The far side of the glasses, on his right side, is blended in slightly with the bridge of his nose. The dark gold color of the lenses has blended slightly with the light brown of his nose. A minor flaw.
+-The flaw I mentioned in IC about pixels also applies here. I think that the man's face was brought into better focus, but it doesn't done perfectly, and is created this subtle, but noticeable degradation in image quality.
+
+AI-ness
+A
+There are no AI-tells. All the edits were done extremely well and left no tells.
+
+B
+The area where the lenses blend into the bridge of the nose is a minor AI-tell. It's the kind of artifact that would only be created by the way AI completely generates images from scratch.
+
+Overall
+A
+A is the clear winner. What makes a pair of glasses more fashionable is very subjective, but i think A did a slightly better job of it. Though they both did a good job. A also had fewer IC and Quality issues. 
+
+B
+This completion did a good job of following the instructions, almost as well as A. But i think the glasses don't look quite right. I understand this is very subjective of course. What clearly made B the inferior option was the subtle IC and Q flaws.

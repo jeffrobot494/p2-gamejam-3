@@ -1,0 +1,267 @@
+STORM DOOR
+rubric
+1) the color of the front door was changed to either 495C6f (dark grey/blueish) or 8292A4 (light grey) (explicit)
+2) the glass storm door was removed (explicit)
+3) the address is "30"
+
+OVERALL
+F
+A
+G
+C
+D
+B
+E
+H
+
+
+AI-ness
+Nothing obvious:
+F, 
+
+	Missing satellite:
+	B, G
+
+Blended seam
+A
+
+Mismatched roof trim
+C, 
+
+Bad letters
+H, 
+Worst letters
+E
+
+Quality (Look at the minutiae of the door)
+
+F - 7
+The quality issues in these completions are subtle. Mostly they have to do with ways the stoop was changed, how the door fits in the wall, and how the numbers on the door look. 
+F is the best completion because:
+--The numbers on the door look excellent
+--The stoop looks fairly realistic, though maybe a little flat.
+--No problems with the satellite dish edit
+
+C - 6
+Like B and F, the issues here are very minor.
+--The cement stoop has a hump in it under the door which looks odd.
+
+B looks very good overall. - 5
+--The most obvious problem is that the arm of the satellite dish is still in the image, but I see this as a minor issue because it just looks like some kind of object inside the window, like a lamp.
+--The door looks decent in the frame, but its a little odd-looking how the door is flush on the outside of the wall at the bottom, instead of recessed like it is at the top. 
+--The cement between the stoop and the cement step under the door is a blended a little too much as it moves from left to right, but this is very minor.
+
+G also looks good overall. I tied it with B because it has very similar issues: -5
+--The satellite is removed but the arm is still there.
+--The bottom of the door is flush with the wall in a slightly-odd way.
+
+A - 4
+The quality issues in these completions are subtle. Mostly they have to do with ways the stoop was changed, how the door fits in the wall, and how the numbers on the door look. 
+-The first thing the eye notices is the cement seam between the stoop and the bottom step of the door is blended in a way that eliminates the apparent gap in the stoop and the house on the upper-left corner of the stoop. 
+-Second, the trim on the roof over the door is misaligned where it meets the rest of the house.
+
+D -3 
+The numbers on the door are very small, but it looks intentional and realistic. The area where the stoop meets the house looks just like it should. The flaws are:
+-The door is completely flush with the house, which looks odd
+-If you look very closely, the way the door knob and lock on the door are textured and shaded make them look like they're just painted on.
+
+H -2
+H has one comparatively obvious issue which it shares with the other bottom two completions, which is:
+-The numbers on the door are not shaped very well. The six looks a little like it was hand-drawn hastily. 
+-Also, the cement where the door meets the stoop kind of spills out to the right in an odd way.
+-The bottom-right edge of the door is lifted up a little bit higher than the bottom-left edge, and it makes the door look slightly misaligned.
+
+E - 1
+-The pixelated numbers on the door are the single biggest flaw in all the completions, and put E at the bottom.
+
+
+
+
+
+IC
+Process: levels, satellite dish, security camera, torch-holder
+
+F
+The eye is really drawn to the door, and the door and its surrounding elements are the key to consistency in this image.
+This is the best completion for IC.
+--The address is accurate, and the characters look generally similar.
+--The stoop is still wooden and white
+--There is a doormat
+--The satellite dish and security camera are present
+
+G
+G is very close to F. It gets all the core elements right.
+--The address is accurate and the characters look decent. like the address characters, the stoop, the roof of the porch. But secondary elements have changed, like the satellite dish, security camera, and doormat.
+--The stoop is still wooden and white
+--The roof of the porch looks the same. 
+BUT, there are secondary inconsistencies:
+-the satellite dish is missing
+-the security camera is missing 
+-the doormat is missing.
+
+A
+The eye is really drawn to the door, and the door and its surrounding elements are the key to consistency in this image. A is very good. But, it's lower several because:
+--the stoop is no longer wood, it's cement, and does not protrude from the wall. This is odd and diminishes the look of the house.
+
+D
+D is also very consistent. The only significant issue is the address numbers that are way too small. 
+
+E
+E would be higher on the list, except that the numbers on the front are blurry and pixelated, and it makes the image overall look cheap. Besides that, nearly everything is consistent, but this is a major inconsistency.
+
+H
+H is fairly consistent, but the numbers don't look the same, and the stoop has changed to a cement similar to the sidewalk, which is a major change that detracts from the house's appearance, and puts it at the bottom of the completions that have numbers on the door, but above the ones that don't. 
+
+B
+B doesn't even have numbers on the door, which is the main problem. Also the stoop is cement, and its missing secondary elements: the doormat, the satellite dish. 
+
+C
+C also doesn't have address numbers, but its lower than B because the red trim on the roof of the porch is missing. This was a serious design element that made the house look attractive.
+
+
+
+
+
+
+D 4.5/5 - 7
+F 4.25/5 - 6
+H 3.5/5 - 5
+C 3.25/5 - 4
+E 3.1/5 - 3
+A 3/5 - 2
+B 3/5 - 2
+G 0.5/5 - 1
+
+
+A
+levels: contrast has changed? Some darks darker, some lights lighter. .5/1
+satellite dish: still there 1/1
+security camera: missing 0/1
+stoop: 0/1
+other: porch roof slightly lower and misaligned 1/1
+3/5
+
+B
+levels: contrast/sharpness same as A .5/1
+satellite dish: missing 0/1
+security camera: ok 1/1
+stoop: 0/1
+other:1/1
+3/5
+
+C
+levels: mostly there .5/1
+satellite dish: ok 1/1
+security camera: 75% there 0.75/1
+stoop: cleaner 0.75/1
+other: porch roof changed 0/1
+3.5/5
+
+D
+levels: slightly off .5/1
+sat dish: OK 1/1
+sec camera missing 0/1
+stoop: ok 1/1
+other: ok 1/1
+4.5/5
+
+E
+levels: slightly off 0.5/1
+sat dish: ok 1/1
+seccamera: ok 1/1
+stoop: slightly lower .5/1
+other: porch roof shadow is stronger, mat gone, numbers look weird: 0/1
+3.5/5
+
+F
+levels: slightly off: .5/1
+sat dish: ok 1/1
+seccamera: 1/1
+stoop: ok 1/1
+other: floor mat changes, window interior change 0.75/1
+4.25/5
+
+G
+levels: slightly off 0.5/1
+satdish: midding 0/1
+seccamera: 0/1
+stoop: OK 1/1
+other: doormat missing, torch-holder missing 0/1
+.5/5
+
+H
+levels: slightly off .5/1
+satdish: ok 1/1
+seccamera: ok 1/1
+stoop: changed 0/1
+other: ok 1/1
+3.5/5
+
+Q
+Look at the minutiae of the door.
+
+AI/Nat: Address numbers, satellite tongue, ??
+
+Overall:
+Address, color, Quality, little IC bits
+
+IF
+Process: download the image and use the dropper tool on the same spot of the door in each completion, and see which match or are closest to the right colors. 
+Pixel 594x1320 in Image A was very close to 496c6f. So that's the pixel we are going to use to compare.
+A-12-6 -> G is closer in color.
+B-7-2 -> B bumped to two because the color is close, not G.
+C-8-2
+D-10-4 -> moved down from 5 to 4, color is worse than F.
+E-9-3
+F-10-5
+G-12-7
+H-7-1
+
+
+A
+1) Pixel 594x1320 is 49607e (very close) 4/5
+2) the storm door was removed 5/5
+3) the address is 30 3/3
+12/13
+
+B
+1) Color is 52778e, not close to either, but not completely wrong. 2/5
+2) The storm door was removed, but also a glass panel was added. 4/5
+3) The address is gone 1/3
+7/13
+
+C
+1) Color is 6c7c96. Not super close to either color. 2/5
+2) The storm door was removed 5/5
+3) There's no address marker 1/3
+8/13
+
+D
+1) Color is 4a758c. Not very close to either 2/5.
+2) The storm door was removed 5/5
+3) The address is correct 3/3
+10/13
+
+E
+1) Not quite the right color. 3/5
+2) The storm door was removed 5/5
+3) The address is still there, but wrong (36) 1/3
+9/13
+
+F
+1) Not a good color. 2/5
+2) Storm door is gone 5/5
+3) Address is correct 3/3
+10/13
+
+G
+1) Pretty close 4/5
+2) Storm door is gone 5/5
+3) Address is correct 3/3
+12/13
+
+H
+1) Color is WAY off 1/5
+2) Storm door is gone 5/5
+3) Address is wrong 1/3
+7/13

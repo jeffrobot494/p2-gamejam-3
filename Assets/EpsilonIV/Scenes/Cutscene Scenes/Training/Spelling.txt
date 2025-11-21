@@ -1,0 +1,6 @@
+Prompt:
+Help please! Could someone correct the spelling on this
+I waited a while for this and it came back wrong, could someone please spell meticulous correctly.
+
+Rubric:
+Has the word on the bottom of the image been changed to read "METICULOUS"?

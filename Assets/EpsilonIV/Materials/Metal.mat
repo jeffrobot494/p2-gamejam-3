@@ -125,7 +125,7 @@ Material:
     - Boolean_43476D73: 0
     - Boolean_7165A49C: 1
     - Boolean_85059BBE: 0
-    - Boolean_8BBF99CD: 1
+    - Boolean_8BBF99CD: 0
     - Boolean_D258FF8E: 0
     - DeformMagnitude: 0
     - Vector1_21C41D02: 256
@@ -139,7 +139,7 @@ Material:
     - _AlphaClippingDitherIsEnabled: 0
     - _AlphaToMask: 1
     - _Alpha_Clipping: 0.1
-    - _Alpha_Multiplier: 1
+    - _Alpha_Multiplier: 0.5
     - _BRDFMode: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1

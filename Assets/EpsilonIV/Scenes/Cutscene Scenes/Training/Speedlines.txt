@@ -1,0 +1,25 @@
+Speedlines
+"Transform the motion blur effect into a comic book speed lines style with bold graphic elements"
+
+1) The motion blue is gone and the car is sharp (explicit)
+2) There are bold, comic-book style speed lines (explicit)
+3) The car looks the same (implicit)
+
+A
+The motion blur is gone
+There are some subtle effects that make it look like its moving, but it doesn't really have speed lines
+the car actually kind of sucks, its got some weird details
+the hubcaps look weird
+the graphic element in the background looks more like an explosion, or like the car is being put up for sale, its not the right kind of effect
+the car is now blue instead of black
+the art style is very simplistic, and not even really comicbooky. More like modern web design stickfigures.
+the dots are comicbooky which is kind of cool
+the color palette is kind of clashing and harsh.
+
+B
+The car looks good, it doesn't look stupid
+The wheels/hubcaps spinning furiously looks awesome
+There are some actual speed effects that make the car look like its driving fast
+the graphic effect in the background has the same problem as A, it doesn't convey speed or a direction even
+the details on the are great
+the color palette is more complimentary

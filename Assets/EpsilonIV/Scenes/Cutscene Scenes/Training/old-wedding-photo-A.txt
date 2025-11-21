@@ -1,0 +1,59 @@
+Image A
+
+List of Changes
+
+IF
+-The picture is cropped to remove the lady in black
+	Technically in line with the instructions. Negatively impacts Image Consistency. Technically 	fine. No AIness.
+-A part of the bouquet touching the woman was removed unnecessarily. 
+	Against instructions. Negative to IC. Very poor quality. No AIness.
+
+The primary instructions to remove the two women were followed. The lady in black was removed by cropping the left side of the photo, which wasn't strictly forbidden by the prompt. The lady in brown was removed by copying and pasting a section of the curtains over her torso and legs, and a section of the carpet over her feet. 
+
+IC
+-An improbably shadow with no apparent source was added to the bottom of the curtain.
+	Out of alignment with the instructions. Negatively impacts Image Consistency. Very poor quality. No AIness.
+-The bride's shoulder has had an inch or so of cloth added to it for no discernable reason.
+	Out of line with the instructions. Negatively impacts Image Consistency. Very poor quality. No AIness.
+
+-A strange grey square has been added to the tip of one of the flowers. 
+	Against instructions. Negative to IC. Very poor quality. No AIness.
+-The bouquet's shadow should fall on the curtain behind it, but none was added.
+	Not in line with instructions, negative to IC, very poor quality, no AIness.
+
+The section to the right of the bride is almost-entirely consistent. However, there are some flaws that depart from the logic of the original image. The curtain placed over the lady in brown has had a shadow placed on the bottom that has no discernable source, and has no shadow along its bottom edge where there should be at least a small one. The bride's left shoulder has had a small section of white cloth added to it for no discernable reason. A flower from the bride's bouquet was removed and a little gray square was added to the bouquet, both unnecessarily. The feet of the three people on the left standing on the section of carpet that was cut and pasted are missing shadows, and the tip of the right foot of the man in the middle is missing.
+
+
+Q
+-To remove the lady in brown, a section of the curtain from the left side is copied and pasted over her. It's bottom is aligned with the bottom stair. 
+	In line with the instructions. Not related to IC. Quality is very poor. No AIness.
+-The portion of the woman that wasn't covered by the pasted curtain was covered over with sections of the carpeted floor taken from elsewhere in the image, creating a visible square of different-colored carpet underneath the three people on the left side of the group.
+	In line with the instructions, offcolored carpet negatively impacts Image Consistency. Very poor quality. No AIness.
+-Where the bride's right shoulder and arm were touching the lady in brown, the lady has been manually cut out messily with small portions of her coat still visible. 
+	In line with instructions. Not relevant to image consistency. Very poor quality. No AIness.
+-Where the flowers touched the lady in brown, she has been messily, manually removed. 
+	In line with instructions, not related to IC. Very poor quality. No AIness.
+-A portion of the flowers can be seen through, and the lady's arm was left behind them. 
+	Not in line with instructions, negative to IC, very poor quality, no AIness.
+-The section of curtain behind and just below the bouquet has the outline of a poorly-aligned cut and paste, which also has a noticeable grey artifact.
+	Presumably done to help remove the woman, negative to IC, very poor quality, No AIness.
+-The pasted in curtain, which is made to look behind the ribbons flowing from the bouquet, has a curved portion cut out of it next to the ribbons where the original photo is visible. 
+	Presumably done to preserve the ribbons with instructions. Negative to IC. Very poor Quality. No AIness.
+-The bottom of the ribbons were edited very crudely and large portions of the original image, with the original carpet, are left on top of the pasted-in carpet that is a different color.
+	In line with instructions, not related to IC, very poor quality. No AIness.
+
+The edits are universally poor. The curtain pasted over the lady in brown is lower resolution than the people next to it, it has a little grey outline in it that looks like a misaligned cut and paste job. The portion of the lady in brown that wasn't covered by the curtain was covered with a cut and pasted section of the carpet from a different part of the floor, and it's a different color and contrasts with the carpet around it. The part of the bride's arm that was touching the lady in brown still has brown pixels left over from a poor job of erasing the woman. A portion of the bouquet can be seen through, and the lady in brown's arm was left behind when it should have been removed. The part of the curtain that should be behind the bouquet's ribbons is missing entirely, presumably from a poor manual erasure. The bottom of the ribbons have been very crudely cut from their original background, and their new background clashes with their old background in probably what is the most noticeable mistake in the entire image.
+
+
+
+AI
+The image does not look AI-generated at all. The glaring flaws all look like the work of an unskilled human.
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+Prompt:
+"Can someone edit out my friend?
+I love this photo but I want a version where it's just my dog because she looks so majestic to me lol. I don't know much about photoshop so I don't know if this is something anyone would be willing to do for free, but I don't have much money."
+
+Rubric: 
+Is the human removed from the photo?
+Is the dog still in the photo?

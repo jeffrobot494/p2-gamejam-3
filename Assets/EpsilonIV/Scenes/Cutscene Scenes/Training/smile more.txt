@@ -1,0 +1,55 @@
+smile more
+
+"Have the man smile more and move the camera down so there is less head room"
+
+Rubric:
+
+1) The man's smile is bigger
+2) The perspective is shifted lower so that there is less empty space above the man's head
+
+IF
+
+A
+1) The man's smile is MUCH bigger. 5/5
+2) There is the same amount of room above the man's head, but the picture is now taller, so it takes up a smaller percentage of the picture. 1/5
+
+The first instruction was followed accurately. The second instruction was ignored. There are other edits, but they don't conflict with the prompt. So that I can break the tie, I'm going to rate this higher because, though the absolute amount of space over the man's head is the same, the increased height of the picture means that it now takes a smaller portion of the image, which may create an effect similar to what the user asked for.
+
+B
+1) The man's smile is significantly bigger. 5/5
+2) There amount of space over the man's head is roughly the same. 1/5
+
+The first instruction was followed excellently. The man's smile is much bigger. The second instruction was ignored. There are no edits that conflict with the instructions.
+
+IC
+
+A
+-The image has a yellow hue. 
++It's a little hard to tell if its the same guy because the smile changes the face so much, but I think it is. Well-captured likeness. 
+-The two woman over his left shoulder have changed to a single, larger woman.
+-The whole background has changed slightly, like people have moved slightly, the whole swiss flag is visible instead of just part.
+- the arm with the wristband is more in focus, the wrist band has changed subtly
+- the aspect ratio has changed from landscape to portrait
+
+B
++IC is much better. The background have changed much less. The same people are mostly there, and they're generally in the same spot in the image. 
++ The huse is the same.
++ The wristband is almost exactly the same, arm still slightly out of focus.
+- The camera has pulled back a little, a little more is in frame on top and bottom.
+
+Q
+A
+Overall the quality is excellent. I only see two minor issues. 1) The man on the black shirt over his right shoulder's right ear looks strange. Its out of focus so its hard to tell, but I think it might be too big. 2) The pinky on the subject's right hand looks a little too small.
+-The front of his tshirt might be a little too smooth, too.
++The wristband actually looks better and more defined in this one than in the original.
+-The left side of his face seems to end a little too abruptly where it curves back around his head. It's a very sharp gradient. Whereas on his right side, you can see more of the curve of his head.
+
+B
+The only flaw I can find is the grey fabric under his right elbow doesn't have an obvious owner. It might be some gray color that the AI interpreted as cloth, and embellished to make it look more like cloth, but isn't supposed to be cloth and doesn't belong to anyone.
+
+AI-ness
+A
+-The only possible AI-tell is the sharp curve of the face I mentioned in Quality, but this is very, very subtle.
+
+B
+-The only possible AI tell is the grey fabric under his right elbow, but this is very, very subtle.

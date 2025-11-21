@@ -1,0 +1,41 @@
+Coffee Cup
+1) The background was changed to a recognizable part of Tokyo
+2) The coffee cup is the same
+3) The hand and arm are the same
+
+IF
+A
+the cup is out of focus
+the fingers are melted
+the coffee cup is melted (see label)
+the arm is totally fucked up
+there's a watermark
+the background hasn't changed
+not recognizable Tokyo
+
+IF: FAIL, not Tokyo
+IC: everything about the image, except the background, is fucked up looking
+Quality: major fail everywhere, terrible edits, 
+AI: Obviously AI, melted arms!
+
+B
+The coffee cup looks good, good form
+it has alien language
+the hand and arm look good, except the thumb is a little cut off w/ bad seam
+the building in the background kind of looks like the Tokyo tower, but its not it
+it kind of looks like Japan, no Japanese kanji/characters though
+
+IF
+Better than A, but could be more recognizably Tokyo
+IC: terrific. Almost perfect. words on cup are alien language.
+Quality: really excellent. thumb seam is bad though. 
+AI: well its obviously AI thanks to the letters, but overall much more natural-looking than A.
+
+Overall
+A
+Not only did the image NOT follow the instructions at all, it completely failed to properly recreate the aspects of the photo that were supposed to stay the same. 
+Totally unusable.
+
+B
+It changed the place to Japan. And if I had to guess, I might guess Tokyo. It's got that Japanese look, and it has skyscrapers. But it could be more obvious. 
+Quality, IC, AI are all excellent (except for the characters). This is the obvious choice.

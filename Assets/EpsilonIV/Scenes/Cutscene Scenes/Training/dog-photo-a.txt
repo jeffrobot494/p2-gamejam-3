@@ -1,0 +1,28 @@
+A
+List of changes (top to bottom)
+
+IF
+The instructions were followed highly accurately. The only edits that were made were to remove the woman and replace the background that needed to be replaced.
+
+IC
+Overall, the Image Consistency is very high. The woman's head was replaced with water and bushes that are contiguous with the rest of the photo. Next to her chin some water that didn't need to be changed was changed to bushes but this is very difficult to detect. The main portion of her body was replaced with a believable portion of the river. Behind her knees, a portions of fence posts were created to maintain consistency. Directly beneath them is another minor issue, which is that the section of road that was created has tire tracks at many different angles, when they should all basically be pointed straight down the road, or curving up to meet the turn. The little gravel cut off next to the road, where her shins were, looks good. A bit of shadow has been invented on a rock but its acceptable. In the foreground, the rock under her feet has been convincingly replaced with matching texture. The shadow of her legs on the rock has appropriately been removed. The one inconsistency here is that the shadow of her upper body that joins with the shadow from the rock has not been removed. No other parts of the photograph have changed, including the dog.
+
+Quality
+The quality of the edits is nearly all superb. The water and bushes added to the river have accurate lighting and loss of focus. The one issue is the patch of river that was created has a darker color to creates a visible contrast with the rest of the river. This is quite noticeable. The edit to the rock the woman was standing on is excellent, with believable details and texture, and the lighting is bright like the rest of the rock. The removal of the shadow was done by replacing with a slightly different form of rock, and the rock texture is perfect, as well as the light and shadow.
+
+AIness
+The most noticeable problem is where her knees have been replaced with fence posts. Throughout the image, the fenceposts are a uniform height and angle, but the ones that were created are of varying heights and angles. This is an AI-tell. Lastly, and this is also easy to miss, is that the bubbling white water that was created near the top of the photo has no source of obstruction causing it to froth. It should be flat and calm like the rest of the water along the river edge.  Directly beneath them is another minor issue, which is that the section of road that was created has tire tracks at many different angles, when they should all basically be pointed straight down the road, or curving up to meet the turn
+
+
+Woman's head is  now a bit of white water (nonsensical) and some continued green bushes (excellent)
+Near the chin some water has been replaced with bushes (bad IC but acceptable)
+There is a dark patch on the river where her body was
+Where her backpack meets the shore could be a little cleaner
+The fence posts created where her legs were are stumpy and dont look right
+The tracks on the road are a bit messier and not as unidirectional as they should be
+the gravel cutoff under her ankles looks good
+The rock where she was standing looks very good
+The shadow of her legs has been removed
+I think the shadow of her upperbody is still there
+The dog is totally unchanged
+The rest of the photo is unchanged
