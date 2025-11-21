@@ -1,8 +1,0 @@
-coco-gauff
-
-Prompt:
-Can someone help in removing the people in the background? Not sure if possible but any help is much appreacited!
-
-Rubric:
-Is the person on the left removed?
-Is the person on the right removed?

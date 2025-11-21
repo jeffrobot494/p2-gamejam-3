@@ -1,7 +1,0 @@
-Prompt:
-"Can someone photo shop micky and minie mouse into the photo please"
-
-Rubric
-Has Mickey Mouse been added to the image?
-Has Minnie Mouse been added to the image?
-
